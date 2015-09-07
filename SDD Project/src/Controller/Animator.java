@@ -37,13 +37,3 @@ public class Animator implements Runnable {
     }
     
 }
-//Launcher launcher;    
-//        //Test Area V================================================================================
-//       int x=0; 
-//        x++;
-//         if (x==3)
-//         {
-//        launcher = (Launcher) gameData.figures.get(0); // launcher
-//         System.out.println("Your dumb");
-//         } 
-       //Test Area^================================================================================ 
