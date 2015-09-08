@@ -1,16 +1,16 @@
-package Model;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
-//import javax.vecmath.Vector2f;
+import javax.vecmath.Vector2f;
 
-public class Missile extends Ellipse2D.Float implements GameFigure {
+abstract public class Missile extends Ellipse2D.Float implements GameFigure {
 
     static int SIZE = 2;
     Color color;
     Point2D.Float target;
-//    private int state = STATE_TRAVELING;
+    private int state = STATE_TRAVELING;
     private static final int UNIT_TRAVEL_DISTANCE = 4;
     private int explosionSize = SIZE;
     private int explosionMaxSize;
@@ -28,38 +28,38 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
         explosionMaxSize = size;
     }
 
-//    @Override
-//    public void render(Graphics g) {
-//        g.setColor(color);
-//        g.fillOval((int)super.x, (int)super.y, (int)super.width, (int)super.height);
-//    }
+    @Override
+    public void render(Graphics g) {
+        g.setColor(color);
+        g.fillOval((int)super.x, (int)super.y, (int)super.width, (int)super.height);
+    }
 
-//    @Override
-//    public void update() {
-//        updateState();
-//        if (state == STATE_TRAVELING) {
-//            updateLocation();
-//        } else if (state == STATE_EXPLODING) {
-//            updateSize();
-//        }
-//    }
+    @Override
+    public void update() {
+        updateState();
+        if (state == STATE_TRAVELING) {
+            updateLocation();
+        } else if (state == STATE_EXPLODING) {
+            updateSize();
+        }
+    }
 
     // Vector arithmetic
     // A: current position
     // B: target position
     // d: distance to travel along the line from A to B
     //     A_moved = A + |B - A| * d where |  | represents 'norm'
-//    public void updateLocation() {
-//        Vector2f currentLoc = new Vector2f((float) getCenterX(), (float) getCenterY());
-//        Vector2f update = new Vector2f(target.x, target.y);
-//        update.sub(currentLoc); // B - A
-//        update.normalize(); // |B - A|
-//        update.scale(UNIT_TRAVEL_DISTANCE); // |B - A| x dist
-//        currentLoc.add(update); // A + |B - A| x d
-//
-//        setFrameFromCenter(currentLoc.x, currentLoc.y,
-//                currentLoc.x + SIZE, currentLoc.y + SIZE);
-//    }
+    public void updateLocation() {
+        Vector2f currentLoc = new Vector2f((float) getCenterX(), (float) getCenterY());
+        Vector2f update = new Vector2f(target.x, target.y);
+        update.sub(currentLoc); // B - A
+        update.normalize(); // |B - A|
+        update.scale(UNIT_TRAVEL_DISTANCE); // |B - A| x dist
+        currentLoc.add(update); // A + |B - A| x d
+
+        setFrameFromCenter(currentLoc.x, currentLoc.y,
+                currentLoc.x + SIZE, currentLoc.y + SIZE);
+    }
 
     public void updateSize() {
         double x = target.getX();
@@ -68,26 +68,26 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
         setFrameFromCenter(x, y, x + explosionSize, y + explosionSize);
     }
 
-//    public void updateState() {
-//        if (state == STATE_TRAVELING) {
-//            double distance = target.distance(getCenterX(), getCenterY());
-//            boolean targetReached = distance <= 2.0 ? true : false;
-//            if (targetReached) {
-//                state = STATE_EXPLODING;
-//            }
-//        } else if (state == STATE_EXPLODING) {
-//            if (explosionSize >= explosionMaxSize) {
-//                state = STATE_DONE;
-//            }
-//        }
-//    }
+    public void updateState() {
+        if (state == STATE_TRAVELING) {
+            double distance = target.distance(getCenterX(), getCenterY());
+            boolean targetReached = distance <= 2.0 ? true : false;
+            if (targetReached) {
+                state = STATE_EXPLODING;
+            }
+        } else if (state == STATE_EXPLODING) {
+            if (explosionSize >= explosionMaxSize) {
+                state = STATE_DONE;
+            }
+        }
+    }
 
     public Color getColor() {
         return color;
     }
 
-//    public int getState() {
-//        return state;
-//    }
+    public int getState() {
+        return state;
+    }
 
 }

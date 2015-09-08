@@ -25,7 +25,7 @@ public class Launcher implements GameFigure {
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
         launcherImage = getImage(imagePath + separator + "images" + separator
-                + "ITetrisPiece0.bmp");
+                + "MyKindOfPKCenter.png");
     }
     
     public static Image getImage(String fileName) {
@@ -56,7 +56,7 @@ public class Launcher implements GameFigure {
     @Override
     public void update() 
     {
-    y-=1;
+    //y-=1;
     }
     @Override
     public int getState() {
