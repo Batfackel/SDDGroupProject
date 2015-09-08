@@ -5,7 +5,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import javax.vecmath.Vector2f;
 
-abstract public class Missile extends Ellipse2D.Float implements GameFigure {
+public class Missile extends Ellipse2D.Float implements GameFigure {
 
     static int SIZE = 2;
     Color color;
