@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="clouds" tilewidth="32" tileheight="32" tilecount="1024">
+  <image source="C:/Users/ryan/Downloads/tileable-cloud-patterns-2/tileable-cloud-patterns-2.jpg" trans="ff00ff" width="1024" height="1024"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwN07VWEAoAAFDe8/BEEAmlBEcVEZGQUGG0u3u0u3u0u3u0u3sUBbEIA2QEFAxQURE8593hfsJ9FBAQkM9jnlBAIU8p4hnPecFLXlFMCaWU8Zo3vOUd5VTwnkqqqKaGD3ykljo+8ZkvfKWeBr7xnR808pNf/KaJPzTTwl8C/wkI+I/WBNGGYEJoSyjtCCOcCCJpTweiiCaGWOLoSDwJdKIzXehKIt1IojvJ9CCFnqSSRjoZ9CKTLLLJoTd96EsuefSjPwMYyCAGM4ShDGM4IxjJKEYzhrGMYzwTmMgkJjOFqUxjOjOYySxmM4e5zGM+C1jIIhazhKUsYzkrWMkqVrOGtaxjPRvYyCY2s4WtbGM7O9jJLnazh73sYz8HOMghDnOEoxzjOCc4ySlOc4aznOM8F7jIJS5zhatc4zo3uMktbnOHu9zjPg94yCPyecwTCijkKUU84zkveMkriimhlDJe84a3vKOcCt5TSRXV1PCBj9RSxyc+84Wv1NPAN77zg0Z+8ovfNPGHZlr4S+C/ftCaINoQTAhtCaUdYYQTQSTt6UAU0cQQSxwdiSeBTnSmC11JpBtJdCeZHqTQk1TSSCeDXmSSRTY59KYPfcklj370ZwADGcRghjCUYQxnBCMZxWjGMJZxjGcCE5nEZKYwlWlMZwYzmcVs5jCXecxnAQtZxGKWsJRlLGcFK1nFatawlnWsZwMb2cRmtrCVbWxnBzvZxW72sJd97OcABznEYY5wlGMc5wQnOcVpznCWc5znAhe5xGWucJVrXOcGN7nFbe5wl3vc5wEPeUQ+j3lCAYU8pYhnPOcFL3lFMSWUUsZr3vCWd5RTwXsqqaKaGj7wkVrq+MRnvvCVehr4xnd+0MhPfvGbJv7QTAt/CWzlB60Jog3BhNCWUNoRRjgRRNKeDkQRTQyxxNGReBLoRGe60JVEupFEd5LpQQo9SSWNdDLoRSZZZJNDb/rQl1zy+B8Wsf7j
+  </data>
+ </layer>
+</map>
