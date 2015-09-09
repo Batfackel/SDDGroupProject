@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="38" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="desert" tilewidth="32" tileheight="32" tilecount="48">
+  <image source="E:/install files/tiled/examples/tmw_desert_spacing.png" trans="ff00ff" width="265" height="199"/>
+ </tileset>
+ <tileset firstgid="49" name="rpg tiles" tilewidth="32" tileheight="32" tilecount="256">
+  <image source="detail_tile.png" trans="ff00ff" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="305" name="other images" tilewidth="32" tileheight="32" tilecount="1024">
+  <image source="tileable7a.png" trans="ff00ff" width="1024" height="1024"/>
+  <terraintypes>
+   <terrain name="New Terrain" tile="67"/>
+  </terraintypes>
+  <tile id="67" terrain=",,,0"/>
+  <tile id="68" terrain=",,0,"/>
+  <tile id="99" terrain=",0,,"/>
+  <tile id="100" terrain="0,,,"/>
+ </tileset>
+ <tileset firstgid="1329" name="stone set" tilewidth="32" tileheight="32" tilecount="4">
+  <image source="pavingstone.png" trans="ff00ff" width="64" height="64"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="38" height="50">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+</map>

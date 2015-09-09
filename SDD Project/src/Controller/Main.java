@@ -22,8 +22,9 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     private Launcher launcher2;
     
     public Main() {
-        setSize(615, 480);
-        setLocation(100, 100);
+        //changed sizing to fit the default image
+        setSize(800, 600);
+        setLocation(0, 0);
         Container c = getContentPane();
         animator = new Animator();
         gameData = new GameData();
