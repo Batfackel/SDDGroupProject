@@ -1,3 +1,4 @@
+import Model.Level;
 import java.awt.Rectangle;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,15 +12,12 @@ public class GameData {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         
         
-<<<<<<< HEAD
-        figures.add(new Launcher(GamePanel.PWIDTH/2-30, GamePanel.PHEIGHT-60));
+        figures.add(new Launcher(Level.returnWidth()/2-30, Level.returnHeight()-60));
                            
         figures.add(new Launcher(100, 100));            
-=======
     
          
-      System.out.println("@@GAME DATA CONSTRUCTO@@");
->>>>>>> origin/master
+        System.out.println("@@GAME DATA CONSTRUCTO@@");
     }
 
     public void update() {

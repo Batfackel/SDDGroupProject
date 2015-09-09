@@ -1,4 +1,5 @@
 
+import Model.Level;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,8 +17,7 @@ public class GamePanel extends JPanel {
     // off screen rendering
     private Graphics graphics;
     private Image dbImage = null;
-    private Image backgroundImage;
-    private static int height, width, size;
+    private Level level;
 
     public GamePanel(Animator animator, GameData gameData) {
         this.animator = animator;
@@ -32,12 +32,7 @@ public class GamePanel extends JPanel {
         // the project folder name, and create a folder named "image"
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
-        switch (size) {
-        default: backgroundImage = getImage(imagePath + separator + "images" + separator
-                + "tile sets" + separator + "test tile set.png");
-                break;
-        }
-        
+        level = new Level();   
         setBackground(Color.blue);
         setPreferredSize(new Dimension(getWidth(), getHeight()));
     }
@@ -71,16 +66,11 @@ public class GamePanel extends JPanel {
                 graphics = dbImage.getGraphics();
             }
         }
-
-<<<<<<< HEAD
-        graphics.clearRect(0, 0, GamePanel.PWIDTH, GamePanel.PHEIGHT);
-               
-=======
-        graphics.clearRect(0, 0, GamePanel.width, GamePanel.height);
+            
+        graphics.clearRect(0, 0, Level.returnWidth(), Level.returnHeight());
         //draw the background image
-        graphics.drawImage(backgroundImage, 0, 0, 800, 500, null);
+        level.render(graphics);
 
->>>>>>> origin/master
         synchronized (gameData.figures) {
             GameFigure f;
             for (int i = 0; i < gameData.figures.size(); i++) {
@@ -88,7 +78,7 @@ public class GamePanel extends JPanel {
                 f.render(graphics);
             }
         }
-
+        level.scrollLevel();
     }
 
     public void printScreen() { // use active rendering to put the buffered image on-screen
@@ -119,41 +109,5 @@ public class GamePanel extends JPanel {
     public void setGameSize(int height, int width) {
         //called and sets the size of the game so the panel knows which image to go and use
         
-    }
-
-    /**
-     * @return the height
-     */
-    public static int returnHeight() {
-        return height;
-    }
-
-    /**
-     * @param height the height to set
-     */
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    /**
-     * @return the width
-     */
-    public static int returnWidth() {
-        return width;
-    }
-
-    /**
-     * @param width the width to set
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    
-    public int returnSize() {
-        return size;
-    }
-    
-    public void setSize(int size) {
-        this.size = size;
     }
 }
