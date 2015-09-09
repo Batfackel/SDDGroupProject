@@ -10,7 +10,7 @@ public class GameData {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         
         
-        figures.add(new Launcher(GamePanel.PWIDTH/2-30, GamePanel.PHEIGHT-60));
+        figures.add(new Launcher(GamePanel.returnWidth()/2-30, GamePanel.returnHeight()-60));
          
       System.out.println("@@GAME DATA CONSTRUCTO@@");
     }
