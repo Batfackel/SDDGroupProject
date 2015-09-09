@@ -23,7 +23,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     
     public Main() {
         //changed sizing to fit the default image
-        setSize(800, 600);
+        setSize(800, 1000);
         setLocation(0, 0);
         Container c = getContentPane();
         animator = new Animator();
