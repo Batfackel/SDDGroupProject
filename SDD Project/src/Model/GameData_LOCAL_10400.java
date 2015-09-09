@@ -15,10 +15,9 @@ public class GameData {
         figures.add(new Launcher(Level.returnWidth()/2-30, Level.returnHeight()-60));
                            
         figures.add(new Launcher(100, 100));            
-  
+    
          
-      System.out.println("@@GAME DATA CONSTRUCTO@@");
-
+        System.out.println("@@GAME DATA CONSTRUCTO@@");
     }
 
     public void update() {

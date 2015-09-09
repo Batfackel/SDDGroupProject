@@ -69,11 +69,24 @@ public class GamePanel extends JPanel {
                 graphics = dbImage.getGraphics();
             }
         }
+<<<<<<< HEAD
             
         graphics.clearRect(0, 0, Level.returnWidth(), Level.returnHeight());
+=======
+
+
+        graphics.clearRect(0, 0, GamePanel.PWIDTH, GamePanel.PHEIGHT);
+               
+
+        graphics.clearRect(0, 0, GamePanel.width, GamePanel.height);
+>>>>>>> 3e342d976e67f98d2f60c979a4ec568d422f39de
         //draw the background image
         level.render(graphics);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3e342d976e67f98d2f60c979a4ec568d422f39de
         synchronized (gameData.figures) {
             GameFigure f;
             for (int i = 0; i < gameData.figures.size(); i++) {

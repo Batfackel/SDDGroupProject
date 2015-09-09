@@ -12,13 +12,24 @@ public class GameData {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         
         
+<<<<<<< HEAD
         figures.add(new Launcher(Level.returnWidth()/2-30, Level.returnHeight()-60));
                            
         figures.add(new Launcher(100, 100));            
-  
+    
+         
+        System.out.println("@@GAME DATA CONSTRUCTO@@");
+=======
+
+        figures.add(new Launcher(GamePanel.PWIDTH/2-30, GamePanel.PHEIGHT-60));
+                           
+        figures.add(new Launcher(100, 100));            
+
+    
          
       System.out.println("@@GAME DATA CONSTRUCTO@@");
 
+>>>>>>> 3e342d976e67f98d2f60c979a4ec568d422f39de
     }
 
     public void update() {
