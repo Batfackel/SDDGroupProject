@@ -47,8 +47,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         startButton.addActionListener(this);
         quitButton.addActionListener(this);
 
-        launcher = (Launcher) gameData.figures.get(0); // launcher
-        launcher2 = (Launcher) gameData.figures.get(0); // launcher
+        launcher = (Launcher) gameData.figures.get(0); // launcher        
         
     }
        
@@ -96,6 +95,11 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
             case KeyEvent.VK_RIGHT:
                 launcher.x += 10;
                 break;
+            case KeyEvent.VK_UP:
+                launcher.y -= 10;
+                break;
+            case KeyEvent.VK_DOWN:
+                launcher.y += 10;                
         }
     }
     

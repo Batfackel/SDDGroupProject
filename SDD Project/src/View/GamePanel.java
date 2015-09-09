@@ -30,7 +30,7 @@ public class GamePanel extends JPanel {
     }
 
     
-    public void Tetris()
+    /*public void Tetris()
     {
        Launcher launcher;
        //Test Area V================================================================================
@@ -42,7 +42,7 @@ public class GamePanel extends JPanel {
          System.out.println("Your dumb");
          } 
        //Test Area^================================================================================ 
-    }
+    }*/
     public void gameRender() {
         if (dbImage == null) {
             dbImage = createImage(PWIDTH, PHEIGHT);
@@ -55,7 +55,7 @@ public class GamePanel extends JPanel {
         }
 
         graphics.clearRect(0, 0, GamePanel.PWIDTH, GamePanel.PHEIGHT);
-
+               
         synchronized (gameData.figures) {
             GameFigure f;
             for (int i = 0; i < gameData.figures.size(); i++) {
