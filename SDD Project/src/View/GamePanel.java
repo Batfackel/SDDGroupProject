@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
       
+    public static final int PWIDTH = 600; // size of the game panel
+    public static final int PHEIGHT = 400;
+    
     private Animator animator;
     private GameData gameData;
     // off screen rendering
@@ -72,15 +75,15 @@ public class GamePanel extends JPanel {
             }
         }
 
-<<<<<<< HEAD
+
         graphics.clearRect(0, 0, GamePanel.PWIDTH, GamePanel.PHEIGHT);
                
-=======
+
         graphics.clearRect(0, 0, GamePanel.width, GamePanel.height);
         //draw the background image
         graphics.drawImage(backgroundImage, 0, 0, 800, 500, null);
 
->>>>>>> origin/master
+
         synchronized (gameData.figures) {
             GameFigure f;
             for (int i = 0; i < gameData.figures.size(); i++) {

@@ -11,19 +11,19 @@ import javax.swing.JOptionPane;
 
 public class Launcher implements GameFigure, ShipState {
     
-<<<<<<< HEAD
+
     Rectangle r1, r2;
     Image launcherImage;
     float x, y, width1 = 110, height1 = 125;
     int levelState = -1;
-=======
+
     
->>>>>>> origin/master
+
 
     public Launcher(float x, float y) {
         this.x = x;
         this.y = y;
-<<<<<<< HEAD
+
         this.levelState = BASE_LEVEL;
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -49,9 +49,9 @@ public class Launcher implements GameFigure, ShipState {
             JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
         }
         return image;
-=======
+
         
->>>>>>> origin/master
+
     }
 
     // Missile shoot location
@@ -65,7 +65,7 @@ public class Launcher implements GameFigure, ShipState {
 
     @Override
     public void render(Graphics g) {
-<<<<<<< HEAD
+
         g.drawImage(launcherImage, (int)x, (int)y, null);
         
         //collision debugging---------------------------------------
@@ -74,9 +74,9 @@ public class Launcher implements GameFigure, ShipState {
         g.setColor(Color.BLUE);
 //        g.drawRect((int) this.x + 10, (int) this.y + 40, (int) this.width2, (int) this.height2);
         setRectangle();
-=======
+
         //g.drawImage(launcherImage, (int)x, (int)y, null);
->>>>>>> origin/master
+
     }
 
     // simple hit box
