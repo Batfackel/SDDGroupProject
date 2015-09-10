@@ -45,7 +45,12 @@ public class Launcher implements GameFigure, ShipState {
         }
         return image;
     }
-
+    //"* 3" is to make up for the health bar length. 
+     public static int maxHealth = 100 * 3;
+     /*int health = maxHealth;*/
+     int currentHealth = maxHealth;
+      
+    
     // Missile shoot location
     public float getXofMissileShoot() {
         return x+30;
@@ -57,6 +62,32 @@ public class Launcher implements GameFigure, ShipState {
 
     @Override
     public void render(Graphics g) {
+        //health bar 
+        g.setColor(Color.GRAY);
+        g.drawRect(5,5,315,35);
+        
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(5,5,315,35);
+        
+        g.setColor(Color.RED);
+        g.fillRect(10,10,300,25);
+        
+        g.setColor(Color.GREEN);
+        g.fillRect(10,10,currentHealth,25);
+        
+        
+        //Sheild bar
+        
+
+        g.setColor(Color.YELLOW);
+        g.fillRect(5,50,310,15);
+        
+        g.setColor(Color.ORANGE);
+        g.fillRect(5,53,300,10);
+        
+        
+        
+        
         g.drawImage(launcherImage, (int)x, (int)y, null);
         
         //collision debugging---------------------------------------
