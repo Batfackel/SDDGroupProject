@@ -1,4 +1,5 @@
 
+import Model.DefaultShip;
 import Model.Level;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,6 +22,7 @@ public class GamePanel extends JPanel {
     private Graphics graphics;
     private Image dbImage = null;
     private Level level;
+    public DefaultShip ship;
 
     public GamePanel(Animator animator, GameData gameData) {
         this.animator = animator;
@@ -35,9 +37,10 @@ public class GamePanel extends JPanel {
         // the project folder name, and create a folder named "image"
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
-        level = new Level();   
+        level = new Level(); 
         setBackground(Color.blue);
         setPreferredSize(new Dimension(getWidth(), getHeight()));
+        ship = new DefaultShip(400,400);
     }
 
     public void startGame() {
@@ -78,6 +81,7 @@ public class GamePanel extends JPanel {
         graphics.clearRect(0, 0, Level.returnWidth(), Level.returnHeight());
         //draw the background image first then draw everything else ontop of it
         level.render(graphics);
+        ship.render(graphics);
 
         synchronized (gameData.figures) {
             GameFigure f;

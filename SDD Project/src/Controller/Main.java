@@ -30,6 +30,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     private JLabel lbl;
     private Date now = new Date();
     
+    
     public Main() {
         //changed sizing to fit the default image
         setSize(screenWidth, screenHeight);
