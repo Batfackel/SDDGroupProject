@@ -1,15 +1,20 @@
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Main extends JFrame implements ActionListener, MouseListener, KeyListener {
 
@@ -20,10 +25,14 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     private JButton quitButton;
     private Launcher launcher;
     private Launcher launcher2;
+    private int screenWidth = 800;
+    private int screenHeight = 1000;
+    private JLabel lbl;
+    private Date now = new Date();
     
     public Main() {
         //changed sizing to fit the default image
-        setSize(800, 1000);
+        setSize(screenWidth, screenHeight);
         setLocation(0, 0);
         Container c = getContentPane();
         animator = new Animator();
@@ -34,6 +43,10 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         c.add(gamePanel, "Center");
 
         JPanel southPanel = new JPanel();
+        
+        lbl = new JLabel("00:00:00");
+        southPanel.add(lbl);
+        
         startButton = new JButton("Start");
         southPanel.add(startButton);
         
@@ -49,13 +62,15 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         quitButton.addActionListener(this);
 
         launcher = (Launcher) gameData.figures.get(0); // launcher        
-        
+        pack();
+        setVisible(true);
     }
        
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == startButton) {
             gamePanel.startGame();
+            startTimer();
         } else if (ae.getSource() == quitButton) {
             animator.running = false;
         }
@@ -104,6 +119,28 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         }
     }
     
+    public void setScreenSize(int w, int h){
+        this.screenHeight = h;
+        this.screenWidth = w;
+        setSize(screenWidth, screenHeight);
+    }
+    
+    private void startTimer(){
+		now.setHours(0);
+		now.setMinutes(0);
+		now.setSeconds(0);
+		final Timer timer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Date now2 = new Date(now.getTime() + 1000);
+				now = now2;
+				SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+				lbl.setText(formatter.format(now));
+			}
+		});
+                
+                timer.start();
+    }
+    
    
     @Override
     public void mouseClicked(MouseEvent me) {
@@ -127,12 +164,5 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     //move into controller that handles player input
     @Override
     public void keyReleased(KeyEvent ke) {
-    }
-
-    public static void main(String[] args) {
-        JFrame game = new Main();
-        
-        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        game.setVisible(true);
     }
 }
