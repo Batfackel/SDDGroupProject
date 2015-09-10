@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.SaveData;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -19,7 +20,8 @@ public class Level {
     private BufferedImage background;
     private static int height, width, size, x, y;
     private boolean needToDispose;
-    
+    private boolean priority = false;
+    private SaveData save;
     public Level() {
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -31,11 +33,14 @@ public class Level {
                 clouds = importImage(imagePath + separator + "images" + separator + "tile sets" + separator + "clouds.png");
                 
                 x = 0;
-                y = -700;
+                y = 0;
                 height = 800;
                 width = 600;
                 break;
         }
+        //save = new SaveData(true);
+        
+        //call the save.SaveData() when the game ends(player death or closing)
     }
     
     public static Image importImage(String fileName) {
@@ -51,17 +56,19 @@ public class Level {
     
     public void scrollLevel() {
         //move the image down
-        this.y += 1;
-        if(y == 0) {
-            y-= 110;
-        }
+        this.y += 10;
     }
     
     public void render(Graphics g) {
-        background = new BufferedImage(backgroundImage.getWidth(null), backgroundImage.getHeight(null), BufferedImage.TYPE_INT_RGB);
         System.out.print("y = " + y);
-        g.drawImage(backgroundImage, x, y, null);
-        g.drawImage(clouds, x, y, null);
+        g.drawImage(clouds, x, y-1000, null);
+        if(this.y <= 920) {
+            g.drawImage(clouds, x, y + 920, null);
+            if(this.y == 920) {
+                this.y = 0;
+            }
+        }
+        
     }
     
     public Image getImage() {
