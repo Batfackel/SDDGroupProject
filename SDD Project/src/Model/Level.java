@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class Level {
 
     
-    private Image backgroundImage, clouds;
+    private Image backgroundImage, clouds, clouds2;
     private BufferedImage background;
     private static int height, width, size, x, y;
     private boolean needToDispose;
@@ -30,10 +30,11 @@ public class Level {
         switch (size) {
         default: backgroundImage = importImage(imagePath + separator + "images" + separator
                 + "tile sets" + separator + "test tile set.png");
-                clouds = importImage(imagePath + separator + "images" + separator + "tile sets" + separator + "clouds.png");
+                clouds = importImage(imagePath + separator + "images" + separator + "tile sets" + separator + "cloudsmerged.png");
+                clouds2 = importImage(imagePath + separator + "images" + separator + "tile sets" + separator + "cloudsmerged2.png");
                 
                 x = 0;
-                y = 0;
+                y = -2840;
                 height = 800;
                 width = 600;
                 break;
@@ -61,12 +62,15 @@ public class Level {
     
     public void render(Graphics g) {
         System.out.print("y = " + y);
-        g.drawImage(clouds, x, y-1000, null);
-        if(this.y <= 920) {
-            g.drawImage(clouds, x, y + 920, null);
-            if(this.y == 920) {
-                this.y = 0;
+        g.drawImage(clouds2, x, y, null);
+        if(this.y >= 10) {
+            g.drawImage(clouds2, x, y-3840, null);
+            if(y == 3840) {
+                y = -2840;
             }
+        }
+        else {
+            
         }
         
     }
