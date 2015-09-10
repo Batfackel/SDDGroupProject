@@ -44,6 +44,10 @@ public class Level {
         //call the save.SaveData() when the game ends(player death or closing)
     }
     
+    public Level(int level) {
+        
+    }
+    
     public static Image importImage(String fileName) {
         Image image = null;
         try {
@@ -69,10 +73,7 @@ public class Level {
                 y = -2840;
             }
         }
-        else {
-            
-        }
-        
+        scrollLevel();       
     }
     
     public Image getImage() {

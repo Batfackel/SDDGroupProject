@@ -76,7 +76,7 @@ public class GamePanel extends JPanel {
         }
             
         graphics.clearRect(0, 0, Level.returnWidth(), Level.returnHeight());
-        //draw the background image
+        //draw the background image first then draw everything else ontop of it
         level.render(graphics);
 
         synchronized (gameData.figures) {
@@ -86,7 +86,6 @@ public class GamePanel extends JPanel {
                 f.render(graphics);
             }
         }
-        level.scrollLevel();
     }
 
     public void printScreen() { // use active rendering to put the buffered image on-screen
