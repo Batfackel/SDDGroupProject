@@ -1,6 +1,8 @@
 
 import Model.DefaultShip;
 import Model.Level;
+import Model.Ship;
+import Model.ShipFactory;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -22,7 +24,8 @@ public class GamePanel extends JPanel {
     private Graphics graphics;
     private Image dbImage = null;
     private Level level;
-    public DefaultShip ship;
+    public ShipFactory shipMaker;
+ 
 
     public GamePanel(Animator animator, GameData gameData) {
         this.animator = animator;
@@ -40,7 +43,7 @@ public class GamePanel extends JPanel {
         level = new Level(); 
         setBackground(Color.blue);
         setPreferredSize(new Dimension(getWidth(), getHeight()));
-        ship = new DefaultShip(400,400);
+        //ship = shipMaker.getShip(0,30,30);//new DefaultShip(400,400);
     }
 
     public void startGame() {
@@ -81,7 +84,7 @@ public class GamePanel extends JPanel {
         graphics.clearRect(0, 0, Level.returnWidth(), Level.returnHeight());
         //draw the background image first then draw everything else ontop of it
         level.render(graphics);
-        ship.render(graphics);
+        
 
         synchronized (gameData.figures) {
             GameFigure f;

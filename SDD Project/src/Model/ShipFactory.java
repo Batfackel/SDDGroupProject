@@ -12,16 +12,14 @@ package Model;
 public class ShipFactory {
     
     //Default constructor
-    public ShipFactory(){
-        
-    }
-    
+  
+     
     public Ship getShip(int shipType, float x, float y){
         
         switch (shipType) {
             case 0:{
                 
-                return new DefaultShip(x,y);
+                return new DefaultShip();
             }
             default:{
                 return null;

@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
 
+import Model.ShipState;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author Will
  */
-public class DefaultShip implements Ship {
+public class TempShip implements GameFigure{
+    
     
    Image currentImage; 
    float x, y , dx, dy;
@@ -26,38 +28,65 @@ public class DefaultShip implements Ship {
    int armour;
    int shipState;
    int weaponState,weaponLevel;
+   int shipType;
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
    
-    public DefaultShip(/*float x, float y*/){
+    public TempShip(float x, float y){
     //Initialize ship here
         this.x = x;
         this.y = y;
-        setShipState(0/*newShipState*/);
+        this.rateOfSpeed = 5;
+        this.shipType = 1;
+        setShipState(STATE_TRAVELING);
    
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
     
         this.currentImage = getImage(imagePath + separator + "images" + 
+            separator + "death.png");
+        defaultShipMap.put(1, this.currentImage);//Should be use constant NORMAL_STATE=0
+  
+        this.currentImage = getImage(imagePath + separator + "images" + 
+            separator + "rose.png");
+        defaultShipMap.put(2, this.currentImage);//Sh
+        
+        this.currentImage = getImage(imagePath + separator + "images" + 
+            separator + "shadow.png");
+        defaultShipMap.put(3, this.currentImage);//Sh
+        
+        this.currentImage = getImage(imagePath + separator + "images" + 
+            separator + "pine.png");
+        defaultShipMap.put(4, this.currentImage);//Sh
+        
+        this.currentImage = getImage(imagePath + separator + "images" + 
+            separator + "violet.png");
+        defaultShipMap.put(5, this.currentImage);//Sh
+        
+        this.currentImage = getImage(imagePath + separator + "images" + 
             separator + "raider.png");
-        defaultShipMap.put(0, this.currentImage);//Should be use constant NORMAL_STATE=0
+        defaultShipMap.put(6, this.currentImage);//Sh
     }
     
 //===GetUserInput==================================================================================================
-public void moveRight(int x) {
+public void moveRight() {
+    x = (int) (x + this.rateOfSpeed);
     dx = x;
 }
 //-----------------------------------------------------------------------------------------------------------
-public void moveLeft(int x) {
+public void moveLeft() {
+    x = (int) (x - this.rateOfSpeed);
     dx = x;
 }
 //-----------------------------------------------------------------------------------------------------------
-public void moveUp(int y) {
+public void moveUp() {
+     y = (int) (y - this.rateOfSpeed);
     dy = y;
 }
 //-----------------------------------------------------------------------------------------------------------
-public void moveDown(int y) {
+public void moveDown() {
+    y = (int) (y + this.rateOfSpeed);
     dy = y;
 }
 //-----------------------------------------------------------------------------------------------------------
@@ -73,16 +102,19 @@ public Rectangle[] getHitBox(){
     return this.hitBox;
 }
 
-@Override
 public void render(Graphics g){
     switch (getShipState()){
-        case 0:{
-            g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
+        case 1:{
+            g.drawImage(defaultShipMap.get(this.shipType), (int)x, (int)y, null);
             g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,
                 (int) this.shipHeight);
         }
     }
 }
+    public void setShipType(int type)
+    {
+       this.shipType = type;
+    }
    public void setRateOfSpeed(int newSpeed)
    {
        this.rateOfSpeed = newSpeed;
@@ -134,15 +166,15 @@ private void updateLocation(){
 private void updateState(){
 
 }
-@Override
+
 public void update(){
     updateState();
     updateLocation();
     setHitBox();
 }
 
-@Override
 public int getState() {
-    return 0;
+    return this.shipState;
 }
+    
 }

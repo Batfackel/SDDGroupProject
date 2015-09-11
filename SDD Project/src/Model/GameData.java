@@ -14,7 +14,9 @@ public class GameData {
         
         figures.add(new Launcher(Level.returnWidth()/2-30, Level.returnHeight()-60));
                            
-        figures.add(new Launcher(100, 100));            
+        figures.add(new Launcher(100, 100));  
+        
+        figures.add(new TempShip(500,500));
   
          
       System.out.println("@@GAME DATA CONSTRUCTO@@");
@@ -28,7 +30,8 @@ public class GameData {
                 
             Launcher test = (Launcher) this.figures.get(0);
             Launcher other = (Launcher) this.figures.get(1);
-                
+             
+            TempShip ship = (TempShip) this.figures.get(2);
                 
             Rectangle mytestR1 = test.getRectangle1();
             Rectangle mytestR2 = other.getRectangle1();

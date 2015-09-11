@@ -29,7 +29,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     private int screenHeight = 1000;
     private JLabel lbl;
     private Date now = new Date();
-    
+    private TempShip ship;
     
     public Main() {
         //changed sizing to fit the default image
@@ -61,10 +61,12 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         gamePanel.addKeyListener(this);
         startButton.addActionListener(this);
         quitButton.addActionListener(this);
-
+        
         launcher = (Launcher) gameData.figures.get(0); // launcher        
         pack();
         setVisible(true);
+        
+        ship = (TempShip) gameData.figures.get(2);
     }
        
     @Override
@@ -107,16 +109,41 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     public void keyPressed(KeyEvent ke) {
         switch (ke.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                launcher.x -= 10;
+                ship.moveLeft();
                 break;
             case KeyEvent.VK_RIGHT:
-                launcher.x += 10;
+                ship.moveRight();
                 break;
             case KeyEvent.VK_UP:
-                launcher.y -= 10;
+                ship.moveUp();
                 break;
             case KeyEvent.VK_DOWN:
-                launcher.y += 10;                
+                ship.moveDown(); 
+                break;
+            case KeyEvent.VK_1:
+                ship.setRateOfSpeed(5);
+                ship.setShipType(1);
+                break;
+            case KeyEvent.VK_2:
+                ship.setRateOfSpeed(8);
+                ship.setShipType(2);
+                break;
+            case KeyEvent.VK_3:
+                ship.setRateOfSpeed(12);
+                ship.setShipType(3);
+                break;
+            case KeyEvent.VK_4:
+                ship.setRateOfSpeed(15);
+                ship.setShipType(4);
+                break;
+            case KeyEvent.VK_5:
+                ship.setRateOfSpeed(18);
+                ship.setShipType(5);
+                break;
+            case KeyEvent.VK_6:
+                ship.setRateOfSpeed(21);
+                ship.setShipType(6);
+                break;
         }
     }
     
