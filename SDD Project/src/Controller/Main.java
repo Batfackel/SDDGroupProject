@@ -84,7 +84,12 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         int x = e.getX();
         int y = e.getY();
 
+        //----------------------------------------------------------------------
+        //changes the types of bullet shot. This changes the weapon type when 
+        //the ship weapon state changes - 9/10/2015
+        //----------------------------------------------------------------------
         Color color;
+        /*
         double r = Math.random();
         if (r < 0.25) {
             color = Color.red;
@@ -95,7 +100,21 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         } else {
             color = Color.green;
         }
-
+        */       
+        System.out.println("this is the state -------- " + launcher.getLevelState());
+        switch(launcher.getLevelState()){            
+            case 0: color = Color.gray;
+                break;
+            case 1: color = Color.blue;
+                break;
+            case 2: color = Color.green;
+                break;
+            case 3: color = Color.red;
+                break;
+            default: color = Color.yellow;
+        }
+        //----------------------------------------------------------------------
+        
         Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);
         f.setTarget(x, y);
         int size = (int) (Math.random() * 100) + 5; // min = 5 max = 105

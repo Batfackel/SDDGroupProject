@@ -90,36 +90,51 @@ public class Launcher implements GameFigure, ShipState {
         
         g.drawImage(launcherImage, (int)x, (int)y, null);
         
-        //collision debugging---------------------------------------
+        //----------------------------------------------------------------------
+        //set up and display hit boxes for the launcher objects
+        //used for dubugging 9/10/2015
+        //----------------------------------------------------------------------
         g.setColor(Color.yellow);
         g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
         g.setColor(Color.BLUE);
-//        g.drawRect((int) this.x + 10, (int) this.y + 40, (int) this.width2, (int) this.height2);
-        setRectangle();
-        //g.drawImage(launcherImage, (int)x, (int)y, null);
+        setRectangle();        
+        //----------------------------------------------------------------------
     }
 
-    // simple hit box
-    //-------------------------------
+    //----------------------------------------------------------------------
+    //getters and setter for the launcher hit box
+    //9/10/2015
+    //----------------------------------------------------------------------
+    // simple hit box for the launcher object
     private void setRectangle() {
         this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
     }
-    
+    // get ht box
     public Rectangle getRectangle1() {
         return this.r1;
     }
-    //----------------------------------
+    //----------------------------------------------------------------------
+    //This will be used by the ship class to get and set the weapon level
+    //state. 9/10/2015
+    //----------------------------------------------------------------------
+    // get and set the weapon level state
+    public void setLevelState(int i) {
+        this.levelState = i;
+    }
     
+    public int getLevelState() {
+        return this.levelState;
+    }
+    
+    //----------------------------------------------------------------------
     @Override
     public void update() 
-    {
-        System.out.println(levelState); //the weapon level held in the ship object, test
+    {   
     //y-=1;
     }
     @Override
     public int getState() {
         return STATE_TRAVELING;
     }
-    
-    
+   
 }

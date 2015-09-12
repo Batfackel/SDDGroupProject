@@ -1,6 +1,6 @@
 /*
- * I'm still working on this but this should be the weapon level 
- * stored in the ship object
+ * This interface represent the weapon level of the ship. The getters and setters
+ * that go along with it are in the launcher class. 9/10/2015
  */
 package Model;
 
@@ -11,6 +11,5 @@ package Model;
 public interface ShipState {
     static final int BASE_LEVEL = 0;
     static final int LEVEL_1 = 1;
-    static final int LEVEL_2 = 2;
-       
+    static final int LEVEL_2 = 2;    
 }

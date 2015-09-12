@@ -21,11 +21,11 @@ public class Animator implements Runnable {
         running = true;
         while (running) {
              
-            System.out.println("Before Update");
+            //System.out.println("Before Update");
             gameData.update();
-             System.out.println("Before GameRender");
+            //System.out.println("Before GameRender");
             gamePanel.gameRender();
-            System.out.println("Before Game Panel");
+            //System.out.println("Before Game Panel");
             gamePanel.printScreen();
             try {
                 Thread.sleep(50);
