@@ -40,6 +40,7 @@ public class GameData {
         
 // Idealy this would be in a loop but for the sake of testing I did this.        
         TempShip ship = (TempShip) this.figures.get(0);
+
         //Launcher test = (Launcher) this.figures.get(1);
         Launcher enemy1 = (Launcher) this.figures.get(1);
         Launcher enemy2 = (Launcher) this.figures.get(2);
