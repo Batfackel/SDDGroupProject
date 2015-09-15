@@ -30,6 +30,7 @@ public class SaveData {
     String separator = System.getProperty("file.separator");
     
     public SaveData(boolean firstLoad) {
+        loadedScores = new Vector<Score>();
        if(firstLoad) {
            readFile();
        }
@@ -44,18 +45,25 @@ public class SaveData {
             BufferedReader bufferedReader = new BufferedReader(reader);
             Score score = null;
             while((line = bufferedReader.readLine()) != null) {
+                if(line.compareTo("***") == 0) {
+                    //consume the line
+                    line = null;
+                }
                 score = new Score();
-                //consume the line
-                line = null;
+                
                 //read in the name
+                line = bufferedReader.readLine();
                 score.setName(line);
                 //read in the score
+                line = bufferedReader.readLine();
                 score.setScore(Integer.parseInt(line));
                 //read in the time played
+                line = bufferedReader.readLine();
                 String[] values = line.split(Pattern.quote("."));
                 Time time = new Time(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]));
                 score.setTimePlayed(time);
                 //read in the max level
+                line = bufferedReader.readLine();
                 score.setHighestLevel(Integer.parseInt(line));
                 //add to the loaded in scores
                 loadedScores.add(score);
