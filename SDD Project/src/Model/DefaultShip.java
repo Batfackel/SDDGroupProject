@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -77,11 +78,15 @@ public Rectangle[] getHitBox(){
 
 @Override
 public void render(Graphics g){
+    System.out.println("before switch------------------------");
     switch (getShipState()){
         case 0:{
+            System.out.println("case 0------------------------");
+            g.setColor(Color.red);
             g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
-            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,
-                (int) this.shipHeight);
+//            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
+                //(int) this.shipHeight);
+            g.drawRect((int)this.x, (int)this.y, 100, 100);
         }
     }
 }

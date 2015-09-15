@@ -116,8 +116,9 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
             color = Color.green;
         }
         */       
-        System.out.println("this is the state -------- " + launcher.getLevelState());
-        switch(launcher.getLevelState()){            
+        System.out.println("this is the state -------- " + ship.getLevelState());
+        //switch(launcher.getLevelState()){            
+        switch(ship.getLevelState()) {
             case 0: color = Color.gray;
                 break;
             case 1: color = Color.blue;
@@ -131,7 +132,8 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
         
-        Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);
+        //Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);
+        Missile f = new Missile(ship.getXofMissileShoot(), ship.getYofMissileShoot(), color);
         f.setTarget(x, y);
         int size = (int) (Math.random() * 100) + 5; // min = 5 max = 105
         f.setExplosionMaxSize(size);

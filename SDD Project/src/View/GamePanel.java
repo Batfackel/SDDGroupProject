@@ -72,8 +72,8 @@ public class GamePanel extends JPanel {
     }*/
     public void gameRender() {
         if (dbImage == null) {
-            //dbImage = createImage(getWidth(), getHeight());
-            dbImage = createImage(PWIDTH, PHEIGHT);
+            dbImage = createImage(getWidth(), getHeight());
+            //dbImage = createImage(PWIDTH, PHEIGHT);
             if (dbImage == null) {
                 System.out.println("dbImage is null");
                 return;
