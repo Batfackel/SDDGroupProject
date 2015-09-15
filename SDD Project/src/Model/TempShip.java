@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Will
  */
-public class TempShip implements GameFigure{
+public class TempShip implements GameFigure, ShipState{
     
     
    Image currentImage; 
@@ -28,6 +28,7 @@ public class TempShip implements GameFigure{
    int armour;
    int shipState;
    int weaponState,weaponLevel;
+   int levelState = -1;
    int shipType;
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
@@ -38,6 +39,10 @@ public class TempShip implements GameFigure{
         this.y = y;
         this.rateOfSpeed = 5;
         this.shipType = 1;
+        //this.shipWidth and this.shipHeight are never set so I hard coded in the values for now
+        this.shipHeight = 50;
+        this.shipWidth = 50;
+        this.levelState = BASE_LEVEL;
         setShipState(STATE_TRAVELING);
    
         String imagePath = System.getProperty("user.dir");
@@ -67,6 +72,9 @@ public class TempShip implements GameFigure{
         this.currentImage = getImage(imagePath + separator + "images" + 
             separator + "raider.png");
         defaultShipMap.put(6, this.currentImage);//Sh
+        
+        //initialize hitbox
+        setHitBox();
     }
     
 //===GetUserInput==================================================================================================
@@ -91,8 +99,11 @@ public void moveDown() {
 }
 //-----------------------------------------------------------------------------------------------------------
 public void setHitBox(){
+//    System.out.println("before sethitbox--------------------------------------------");
+    //System.out.println(getShipState());
     switch (getShipState()){
-        case 0: {
+        case 1: {
+            //System.out.println("in sethitbox--------------------------------------------");
             this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth,
             (int) this.shipHeight); 
         }
@@ -103,9 +114,13 @@ public Rectangle[] getHitBox(){
 }
 
 public void render(Graphics g){
+    //System.out.println("before switch2------------------------");
     switch (getShipState()){
         case 1:{
+            //System.out.println("in switch2------------------------");
+            g.setColor(Color.red);
             g.drawImage(defaultShipMap.get(this.shipType), (int)x, (int)y, null);
+            //this.shipWidth and this.shipHeight are never set so I hard coded in the values for now
             g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,
                 (int) this.shipHeight);
         }
@@ -156,6 +171,36 @@ public void render(Graphics g){
        }
        return image;
     }
+    
+    //----------------------------------------------------------------------
+    //This will be used by the ship class to get and set the weapon level
+    //state. 9/10/2015
+    //----------------------------------------------------------------------
+    // get and set the weapon level state
+   @Override
+    public void setLevelState(int i) {
+        this.levelState = i;
+    }
+    
+   @Override
+    public int getLevelState() {
+        return this.levelState;
+    }
+    //----------------------------------------------------------------------
+    //----------------------------------------------------------------------
+    
+    //----------------------------------------------------------------------
+    // Missile shoot location
+    //----------------------------------------------------------------------
+    public float getXofMissileShoot() {
+        return x+25;
+    }
+    
+    public float getYofMissileShoot() {
+        return y+25;
+    }
+    //----------------------------------------------------------------------
+    //----------------------------------------------------------------------
     
 private void updateAnimation(){
     
