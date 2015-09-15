@@ -15,20 +15,16 @@ public class GameData {
         //9/10/2015
 //-----------------------------------------------------------------------------        
         //player ship
-        figures.add(new Launcher(350, 500));
-                           
-
-        //figures.add(new Launcher(100, 100));  
-        
+        //figures.add(new Launcher(350, 500));                                     
         figures.add(new TempShip(500,500));
   
-
         //represent weapon power-up items
         figures.add(new Launcher(100, 200));           
         figures.add(new Launcher(250, 200));
         figures.add(new Launcher(400, 200));
+        figures.add(new Launcher(1000, 2000));           
 //-----------------------------------------------------------------------------
-
+//----------------------------------------------------------------------
          
       //System.out.println("@@GAME DATA CONSTRUCTO@@");
 
@@ -37,23 +33,25 @@ public class GameData {
     public void update() {
 //-----------------------------------------------------------------------------
 // a little collision test for the playable ship and another instance of the ship
-//---------------------------------------------        
-        //for (int i = 0; i< figures.size(); i++) {
-                
-            Launcher test = (Launcher) this.figures.get(0);
-            Launcher other = (Launcher) this.figures.get(1);
-             
-            TempShip ship = (TempShip) this.figures.get(2);
-
 // when the ship collides the weapon state boolean will be true and increment
 // the player ship's weapon level state 9/10/2015
+//-----------------------------------------------------------------------------
+        //for (int i = 0; i< figures.size(); i++) {                            
         
 // Idealy this would be in a loop but for the sake of testing I did this.        
+<<<<<<< HEAD
 //-----------------------------------------------------------------------------
         //Launcher test = (Launcher) this.figures.get(0);
         Launcher enemy1 = (Launcher) this.figures.get(1);
         Launcher enemy2 = (Launcher) this.figures.get(2);
         Launcher enemy3 = (Launcher) this.figures.get(3);
+=======
+        TempShip ship = (TempShip) this.figures.get(0);
+        Launcher test = (Launcher) this.figures.get(1);
+        Launcher enemy1 = (Launcher) this.figures.get(2);
+        Launcher enemy2 = (Launcher) this.figures.get(3);
+        Launcher enemy3 = (Launcher) this.figures.get(4);
+>>>>>>> origin/master
               
         boolean levelCheck = false;
         for (int i = 1; i < figures.size(); i++) {
@@ -82,7 +80,8 @@ public class GameData {
         }
         
 //-----------------------------------------------------------------------------
-            
+//-----------------------------------------------------------------------------
+        
         List<GameFigure> remove = new ArrayList<GameFigure>();
         GameFigure f;        
         

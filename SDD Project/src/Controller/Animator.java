@@ -28,7 +28,7 @@ public class Animator implements Runnable {
             //System.out.println("Before Game Panel");
             gamePanel.printScreen();
             try {
-                Thread.sleep(50);
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 
             }

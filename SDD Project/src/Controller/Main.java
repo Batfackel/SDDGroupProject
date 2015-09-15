@@ -62,11 +62,11 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         startButton.addActionListener(this);
         quitButton.addActionListener(this);
         
-        launcher = (Launcher) gameData.figures.get(0); // launcher        
+        //launcher = (Launcher) gameData.figures.get(1); // launcher        
         pack();
         setVisible(true);
         
-        ship = (TempShip) gameData.figures.get(2);
+        ship = (TempShip) gameData.figures.get(0);
     }
        
     @Override
@@ -114,6 +114,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
             default: color = Color.yellow;
         }
         //----------------------------------------------------------------------
+        //----------------------------------------------------------------------
         
         Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);
         f.setTarget(x, y);
@@ -128,13 +129,13 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     public void keyPressed(KeyEvent ke) {
         switch (ke.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                ship.moveLeft();
+                ship.moveLeft();                
                 break;
             case KeyEvent.VK_RIGHT:
-                ship.moveRight();
+                ship.moveRight();                
                 break;
             case KeyEvent.VK_UP:
-                ship.moveUp();
+                ship.moveUp();              
                 break;
             case KeyEvent.VK_DOWN:
                 ship.moveDown(); 
@@ -212,4 +213,14 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     @Override
     public void keyReleased(KeyEvent ke) {
     }
+    
+    //initial main not needed
+    /*
+    public static void main(String[] args) {
+        JFrame game = new Main();
+        //game.setTitle("Beggar's Canyon");
+        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.setVisible(true);
+    }
+    */
 }
