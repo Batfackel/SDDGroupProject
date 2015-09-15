@@ -28,7 +28,7 @@ public class TempShip implements GameFigure, ShipState{
    int armour;
    int shipState;
    int weaponState,weaponLevel;
-   int levelState = -1;
+   int levelState;
    int shipType;
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
@@ -42,7 +42,8 @@ public class TempShip implements GameFigure, ShipState{
         //this.shipWidth and this.shipHeight are never set so I hard coded in the values for now
         this.shipHeight = 50;
         this.shipWidth = 50;
-        this.levelState = BASE_LEVEL;
+        this.levelState = -1;
+        setLevelState(this.levelState);
         setShipState(STATE_TRAVELING);
    
         String imagePath = System.getProperty("user.dir");
@@ -179,7 +180,15 @@ public void render(Graphics g){
     // get and set the weapon level state
    @Override
     public void setLevelState(int i) {
-        this.levelState = i;
+        switch(i) {
+            case -1: this.levelState = BASE_LEVEL;
+                break;
+            case 0: this.levelState = LEVEL_1;
+                break;
+            case 1: this.levelState = LEVEL_2;
+                break;
+            case 2: this.levelState = LEVEL_3;
+        }
     }
     
    @Override

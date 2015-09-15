@@ -35,45 +35,20 @@ public class GameData {
 // a little collision test for the playable ship and another instance of the ship
 // when the ship collides the weapon state boolean will be true and increment
 // the player ship's weapon level state 9/10/2015
-//-----------------------------------------------------------------------------
-        //for (int i = 0; i< figures.size(); i++) {                            
-        
-// Idealy this would be in a loop but for the sake of testing I did this.        
+//-----------------------------------------------------------------------------                     
         TempShip ship = (TempShip) this.figures.get(0);
-
-        //Launcher test = (Launcher) this.figures.get(1);
-        Launcher enemy1 = (Launcher) this.figures.get(1);
-        Launcher enemy2 = (Launcher) this.figures.get(2);
-        Launcher enemy3 = (Launcher) this.figures.get(3);
               
-        boolean levelCheck = false;
-        for (int i = 1; i < figures.size(); i++) {
+        //set to 4 for the time being, make a new arraylist for the enemies
+        for (int i = 1; i < 4; i++) {
 
                 Rectangle[] hit = ship.getHitBox();
-            //this would crash the game becuse I was testing stuff that wasn't created
-            //Launcher enemy = (Launcher) this.figures.get(i);
-                         
-            //if (test.getRectangle1().intersects(enemy1.getRectangle1())) {
-            if (hit[0].intersects(enemy1.getRectangle1())) {
-                System.out.println("intersections");
-                enemy1.x = 100000;
-                levelCheck = true;                
-            }
-            //else if (test.getRectangle1().intersects(enemy2.getRectangle1())) {
-            else if (hit[0].intersects(enemy2.getRectangle1())) {
-                enemy2.x = 100000;
-                levelCheck = true;
-            }                
-            else if (hit[0].intersects(enemy3.getRectangle1())) {
-                enemy3.x = 100000;
-                levelCheck = true;
-            }
+                Launcher asdf = (Launcher) this.figures.get(i);
+                
+                if (hit[0].intersects(asdf.getRectangle1())) {
+                    asdf.x = 100000;                    
+                    ship.setLevelState(ship.getLevelState());
+                }            
     }
-        if (levelCheck == true) {
-            ship.levelState++;
-            levelCheck = false;
-        }
-        
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
         

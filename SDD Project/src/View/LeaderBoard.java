@@ -22,5 +22,5 @@ public class LeaderBoard extends JPanel{
         //load up the java swing components to display on the screen
     }
     
-    public void 
+    //public void 
 }
