@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
       
-    public static final int PWIDTH = 600; // size of the game panel
-    public static final int PHEIGHT = 400;
+    public static final int PWIDTH = 800; // size of the game panel
+    public static final int PHEIGHT = 800;
     
     private Animator animator;
     private GameData gameData;
@@ -72,7 +72,8 @@ public class GamePanel extends JPanel {
     }*/
     public void gameRender() {
         if (dbImage == null) {
-            dbImage = createImage(getWidth(), getHeight());
+            //dbImage = createImage(getWidth(), getHeight());
+            dbImage = createImage(PWIDTH, PHEIGHT);
             if (dbImage == null) {
                 System.out.println("dbImage is null");
                 return;

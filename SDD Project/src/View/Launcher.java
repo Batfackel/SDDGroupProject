@@ -118,10 +118,12 @@ public class Launcher implements GameFigure, ShipState {
     //state. 9/10/2015
     //----------------------------------------------------------------------
     // get and set the weapon level state
+    @Override
     public void setLevelState(int i) {
         this.levelState = i;
     }
     
+    @Override
     public int getLevelState() {
         return this.levelState;
     }

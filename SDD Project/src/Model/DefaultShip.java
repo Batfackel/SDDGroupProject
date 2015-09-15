@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author Will
  */
-public class DefaultShip implements Ship {
+public class DefaultShip implements Ship, ShipState {
     
    Image currentImage; 
    float x, y , dx, dy;
@@ -26,6 +26,7 @@ public class DefaultShip implements Ship {
    int armour;
    int shipState;
    int weaponState,weaponLevel;
+   int levelState = -1; //stores weapon level state
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
    
@@ -33,6 +34,7 @@ public class DefaultShip implements Ship {
     //Initialize ship here
         this.x = x;
         this.y = y;
+        this.levelState = BASE_LEVEL; //initialze weapon level state
         setShipState(0/*newShipState*/);
    
         String imagePath = System.getProperty("user.dir");
@@ -124,6 +126,23 @@ public void render(Graphics g){
        }
        return image;
     }
+    
+    //----------------------------------------------------------------------
+    //This will be used by the ship class to get and set the weapon level
+    //state. 9/10/2015
+    //----------------------------------------------------------------------
+    // get and set the weapon level state
+   @Override
+    public void setLevelState(int i) {
+        this.levelState = i;
+    }
+    
+   @Override
+    public int getLevelState() {
+        return this.levelState;
+    }
+    //----------------------------------------------------------------------
+    //----------------------------------------------------------------------
     
 private void updateAnimation(){
     

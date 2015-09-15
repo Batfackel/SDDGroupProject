@@ -12,4 +12,7 @@ public interface ShipState {
     static final int BASE_LEVEL = 0;
     static final int LEVEL_1 = 1;
     static final int LEVEL_2 = 2;    
+    static final int LEVEL_3 = 3;
+    public void setLevelState(int i);
+    public int getLevelState();
 }
