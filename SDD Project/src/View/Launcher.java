@@ -15,6 +15,7 @@ public class Launcher implements GameFigure, ShipState {
     Image launcherImage;
     float x, y, width1 = 110, height1 = 125;
     int levelState = -1;
+    private int state = STATE_TRAVELING;
 
     public Launcher(float x, float y) {
         this.x = x;
@@ -136,7 +137,10 @@ public class Launcher implements GameFigure, ShipState {
     }
     @Override
     public int getState() {
-        return STATE_TRAVELING;
+        return state;
     }
    
+    public void useItem(){
+        state = STATE_DONE;
+    }
 }
