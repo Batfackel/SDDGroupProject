@@ -39,19 +39,19 @@ public class GameData {
         //for (int i = 0; i< figures.size(); i++) {                            
         
 // Idealy this would be in a loop but for the sake of testing I did this.        
-<<<<<<< HEAD
+
 //-----------------------------------------------------------------------------
         //Launcher test = (Launcher) this.figures.get(0);
         Launcher enemy1 = (Launcher) this.figures.get(1);
         Launcher enemy2 = (Launcher) this.figures.get(2);
         Launcher enemy3 = (Launcher) this.figures.get(3);
-=======
+
         TempShip ship = (TempShip) this.figures.get(0);
         Launcher test = (Launcher) this.figures.get(1);
-        Launcher enemy1 = (Launcher) this.figures.get(2);
-        Launcher enemy2 = (Launcher) this.figures.get(3);
-        Launcher enemy3 = (Launcher) this.figures.get(4);
->>>>>>> origin/master
+//        Launcher enemy1 = (Launcher) this.figures.get(2);
+//        Launcher enemy2 = (Launcher) this.figures.get(3);
+//        Launcher enemy3 = (Launcher) this.figures.get(4);
+
               
         boolean levelCheck = false;
         for (int i = 1; i < figures.size(); i++) {
