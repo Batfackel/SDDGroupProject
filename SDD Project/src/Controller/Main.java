@@ -1,4 +1,5 @@
 
+import View.LeaderBoard;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -30,12 +31,14 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     private JLabel lbl;
     private Date now = new Date();
     private TempShip ship;
-    
+    private JButton leaderBoard;
+    private LeaderBoard leaderPanel;
+    private Container c;
     public Main() {
         //changed sizing to fit the default image
         setSize(screenWidth, screenHeight);
         setLocation(0, 0);
-        Container c = getContentPane();
+        c = getContentPane();
         animator = new Animator();
         gameData = new GameData();
         gamePanel = new GamePanel(animator, gameData);
@@ -53,7 +56,12 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         
         quitButton = new JButton("Quit");
         southPanel.add(quitButton);
+        
+        leaderBoard = new JButton("Scores");
+        southPanel.add(leaderBoard);
         c.add(southPanel, "South");
+        
+        
 
         gamePanel.addMouseListener(this);
         startButton.setFocusable(false); // "Start" button click should not receive keyboard data
@@ -61,6 +69,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         gamePanel.addKeyListener(this);
         startButton.addActionListener(this);
         quitButton.addActionListener(this);
+        leaderBoard.addActionListener(this);
         
         //launcher = (Launcher) gameData.figures.get(1); // launcher        
         pack();
@@ -76,6 +85,12 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
             startTimer();
         } else if (ae.getSource() == quitButton) {
             animator.running = false;
+        }
+        else if(ae.getSource() == leaderBoard) {
+            leaderPanel = new LeaderBoard();
+            c.add(leaderPanel, "Center");
+            gamePanel.setVisible(false);
+            leaderBoard.setVisible(true);
         }
     }
 

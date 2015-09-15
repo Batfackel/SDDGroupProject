@@ -15,12 +15,13 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author ryan
  */
-public class SaveData {
+public class SaveData{
     
     private String fileName;
     private Vector<Score> loadedScores;
@@ -28,12 +29,31 @@ public class SaveData {
     String filePath = System.getProperty("user.dir");
     // separator: Windows '\', Linux '/'
     String separator = System.getProperty("file.separator");
-    
+    public static final int NAME_INDEX = 0;
+    public static final int SCORE_INDEX = 1;
+    public static final int TIME_INDEX = 2;
+    public static final int LEVEL_INDEX = 3;
+    protected String[] columnNames;
+    protected Vector dataVector;
     public SaveData(boolean firstLoad) {
         loadedScores = new Vector<Score>();
+        dataVector = new Vector();
+        columnNames = new String[4];
+        columnNames[0] = "Name";
+        columnNames[1] = "Score";
+        columnNames[2] = "Time";
+        columnNames[3] = "Level";
        if(firstLoad) {
            readFile();
        }
+    }
+    
+    public int getnumberOfLoadedScores() {
+        return loadedScores.size();
+    }
+    
+    public Vector<Score> getloadedScores() {
+        return loadedScores;
     }
     
     public void readFile() {
@@ -107,4 +127,35 @@ public class SaveData {
             Logger.getLogger(SaveData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+//    @Override
+//    public int getRowCount() {
+//        return loadedScores.size();
+//    }
+//
+//    @Override
+//    public int getColumnCount() {
+//        return columnNames.length;
+//    }
+//
+//    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Score temp = loadedScores.get(rowIndex);
+        switch(columnIndex) {
+            case NAME_INDEX:
+                return temp.getName();
+            case SCORE_INDEX:
+                return temp.getScore();
+            case TIME_INDEX:
+                return temp.getTimePlayed().toString();
+            case LEVEL_INDEX:
+                return temp.getHighestLevel();
+            default:
+                return new Object();
+        }
+    }
+//    
+//    public String getColumnName(int column) {
+//        return columnNames[column];
+//    }
 }
