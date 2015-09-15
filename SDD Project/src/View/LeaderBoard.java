@@ -31,6 +31,7 @@ public class LeaderBoard extends JPanel{
     private JLabel nameBanner, score, time, level;
     private Vector<JLabel> nameLabels, scoreLabels, timeLabels, levelLabels;
     private JPanel header;
+    private JPanel[][] panelHolder;
     private JTable table;
     private JScrollPane scrollPane;
             
@@ -44,29 +45,35 @@ public class LeaderBoard extends JPanel{
         //header.setPreferredSize(new Dimension(getWidth(), 100));
         header.setBackground(Color.green);
         header.setLayout(layout);
+        panelHolder = new JPanel[1 + data.getnumberOfLoadedScores()][4];
+        for(int n = 0; n < 1 + data.getnumberOfLoadedScores(); n++) {
+            for(int x = 0; x < 4; x++) {
+                panelHolder[n][x] = new JPanel();
+                header.add(panelHolder[n][x]);
+            }
+        }
         nameBanner = new JLabel("Name");
         score = new JLabel("score");
         time = new JLabel("Time");
         level = new JLabel("Level");
-        header.add(nameBanner);
-        header.add(score);
-        header.add(time);
-        header.add(level);
+        panelHolder[0][0].add(nameBanner);
+        panelHolder[0][1].add(score);
+        panelHolder[0][2].add(time);
+        panelHolder[0][3].add(level);
         nameLabels = new Vector();
         scoreLabels = new Vector();
         timeLabels = new Vector();
         levelLabels = new Vector();
-//        for(int i = 0; i < data.getnumberOfLoadedScores(); i++) {
-//            String name = (String)data.getValueAt(i, 0);
-//            nameLabels.add(new JLabel(name));
-//            scoreLabels[i] = new JLabel((String)data.getValueAt(i, 1));
-//            timeLabels[i] = new JLabel((String)data.getValueAt(i, 2));
-//            levelLabels[i] = new JLabel((String)data.getValueAt(i, 3));
-//            header.add(nameLabels[i]);
-//            header.add(scoreLabels[i]);
-//            header.add(timeLabels[i]);
-//            header.add(levelLabels[i]);
-//        }
+        for(int i = 1; i < data.getnumberOfLoadedScores(); i++) {
+            JLabel tempLabel = new JLabel((String)data.getValueAt(i - 1, 0));
+            panelHolder[i][0].add(tempLabel);
+            tempLabel = new JLabel((String)data.getValueAt(i - 1, 1));
+            panelHolder[i][1].add(tempLabel);
+            tempLabel = new JLabel((String)data.getValueAt(i - 1, 2));
+            panelHolder[i][2].add(tempLabel);
+            tempLabel = new JLabel((String)data.getValueAt(i - 1, 3));
+            panelHolder[i][3].add(tempLabel);
+        }
         
         
         

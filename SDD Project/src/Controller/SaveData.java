@@ -145,11 +145,11 @@ public class SaveData{
             case NAME_INDEX:
                 return temp.getName();
             case SCORE_INDEX:
-                return temp.getScore();
+                return String.valueOf(temp.getScore());
             case TIME_INDEX:
                 return temp.getTimePlayed().toString();
             case LEVEL_INDEX:
-                return temp.getHighestLevel();
+                return String.valueOf(temp.getHighestLevel());
             default:
                 return new Object();
         }
