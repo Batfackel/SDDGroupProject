@@ -97,8 +97,7 @@ public class Launcher implements GameFigure, ShipState {
         //----------------------------------------------------------------------
         g.setColor(Color.yellow);
         g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
-        g.setColor(Color.BLUE);
-        setRectangle();        
+        g.setColor(Color.BLUE);     
         //----------------------------------------------------------------------
     }
 
@@ -133,7 +132,7 @@ public class Launcher implements GameFigure, ShipState {
     @Override
     public void update() 
     {   
-    //y-=1;
+    setRectangle();        
     }
     @Override
     public int getState() {

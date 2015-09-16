@@ -33,22 +33,28 @@ public class GameData {
     public void update() {
 //-----------------------------------------------------------------------------
 // a little collision test for the playable ship and another instance of the ship
-// when the ship collides the weapon state boolean will be true and increment
-// the player ship's weapon level state 9/10/2015
+// when the ship collides the weapon level state will increment
+// the player ship's weapon level state 9/15/2015
+// uses the figures arraylist until an item class is created                
 //-----------------------------------------------------------------------------                     
         TempShip ship = (TempShip) this.figures.get(0);
               
-        //set to 4 for the time being, make a new arraylist for the enemies
-        for (int i = 1; i < 4; i++) {
+        try {
+            for (int i = 1; i < this.figures.size(); i++) {
 
                 Rectangle[] hit = ship.getHitBox();
                 Launcher asdf = (Launcher) this.figures.get(i);
-                
+
                 if (hit[0].intersects(asdf.getRectangle1())) {
-                    asdf.x = 100000;                    
+                    //asdf.x = 100000;                    
+                    //ship.setShipState(STATE_DONE);
+                    this.figures.remove(asdf);
                     ship.setLevelState(ship.getLevelState());
-                }            
-    }
+                }
+            }
+        } catch (java.lang.ClassCastException e) {
+            System.out.println("missile");
+        }
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
         
