@@ -38,7 +38,7 @@ public class LeaderBoard extends JPanel{
     public LeaderBoard() {
         //read the data file to get what scores are in there
         data = new SaveData(true);
-        data.readFile();
+        //data.readFile();
         
         header = new JPanel();
         GridLayout layout = new GridLayout(1 + data.getnumberOfLoadedScores(),4, 20, 20);
@@ -64,7 +64,7 @@ public class LeaderBoard extends JPanel{
         scoreLabels = new Vector();
         timeLabels = new Vector();
         levelLabels = new Vector();
-        for(int i = 1; i < data.getnumberOfLoadedScores(); i++) {
+        for(int i = 1; i < data.getnumberOfLoadedScores() + 1; i++) {
             JLabel tempLabel = new JLabel((String)data.getValueAt(i - 1, 0));
             panelHolder[i][0].add(tempLabel);
             tempLabel = new JLabel((String)data.getValueAt(i - 1, 1));

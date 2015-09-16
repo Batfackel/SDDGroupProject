@@ -178,5 +178,37 @@ public int getState() {
     return 0;
 }
 
+//Weapon Methods
+// Missile shoot location
+    public float getXofMissileShoot() {
+        return x+30;
+    }
+    
+    public float getYofMissileShoot() {
+        return y+20;
+    }
+
+   
+    @Override
+    public void setShipType(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void moveLeft() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void moveRight() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void moveUp() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
  
 }

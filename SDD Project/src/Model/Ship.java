@@ -46,5 +46,18 @@ public interface Ship {
     //---------------------------------Weapon Stuff
     public void setLevelState(int i);
     public int getLevelState();
-    
+
+    public void moveLeft();
+
+    public void moveRight();
+
+    public void moveUp();
+
+    public void setShipType(int i);
+    // Missile shoot location
+    public float getXofMissileShoot();
+    public float getYofMissileShoot();
+ 
+
+  
 }
