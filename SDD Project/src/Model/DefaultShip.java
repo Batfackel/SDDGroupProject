@@ -199,22 +199,26 @@ public int getState() {
 
     @Override
     public void moveLeft() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    x = (int) (x - this.rateOfSpeed);
+    dx = x;
     }
 
     @Override
     public void moveRight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    x = (int) (x + this.rateOfSpeed);
+    dx = x;
     }
 
     @Override
     public void moveUp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    y = (int) (y - this.rateOfSpeed);
+    dy = y;
     }
 
     @Override
     public void moveDown() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    y = (int) (y + this.rateOfSpeed);
+    dy = y;
     }
 
 
