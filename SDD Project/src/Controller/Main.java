@@ -1,6 +1,4 @@
 package Controller;
-
-
 import Model.Launcher;
 import Model.GameData;
 import Controller.KeyController;
@@ -59,8 +57,8 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         c = getContentPane();
         animator = new Animator();
         gameData = new GameData();
-        ship = shipMaker.getShip(0, 350, 350);
-        ship = (Ship) gameData.figures.get(0);
+       // ship = shipMaker.getShip(0, 350, 350);
+       // ship = (Ship) gameData.figures.get(0);//will checking som
         controller = new KeyController(ship);
         gamePanel = new GamePanel(animator, gameData);
         animator.setGamePanel(gamePanel);
@@ -97,8 +95,8 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         setVisible(true);
         
 
-        Ship ship;
-        ship = (Ship) gameData.ships.get(0);
+//        Ship ship;
+//        ship = (Ship) gameData.ships.get(0);
 
     }
        

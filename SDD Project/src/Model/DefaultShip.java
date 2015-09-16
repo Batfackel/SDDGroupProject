@@ -30,14 +30,16 @@ public class DefaultShip implements Ship, ShipState {
    int levelState = -1; //stores weapon level state
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
-   
-    public DefaultShip(/*float x, float y*/){
+   int state;
+    public DefaultShip(float x, float y){
     //Initialize ship here
         this.x = x;
         this.y = y;
         this.shipHeight = 50;
         this.shipWidth = 50;
         this.levelState = BASE_LEVEL; //initialze weapon level state
+        this.state = STATE_OK;
+       
         setShipState(0/*newShipState*/);
    
         String imagePath = System.getProperty("user.dir");
@@ -47,6 +49,7 @@ public class DefaultShip implements Ship, ShipState {
         this.currentImage = getImage(imagePath + separator + "images" + 
             separator + "raider.png");
         defaultShipMap.put(0, this.currentImage);//Should be use constant NORMAL_STATE=0
+        this.setShipHitBox();
     }
     
 //===GetUserInput==================================================================================================
@@ -175,7 +178,7 @@ public void update(){
 
 @Override
 public int getState() {
-    return 0;
+    return this.state;
 }
 
 //Weapon Methods

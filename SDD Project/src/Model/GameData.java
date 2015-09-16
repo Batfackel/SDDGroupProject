@@ -11,7 +11,8 @@ public class GameData {
 
     public List<GameFigure> figures;
     public List<Ship> ships;
-    private ShipFactory shipMaker;
+    private ShipFactory shipMaker = new ShipFactory();
+    private Ship incomingShip;
     public GameData() {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
@@ -21,11 +22,11 @@ public class GameData {
         //player ship
         //figures.add(new Launcher(350, 500));                                     
  //       figures.add(new TempShip(500,500));
- 
-        ships.add(shipMaker.getShip(0, 350, 350));
+        //incomingShip = shipMaker.getShip("defaultShip",300,350);
+       // ships.add(incomingShip);
+         ships.add((Ship)shipMaker.getShip("defaultShip",450,200));
         //represent weapon power-up items
-        //figures.add(new Launcher(100, 200));
-        
+        //figures.add(new Launcher(100, 200));    
         figures.add(new Launcher(250, 200));
         figures.add(new Launcher(400, 200));
         figures.add(new Launcher(100, 200));           
@@ -48,10 +49,10 @@ public class GameData {
         Ship currentShip = (Ship) this.ships.get(0);
         //set to 4 for the time being, make a new arraylist for the enemies
     
-        TempShip ship = (TempShip) this.figures.get(0);
+       // TempShip ship = (TempShip) this.figures.get(0);
               
         try {
-            for (int i = 1; i < this.figures.size(); i++) {
+            for (int i = 0; i < this.figures.size(); i++) {
 
 
                 //Rectangle[] hit = ship.getHitBox();
@@ -62,7 +63,7 @@ public class GameData {
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);
                     this.figures.remove(asdf);
-                    ship.setLevelState(ship.getLevelState());
+                    currentShip.setLevelState(currentShip.getLevelState());
                 }           
     }
               
