@@ -28,10 +28,12 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     private int screenHeight = 1000;
     private JLabel lbl;
     private Date now = new Date();
-    public  TempShip ship;
+    private  TempShip ship;
     private JButton leaderBoard;
     private LeaderBoard leaderPanel;
     private Container c;
+    private KeyController controller;
+    
     public TempShip Ship(){
         return this.ship;
     }
@@ -42,6 +44,8 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         c = getContentPane();
         animator = new Animator();
         gameData = new GameData();
+        ship = (TempShip) gameData.figures.get(0);
+        controller = new KeyController(ship);
         gamePanel = new GamePanel(animator, gameData);
         animator.setGamePanel(gamePanel);
         animator.setGameData(gameData);
@@ -67,7 +71,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         gamePanel.addMouseListener(this);
         startButton.setFocusable(false); // "Start" button click should not receive keyboard data
         gamePanel.setFocusable(true); // receives keyboard data
-        gamePanel.addKeyListener(new KeyController());
+        gamePanel.addKeyListener(controller);
         startButton.addActionListener(this);
         quitButton.addActionListener(this);
         leaderBoard.addActionListener(this);
@@ -76,7 +80,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         pack();
         setVisible(true);
         
-        ship = (TempShip) gameData.figures.get(0);
+        
     }
        
     @Override

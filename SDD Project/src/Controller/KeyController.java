@@ -1,7 +1,16 @@
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+
 public class KeyController implements KeyListener {
+    
+    private TempShip ship;
+    
+    public KeyController(TempShip ship) {
+        this.ship = ship;
+    }
+    
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -46,10 +55,12 @@ public class KeyController implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
