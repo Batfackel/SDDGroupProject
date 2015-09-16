@@ -33,10 +33,10 @@ public class Launcher implements GameFigure, ShipState {
         //launcherImage = getImage(imagePath + separator + "images" + separator
         launcherImage = getImage(imagePath + separator + "images" + separator
                 + "TestShip.png");
-        setRectangle(); // initialize the hit box when object is created for testing
+       setLauncherHitBox(); // initialize the hit box when object is created for testing
     }
     
-    public static Image getImage(String fileName) {
+    public Image getImage(String fileName) {
         Image image = null;
         try {
             image = ImageIO.read(new File(fileName));
@@ -98,7 +98,7 @@ public class Launcher implements GameFigure, ShipState {
         g.setColor(Color.yellow);
         g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
         g.setColor(Color.BLUE);
-        setRectangle();        
+        setLauncherHitBox();        
         //----------------------------------------------------------------------
     }
 
@@ -107,11 +107,11 @@ public class Launcher implements GameFigure, ShipState {
     //9/10/2015
     //----------------------------------------------------------------------
     // simple hit box for the launcher object
-    private void setRectangle() {
+    private void setLauncherHitBox() {
         this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
     }
     // get ht box
-    public Rectangle getRectangle1() {
+    public Rectangle getLauncherHitBox() {
         return this.r1;
     }
     //----------------------------------------------------------------------
@@ -142,5 +142,45 @@ public class Launcher implements GameFigure, ShipState {
    
     public void useItem(){
         state = STATE_DONE;
+    }
+
+    @Override
+    public void setRateOfSpeed(int newSpeed) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addArmour(int armourToAdd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setWeaponState(int newWeaponState) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addWeaponLevel(int weaponPower) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setShipState(int newShipState) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setShipHitBox() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipState() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Rectangle[] getShipHitBox() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

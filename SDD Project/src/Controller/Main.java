@@ -1,4 +1,6 @@
 
+import Model.Ship;
+import Model.ShipFactory;
 import View.LeaderBoard;
 import java.awt.Color;
 import java.awt.Container;
@@ -34,6 +36,8 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
     private JButton leaderBoard;
     private LeaderBoard leaderPanel;
     private Container c;
+   // private ShipFactory shipMaker;
+    
     public Main() {
         //changed sizing to fit the default image
         setSize(screenWidth, screenHeight);
@@ -75,7 +79,8 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
         pack();
         setVisible(true);
         
-        ship = (TempShip) gameData.figures.get(0);
+        Ship ship;
+        ship = (Ship) gameData.ships.get(0);
     }
        
     @Override
