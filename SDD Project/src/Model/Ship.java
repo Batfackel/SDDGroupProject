@@ -52,6 +52,8 @@ public interface Ship {
     public void moveRight();
 
     public void moveUp();
+    
+    public void moveDown();
 
     public void setShipType(int i);
     // Missile shoot location

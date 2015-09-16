@@ -1,3 +1,5 @@
+package Model;
+
 
 import Model.ShipState;
 import java.awt.Color;
@@ -15,7 +17,7 @@ public class Launcher implements GameFigure, ShipState {
     Image launcherImage;
     float x, y, width1 = 110, height1 = 125;
     int levelState = -1;
-    private int state = STATE_TRAVELING;
+    private int state = GameFigure.STATE_TRAVELING;
 
     public Launcher(float x, float y) {
         this.x = x;
@@ -142,7 +144,7 @@ public class Launcher implements GameFigure, ShipState {
     }
    
     public void useItem(){
-        state = STATE_DONE;
+        state = GameFigure.STATE_DONE;
     }
 
     @Override
@@ -202,6 +204,11 @@ public class Launcher implements GameFigure, ShipState {
 
     @Override
     public void setShipType(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void moveDown() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

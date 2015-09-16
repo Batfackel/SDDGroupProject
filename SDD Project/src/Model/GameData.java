@@ -1,3 +1,5 @@
+package Model;
+
 import Model.Ship;
 import Model.ShipFactory;
 import java.awt.Rectangle;
@@ -7,8 +9,8 @@ import java.util.Collections;
 
 public class GameData {
 
-    final List<GameFigure> figures;
-    final List<Ship> ships;
+    public List<GameFigure> figures;
+    public List<Ship> ships;
     private ShipFactory shipMaker;
     public GameData() {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
@@ -22,7 +24,8 @@ public class GameData {
  
         ships.add(shipMaker.getShip(0, 350, 350));
         //represent weapon power-up items
-        //figures.add(new Launcher(100, 200));           
+        //figures.add(new Launcher(100, 200));
+        
         figures.add(new Launcher(250, 200));
         figures.add(new Launcher(400, 200));
         figures.add(new Launcher(100, 200));           

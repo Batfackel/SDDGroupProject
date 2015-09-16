@@ -1,4 +1,7 @@
+package View;
 
+
+import Controller.Main;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
