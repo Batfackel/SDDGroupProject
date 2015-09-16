@@ -43,7 +43,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     private Container c;
 
     private ShipFactory shipMaker;
-    private Ship ship= shipMaker.getShip(0, 350, 350);
+    private Ship ship;
     
 
     private KeyController controller;
@@ -59,6 +59,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         c = getContentPane();
         animator = new Animator();
         gameData = new GameData();
+        ship = shipMaker.getShip(0, 350, 350);
         ship = (Ship) gameData.figures.get(0);
         controller = new KeyController(ship);
         gamePanel = new GamePanel(animator, gameData);
