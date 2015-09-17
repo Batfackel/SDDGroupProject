@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;

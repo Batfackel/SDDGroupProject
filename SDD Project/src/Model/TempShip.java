@@ -6,13 +6,10 @@ package Model;
  * and open the template in the editor.
  */
 
-import Model.GameFigure;
-import Model.ShipState;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.io.File;
 import java.util.HashMap;
 import javax.imageio.ImageIO;

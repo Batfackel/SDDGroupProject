@@ -39,6 +39,8 @@ public class DefaultShip implements Ship, ShipState {
         this.shipWidth = 50;
         this.levelState = BASE_LEVEL; //initialze weapon level state
         this.state = STATE_OK;
+        //needs a default speed otherwise I don't know how far to move
+        this.rateOfSpeed = 1;
        
         setShipState(0/*newShipState*/);
    
@@ -52,23 +54,6 @@ public class DefaultShip implements Ship, ShipState {
         this.setShipHitBox();
     }
     
-//===GetUserInput==================================================================================================
-public void moveRight(int x) {
-    dx = x;
-}
-//-----------------------------------------------------------------------------------------------------------
-public void moveLeft(int x) {
-    dx = x;
-}
-//-----------------------------------------------------------------------------------------------------------
-public void moveUp(int y) {
-    dy = y;
-}
-//-----------------------------------------------------------------------------------------------------------
-public void moveDown(int y) {
-    dy = y;
-}
-//-----------------------------------------------------------------------------------------------------------
 public void setShipHitBox(){
     switch (getShipState()){
         case 0: {

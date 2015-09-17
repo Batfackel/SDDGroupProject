@@ -1,19 +1,13 @@
-<<<<<<< HEAD
-
-import Model.HUD;
-=======
 package Controller;
+
 import Model.Launcher;
 import Model.GameData;
-import Controller.KeyController;
 import Model.Missile;
 import Model.Ship;
 import Model.ShipFactory;
->>>>>>> 569f70d36cde5681bf37e38605e0283cb559b2c0
 import View.LeaderBoard;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -39,29 +33,19 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     private int screenWidth = 800;
     private int screenHeight = 1000;
     private JLabel lbl;
-    private Date now = new Date();
+    private Date now; 
     //private  TempShip ship;
     private JButton leaderBoard;
     private LeaderBoard leaderPanel;
-<<<<<<< HEAD
     private Container c;    
-    public TempShip Ship(){
+    private ShipFactory shipMaker;
+    private Ship ship;
+    private KeyController controller;
+
+    public Ship Ship(){
         return this.ship;
     }
-=======
-    private Container c;
-
-    private ShipFactory shipMaker = new ShipFactory();
-    private Ship ship;
     
-
-    private KeyController controller;
-    
-//    public TempShip Ship(){
-//        return this.ship;
-//    }
-
->>>>>>> 569f70d36cde5681bf37e38605e0283cb559b2c0
     public Main() {
         //changed sizing to fit the default image
         setSize(screenWidth, screenHeight);
@@ -69,7 +53,11 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         c = getContentPane();
         animator = new Animator();
         gameData = new GameData();
-        ship = shipMaker.getShip("defaultShip", 350, 350);
+        now = new Date();
+        //why do something that gamedata does for me already, just give me what
+        //is already there
+        //shipMaker = new ShipFactory();
+        //ship = shipMaker.getShip("defaultShip", 350, 350);
         ship = (Ship) gameData.ships.get(0);//will checking som
         controller = new KeyController(ship);
         gamePanel = new GamePanel(animator, gameData);
@@ -97,11 +85,11 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         gamePanel.addMouseListener(this);
         startButton.setFocusable(false); // "Start" button click should not receive keyboard data
         gamePanel.setFocusable(true); // receives keyboard data
-<<<<<<< HEAD
+
       //  gamePanel.addKeyListener(new KeyController());
-=======
+
         gamePanel.addKeyListener(controller);
->>>>>>> 569f70d36cde5681bf37e38605e0283cb559b2c0
+
         startButton.addActionListener(this);
         quitButton.addActionListener(this);
         leaderBoard.addActionListener(this);

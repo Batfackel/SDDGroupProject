@@ -9,7 +9,6 @@ package Controller;
 import View.MainMenu;
 import java.awt.Container;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**

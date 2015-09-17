@@ -1,15 +1,8 @@
 package Model;
-
-
-import Model.HUD;
-import Model.Ship;
-import Model.ShipState;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -20,14 +13,14 @@ public class Launcher implements GameFigure, ShipState {
     Image launcherImage;
     float x, y, width1 = 110, height1 = 125;
     int levelState = -1;
-<<<<<<< HEAD:SDD Project/src/View/Launcher.java
+
     private int state = STATE_TRAVELING;
     HUD hud; 
     
-=======
-    private int state = GameFigure.STATE_TRAVELING;
 
->>>>>>> 569f70d36cde5681bf37e38605e0283cb559b2c0:SDD Project/src/Model/Launcher.java
+    //private int state = GameFigure.STATE_TRAVELING;
+
+
     public Launcher(float x, float y) {
         hud = new HUD();
         this.x = x;
@@ -44,11 +37,11 @@ public class Launcher implements GameFigure, ShipState {
         //launcherImage = getImage(imagePath + separator + "images" + separator
         launcherImage = getImage(imagePath + separator + "images" + separator
                 + "TestShip.png");
-<<<<<<< HEAD:SDD Project/src/View/Launcher.java
-        setRectangle(); // initialize the hit box when object is created for testing   
-=======
+
+        //setRectangle(); // initialize the hit box when object is created for testing   
+
        setLauncherHitBox(); // initialize the hit box when object is created for testing
->>>>>>> 569f70d36cde5681bf37e38605e0283cb559b2c0:SDD Project/src/Model/Launcher.java
+
     }
     
     public Image getImage(String fileName) {

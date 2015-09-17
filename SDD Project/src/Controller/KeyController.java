@@ -1,16 +1,8 @@
 package Controller;
 
-<<<<<<< HEAD
 import Model.Ship;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-/*public class KeyController implements KeyListener {
-=======
-
-import Model.Ship;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 
 public class KeyController implements KeyListener {
     
@@ -20,12 +12,12 @@ public class KeyController implements KeyListener {
         this.ship = (Ship) ship;
     }
     
->>>>>>> 569f70d36cde5681bf37e38605e0283cb559b2c0
+
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                ship.moveLeft();                
+                ship.moveLeft();
                 break;
             case KeyEvent.VK_RIGHT:
                 ship.moveRight();                
@@ -54,23 +46,23 @@ public class KeyController implements KeyListener {
                 break;
             case KeyEvent.VK_5:
                 ship.setRateOfSpeed(18);
-                Ship.setShipType(5);
+                ship.setShipType(5);
                 break;
             case KeyEvent.VK_6:
                 ship.setRateOfSpeed(21);
-                Ship.setShipType(6);
+                ship.setShipType(6);
                 break;
         }
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-}*/
+}

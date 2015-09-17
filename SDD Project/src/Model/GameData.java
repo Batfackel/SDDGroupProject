@@ -1,7 +1,5 @@
 package Model;
 
-import Model.Ship;
-import Model.ShipFactory;
 import java.awt.Rectangle;
 import java.util.List;
 import java.util.ArrayList;

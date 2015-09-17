@@ -1,7 +1,6 @@
 package Model;
 
 
-import Model.GameFigure;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;

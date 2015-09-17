@@ -1,7 +1,6 @@
 package View;
 import Controller.Animator;
 import Model.GameData;
-import Model.DefaultShip;
 import Model.GameFigure;
 import Model.Level;
 import Model.Ship;
