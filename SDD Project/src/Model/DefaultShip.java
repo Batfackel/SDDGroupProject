@@ -53,21 +53,25 @@ public class DefaultShip implements Ship, ShipState {
     }
     
 //===GetUserInput==================================================================================================
-public void moveRight(int x) {
-    dx = x;
-}
-//-----------------------------------------------------------------------------------------------------------
-public void moveLeft(int x) {
-    dx = x;
-}
-//-----------------------------------------------------------------------------------------------------------
-public void moveUp(int y) {
-    dy = y;
-}
-//-----------------------------------------------------------------------------------------------------------
-public void moveDown(int y) {
-    dy = y;
-}
+//public void moveRight(int x) {
+//   x = (int) (x + this.rateOfSpeed);
+//    dx = x;
+//}
+////-----------------------------------------------------------------------------------------------------------
+//public void moveLeft(int x) {
+//    x = (int) (x - this.rateOfSpeed);
+//    dx = x;
+//}
+////-----------------------------------------------------------------------------------------------------------
+//public void moveUp(int y) {
+//   y = (int) (y - this.rateOfSpeed);
+//    dy = y;
+//}
+////-----------------------------------------------------------------------------------------------------------
+//public void moveDown(int y) {
+//     x = (int) (x - this.rateOfSpeed);
+//    dx = x;
+//}
 //-----------------------------------------------------------------------------------------------------------
 public void setShipHitBox(){
     switch (getShipState()){
@@ -91,7 +95,7 @@ public void render(Graphics g){
             g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
 //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
                 //(int) this.shipHeight);
-            g.drawRect((int)this.x, (int)this.y, 100, 100);
+            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
         }
     }
 }

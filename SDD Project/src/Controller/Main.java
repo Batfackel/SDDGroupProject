@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import View.GamePanel;
+import java.awt.event.KeyListener;
 
 public class Main extends JFrame implements ActionListener, MouseListener {
 
@@ -52,7 +53,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     private Container c;
 
     private ShipFactory shipMaker = new ShipFactory();
-    private Ship ship;
+    private Ship mainShip;
     
 
     private KeyController controller;
@@ -69,9 +70,9 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         c = getContentPane();
         animator = new Animator();
         gameData = new GameData();
-        ship = shipMaker.getShip("defaultShip", 350, 350);
-        ship = (Ship) gameData.ships.get(0);//will checking som
-        controller = new KeyController(ship);
+       // ship = shipMaker.getShip("defaultShip", 350, 350);
+        mainShip = (Ship) gameData.ships.get(0);//will checking som
+        controller = new KeyController(mainShip);
         gamePanel = new GamePanel(animator, gameData);
         animator.setGamePanel(gamePanel);
         animator.setGameData(gameData);
@@ -106,7 +107,8 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         quitButton.addActionListener(this);
         leaderBoard.addActionListener(this);
         
-        //launcher = (Launcher) gameData.figures.get(1); // launcher        
+        //launcher = (Launcher) gameData.figures.get(1); // launcher      
+       // ship = (Ship) gameData.ships.get(0);
         pack();
         setVisible(true);
         
@@ -154,9 +156,9 @@ public class Main extends JFrame implements ActionListener, MouseListener {
             color = Color.green;
         }
         */       
-        System.out.println("this is the state -------- " + ship.getLevelState());
+        System.out.println("this is the state -------- " + mainShip.getLevelState());
         //switch(launcher.getLevelState()){            
-        switch(ship.getLevelState()) {
+        switch(mainShip.getLevelState()) {
             case 0: color = Color.gray;
                 break;
             case 1: color = Color.blue;
@@ -171,7 +173,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         //----------------------------------------------------------------------
         
         //Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);
-        Missile f = new Missile(ship.getXofMissileShoot(), ship.getYofMissileShoot(), color);
+        Missile f = new Missile(mainShip.getXofMissileShoot(), mainShip.getYofMissileShoot(), color);
         f.setTarget(x, y);
         int size = (int) (Math.random() * 100) + 5; // min = 5 max = 105
         f.setExplosionMaxSize(size);
