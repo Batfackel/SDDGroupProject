@@ -1,7 +1,10 @@
 
+import Model.HUD;
+import Model.Ship;
 import Model.ShipState;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -16,15 +19,16 @@ public class Launcher implements GameFigure, ShipState {
     float x, y, width1 = 110, height1 = 125;
     int levelState = -1;
     private int state = STATE_TRAVELING;
-
+    HUD hud; 
+    
     public Launcher(float x, float y) {
+        hud = new HUD();
         this.x = x;
         this.y = y;
         this.levelState = BASE_LEVEL;
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
-    
         // put images in 'images' folder, which is on the top level of
         // the NetBeans project folder.
         // Using "Files" tab of the NetBeans explorer window, right click on
@@ -33,7 +37,7 @@ public class Launcher implements GameFigure, ShipState {
         //launcherImage = getImage(imagePath + separator + "images" + separator
         launcherImage = getImage(imagePath + separator + "images" + separator
                 + "TestShip.png");
-        setRectangle(); // initialize the hit box when object is created for testing
+        setRectangle(); // initialize the hit box when object is created for testing   
     }
     
     public static Image getImage(String fileName) {
@@ -47,9 +51,9 @@ public class Launcher implements GameFigure, ShipState {
         return image;
     }
     //"* 3" is to make up for the health bar length. 
-     public static int maxHealth = 100 * 3;
+    // public static int maxHealth = 100 ;
      /*int health = maxHealth;*/
-     int currentHealth = maxHealth;
+//     int currentHealth = maxHealth;
       
     
     // Missile shoot location
@@ -62,33 +66,7 @@ public class Launcher implements GameFigure, ShipState {
     }
 
     @Override
-    public void render(Graphics g) {
-        //health bar 
-        g.setColor(Color.GRAY);
-        g.drawRect(5,5,315,35);
-        
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(5,5,315,35);
-        
-        g.setColor(Color.RED);
-        g.fillRect(10,10,300,25);
-        
-        g.setColor(Color.GREEN);
-        g.fillRect(10,10,currentHealth,25);
-        
-        
-        //Sheild bar
-        
-
-        g.setColor(Color.YELLOW);
-        g.fillRect(5,50,310,15);
-        
-        g.setColor(Color.ORANGE);
-        g.fillRect(5,53,300,10);
-        
-        
-        
-        
+    public void render(Graphics g) {  
         g.drawImage(launcherImage, (int)x, (int)y, null);
         
         //----------------------------------------------------------------------
@@ -99,8 +77,10 @@ public class Launcher implements GameFigure, ShipState {
         g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
         g.setColor(Color.BLUE);     
         //----------------------------------------------------------------------
+        //////Render HUD Class
+        hud.render(g);// tried to set HUD area above the entire game, missiles are still above it...
     }
-
+    
     //----------------------------------------------------------------------
     //getters and setter for the launcher hit box
     //9/10/2015

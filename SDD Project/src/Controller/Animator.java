@@ -19,7 +19,7 @@ public class Animator implements Runnable {
     @Override
     public void run() {
         running = true;
-        while (running) {
+        while (running) { 
              
             //System.out.println("Before Update");
             gameData.update();

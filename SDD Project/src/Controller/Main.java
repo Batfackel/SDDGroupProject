@@ -1,4 +1,5 @@
 
+import Model.HUD;
 import View.LeaderBoard;
 import java.awt.Color;
 import java.awt.Container;
@@ -31,7 +32,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     public  TempShip ship;
     private JButton leaderBoard;
     private LeaderBoard leaderPanel;
-    private Container c;
+    private Container c;    
     public TempShip Ship(){
         return this.ship;
     }
@@ -67,7 +68,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         gamePanel.addMouseListener(this);
         startButton.setFocusable(false); // "Start" button click should not receive keyboard data
         gamePanel.setFocusable(true); // receives keyboard data
-        gamePanel.addKeyListener(new KeyController());
+      //  gamePanel.addKeyListener(new KeyController());
         startButton.addActionListener(this);
         quitButton.addActionListener(this);
         leaderBoard.addActionListener(this);

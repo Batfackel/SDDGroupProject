@@ -1,7 +1,8 @@
 
+import Model.Ship;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-public class KeyController implements KeyListener {
+/*public class KeyController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -35,11 +36,11 @@ public class KeyController implements KeyListener {
                 break;
             case KeyEvent.VK_5:
                 ship.setRateOfSpeed(18);
-                ship.setShipType(5);
+                Ship.setShipType(5);
                 break;
             case KeyEvent.VK_6:
                 ship.setRateOfSpeed(21);
-                ship.setShipType(6);
+                Ship.setShipType(6);
                 break;
         }
     }
@@ -52,4 +53,4 @@ public class KeyController implements KeyListener {
     public void keyReleased(KeyEvent e) {
     }
 
-}
+}*/
