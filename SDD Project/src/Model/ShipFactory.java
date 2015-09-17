@@ -12,20 +12,20 @@ package Model;
 public class ShipFactory {
     
     //Default constructor
-  
+  private Ship shipType;
      
-    public Ship getShip(int shipType, float x, float y){
+  void Ship()
+  {
+      shipType = null;
+  }
+    public Ship getShip(String shipSelection, float x, float y){
         
-        switch (shipType) {
-            case 0:{
-                
-                return new DefaultShip();
-            }
-            default:{
-                return null;
-            }
+        if (shipSelection.equalsIgnoreCase("defaultship")){
+            shipType = new DefaultShip(x,y);
+            return shipType;
         }
-    }
-    
-    
+        else{
+            throw new IllegalArgumentException("NO SUCH SHIP TYPE");
+        }
+    }    
 }

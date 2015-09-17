@@ -1,4 +1,5 @@
 
+import Model.GameFigure;
 import View.AbstractItem;
 import java.awt.Color;
 import java.awt.Graphics;

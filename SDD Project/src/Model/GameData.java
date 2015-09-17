@@ -1,4 +1,7 @@
-import Model.Level;
+package Model;
+
+import Model.Ship;
+import Model.ShipFactory;
 import java.awt.Rectangle;
 import java.util.List;
 import java.util.ArrayList;
@@ -6,20 +9,24 @@ import java.util.Collections;
 
 public class GameData {
 
-    final List<GameFigure> figures;
-
+    public List<GameFigure> figures;
+    public List<Ship> ships;
+    private ShipFactory shipMaker = new ShipFactory();
+    private Ship incomingShip;
     public GameData() {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
-        
+        ships = Collections.synchronizedList(new ArrayList<Ship>());
         //create ships for collision test
         //9/10/2015
 //-----------------------------------------------------------------------------        
         //player ship
         //figures.add(new Launcher(350, 500));                                     
-        figures.add(new TempShip(500,500));
-  
+ //       figures.add(new TempShip(500,500));
+        //incomingShip = shipMaker.getShip("defaultShip",300,350);
+       // ships.add(incomingShip);
+         ships.add((Ship)shipMaker.getShip("defaultShip",450,200));
         //represent weapon power-up items
-        //figures.add(new Launcher(100, 200));           
+        //figures.add(new Launcher(100, 200));    
         figures.add(new Launcher(250, 200));
         figures.add(new Launcher(400, 200));
         figures.add(new Launcher(100, 200));           
@@ -37,28 +44,38 @@ public class GameData {
 // the player ship's weapon level state 9/15/2015
 // uses the figures arraylist until an item class is created                
 //-----------------------------------------------------------------------------                     
-        TempShip ship = (TempShip) this.figures.get(0);
+
+        //TempShip ship = (TempShip) this.figures.get(0);
+        Ship currentShip = (Ship) this.ships.get(0);
+        //set to 4 for the time being, make a new arraylist for the enemies
+    
+       // TempShip ship = (TempShip) this.figures.get(0);
               
         try {
-            for (int i = 1; i < this.figures.size(); i++) {
+            for (int i = 0; i < this.figures.size(); i++) {
 
-                Rectangle[] hit = ship.getHitBox();
+
+                //Rectangle[] hit = ship.getHitBox();
+                Rectangle[] hit = currentShip.getShipHitBox();
                 Launcher asdf = (Launcher) this.figures.get(i);
 
-                if (hit[0].intersects(asdf.getRectangle1())) {
+                  if (hit[0].intersects(asdf.getLauncherHitBox())) {
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);
                     this.figures.remove(asdf);
-                    ship.setLevelState(ship.getLevelState());
-                }
+                    currentShip.setLevelState(currentShip.getLevelState());
+                }           
+    }
+              
             }
-        } catch (java.lang.ClassCastException e) {
+         catch (java.lang.ClassCastException e) {
             System.out.println("missile");
         }
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
         
-        List<GameFigure> remove = new ArrayList<GameFigure>();
+        List<GameFigure> removeGameFigures = new ArrayList<GameFigure>();
         GameFigure f;        
         
         synchronized (figures) {                                                        
@@ -67,10 +84,27 @@ public class GameData {
                 f = figures.get(i);
                 f.update();
                 if (f.getState() == GameFigure.STATE_DONE) {
-                    remove.add(f);
+                    removeGameFigures.add(f);
                 }
             }
-            figures.removeAll(remove);
+            figures.removeAll(removeGameFigures);
         }
-    }
+    
+    
+        List<Ship> removeShips = new ArrayList<Ship>();
+        Ship s;        
+       
+        synchronized (ships) {                                                        
+            
+            for (int i = 0; i < ships.size(); i++) {               
+                s = ships.get(i);
+                s.update();
+                if (s.getState() == Ship.STATE_FINISHED) {
+                    removeShips.add(s);
+                }
+            }
+            ships.removeAll(removeShips);
+        }
+       }
+    
 }

@@ -1,9 +1,12 @@
+package Model;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import Model.GameFigure;
 import Model.ShipState;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author Will
  */
-public class TempShip implements GameFigure, ShipState{
+public class TempShip implements GameFigure, ShipState {
     
     
    Image currentImage; 
@@ -44,7 +47,7 @@ public class TempShip implements GameFigure, ShipState{
         this.shipWidth = 50;
         this.levelState = -1;
         setLevelState(this.levelState);
-        setShipState(STATE_TRAVELING);
+        setShipState(STATE_OK);
    
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -230,5 +233,15 @@ public void update(){
 public int getState() {
     return this.shipState;
 }
+
+    @Override
+    public void setShipHitBox() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Rectangle[] getShipHitBox() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

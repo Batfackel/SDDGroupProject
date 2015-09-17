@@ -8,7 +8,7 @@ package Model;
  *
  * @author Michael McGregor
  */
-public interface ShipState {
+public interface ShipState extends Ship{
     static final int BASE_LEVEL = 0;
     static final int LEVEL_1 = 1;
     static final int LEVEL_2 = 2;    

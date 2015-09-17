@@ -1,3 +1,9 @@
+package Controller;
+
+
+import View.GamePanel;
+import Model.GameData;
+
 
 public class Animator implements Runnable {
     boolean running;

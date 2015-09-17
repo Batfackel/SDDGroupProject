@@ -1,8 +1,26 @@
+package Controller;
 
+<<<<<<< HEAD
 import Model.Ship;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 /*public class KeyController implements KeyListener {
+=======
+
+import Model.Ship;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+
+public class KeyController implements KeyListener {
+    
+    private Ship ship;
+    
+    public KeyController(Ship ship) {
+        this.ship = (Ship) ship;
+    }
+    
+>>>>>>> 569f70d36cde5681bf37e38605e0283cb559b2c0
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -47,10 +65,12 @@ import java.awt.event.KeyListener;
 
     @Override
     public void keyTyped(KeyEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }*/

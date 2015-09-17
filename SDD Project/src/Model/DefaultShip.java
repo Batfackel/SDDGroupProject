@@ -30,12 +30,16 @@ public class DefaultShip implements Ship, ShipState {
    int levelState = -1; //stores weapon level state
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
-   
-    public DefaultShip(/*float x, float y*/){
+   int state;
+    public DefaultShip(float x, float y){
     //Initialize ship here
         this.x = x;
         this.y = y;
+        this.shipHeight = 50;
+        this.shipWidth = 50;
         this.levelState = BASE_LEVEL; //initialze weapon level state
+        this.state = STATE_OK;
+       
         setShipState(0/*newShipState*/);
    
         String imagePath = System.getProperty("user.dir");
@@ -45,6 +49,7 @@ public class DefaultShip implements Ship, ShipState {
         this.currentImage = getImage(imagePath + separator + "images" + 
             separator + "raider.png");
         defaultShipMap.put(0, this.currentImage);//Should be use constant NORMAL_STATE=0
+        this.setShipHitBox();
     }
     
 //===GetUserInput==================================================================================================
@@ -64,7 +69,7 @@ public void moveDown(int y) {
     dy = y;
 }
 //-----------------------------------------------------------------------------------------------------------
-public void setHitBox(){
+public void setShipHitBox(){
     switch (getShipState()){
         case 0: {
             this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth,
@@ -72,7 +77,7 @@ public void setHitBox(){
         }
     }
 }
-public Rectangle[] getHitBox(){
+public Rectangle[] getShipHitBox(){
     return this.hitBox;
 }
 
@@ -137,18 +142,24 @@ public void render(Graphics g){
     //state. 9/10/2015
     //----------------------------------------------------------------------
     // get and set the weapon level state
-   @Override
+  @Override
     public void setLevelState(int i) {
-        this.levelState = i;
+        switch(i) {
+            case -1: this.levelState = BASE_LEVEL;
+                break;
+            case 0: this.levelState = LEVEL_1;
+                break;
+            case 1: this.levelState = LEVEL_2;
+                break;
+            case 2: this.levelState = LEVEL_3;
+        }
     }
     
    @Override
     public int getLevelState() {
         return this.levelState;
     }
-    //----------------------------------------------------------------------
-    //----------------------------------------------------------------------
-    
+//---------------------------------------------------------------------
 private void updateAnimation(){
     
 }
@@ -162,11 +173,54 @@ private void updateState(){
 public void update(){
     updateState();
     updateLocation();
-    setHitBox();
+    setShipHitBox();
 }
 
 @Override
 public int getState() {
-    return 0;
+    return this.state;
 }
+
+//Weapon Methods
+// Missile shoot location
+    public float getXofMissileShoot() {
+        return x+30;
+    }
+    
+    public float getYofMissileShoot() {
+        return y+20;
+    }
+
+   
+    @Override
+    public void setShipType(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void moveLeft() {
+    x = (int) (x - this.rateOfSpeed);
+    dx = x;
+    }
+
+    @Override
+    public void moveRight() {
+    x = (int) (x + this.rateOfSpeed);
+    dx = x;
+    }
+
+    @Override
+    public void moveUp() {
+    y = (int) (y - this.rateOfSpeed);
+    dy = y;
+    }
+
+    @Override
+    public void moveDown() {
+    y = (int) (y + this.rateOfSpeed);
+    dy = y;
+    }
+
+
+ 
 }

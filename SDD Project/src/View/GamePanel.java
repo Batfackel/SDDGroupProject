@@ -1,5 +1,8 @@
-
+package View;
+import Controller.Animator;
+import Model.GameData;
 import Model.DefaultShip;
+import Model.GameFigure;
 import Model.Level;
 import Model.Ship;
 import Model.ShipFactory;
@@ -91,6 +94,13 @@ public class GamePanel extends JPanel {
             GameFigure f;
             for (int i = 0; i < gameData.figures.size(); i++) {
                 f = (GameFigure) gameData.figures.get(i);
+                f.render(graphics);
+            }
+        }
+        synchronized (gameData.ships) {
+            Ship f;
+            for (int i = 0; i < gameData.ships.size(); i++) {
+                f = (Ship) gameData.ships.get(i);
                 f.render(graphics);
             }
         }

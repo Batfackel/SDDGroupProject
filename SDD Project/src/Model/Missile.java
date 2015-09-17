@@ -1,4 +1,7 @@
+package Model;
 
+
+import Model.GameFigure;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
@@ -10,7 +13,7 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
     static int SIZE = 2;
     Color color;
     Point2D.Float target;
-    private int state = STATE_TRAVELING;
+    private int state = GameFigure.STATE_TRAVELING;
     private static final int UNIT_TRAVEL_DISTANCE = 4;
     private int explosionSize = SIZE;
     private int explosionMaxSize;
