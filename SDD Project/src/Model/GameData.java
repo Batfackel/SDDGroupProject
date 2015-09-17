@@ -22,7 +22,7 @@ public class GameData {
  //       figures.add(new TempShip(500,500));
         //incomingShip = shipMaker.getShip("defaultShip",300,350);
        // ships.add(incomingShip);
-         ships.add((Ship)shipMaker.getShip("defaultShip",450,200));
+         ships.add((Ship)shipMaker.getShip("defaultShip",450,450));
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
         figures.add(new Launcher(250, 200));

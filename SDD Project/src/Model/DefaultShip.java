@@ -53,7 +53,7 @@ public class DefaultShip implements Ship, ShipState {
         defaultShipMap.put(0, this.currentImage);//Should be use constant NORMAL_STATE=0
         this.setShipHitBox();
     }
-    
+ 
 public void setShipHitBox(){
     switch (getShipState()){
         case 0: {
@@ -76,7 +76,7 @@ public void render(Graphics g){
             g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
 //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
                 //(int) this.shipHeight);
-            g.drawRect((int)this.x, (int)this.y, 100, 100);
+            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
         }
     }
 }

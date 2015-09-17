@@ -7,9 +7,10 @@ import java.awt.event.KeyListener;
 public class KeyController implements KeyListener {
     
     private Ship ship;
-    
+    //KeyController(){this.ship = null;}//Will Added constructor 9/16/2015
     public KeyController(Ship ship) {
         this.ship = (Ship) ship;
+       // this.ship =  ship;
     }
     
 
