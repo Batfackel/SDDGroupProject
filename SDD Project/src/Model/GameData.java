@@ -8,12 +8,14 @@ import java.util.Collections;
 public class GameData {
 
     public List<GameFigure> figures;
-    public List<Ship> ships;
+    public List<Ship> ships, enemyShips;
     private ShipFactory shipMaker = new ShipFactory();
+    private EnemyFactory enemyMaker = new EnemyFactory();
     private Ship incomingShip;
     public GameData() {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
+        enemyShips = Collections.synchronizedList(new ArrayList<Ship>());
         //create ships for collision test
         //9/10/2015
 //-----------------------------------------------------------------------------        
@@ -23,6 +25,7 @@ public class GameData {
         //incomingShip = shipMaker.getShip("defaultShip",300,350);
        // ships.add(incomingShip);
          ships.add((Ship)shipMaker.getShip("defaultShip",450,450));
+         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
         figures.add(new Launcher(250, 200));
@@ -102,6 +105,17 @@ public class GameData {
                 }
             }
             ships.removeAll(removeShips);
+        }
+        synchronized (enemyShips) {                                                        
+            
+            for (int i = 0; i < enemyShips.size(); i++) {               
+                s = enemyShips.get(i);
+                s.update();
+                if (s.getState() == Ship.STATE_FINISHED) {
+                    removeShips.add(s);
+                }
+            }
+            enemyShips.removeAll(removeShips);
         }
        }
     
