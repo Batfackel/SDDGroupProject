@@ -5,6 +5,11 @@
  */
 package Model;
 
+import Controller.MovementStrategy;
+import Controller.SweepDown;
+import Controller.SweepLeft;
+import Controller.SweepRight;
+import View.GamePanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,13 +22,15 @@ import javax.swing.JOptionPane;
  *
  * @author ryan
  */
-public class DefaultEnemyShip implements Ship, ShipState, GameFigure{
+public class DefaultEnemyShip implements ShipState, GameFigure{
     
     Image image;
     float x, y, dx, dy, shipHeight, shipWidth, rateOfSpeed;
     int armour, shipState, weaponState, weaponLevel, state;
     int levelState = -1;
     Rectangle[] hitBox = new Rectangle[2];
+    boolean moveRight = true;
+    boolean moveLeft = false;
     
     public DefaultEnemyShip(float x, float y) {
         this.x = x;
@@ -122,6 +129,7 @@ public class DefaultEnemyShip implements Ship, ShipState, GameFigure{
                 g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                 break;
         }
+        move();
     }
 
     @Override
@@ -181,6 +189,31 @@ public class DefaultEnemyShip implements Ship, ShipState, GameFigure{
         return y+20;
     }
     
+    public void move() {
+        MovementStrategy movement;
+        
+        if(x >= 0 && moveRight == true) {
+            movement = new SweepRight();
+            movement.moveShip(this);
+            if(x + shipWidth >= GamePanel.PWIDTH) {
+                moveRight = false;
+                moveLeft = true;
+            }
+        }
+        else if(moveLeft == true) {
+            movement = new SweepLeft();
+            movement.moveShip(this);
+            if(x < 0) {
+                moveRight = true;
+                x = 0;
+            }
+        }
+        
+//        if(y > 0 && y < GamePanel.PHEIGHT ) {
+//            movement = new SweepDown();
+//            movement.moveShip(this);
+//        }
+    }
     
     
 }

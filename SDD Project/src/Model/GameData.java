@@ -31,7 +31,7 @@ public class GameData {
         figures.add(new Launcher(250, 200));
         figures.add(new Launcher(400, 200));
         figures.add(new Launcher(100, 200));  
-        figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 200, 200));
+        figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
          
