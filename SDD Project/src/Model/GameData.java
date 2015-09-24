@@ -9,11 +9,10 @@ public class GameData {
 
     public List<GameFigure> figures;
     public List<Item> items;
-    private ShipFactory shipMaker = new ShipFactory();
-    private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();
-    public List<Ship> ships, enemyShips;
+    public List<Ship> ships, enemyShips; 
     private ShipFactory shipMaker = new ShipFactory();
     private EnemyFactory enemyMaker = new EnemyFactory();
+    private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();  
     private Ship incomingShip;
     private int BASE_LEVEL = -1;
     public GameData() {
@@ -88,11 +87,12 @@ public class GameData {
             // detected then it either changes the ships weapon in increments the 
             // weapon level 9/23/15
             for (int i = 0; i < this.items.size(); i++) {
-                Rectangle[] hit = currentShip.getShipHitBox();
+                //Rectangle[] hit = currentShip.getShipHitBox();
+                Rectangle hit = currentShip.getShipHitBox();
                 //System.out.println(this.items.size());
                 Item item = (Item) this.items.get(i);                                
                 
-                if (hit[0].intersects(item.getRectangle1())) {          
+                if (hit.intersects(item.getRectangle1())) {          
                     int itemReference = item.getItemType();
                     int shipWeaponReference = currentShip.getWeaponState();
                     if(itemReference == shipWeaponReference) 
@@ -171,6 +171,6 @@ public class GameData {
 //            }
 //            enemyShips.removeAll(removeShips);
 //        }
-       }
+//       }
 
 }

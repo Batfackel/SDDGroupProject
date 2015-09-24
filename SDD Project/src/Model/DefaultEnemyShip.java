@@ -180,6 +180,11 @@ public class DefaultEnemyShip implements Ship, ShipState, GameFigure{
     public float getYofMissileShoot() {
         return y+20;
     }
+
+    @Override
+    public int getWeaponState() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     
