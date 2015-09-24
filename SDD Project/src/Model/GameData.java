@@ -8,24 +8,39 @@ import java.util.Collections;
 public class GameData {
 
     public List<GameFigure> figures;
-    public List<Ship> ships, enemyShips;
+    public List<Item> items;
+    public List<Ship> ships, enemyShips; 
     private ShipFactory shipMaker = new ShipFactory();
     private EnemyFactory enemyMaker = new EnemyFactory();
+    private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();  
     private Ship incomingShip;
+    private int BASE_LEVEL = -1;
     public GameData() {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
+        items = Collections.synchronizedList(new ArrayList<Item>());
         enemyShips = Collections.synchronizedList(new ArrayList<Ship>());
+
         //create ships for collision test
         //9/10/2015
 //-----------------------------------------------------------------------------        
-        //player ship
-        //figures.add(new Launcher(350, 500));                                     
- //       figures.add(new TempShip(500,500));
+        
         //incomingShip = shipMaker.getShip("defaultShip",300,350);
-       // ships.add(incomingShip);
-         ships.add((Ship)shipMaker.getShip("defaultShip",450,450));
+        // ships.add(incomingShip);      
+        ships.add((Ship)shipMaker.getShip("defaultShip",450,450));
+        //represent weapon power-up items
+        //figures.add(new Launcher(100, 200));    
+        // testing items and new item mechanics
+        items.add((Item)weaponMaker.getWeapon("KINETIC", 250, 200));
+        items.add((Item)weaponMaker.getWeapon("KINETIC", 250, 180));
+        items.add((Item)weaponMaker.getWeapon("KINETIC", 250, 1600));
+        items.add((Item)weaponMaker.getWeapon("KINETIC", 250, 220));
+        items.add((Item)weaponMaker.getWeapon("KINETIC", 250, 240));
+        items.add((Item)weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item)weaponMaker.getWeapon("MISSILE", 100, 200));
+        
 //         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
+
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
         figures.add(new Launcher(250, 200));
@@ -46,16 +61,14 @@ public class GameData {
 // the player ship's weapon level state 9/15/2015
 // uses the figures arraylist until an item class is created                
 //-----------------------------------------------------------------------------                     
-
+              
         //TempShip ship = (TempShip) this.figures.get(0);
         Ship currentShip = (Ship) this.ships.get(0);
-        //set to 4 for the time being, make a new arraylist for the enemies
-    
+        //set to 4 for the time being, make a new arraylist for the enemies        
        // TempShip ship = (TempShip) this.figures.get(0);
               
         try {
             for (int i = 0; i < this.figures.size(); i++) {
-
 
                 //Rectangle[] hit = ship.getHitBox();
                 Rectangle hit = currentShip.getShipHitBox();
@@ -67,11 +80,33 @@ public class GameData {
                     this.figures.remove(asdf);
                     currentShip.setLevelState(currentShip.getLevelState());
                 }           
-    }
-              
+            }
+            
+            // checks for collision between items and the ship. If collision is 
+            // detected then it either changes the ships weapon in increments the 
+            // weapon level 9/23/15
+            for (int i = 0; i < this.items.size(); i++) {
+                //Rectangle[] hit = currentShip.getShipHitBox();
+                Rectangle hit = currentShip.getShipHitBox();
+                //System.out.println(this.items.size());
+                Item item = (Item) this.items.get(i);                                
+                
+                if (hit.intersects(item.getRectangle1())) {          
+                    int itemReference = item.getItemType();
+                    int shipWeaponReference = currentShip.getWeaponState();
+                    if(itemReference == shipWeaponReference) 
+                        currentShip.setLevelState(currentShip.getLevelState());
+                    else if(itemReference >= 0 && itemReference <= 2) {
+                        currentShip.setWeaponState(itemReference);
+                        currentShip.setLevelState(BASE_LEVEL);
+                    }                        
+                    this.items.remove(item);                              
+                }
+            }
+              System.out.println("weapon state is " + currentShip.getWeaponState());
             }
          catch (java.lang.ClassCastException e) {
-            System.out.println("missile");
+            //System.out.println("missile");
         }
 
 //-----------------------------------------------------------------------------
@@ -107,6 +142,23 @@ public class GameData {
             }
             ships.removeAll(removeShips);
         }
+        
+        // added new items list to find and remove objects 9/23/15
+        List<Item> removeItems = new ArrayList<Item>();
+        Item it;        
+       
+        synchronized (items) {                                                     
+            
+            for (int i = 0; i < items.size(); i++) {               
+                it = items.get(i);
+                it.update();
+                if (it.getState() == Item.STATE_DONE)
+                    removeItems.add(it);
+            }
+          }
+	  items.removeAll(removeItems);
+       }   
+
 //        synchronized (enemyShips) {                                                        
 //            
 //            for (int i = 0; i < enemyShips.size(); i++) {               
@@ -118,6 +170,6 @@ public class GameData {
 //            }
 //            enemyShips.removeAll(removeShips);
 //        }
-       }
-    
+//       }
+
 }

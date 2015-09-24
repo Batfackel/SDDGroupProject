@@ -24,6 +24,8 @@ public interface Ship {
 
     public void setWeaponState(int newWeaponState);
 
+    public int getWeaponState();
+    
     public void addWeaponLevel(int weaponPower);
 
     public void setShipState(int newShipState);
