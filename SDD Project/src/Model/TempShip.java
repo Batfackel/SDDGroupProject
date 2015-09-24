@@ -110,8 +110,8 @@ public void setHitBox(){
         }
     }
 }
-public Rectangle[] getHitBox(){
-    return this.hitBox;
+public Rectangle getShipHitBox(){
+    return this.hitBox[0];
 }
 
 public void render(Graphics g){
@@ -234,11 +234,5 @@ public int getState() {
     @Override
     public void setShipHitBox() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Rectangle[] getShipHitBox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

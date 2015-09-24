@@ -32,7 +32,7 @@ public interface Ship {
     
     public int getShipState();
     
-    public Rectangle[] getShipHitBox();
+    public Rectangle getShipHitBox();
 
     public Image getImage(String fileName);
 

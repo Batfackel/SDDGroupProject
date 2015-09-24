@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author ryan
  */
-public class DefaultEnemyShip implements Ship, ShipState{
+public class DefaultEnemyShip implements Ship, ShipState, GameFigure{
     
     Image image;
     float x, y, dx, dy, shipHeight, shipWidth, rateOfSpeed;
@@ -83,8 +83,8 @@ public class DefaultEnemyShip implements Ship, ShipState{
     }
 
     @Override
-    public Rectangle[] getShipHitBox() {
-        return this.hitBox;
+    public Rectangle getShipHitBox() {
+        return this.hitBox[0];
     }
 
     @Override

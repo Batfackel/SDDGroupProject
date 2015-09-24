@@ -25,12 +25,13 @@ public class GameData {
         //incomingShip = shipMaker.getShip("defaultShip",300,350);
        // ships.add(incomingShip);
          ships.add((Ship)shipMaker.getShip("defaultShip",450,450));
-         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
+//         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
         figures.add(new Launcher(250, 200));
         figures.add(new Launcher(400, 200));
-        figures.add(new Launcher(100, 200));           
+        figures.add(new Launcher(100, 200));  
+        figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 200, 200));
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
          
@@ -57,10 +58,10 @@ public class GameData {
 
 
                 //Rectangle[] hit = ship.getHitBox();
-                Rectangle[] hit = currentShip.getShipHitBox();
-                Launcher asdf = (Launcher) this.figures.get(i);
+                Rectangle hit = currentShip.getShipHitBox();
+                Ship asdf = (Ship) this.figures.get(i);
 
-                  if (hit[0].intersects(asdf.getLauncherHitBox())) {
+                  if (hit.intersects(asdf.getShipHitBox())) {
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);
                     this.figures.remove(asdf);
@@ -106,17 +107,17 @@ public class GameData {
             }
             ships.removeAll(removeShips);
         }
-        synchronized (enemyShips) {                                                        
-            
-            for (int i = 0; i < enemyShips.size(); i++) {               
-                s = enemyShips.get(i);
-                s.update();
-                if (s.getState() == Ship.STATE_FINISHED) {
-                    removeShips.add(s);
-                }
-            }
-            enemyShips.removeAll(removeShips);
-        }
+//        synchronized (enemyShips) {                                                        
+//            
+//            for (int i = 0; i < enemyShips.size(); i++) {               
+//                s = enemyShips.get(i);
+//                s.update();
+//                if (s.getState() == Ship.STATE_FINISHED) {
+//                    removeShips.add(s);
+//                }
+//            }
+//            enemyShips.removeAll(removeShips);
+//        }
        }
     
 }

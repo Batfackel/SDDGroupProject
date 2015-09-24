@@ -27,7 +27,7 @@ public class DefaultShip implements Ship, ShipState {
    int armour;
    int shipState;
    int weaponState,weaponLevel;
-   int levelState = -1; //stores weapon level state
+   int levelState = BASE_LEVEL; //stores weapon level state
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
    int state;
@@ -62,8 +62,8 @@ public void setShipHitBox(){
         }
     }
 }
-public Rectangle[] getShipHitBox(){
-    return this.hitBox;
+public Rectangle getShipHitBox(){
+    return this.hitBox[0];
 }
 
 @Override
