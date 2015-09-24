@@ -41,6 +41,7 @@ public class DefaultShip implements Ship, ShipState {
         this.state = STATE_OK;
         //needs a default speed otherwise I don't know how far to move
         this.rateOfSpeed = 1;
+        this.weaponState = 0; //initialze to kinetic weapon
        
         setShipState(0/*newShipState*/);
    
@@ -68,10 +69,10 @@ public Rectangle[] getShipHitBox(){
 
 @Override
 public void render(Graphics g){
-    System.out.println("before switch------------------------");
+    //System.out.println("before switch------------------------");
     switch (getShipState()){
         case 0:{
-            System.out.println("case 0------------------------");
+           //System.out.println("case 0------------------------");
             g.setColor(Color.red);
             g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
 //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
@@ -95,6 +96,10 @@ public void render(Graphics g){
    public void setWeaponState(int newWeaponState)
    {
        this.weaponState = newWeaponState;
+   }
+   
+   public int getWeaponState() {
+       return this.weaponState;
    }
    
    public void addWeaponLevel(int weaponPower)

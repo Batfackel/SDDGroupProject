@@ -102,6 +102,13 @@ public class GamePanel extends JPanel {
                 f = (Ship) gameData.ships.get(i);
                 f.render(graphics);
             }
+        }        
+        synchronized (gameData.items) {
+            GameFigure f;
+            for (int i = 0; i < gameData.items.size(); i++) {
+                f = (GameFigure) gameData.items.get(i);
+                f.render(graphics);
+            }            
         }
     }
 

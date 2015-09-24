@@ -41,5 +41,4 @@ public class Animator implements Runnable {
         }
         System.exit(0);
     }
-    
 }

@@ -1,35 +1,43 @@
+package Model;
 
 import Model.GameFigure;
-import View.AbstractItem;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This is a general purpose item class. Feel free to build use this with child
+ * classes to make new items for the game
  */
 
 
 /**
  *
- * @author atm15_000
+ * @author Michael McGregor
  */
 class Item implements GameFigure, AbstractItem{
 
     private float x, y, width1 = 110, height1 = 125;
     protected int itemType;
-    Image itemImage;
+    Image itemImage, leItem;
     Rectangle r1, r2;
+    private int state = STATE_TRAVELING;
+    private int picX1, picX2, picY1, picY2;
     
-    public Item(float x, float y) {
+    
+    public Item(float x, float y, int ref, int startX, int endX, int startY, int endY) {
         this.x = x;
         this.y = y;
+        this.picX1 = startX;
+        this.picX2 = endX;
+        this.picY1 = startY;
+        this.picY2 = endY;
+        
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
@@ -41,7 +49,8 @@ class Item implements GameFigure, AbstractItem{
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
         itemImage = getImage(imagePath + separator + "images" + separator
-                + "TestShip.png");
+                + "itemSample.png");
+        
         setRectangle(); // initialize the hit box when object is created for testing
     }
 
@@ -58,9 +67,11 @@ class Item implements GameFigure, AbstractItem{
     
     @Override
     public void render(Graphics g) {
-        g.drawImage(itemImage, (int)x, (int)y, null);
+        //g.drawImage(itemImage, (int) x, (int) y, (int) x + 40, (int) y + 40, 32, 0, 64, 32, null, null);
+        g.drawImage(itemImage, (int)x, (int)y, (int)x + 40, (int)y + 40, this.picX1, this.picX2, this.picY1, this.picY2, null, null);
+        //g.drawImage(itemImage, (int)x, (int)y, null);
         g.setColor(Color.red);
-        g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
+        g.drawRect((int) this.x + 5, (int) this.y + 5, 28, 28);        
     }
 
     //----------------------------------------------------------------------
@@ -69,7 +80,7 @@ class Item implements GameFigure, AbstractItem{
     //----------------------------------------------------------------------
     // simple hit box for the launcher object
     private void setRectangle() {
-        this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
+        this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, 28, 28);        
     }
     // get ht box
     public Rectangle getRectangle1() {
@@ -77,14 +88,24 @@ class Item implements GameFigure, AbstractItem{
     }
     //----------------------------------------------------------------------
     
+    public int getItemType() {
+        return this.itemType;
+    }
+    
     @Override
     public void update() {
-        setRectangle();
+        setRectangle();       
+        //this.x += 2;
+        //this.y += 1;
+        if (this.x > 500 || this.y > 500){
+            System.out.println(this.x);
+            this.state = STATE_DONE;
+        }
     }
 
     @Override
     public int getState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.state;
     }
 
     @Override

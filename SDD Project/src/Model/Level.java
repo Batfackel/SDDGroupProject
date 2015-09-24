@@ -64,7 +64,7 @@ public class Level {
     }
     
     public void render(Graphics g) {
-        System.out.print("y = " + y);
+        //System.out.print("y = " + y);
         g.drawImage(clouds2, x, y, null);
         if(this.y >= 10) {
             g.drawImage(clouds2, x, y-3840, null);
