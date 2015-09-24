@@ -7,7 +7,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-public class Launcher implements GameFigure, ShipState {
+public class Launcher implements Ship, GameFigure, ShipState {
     
     Rectangle r1, r2;
     Image launcherImage;
@@ -96,7 +96,7 @@ public class Launcher implements GameFigure, ShipState {
         this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
     }
     // get ht box
-    public Rectangle getLauncherHitBox() {
+    public Rectangle getShipHitBox(){
         return this.r1;
     }
     //----------------------------------------------------------------------
@@ -161,11 +161,6 @@ public class Launcher implements GameFigure, ShipState {
 
     @Override
     public int getShipState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Rectangle[] getShipHitBox() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

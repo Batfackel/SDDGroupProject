@@ -9,21 +9,25 @@ public class GameData {
 
     public List<GameFigure> figures;
     public List<Item> items;
-    public List<Ship> ships;
     private ShipFactory shipMaker = new ShipFactory();
     private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();
+    public List<Ship> ships, enemyShips;
+    private ShipFactory shipMaker = new ShipFactory();
+    private EnemyFactory enemyMaker = new EnemyFactory();
     private Ship incomingShip;
     private int BASE_LEVEL = -1;
     public GameData() {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
         items = Collections.synchronizedList(new ArrayList<Item>());
+        enemyShips = Collections.synchronizedList(new ArrayList<Ship>());
+
         //create ships for collision test
         //9/10/2015
 //-----------------------------------------------------------------------------        
         
         //incomingShip = shipMaker.getShip("defaultShip",300,350);
-       // ships.add(incomingShip);      
+        // ships.add(incomingShip);      
         ships.add((Ship)shipMaker.getShip("defaultShip",450,450));
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
@@ -36,9 +40,15 @@ public class GameData {
         items.add((Item)weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item)weaponMaker.getWeapon("MISSILE", 100, 200));
         
+//         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
+
+        //represent weapon power-up items
+        //figures.add(new Launcher(100, 200));    
         //figures.add(new Launcher(250, 200));
         //figures.add(new Launcher(400, 200));
-        //figures.add(new Launcher(100, 200));           
+        //figures.add(new Launcher(100, 200));  
+        figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 200, 200));
+
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
          
@@ -62,12 +72,11 @@ public class GameData {
         try {
             for (int i = 0; i < this.figures.size(); i++) {
 
-
                 //Rectangle[] hit = ship.getHitBox();
-                Rectangle[] hit = currentShip.getShipHitBox();
-                Launcher asdf = (Launcher) this.figures.get(i);
+                Rectangle hit = currentShip.getShipHitBox();
+                Ship asdf = (Ship) this.figures.get(i);
 
-                  if (hit[0].intersects(asdf.getLauncherHitBox())) {
+                  if (hit.intersects(asdf.getShipHitBox())) {
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);
                     this.figures.remove(asdf);
@@ -147,7 +156,21 @@ public class GameData {
                 if (it.getState() == Item.STATE_DONE)
                     removeItems.add(it);
             }
-            items.removeAll(removeItems);
-        }
+          }
+	  items.removeAll(removeItems);
        }   
+
+//        synchronized (enemyShips) {                                                        
+//            
+//            for (int i = 0; i < enemyShips.size(); i++) {               
+//                s = enemyShips.get(i);
+//                s.update();
+//                if (s.getState() == Ship.STATE_FINISHED) {
+//                    removeShips.add(s);
+//                }
+//            }
+//            enemyShips.removeAll(removeShips);
+//        }
+       }
+
 }

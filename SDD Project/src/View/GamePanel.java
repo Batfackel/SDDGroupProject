@@ -110,6 +110,13 @@ public class GamePanel extends JPanel {
                 f.render(graphics);
             }            
         }
+//        synchronized (gameData.enemyShips) {
+//            Ship f;
+//            for (int i = 0; i < gameData.enemyShips.size(); i++) {
+//                f = (Ship) gameData.enemyShips.get(i);
+//                f.render(graphics);
+//            }
+//        }
     }
 
     public void printScreen() { // use active rendering to put the buffered image on-screen
