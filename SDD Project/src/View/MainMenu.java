@@ -39,7 +39,7 @@ public class MainMenu extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "640 * 480", "800 * 600", "1280 * 720", "1400 * 900" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "800 * 1200", "1280 * 720", "1400 * 900" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
