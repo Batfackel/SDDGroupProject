@@ -5,6 +5,7 @@ import Model.GameData;
 import Model.Missile;
 import Model.Ship;
 import Model.ShipFactory;
+import Model.Tutorial;
 import View.LeaderBoard;
 import java.awt.Color;
 import java.awt.Container;
@@ -41,6 +42,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     private ShipFactory shipMaker;
     private Ship ship;
     private Ship mainShip;
+    private Tutorial tutorial;
     
 
 
@@ -109,7 +111,13 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         pack();
         setVisible(true);
         
-
+        tutorial = new Tutorial();
+        gamePanel.addMouseListener(tutorial);
+        gamePanel.addKeyListener(tutorial);
+                 synchronized (gameData.figures) {
+            gameData.figures.add(tutorial);
+        }
+        //gameData.figures.add(tutorial);
 //        Ship ship;
 //        ship = (Ship) gameData.ships.get(0);
 

@@ -7,6 +7,7 @@ package Model;
 
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 
@@ -27,8 +28,8 @@ public class HUD {
 public void render(Graphics g){
 
     g.setColor(Color.BLACK);
-    g.fillRect(600,0,50, 600);
-    g.fillRect(0, 0, 50, 600);
+    g.fillRect(750,0,50, 1200);
+    g.fillRect(0, 0, 50, 1200);
    // g.setColor(Color.WHITE);
     
    
@@ -61,6 +62,7 @@ public void render(Graphics g){
 
         
         g.setColor(Color.BLACK);
+        g.setFont(new Font("TimesRoman",Font.BOLD,13));
         g.drawString("S",25,200);
         g.drawString("H",25,220);
         g.drawString("I",25,240);
@@ -72,7 +74,7 @@ public void render(Graphics g){
         /////////////////Score placeholder//////////
         g.setColor(Color.WHITE);
         g.drawString("SCORE",5,340);
-        g.drawRect(5,350,75,50);
+        g.drawRect(5,350,35,60);
  
         
 
