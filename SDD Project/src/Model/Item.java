@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -22,13 +23,12 @@ import javax.swing.JOptionPane;
  */
 class Item implements GameFigure, AbstractItem{
 
-    private float x, y, width1 = 110, height1 = 125;
+    private float x, y, width1 = 110, height1 = 125, movementX, movementY;
     protected int itemType;
     Image itemImage, leItem;
     Rectangle r1, r2;
     private int state = STATE_TRAVELING;
-    private int picX1, picX2, picY1, picY2;
-    
+    private int picX1, picX2, picY1, picY2;               
     
     public Item(float x, float y, int ref, int startX, int endX, int startY, int endY) {
         this.x = x;
@@ -37,6 +37,8 @@ class Item implements GameFigure, AbstractItem{
         this.picX2 = endX;
         this.picY1 = startY;
         this.picY2 = endY;
+        this.movementX = randomizeX();
+        this.movementY = randomizeY();
         
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -74,6 +76,15 @@ class Item implements GameFigure, AbstractItem{
         g.drawRect((int) this.x + 5, (int) this.y + 5, 28, 28);        
     }
 
+    private float randomizeX() {
+        Random rand = new Random();
+        return rand.nextFloat() * (3 - (-3)) + (-3);
+    }
+    
+    private float randomizeY() {
+        Random rand = new Random();
+        return rand.nextFloat() * 3;
+    }
     //----------------------------------------------------------------------
     //getters and setter for the launcher hit box
     //9/10/2015
@@ -95,8 +106,8 @@ class Item implements GameFigure, AbstractItem{
     @Override
     public void update() {
         setRectangle();       
-        //this.x += 2;
-        //this.y += 1;
+        this.x += this.movementX;
+        this.y += this.movementY;
         if (this.x > 500 || this.y > 500){
             System.out.println(this.x);
             this.state = STATE_DONE;

@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class GameData {
 
@@ -43,9 +44,9 @@ public class GameData {
 
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
-        figures.add(new Launcher(250, 200));
+        /*figures.add(new Launcher(250, 200));
         figures.add(new Launcher(400, 200));
-        figures.add(new Launcher(100, 200));  
+        figures.add(new Launcher(100, 200));  */
         figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
@@ -54,6 +55,14 @@ public class GameData {
 
     }
 
+    private float randomize(float in, int offset) {
+        float min = in, max = in + offset;        
+        Random rand = new Random();
+        float number = rand.nextFloat() * (max - min) + min;
+        
+        return number;
+    }
+    
     public void update() {
 //-----------------------------------------------------------------------------
 // a little collision test for the playable ship and another instance of the ship
@@ -65,7 +74,7 @@ public class GameData {
         //TempShip ship = (TempShip) this.figures.get(0);
         Ship currentShip = (Ship) this.ships.get(0);
         //set to 4 for the time being, make a new arraylist for the enemies        
-       // TempShip ship = (TempShip) this.figures.get(0);
+       // TempShip ship = (TempShip) this.figures.get(0);                
               
         try {
             for (int i = 0; i < this.figures.size(); i++) {
@@ -75,10 +84,20 @@ public class GameData {
                 Ship asdf = (Ship) this.figures.get(i);
 
                   if (hit.intersects(asdf.getShipHitBox())) {
+                    
+                    items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
+                    items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
+                    items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
+                    items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
+                    items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
+                    items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
+                    items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
+                    items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
+                    
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);
                     this.figures.remove(asdf);
-                    currentShip.setLevelState(currentShip.getLevelState());
+                    //currentShip.setLevelState(currentShip.getLevelState());
                 }           
             }
             
