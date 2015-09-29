@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
  */
 public class DefaultShip implements Ship, ShipState {
     
+    private HUD hud;
+    
    Image currentImage; 
    float x, y , dx, dy;
    float shipHeight, shipWidth;
@@ -30,8 +32,10 @@ public class DefaultShip implements Ship, ShipState {
    int levelState = BASE_LEVEL; //stores weapon level state
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
-   int state;
+   int state; 
+   private int shipHealth;
     public DefaultShip(float x, float y){
+        hud = new HUD(this);
     //Initialize ship here
         this.x = x;
         this.y = y;
@@ -44,7 +48,7 @@ public class DefaultShip implements Ship, ShipState {
         this.weaponState = 0; //initialze to kinetic weapon
        
         setShipState(0/*newShipState*/);
-   
+  
         
         //----------------------------------------------------------------------------------------------------
         String imagePath = System.getProperty("user.dir");
@@ -57,7 +61,15 @@ public class DefaultShip implements Ship, ShipState {
         this.setShipHitBox();
         //----------------------------------------------------------------------------------------------------
     }
- 
+    
+     DefaultShip() {
+     this.shipHealth = 50;
+ }
+    
+ public int getShipHealth() {
+     return this.shipHealth;
+ }
+    
 public void setShipHitBox(){
     switch (getState()){
         case 1: {
@@ -72,12 +84,14 @@ public Rectangle getShipHitBox(){
 
 @Override
 public void render(Graphics g){
+    
+   
     //System.out.println("before switch------------------------");
     
     switch (getState()){
         case 1:{
            //System.out.println("case 0------------------------");
-            g.setColor(Color.red);
+          g.setColor(Color.red);
             g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
 //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
                 //(int) this.shipHeight);
@@ -97,6 +111,8 @@ public void render(Graphics g){
             break;
         }
     }
+     
+    hud.render(g);
 }
    public void setRateOfSpeed(int newSpeed)
    {
@@ -198,11 +214,7 @@ public int getState() {
         return y+20;
     }
 
-   
-    @Override
-    public void setShipType(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 
     @Override
     public void moveLeft() {
@@ -226,6 +238,11 @@ public int getState() {
     public void moveDown() {
     y = (int) (y + this.rateOfSpeed);
     dy = y;
+    }
+
+    @Override
+    public void setShipType(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

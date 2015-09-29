@@ -6,6 +6,8 @@
 package Model;
 
 
+import static View.GamePanel.PHEIGHT;
+import static View.GamePanel.PWIDTH;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -16,19 +18,35 @@ import java.awt.Graphics;
  * @author Brian
  */
 public class HUD {
-    //private Ship ship;
+    private DefaultShip ship;
+DefaultShip shiphealth = new DefaultShip();
+            
+   int health = shiphealth.getShipHealth();
+   
+    public HUD(DefaultShip ship) {
+        this.ship = ship;
+    }  
     
-    public HUD() {
-        
     
-}
     
-
+ private Score score;
+         public HUD(Score score) {
+             this.score = score;
+             
+         }
+ 
 
 public void render(Graphics g){
 
+    
+    g.setColor(Color.red);
+           /* g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
+//            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
+                //(int) this.shipHeight);
+            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);*/
+
     g.setColor(Color.BLACK);
-    g.fillRect(750,0,50, 1200);
+    g.fillRect(750,0,100, 1200);
     g.fillRect(0, 0, 50, 1200);
    // g.setColor(Color.WHITE);
     
@@ -45,9 +63,9 @@ public void render(Graphics g){
         g.fillRect(5,5,10,300);
         
         g.setColor(Color.GREEN);
-        g.fillRect(5,5,10,300);
+        g.fillRect(5,5,10,health);
         g.setColor(Color.BLACK);
-        ///////Terrible way to get verticle letters- will change later///////
+        /////// verticle letters//////
         g.drawString("L",5,240);
         g.drawString("I",5,260);
         g.drawString("F",5,280);
@@ -73,12 +91,14 @@ public void render(Graphics g){
 
         /////////////////Score placeholder//////////
         g.setColor(Color.WHITE);
-        g.drawString("SCORE",5,340);
-        g.drawRect(5,350,35,60);
+        g.drawString("SCORE", PWIDTH/2,PHEIGHT+75);
+        g.drawString(String.valueOf(score),PWIDTH/2,PHEIGHT+100);
  
         
 
 }
+
+   
 
   
      
