@@ -113,10 +113,11 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         
         tutorial = new Tutorial();
         gamePanel.addMouseListener(tutorial);
-        gamePanel.addKeyListener(tutorial);
-                 synchronized (gameData.figures) {
-            gameData.figures.add(tutorial);
-        }
+        /*yuchen can you move the keylistener in the tutorial to the keyController class*/
+//        gamePanel.addKeyListener(tutorial);
+//                 synchronized (gameData.figures) {
+//            gameData.figures.add(tutorial);
+//        }
         //gameData.figures.add(tutorial);
 //        Ship ship;
 //        ship = (Ship) gameData.ships.get(0);
