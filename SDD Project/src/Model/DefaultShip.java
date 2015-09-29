@@ -45,6 +45,8 @@ public class DefaultShip implements Ship, ShipState {
        
         setShipState(0/*newShipState*/);
    
+        
+        //----------------------------------------------------------------------------------------------------
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
@@ -53,11 +55,12 @@ public class DefaultShip implements Ship, ShipState {
             separator + "raider.png");
         defaultShipMap.put(0, this.currentImage);//Should be use constant NORMAL_STATE=0
         this.setShipHitBox();
+        //----------------------------------------------------------------------------------------------------
     }
  
 public void setShipHitBox(){
-    switch (getShipState()){
-        case 0: {
+    switch (getState()){
+        case 1: {
             this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth,
             (int) this.shipHeight); 
         }
@@ -70,14 +73,28 @@ public Rectangle getShipHitBox(){
 @Override
 public void render(Graphics g){
     //System.out.println("before switch------------------------");
-    switch (getShipState()){
-        case 0:{
+    
+    switch (getState()){
+        case 1:{
            //System.out.println("case 0------------------------");
             g.setColor(Color.red);
             g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
 //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
                 //(int) this.shipHeight);
             g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+            break;
+        }
+        case 2:{
+            //turning left
+            break;
+        }
+         case 3:{
+            //turning left
+            break;
+        }
+          case 4:{
+            //exploding
+            break;
         }
     }
 }

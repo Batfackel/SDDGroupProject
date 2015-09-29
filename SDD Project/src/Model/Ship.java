@@ -15,7 +15,9 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 public interface Ship {
     static final int STATE_OK = 1;
-    static final int STATE_EXPLODING = 2;
+    static final int STATE_TURNING_LEFT = 2;
+    static final int STATE_TURNING_RIGHT = 3;
+    static final int STATE_EXPLODING = 4;
     static final int STATE_FINISHED = 0;
 
     public void setRateOfSpeed(int newSpeed);
