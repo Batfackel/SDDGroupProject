@@ -25,7 +25,9 @@ import javax.swing.JOptionPane;
 public class DefaultEnemyShip implements ShipState, GameFigure{
     
     Image image;
-    float x, y, dx, dy, shipHeight, shipWidth, rateOfSpeed;
+    private float x;
+    private float y;
+    float  dx, dy, shipHeight, shipWidth, rateOfSpeed;
     int armour, shipState, weaponState, weaponLevel, state;
     int levelState = -1;
     Rectangle[] hitBox = new Rectangle[2];
@@ -39,7 +41,7 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
         this.shipWidth = 160;
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
-        this.rateOfSpeed = 3;
+        this.rateOfSpeed = 2;
         setShipState(0);
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -78,7 +80,7 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     public void setShipHitBox() {
         switch (getShipState()){
         case 0: 
-            this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth,
+            this.hitBox[0] = new Rectangle((int)this.getX(), (int)this.getY(), (int)this.shipWidth,
             (int) this.shipHeight); 
             break;
         }
@@ -123,10 +125,10 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
             case 0:
     //            System.out.println("case 0------------------------");
                 g.setColor(Color.red);
-                g.drawImage(image, (int)x, (int)y, null);
+                g.drawImage(image, (int)getX(), (int)getY(), null);
     //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
                     //(int) this.shipHeight);
-                g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                g.drawRect((int)this.getX(), (int)this.getY(), (int)this.shipWidth, (int)this.shipHeight);
                 break;
         }
         move();
@@ -152,26 +154,26 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
 
     @Override
     public void moveLeft() {
-        x = (int) (x - this.rateOfSpeed);
-        dx = x;
+        x = (int) (getX() - this.rateOfSpeed);
+        dx = getX();
     }
 
     @Override
     public void moveRight() {
-        x = (int) (x + this.rateOfSpeed);
-        dx = x;
+        x = (int) (getX() + this.rateOfSpeed);
+        dx = getX();
     }
 
     @Override
     public void moveUp() {
-        y = (int) (y - this.rateOfSpeed);
-        dy = y;
+        y = (int) (getY() - this.rateOfSpeed);
+        dy = getY();
     }
 
     @Override
     public void moveDown() {
-        y = (int) (y + this.rateOfSpeed);
-        dy = y;
+        y = (int) (getY() + this.rateOfSpeed);
+        dy = getY();
     }
 
     @Override
@@ -181,12 +183,12 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
 
     @Override
     public float getXofMissileShoot() {
-        return x+30;
+        return getX()+30;
     }
 
     @Override
     public float getYofMissileShoot() {
-        return y+20;
+        return getY()+20;
     }
 
     @Override
@@ -197,10 +199,10 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     public void move() {
         MovementStrategy movement;
         
-        if(x >= 0 && moveRight == true) {
+        if(getX() >= 0 && moveRight == true) {
             movement = new SweepRight();
             movement.moveShip(this);
-            if(x + shipWidth >= GamePanel.PWIDTH) {
+            if(getX() + shipWidth >= GamePanel.PWIDTH) {
                 moveRight = false;
                 moveLeft = true;
             }
@@ -208,16 +210,33 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
         else if(moveLeft == true) {
             movement = new SweepLeft();
             movement.moveShip(this);
-            if(x < 0) {
+            if(getX() < 0) {
                 moveRight = true;
                 x = 0;
             }
         }
         
-//        if(y > 0 && y < GamePanel.PHEIGHT ) {
-//            movement = new SweepDown();
-//            movement.moveShip(this);
-//        }
+        if(y > GamePanel.PHEIGHT ) {
+            state = STATE_DONE;
+        }
+        else {
+            movement = new SweepDown();
+            movement.moveShip(this);
+        }
+    }
+
+    /**
+     * @return the x
+     */
+    public float getX() {
+        return x;
+    }
+
+    /**
+     * @return the y
+     */
+    public float getY() {
+        return y;
     }
     
     

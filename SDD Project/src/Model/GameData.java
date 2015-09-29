@@ -58,6 +58,10 @@ public class GameData {
         figures.add(new Launcher(400, 200));
         figures.add(new Launcher(100, 200));  */
         figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
+        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+        for(int i = 0; i < enemyFormation.length; i++) {
+            figures.add((GameFigure)enemyFormation[i]);
+        }
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
          
@@ -106,7 +110,9 @@ public class GameData {
                     
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);
-                    this.figures.remove(asdf);
+                    synchronized (figures) {
+                        this.figures.remove(asdf);
+                    }
                     //currentShip.setLevelState(currentShip.getLevelState());
                 }           
             }
@@ -134,8 +140,8 @@ public class GameData {
             }
               System.out.println("weapon state is " + currentShip.getWeaponState());
             }
-         catch (java.lang.ClassCastException e) {
-            //System.out.println("missile");
+         catch (Exception e) {
+            System.out.println(e.toString());
         }
 
 //-----------------------------------------------------------------------------
