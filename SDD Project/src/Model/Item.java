@@ -108,7 +108,7 @@ class Item implements GameFigure, AbstractItem{
         setRectangle();       
         this.x += this.movementX;
         this.y += this.movementY;
-        if (this.x > 500 || this.y > 500){
+        if (this.x > 850 || this.y > 1050){
             System.out.println(this.x);
             this.state = STATE_DONE;
         }
