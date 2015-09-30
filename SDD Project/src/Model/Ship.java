@@ -65,6 +65,4 @@ public interface Ship {
 
     public void setState(int i);
  
-
-  
 }

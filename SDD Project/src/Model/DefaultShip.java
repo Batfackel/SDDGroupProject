@@ -36,7 +36,7 @@ public class DefaultShip implements Ship, ShipState {
    int explosionState;
    private Image eSheet;
    private int shipHealth;
-   
+   private int shipImageToUse;
    public DefaultShip(float x, float y){
     int state; 
    
@@ -46,6 +46,7 @@ public class DefaultShip implements Ship, ShipState {
         this.y = y;
         this.shipHeight = 50;
         this.shipWidth = 50;
+        this.shipImageToUse = 1;
         this.explosionState=1;
         this.levelState = BASE_LEVEL; //initialze weapon level state
         this.state = STATE_OK;
@@ -59,14 +60,29 @@ public class DefaultShip implements Ship, ShipState {
         String separator = System.getProperty("file.separator");
     
         
-        Image eSheet = getImage(imagePath + separator + "images" + 
+        this.eSheet = getImage(imagePath + separator + "images" + 
             separator +"explosionsheet.png");
         //----------------------------------------------------------------------------------------------------
         
         this.currentImage = getImage(imagePath + separator + "images" + 
             separator + "raider.png");
-        defaultShipMap.put(0, this.currentImage);//Should be use constant NORMAL_STATE=0
+        defaultShipMap.put(1, this.currentImage);//Should be use constant NORMAL_STATE=0
         this.setShipHitBox();
+        
+        this.currentImage = getImage(imagePath + separator + "images" + 
+            separator + "raider_left.png");
+        defaultShipMap.put(2, this.currentImage);//Should be use constant NORMAL_STATE=0
+        this.setShipHitBox();
+        
+        this.currentImage = getImage(imagePath + separator + "images" + 
+            separator + "raider_right.png");
+        defaultShipMap.put(3, this.currentImage);//Should be use constant NORMAL_STATE=0
+        this.setShipHitBox();
+        
+        
+        
+        
+        
         //----------------------------------------------------------------------------------------------------
     }
    
@@ -149,104 +165,112 @@ public void render(Graphics g){
         case 1:{  //flying normally
            //System.out.println("case 0------------------------");
           g.setColor(Color.red);
-            g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
+            g.drawImage(defaultShipMap.get(shipImageToUse), (int)x, (int)y, null);
 //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
                 //(int) this.shipHeight);
-            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+          //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
              System.out.println("Normal State="+this.state+" and explosionState = " + this.explosionState);
             break;
         }
         case 2:{
-            //turning left
+             g.setColor(Color.red);
+            g.drawImage(defaultShipMap.get(shipImageToUse), (int)x, (int)y, null);
+//            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
+                //(int) this.shipHeight);
+           // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+             System.out.println("Normal State="+this.state+" and explosionState = " + this.explosionState);
             break;
         }
          case 3:{
-            //turning left
+             g.setColor(Color.red);
+             g.drawImage(defaultShipMap.get(shipImageToUse), (int)x, (int)y, null);
+//            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
+                //(int) this.shipHeight);
+            //g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);          
             break;
         }
-          case 4:{//Dying
-              System.out.println("EXPLOSION STATE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + this.explosionState);
-              
+          case 4:{//Dying       
+       
               switch (this.explosionState) {
                 
                 case GameData.STATE_EXPLOSIOIN_1: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 0, 0, 64, 64, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                   // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_2: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 64, 0, 128, 64, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                  //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_3: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 128, 0, 192, 64, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                   // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_4: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 192, 0, 256, 64, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                  //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_5: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 0, 64, 64, 128, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                  //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_6: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 64, 64, 128, 128, null, null);
-                     g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                  //   g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_7: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 128, 64, 192, 128, null, null);
-                   g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                 //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_8: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 192, 64, 256, 128, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                   // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_9: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 0, 128, 64, 192, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                   // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_10: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 64, 128, 128, 192, null, null);
-                     g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                    // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_11: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 128, 128, 192, 192, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                   // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_12: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 192, 128, 256, 192, null, null);
-                     g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                    // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_13: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 0, 192, 64, 256, null, null);
-                     g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                   //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_14: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 64, 192, 128, 256, null, null);
-                     g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                    // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_15: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 128, 192, 192, 256, null, null);
-                     g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                    // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
                 case GameData.STATE_EXPLOSIOIN_16: {
                     g.drawImage(eSheet, (int) x, (int) y, (int) x + 100, (int) y + 100, 192, 192, 256, 256, null, null);
-                    g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                   // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                     break;
                 }
               
@@ -258,8 +282,38 @@ public void render(Graphics g){
      
    
 }
-   
-   
+private boolean isMovingHorizontal() {
+
+        if (dx != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void updateFlightAnimation() {
+        if (isMovingHorizontal()) {
+
+            if (dx < 0)//moving Left
+            {
+                setState(2);
+                shipImageToUse = 2;
+            
+            }
+            else // moving right
+            {
+                setState(3);
+                 shipImageToUse = 3;
+            }
+           
+        }
+        else   //no horizontal movement
+        {
+            setState(1);
+            shipImageToUse = 1;
+        }
+
+    }
    
 //-------------------------------------------------------------------------
 /*WEAPON METHODS*/
@@ -337,7 +391,7 @@ private void updateLocation(){
     
 }
 private void updateState(){
-     
+ //    updateFlightAnimation();
 }
 
 

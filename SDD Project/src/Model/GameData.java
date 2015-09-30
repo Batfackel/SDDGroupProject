@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.KeyController;
+import Controller.Main;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
@@ -127,7 +129,11 @@ public class GameData {
                     items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
                      /*START EXPLOSION TEST*/
                         currentShip.setState(4);
-                        /*END EXPLOSION TEST*/
+//=======================/*END EXPLOSION TEST*/
+                      //  Ship currentShip = (Ship) this.ships.get(0);
+                       
+                       
+                      //   Main.controller = new KeyController(currentShip);
                          System.out.println("Ship state is " + currentShip.getState());
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);

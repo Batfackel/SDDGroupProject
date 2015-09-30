@@ -24,7 +24,11 @@ public class KeyController implements KeyListener {
         this.data = gameData;
     }
     
-
+    public void setShip(Ship ship){
+        
+        this.ship = ship;
+        
+    }
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {

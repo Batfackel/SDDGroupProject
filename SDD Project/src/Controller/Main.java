@@ -47,7 +47,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     
 
 
-    private KeyController controller;
+    public KeyController controller;
     
     /*public Ship Ship(){
         return this.ship;
@@ -222,6 +222,14 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent me) {
     }
+    
+    
+//    void setKeyController(KeyController keyCon)
+//    {
+//      
+//        mainShip = (Ship) gameData.ships.get(0);
+//        keyCon.setShip(mainShip);        
+//    }
     //move into controller that handles player input
     
     //initial main not needed
