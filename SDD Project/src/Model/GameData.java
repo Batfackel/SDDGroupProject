@@ -186,20 +186,20 @@ public class GameData {
         }
     
     
-        List<Ship> removeShips = new ArrayList<Ship>();
-        Ship s;        
-       
-        synchronized (ships) {                                                        
-            
-            for (int i = 0; i < ships.size(); i++) {               
-                s = ships.get(i);
-                s.update();
-                if (s.getState() == Ship.STATE_FINISHED) {
-                    removeShips.add(s);
-                }
-            }
-            ships.removeAll(removeShips);
-        }
+//        List<Ship> removeShips = new ArrayList<Ship>();
+//        Ship s;        
+//       
+//        synchronized (ships) {                                                        
+//            
+//            for (int i = 0; i < ships.size(); i++) {               
+//                s = ships.get(i);
+//                s.update();
+//                if (s.getState() == Ship.STATE_FINISHED) {
+//                    removeShips.add(s);
+//                }
+//            }
+//            ships.removeAll(removeShips);
+//        }
         
         // added new items list to find and remove objects 9/23/15
         List<Item> removeItems = new ArrayList<Item>();
