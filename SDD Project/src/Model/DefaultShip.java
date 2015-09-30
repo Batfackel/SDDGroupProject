@@ -32,18 +32,15 @@ public class DefaultShip implements Ship, ShipState {
    int levelState = BASE_LEVEL; //stores weapon level state
    Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
-<<<<<<< HEAD
    int state;
    int explosionState;
    private Image eSheet;
+   private int shipHealth;
    
    public DefaultShip(float x, float y){
-=======
-   int state; 
-   private int shipHealth;
-    public DefaultShip(float x, float y){
+    int state; 
+   
        
->>>>>>> origin/master
     //Initialize ship here
         this.x = x;
         this.y = y;
@@ -56,10 +53,6 @@ public class DefaultShip implements Ship, ShipState {
         this.rateOfSpeed = 10;
         this.weaponState = 0; //initialze to kinetic weapon
         setShipState(0/*newShipState*/);
-<<<<<<< HEAD
-=======
-  
->>>>>>> origin/master
         
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -76,7 +69,6 @@ public class DefaultShip implements Ship, ShipState {
         this.setShipHitBox();
         //----------------------------------------------------------------------------------------------------
     }
-<<<<<<< HEAD
    
 //-------------------------------------------------------------------------
 /*SHIP METHODS*/
@@ -124,7 +116,6 @@ public class DefaultShip implements Ship, ShipState {
  //-------------------------------------------------------------------------
 /*HITBOX METHODS*/
 //-------------------------------------------------------------------------   
-=======
     
      DefaultShip() {
      this.shipHealth = 50;
@@ -133,8 +124,7 @@ public class DefaultShip implements Ship, ShipState {
  public int getShipHealth() {
      return this.shipHealth;
  }
-    
->>>>>>> origin/master
+
 public void setShipHitBox(){
     switch (getState()){
         case 1: {
@@ -398,18 +388,16 @@ public int getState() {
        }
        return image;
     }
-<<<<<<< HEAD
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-=======
 
     @Override
     public void setShipType(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 
  
->>>>>>> origin/master
+
 }
