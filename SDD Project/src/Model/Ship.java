@@ -62,6 +62,8 @@ public interface Ship {
     // Missile shoot location
     public float getXofMissileShoot();
     public float getYofMissileShoot();
+
+    public void setState(int i);
  
 
   

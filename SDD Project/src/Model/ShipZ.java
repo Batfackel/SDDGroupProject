@@ -116,12 +116,18 @@ public void render(Graphics g){
    public int getShipState()
    {
        return this.shipState;
-   }
+    }
+
+    @Override
+    public void setState(int newState) {
+        this.state = newState;
+    }
+
     public Image getImage(String fileName) {
-       Image image = null;
-       try {
-           image = ImageIO.read(new File(fileName));
-       } catch (Exception ioe) {
+        Image image = null;
+        try {
+            image = ImageIO.read(new File(fileName));
+        } catch (Exception ioe) {
            System.out.println("Error: Cannot open image:" + fileName);
            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
        }

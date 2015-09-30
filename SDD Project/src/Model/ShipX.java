@@ -171,7 +171,10 @@ public void update(){
 public int getState() {
     return this.state;
 }
-
+@Override
+public void setState(int newState){
+    this.state = newState;
+}
 //Weapon Methods
 // Missile shoot location
     public float getXofMissileShoot() {

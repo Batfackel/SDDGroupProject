@@ -238,6 +238,11 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     public float getY() {
         return y;
     }
+
+    @Override
+    public void setState(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
