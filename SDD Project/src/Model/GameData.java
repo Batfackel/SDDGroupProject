@@ -12,11 +12,25 @@ import javax.swing.JOptionPane;
 
 public class GameData {
 
-    String imagePath = System.getProperty("user.dir");
-        // separator: Windows '\', Linux '/'
-    String separator = System.getProperty("file.separator");
-    public final Image explosionSpriteSheet = getImage(imagePath + separator + "images" + 
-            separator +"explosionsheet.png");
+    
+    static final int STATE_EXPLOSIOIN_1 = 1;
+    static final int STATE_EXPLOSIOIN_2 = 2;
+    static final int STATE_EXPLOSIOIN_3 = 3;
+    static final int STATE_EXPLOSIOIN_4 = 4;
+    static final int STATE_EXPLOSIOIN_5 = 5;
+    static final int STATE_EXPLOSIOIN_6 = 6;
+    static final int STATE_EXPLOSIOIN_7 = 7;
+    static final int STATE_EXPLOSIOIN_8 = 8;
+    static final int STATE_EXPLOSIOIN_9 = 9;
+    static final int STATE_EXPLOSIOIN_10 = 10;
+    static final int STATE_EXPLOSIOIN_11 = 11;
+    static final int STATE_EXPLOSIOIN_12 = 12;
+    static final int STATE_EXPLOSIOIN_13 = 13;
+    static final int STATE_EXPLOSIOIN_14 = 14;
+    static final int STATE_EXPLOSIOIN_15 = 15;
+    static final int STATE_EXPLOSIOIN_16 = 16;
+
+    
     
     public List<GameFigure> figures;
     public List<Item> items;
@@ -111,7 +125,10 @@ public class GameData {
                     items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
                     items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
                     items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
-                    
+                     /*START EXPLOSION TEST*/
+                        currentShip.setState(4);
+                        /*END EXPLOSION TEST*/
+                         System.out.println("Ship state is " + currentShip.getState());
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);
                     synchronized (figures) {
@@ -121,7 +138,7 @@ public class GameData {
                   }
                 }           
             }
-            
+ 
             // checks for collision between items and the ship. If collision is 
             // detected then it either changes the ships weapon in increments the 
             // weapon level 9/23/15
@@ -139,6 +156,7 @@ public class GameData {
                     else if(itemReference >= 0 && itemReference <= 2) {
                         currentShip.setWeaponState(itemReference);
                         currentShip.setLevelState(BASE_LEVEL);
+                       
                     }                        
                     this.items.remove(item);                              
                 }
@@ -212,6 +230,9 @@ public class GameData {
 //        }
 //       }
 
+//Will's Note:  This is probably not needed due to not being able to access Image files from this class.
+    //  Is this true anyone?
+    //??????????????????????????????????????????????????????????????????????????????????????????????????
     public Image getImage(String fileName) {
        Image image = null;
        try {
