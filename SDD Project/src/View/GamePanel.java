@@ -2,6 +2,7 @@ package View;
 import Controller.Animator;
 import Model.GameData;
 import Model.GameFigure;
+import Model.HUD;
 import Model.Level;
 import Model.Ship;
 import Model.ShipFactory;
@@ -26,6 +27,7 @@ public class GamePanel extends JPanel {
     private Graphics graphics;
     private Image dbImage = null;
     private Level level;
+     private HUD hud;
     public ShipFactory shipMaker;
  
 
@@ -46,6 +48,7 @@ public class GamePanel extends JPanel {
         setBackground(Color.blue);
         setPreferredSize(new Dimension(getWidth(), getHeight()));
         //ship = shipMaker.getShip(0,30,30);//new DefaultShip(400,400);
+        hud = new HUD();
     }
 
     public void startGame() {
@@ -117,6 +120,7 @@ public class GamePanel extends JPanel {
 //                f.render(graphics);
 //            }
 //        }
+         hud.render(graphics);
     }
 
     public void printScreen() { // use active rendering to put the buffered image on-screen

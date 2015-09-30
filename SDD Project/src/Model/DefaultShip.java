@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class DefaultShip implements Ship, ShipState {
     
-    private HUD hud;
+    
     
    Image currentImage; 
    float x, y , dx, dy;
@@ -35,7 +35,7 @@ public class DefaultShip implements Ship, ShipState {
    int state; 
    private int shipHealth;
     public DefaultShip(float x, float y){
-        hud = new HUD(this);
+       
     //Initialize ship here
         this.x = x;
         this.y = y;
@@ -112,7 +112,7 @@ public void render(Graphics g){
         }
     }
      
-    hud.render(g);
+   
 }
    public void setRateOfSpeed(int newSpeed)
    {

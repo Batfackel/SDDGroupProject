@@ -18,81 +18,37 @@ import javax.swing.JPanel;
  *
  * @author Brian
  */
-public class HUD extends JPanel {
-private DefaultShip ship;
-DefaultShip shiphealth = new DefaultShip();
-   
+public class HUD {
 
-   int health = shiphealth.getShipHealth();
-   
-    public HUD(DefaultShip ship) {
-        this.ship = ship;
-    }  
-    
-    
-    
- private Score score;
-         public HUD(Score score) {
-             this.score = score;
-             
-         }
-         
- 
-         
-public void render(Graphics g){
-    
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(5,5,10,300);
-        
-        
-        g.setColor(Color.RED);
-        g.fillRect(5,5,10,300);
-        
-        
-        
-        g.setColor(Color.GREEN);
-        g.fillRect(5,5,10, health);
-         
-       
-        /////// verticle letters//////
-        g.setColor(Color.BLACK);
-        g.drawString("L",5,240);
-        g.drawString("I",5,260);
-        g.drawString("F",5,280);
-        g.drawString("E",5,300);
-        //////////////////Sheild bar///////////////////////////////
-        g.setColor(Color.YELLOW);
-        g.fillRect(25,105,10,200);
-        
-        g.setColor(Color.ORANGE);
-        g.fillRect(25,105,10,200);
-        
+public static float Health = 100;
 
-        
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("TimesRoman",Font.BOLD,13));
-        g.drawString("S",25,200);
-        g.drawString("H",25,220);
-        g.drawString("I",25,240);
-        g.drawString("E",25,260);
-        g.drawString("L",25,280);
-        g.drawString("D",25,300);
-        
+private float greenValue = 255;
+public int score = 0;
 
-        /////////////////Score placeholder//////////
-        g.setColor(Color.WHITE);
-        g.drawString("SCORE", PWIDTH/2,PHEIGHT+75);
-        g.drawString(String.valueOf(score),PWIDTH/2,PHEIGHT+100);
- 
- 
-    g.setColor(Color.red);
-           /* g.drawImage(defaultShipMap.get(0), (int)x, (int)y, null);
-//            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
-                //(int) this.shipHeight);
-            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);*/
+
+public void update() {
+    HealthBound();
+    score ++;
+    greenValue = Health*3;
+    
+    if (greenValue > 255) {
+        greenValue = 255;
+    }
+}
+public void render(Graphics g) {
+    
+        /*g.setColor(Color.DARK_GRAY);
+        g.fillRect(2, 5, (int) (100 * 3.5), 15);
+        g.setColor(new Color(150, (int)greenValue, 0));
+        g.fillRect(2, 5, (int) (Health * 3.5), 15);
+        g.setColor(Color.white);
+        g.drawRect(2, 5, (int) (100 * 3.5), 15);*/
+        
+    
+    //public void render(Graphics g){
 
     g.setColor(Color.BLACK);
-    g.fillRect(750,0,100, 1200);
+    g.fillRect(750,0,50, 1200);
     g.fillRect(0, 0, 50, 1200);
    // g.setColor(Color.WHITE);
     
@@ -109,9 +65,9 @@ public void render(Graphics g){
         g.fillRect(5,5,10,300);
         
         g.setColor(Color.GREEN);
-        g.fillRect(5,5,10,health);
+        g.fillRect(5,5,10,300);
         g.setColor(Color.BLACK);
-        /////// verticle letters//////
+        ///////Terrible way to get verticle letters- will change later///////
         g.drawString("L",5,240);
         g.drawString("I",5,260);
         g.drawString("F",5,280);
@@ -135,17 +91,23 @@ public void render(Graphics g){
         g.drawString("D",25,300);
         
 
+        
+
         /////////////////Score placeholder//////////
         g.setColor(Color.WHITE);
         g.drawString("SCORE", PWIDTH/2,PHEIGHT+75);
         g.drawString(String.valueOf(score),PWIDTH/2,PHEIGHT+100);
  
-
+ 
 
 }
 
 
-
+private void HealthBound() {
+    if(Health <= 0) {
+        Health = 0;
+    }
+}
 
   
     
