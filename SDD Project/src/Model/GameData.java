@@ -161,6 +161,16 @@ public class GameData {
                     this.items.remove(item);                              
                 }
             }
+            
+            for (int i = 0; i < this.enemyShips.size(); i++) {
+                DefaultEnemyShip eShip = (DefaultEnemyShip) enemyShips.get(i);                                
+                
+                if (currentShip.getShipHitBox().intersects(eShip.getShipHitBox())) {          
+                    synchronized (enemyShips) {                      
+                        this.enemyShips.remove(eShip);   
+                    }
+                }
+            }
               System.out.println("weapon state is " + currentShip.getWeaponState());
             }
          catch (Exception e) {
@@ -185,21 +195,21 @@ public class GameData {
             figures.removeAll(removeGameFigures);
         }
     
-    
-//        List<Ship> removeShips = new ArrayList<Ship>();
-//        Ship s;        
-//       
-//        synchronized (ships) {                                                        
-//            
-//            for (int i = 0; i < ships.size(); i++) {               
-//                s = ships.get(i);
-//                s.update();
+//        careful of deleting something and causing an out of bounds error
+        List<Ship> removeShips = new ArrayList<Ship>();
+        Ship s;        
+       
+        synchronized (ships) {                                                        
+            
+            for (int i = 0; i < ships.size(); i++) {               
+                s = ships.get(i);
+                s.update();
 //                if (s.getState() == Ship.STATE_FINISHED) {
 //                    removeShips.add(s);
 //                }
-//            }
-//            ships.removeAll(removeShips);
-//        }
+            }
+            ships.removeAll(removeShips);
+        }
         
         // added new items list to find and remove objects 9/23/15
         List<Item> removeItems = new ArrayList<Item>();
@@ -213,22 +223,11 @@ public class GameData {
                 if (it.getState() == Item.STATE_DONE)
                     removeItems.add(it);
             }
+            items.removeAll(removeItems);
           }
-	  items.removeAll(removeItems);
-       }   
-
-//        synchronized (enemyShips) {                                                        
-//            
-//            for (int i = 0; i < enemyShips.size(); i++) {               
-//                s = enemyShips.get(i);
-//                s.update();
-//                if (s.getState() == Ship.STATE_FINISHED) {
-//                    removeShips.add(s);
-//                }
-//            }
-//            enemyShips.removeAll(removeShips);
-//        }
-//       }
+    }
+        
+       
 
 //Will's Note:  This is probably not needed due to not being able to access Image files from this class.
     //  Is this true anyone?

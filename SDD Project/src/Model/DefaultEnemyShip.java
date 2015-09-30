@@ -216,13 +216,13 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
             }
         }
         
-        if(y > GamePanel.PHEIGHT ) {
-            state = STATE_DONE;
-        }
-        else {
+//        if(y > 3000 ) {
+//            state = STATE_DONE;
+//        }
+//        else {
             movement = new SweepDown();
             movement.moveShip(this);
-        }
+//        }
     }
 
     /**

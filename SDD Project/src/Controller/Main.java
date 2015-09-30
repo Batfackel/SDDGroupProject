@@ -62,10 +62,6 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         gameData = new GameData();
 
         now = new Date();
-        //why do something that gamedata does for me already, just give me what
-        //is already there
-        //shipMaker = new ShipFactory();
-        //ship = shipMaker.getShip("defaultShip", 350, 350);
         ship = (Ship) gameData.ships.get(0);//will checking som
         controller = new KeyController(ship);
 
