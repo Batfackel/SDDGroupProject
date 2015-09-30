@@ -48,9 +48,9 @@ public class Main extends JFrame implements ActionListener, MouseListener {
 
     private KeyController controller;
     
-    public Ship Ship(){
+    /*public Ship Ship(){
         return this.ship;
-    }
+    }*/
     
     public Main() {
         //changed sizing to fit the default image
