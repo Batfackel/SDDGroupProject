@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.GameData;
 import Model.Ship;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,10 +8,20 @@ import java.awt.event.KeyListener;
 public class KeyController implements KeyListener {
     
     private Ship ship;
+    private GameData data;
     //KeyController(){this.ship = null;}//Will Added constructor 9/16/2015
+    public KeyController(Ship ship, GameData gameData) {
+        this.ship = (Ship) ship;
+        this.data = gameData;
+       // this.ship =  ship;
+    }
+    
     public KeyController(Ship ship) {
         this.ship = (Ship) ship;
-       // this.ship =  ship;
+    }
+    
+    public void setGameData(GameData gameData) {
+        this.data = gameData;
     }
     
 
@@ -52,6 +63,9 @@ public class KeyController implements KeyListener {
             case KeyEvent.VK_6:
                 ship.setRateOfSpeed(21);
                 ship.setShipType(6);
+                break;
+            case KeyEvent.VK_S:
+                data.spawnEnemiesForTest();
                 break;
         }
     }

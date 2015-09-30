@@ -223,5 +223,16 @@ public class GameData {
        return image;
     }
     
+    public void spawnEnemiesForTest() {
+        figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
+        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+        for(int i = 0; i < enemyFormation.length; i++) {
+            synchronized(figures) {
+                figures.add((GameFigure)enemyFormation[i]);
+            }
+            
+        }
+    }
+    
     
 }

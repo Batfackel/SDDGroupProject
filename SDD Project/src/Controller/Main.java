@@ -22,11 +22,12 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import View.GamePanel;
 import java.awt.event.KeyListener;
+import java.util.Set;
 
 public class Main extends JFrame implements ActionListener, MouseListener {
 
     private GamePanel gamePanel;
-    private final GameData gameData;
+    public final GameData gameData;
     private Animator animator;
     private JButton startButton;
     private JButton quitButton;
@@ -71,6 +72,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
        // ship = shipMaker.getShip("defaultShip", 350, 350);
         mainShip = (Ship) gameData.ships.get(0);//will checking som
         controller = new KeyController(mainShip);
+        controller.setGameData(gameData);
 
         gamePanel = new GamePanel(animator, gameData);
         animator.setGamePanel(gamePanel);

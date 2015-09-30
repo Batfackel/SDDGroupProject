@@ -21,6 +21,10 @@ public class Animator implements Runnable {
     public void setGameData(GameData gameData) {
         this.gameData = gameData;
     }
+    
+    public GameData getGameData() {
+        return gameData;
+    }
 
     @Override
     public void run() {
