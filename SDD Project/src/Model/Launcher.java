@@ -15,14 +15,14 @@ public class Launcher implements Ship, GameFigure, ShipState {
     int levelState = -1;
 
     private int state = STATE_TRAVELING;
-    HUD hud; 
+    //HUD hud; 
     
 
     //private int state = GameFigure.STATE_TRAVELING;
 
 
     public Launcher(float x, float y) {
-        hud = new HUD();
+      
         this.x = x;
         this.y = y;
         this.levelState = BASE_LEVEL;
@@ -83,8 +83,7 @@ public class Launcher implements Ship, GameFigure, ShipState {
         setLauncherHitBox();        
         g.setColor(Color.BLUE);     
         //----------------------------------------------------------------------
-        //////Render HUD Class
-        hud.render(g);// tried to set HUD area above the entire game, missiles are still above it...
+        
     }
     
     //----------------------------------------------------------------------

@@ -109,7 +109,11 @@ public class GameData {
 
                 //Rectangle[] hit = ship.getHitBox();
                 Rectangle hit = currentShip.getShipHitBox();
-                Ship asdf = (Ship) this.figures.get(i);
+                
+                if (this.figures.get(i) instanceof Ship) {
+                    Ship asdf = (Ship) this.figures.get(i);
+                
+                
 
                   if (hit.intersects(asdf.getShipHitBox())) {
                     
@@ -131,6 +135,7 @@ public class GameData {
                         this.figures.remove(asdf);
                     }
                     //currentShip.setLevelState(currentShip.getLevelState());
+                  }
                 }           
             }
  

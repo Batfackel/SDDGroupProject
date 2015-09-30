@@ -6,9 +6,12 @@
 package Model;
 
 
+import static View.GamePanel.PHEIGHT;
+import static View.GamePanel.PWIDTH;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
 
 /**
@@ -16,16 +19,33 @@ import java.awt.Graphics;
  * @author Brian
  */
 public class HUD {
-    //private Ship ship;
+
+public static float Health = 100;
+
+private float greenValue = 255;
+public int score = 0;
+
+
+public void update() {
+    HealthBound();
+    score ++;
+    greenValue = Health*3;
     
-    public HUD() {
+    if (greenValue > 255) {
+        greenValue = 255;
+    }
+}
+public void render(Graphics g) {
+    
+        /*g.setColor(Color.DARK_GRAY);
+        g.fillRect(2, 5, (int) (100 * 3.5), 15);
+        g.setColor(new Color(150, (int)greenValue, 0));
+        g.fillRect(2, 5, (int) (Health * 3.5), 15);
+        g.setColor(Color.white);
+        g.drawRect(2, 5, (int) (100 * 3.5), 15);*/
         
     
-}
-    
-
-
-public void render(Graphics g){
+    //public void render(Graphics g){
 
     g.setColor(Color.BLACK);
     g.fillRect(750,0,50, 1200);
@@ -71,14 +91,28 @@ public void render(Graphics g){
         g.drawString("D",25,300);
         
 
-        /////////////////Score placeholder//////////
-        g.setColor(Color.WHITE);
-        g.drawString("SCORE",5,340);
-        g.drawRect(5,350,35,60);
- 
         
 
+        /////////////////Score placeholder//////////
+        g.setColor(Color.WHITE);
+        g.drawString("SCORE", PWIDTH/2,PHEIGHT+75);
+        g.drawString(String.valueOf(score),PWIDTH/2,PHEIGHT+100);
+ 
+ 
+
 }
+
+
+private void HealthBound() {
+    if(Health <= 0) {
+        Health = 0;
+    }
+}
+
+  
+    
+
+   
 
   
      
