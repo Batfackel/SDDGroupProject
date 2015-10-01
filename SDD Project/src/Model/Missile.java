@@ -22,10 +22,11 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
     private int explosionMaxSize;
     String imagePath = System.getProperty("user.dir");
     String separator = System.getProperty("file.separator");
-    currentImage = getImage(imagePath + separator + "images" + separator + "missile.jpg");
+    
     public Missile(float x, float y, Color color) {
         setFrameFromCenter(x, y, x + SIZE, y + SIZE);
         this.color = color;
+        currentImage = getImage(imagePath + separator + "images" + separator + "missile.jpg");
     }
 
     public void setTarget(float x, float y) {
