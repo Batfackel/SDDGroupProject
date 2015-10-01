@@ -22,12 +22,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import View.GamePanel;
 import java.awt.event.KeyListener;
-import java.util.Set;
 
-public class Main extends JFrame implements ActionListener, MouseListener {
+public class Main extends JFrame implements ActionListener {
 
     private GamePanel gamePanel;
-    public final GameData gameData;
+    public static  GameData gameData;
     private Animator animator;
     private JButton startButton;
     private JButton quitButton;
@@ -47,11 +46,11 @@ public class Main extends JFrame implements ActionListener, MouseListener {
     
 
 
-    public KeyController controller;
+    private KeyController controller;
     
-    /*public Ship Ship(){
+    public Ship Ship(){
         return this.ship;
-    }*/
+    }
     
     public Main() {
         //changed sizing to fit the default image
@@ -62,13 +61,16 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         gameData = new GameData();
 
         now = new Date();
+        //why do something that gamedata does for me already, just give me what
+        //is already there
+        //shipMaker = new ShipFactory();
+        //ship = shipMaker.getShip("defaultShip", 350, 350);
         ship = (Ship) gameData.ships.get(0);//will checking som
         controller = new KeyController(ship);
 
        // ship = shipMaker.getShip("defaultShip", 350, 350);
         mainShip = (Ship) gameData.ships.get(0);//will checking som
         controller = new KeyController(mainShip);
-        controller.setGameData(gameData);
 
         gamePanel = new GamePanel(animator, gameData);
         animator.setGamePanel(gamePanel);
@@ -92,7 +94,8 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         
         
 
-        gamePanel.addMouseListener(this);
+        MouseController mouseController = new MouseController(mainShip);
+        gamePanel.addMouseListener(mouseController);
         startButton.setFocusable(false); // "Start" button click should not receive keyboard data
         gamePanel.setFocusable(true); // receives keyboard data
 
@@ -138,54 +141,7 @@ public class Main extends JFrame implements ActionListener, MouseListener {
         }
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-
-        //----------------------------------------------------------------------
-        //changes the types of bullet shot. This changes the weapon type when 
-        //the ship weapon state changes - 9/10/2015
-        //----------------------------------------------------------------------
-        Color color;
-        /*
-        double r = Math.random();
-        if (r < 0.25) {
-            color = Color.red;
-        } else if (r < 0.5) {
-            color = Color.blue;
-        } else if (r < 0.75) {
-            color = Color.gray;
-        } else {
-            color = Color.green;
-        }
-        */       
-        System.out.println("this is the state -------- " + mainShip.getLevelState());
-        //switch(launcher.getLevelState()){            
-        switch(mainShip.getLevelState()) {
-            case 0: color = Color.gray;
-                break;
-            case 1: color = Color.blue;
-                break;
-            case 2: color = Color.green;
-                break;
-            case 3: color = Color.red;
-                break;
-            default: color = Color.yellow;
-        }
-        //----------------------------------------------------------------------
-        //----------------------------------------------------------------------
-        
-        //Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);
-        Missile f = new Missile(mainShip.getXofMissileShoot(), mainShip.getYofMissileShoot(), color);
-        f.setTarget(x, y);
-        int size = (int) (Math.random() * 100) + 5; // min = 5 max = 105
-        f.setExplosionMaxSize(size);
-         synchronized (gameData.figures) {
-            gameData.figures.add(f);
-        }
-    }
-    
+   
     public void setScreenSize(int w, int h){
         this.screenHeight = h;
         this.screenWidth = w;
@@ -207,38 +163,4 @@ public class Main extends JFrame implements ActionListener, MouseListener {
                 timer.start();
     }
     
-    @Override
-    public void mouseClicked(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent me) {
-    }
-    
-    
-//    void setKeyController(KeyController keyCon)
-//    {
-//      
-//        mainShip = (Ship) gameData.ships.get(0);
-//        keyCon.setShip(mainShip);        
-//    }
-    //move into controller that handles player input
-    
-    //initial main not needed
-    /*
-    public static void main(String[] args) {
-        JFrame game = new Main();
-        //game.setTitle("Beggar's Canyon");
-        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        game.setVisible(true);
-    }
-    */
 }
