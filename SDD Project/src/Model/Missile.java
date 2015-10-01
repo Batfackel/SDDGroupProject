@@ -1,14 +1,18 @@
 package Model;
 
 
+import static Model.Item.getImage;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import javax.vecmath.Vector2f;
+import javax.imageio.ImageIO;
+import java.io.File;
 
 public class Missile extends Ellipse2D.Float implements GameFigure {
-
+    Image currentImage; 
     static int SIZE = 2;
     Color color;
     Point2D.Float target;
@@ -16,7 +20,9 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
     private static final int UNIT_TRAVEL_DISTANCE = 4;
     private int explosionSize = SIZE;
     private int explosionMaxSize;
-
+    String imagePath = System.getProperty("user.dir");
+    String separator = System.getProperty("file.separator");
+    currentImage = getImage(imagePath + separator + "images" + separator + "missile.jpg");
     public Missile(float x, float y, Color color) {
         setFrameFromCenter(x, y, x + SIZE, y + SIZE);
         this.color = color;
