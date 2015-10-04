@@ -71,6 +71,7 @@ public class Main extends JFrame implements ActionListener {
        // ship = shipMaker.getShip("defaultShip", 350, 350);
         mainShip = (Ship) gameData.ships.get(0);//will checking som
         controller = new KeyController(mainShip);
+        controller.setGameData(gameData);
 
         gamePanel = new GamePanel(animator, gameData);
         animator.setGamePanel(gamePanel);
