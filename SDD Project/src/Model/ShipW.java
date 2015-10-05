@@ -1,7 +1,6 @@
 package Model;
-import Model.Ship;
+
 import static Model.Ship.STATE_OK;
-import Model.ShipState;
 import static Model.ShipState.BASE_LEVEL;
 import static Model.ShipState.LEVEL_1;
 import static Model.ShipState.LEVEL_2;
@@ -19,7 +18,8 @@ import javax.swing.JOptionPane;
  *
  * @author Will
  */
-public class ShipZ implements Ship, ShipState {
+public class ShipW implements Ship, ShipState {    
+   
     
   Image currentImage; 
    float x, y , dx, dy;
@@ -37,7 +37,7 @@ public class ShipZ implements Ship, ShipState {
    private int shipHealth;
    private int shipImageToUse;
   
-   public ShipZ(float x, float y){
+   public ShipW(float x, float y){
       
        state = 1; 
    
@@ -66,7 +66,7 @@ public class ShipZ implements Ship, ShipState {
         //----------------------------------------------------------------------------------------------------
         
         this.currentImage = getImage(imagePath + separator + "images" + 
-            separator + "sun.png");
+            separator + "shadow.png");
         defaultShipMap.put(1, this.currentImage);//Should be use constant NORMAL_STATE=0
         this.setShipHitBox();
         
@@ -134,7 +134,7 @@ public class ShipZ implements Ship, ShipState {
 /*HITBOX METHODS*/
 //-------------------------------------------------------------------------   
     
-     ShipZ() {
+     ShipW() {
      this.shipHealth = 50;
  }  //Will someone tell me what this is for.  I know what is does, but I don't
     //who or why someone put an additional constructor that does not initalize

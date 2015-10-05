@@ -18,11 +18,10 @@ import javax.swing.JOptionPane;
  *
  * @author Will
  */
-public class DefaultShip implements Ship, ShipState {
+public class DefaultShip implements Ship, ShipState {    
+   
     
-    
-    
-   Image currentImage; 
+  Image currentImage; 
    float x, y , dx, dy;
    float shipHeight, shipWidth;
    float rateOfSpeed;
@@ -37,8 +36,10 @@ public class DefaultShip implements Ship, ShipState {
    private Image eSheet;
    private int shipHealth;
    private int shipImageToUse;
+  
    public DefaultShip(float x, float y){
-    int state; 
+      
+       state = 1; 
    
        
     //Initialize ship here
@@ -135,7 +136,9 @@ public class DefaultShip implements Ship, ShipState {
     
      DefaultShip() {
      this.shipHealth = 50;
- }
+ }  //Will someone tell me what this is for.  I know what is does, but I don't
+    //who or why someone put an additional constructor that does not initalize
+    //anything but the health of the ship.
     
  public int getShipHealth() {
      return this.shipHealth;
@@ -415,21 +418,13 @@ public void setState(int newState){
 public int getState() {
     return this.state;
 }
-
-
-  
-
-
-
 //-------------------------------------------------------------------------
 /*STATE AND ANIMATION METHODS*/
 //-------------------------------------------------------------------------   
-   
-   
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*STATE AND ANIMATION METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-   //-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 /*HELPER METHODS*/ 
 //-------------------------------------------------------------------------
    public Image getImage(String fileName) {
@@ -445,13 +440,4 @@ public int getState() {
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-    @Override
-    public void setShipType(int i) {
-        
-    }
-
-
- 
-
 }
