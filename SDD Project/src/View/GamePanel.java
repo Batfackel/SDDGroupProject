@@ -29,7 +29,7 @@ public class GamePanel extends JPanel {
     private Level level;
      private HUD hud;
     public ShipFactory shipMaker;
- 
+    private Image titleScreen;
 
     public GamePanel(Animator animator, GameData gameData) {
         this.animator = animator;
@@ -44,14 +44,22 @@ public class GamePanel extends JPanel {
         // the project folder name, and create a folder named "image"
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
+     
+        titleScreen = getImage(imagePath + separator + "images" + separator
+                + "Inazuma no sentōki2000x1500.png");
+
+
+        
         level = new Level(); 
         setBackground(Color.blue);
+         
         setPreferredSize(new Dimension(getWidth(), getHeight()));
         //ship = shipMaker.getShip(0,30,30);//new DefaultShip(400,400);
         hud = new HUD();
     }
 
     public void startGame() {
+       
         Thread t = new Thread(animator);
         t.start();
     }

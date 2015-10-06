@@ -21,22 +21,24 @@ import javax.swing.JOptionPane;
 public class DefaultShip implements Ship, ShipState {    
    
     
-  Image currentImage; 
-   float x, y , dx, dy;
-   float shipHeight, shipWidth;
-   float rateOfSpeed;
-   int armour;
-   int shipState;
-   int weaponState,weaponLevel;
-   int levelState = BASE_LEVEL; //stores weapon level state
-   Rectangle[] hitBox = new Rectangle[2];
+   private Image currentImage; 
+   private float x, y , dx, dy;
+   private float shipHeight, shipWidth;
+   private float rateOfSpeed;
+   private int armour;
+   private int shipState;
+   private int weaponState,weaponLevel;
+   private int levelState = BASE_LEVEL; //stores weapon level state
+   private Rectangle[] hitBox = new Rectangle[2];
    private static HashMap<Integer,Image> defaultShipMap = new HashMap<Integer, Image>();
-   int state;
-   int explosionState;
+   private int state;
+   private int explosionState;
    private Image eSheet;
    private int shipHealth;
    private int shipImageToUse;
-  
+   private final String imagePath = System.getProperty("user.dir");  // separator: Windows '\', Linux '/'  
+   private final String separator = System.getProperty("file.separator");
+    
    public DefaultShip(float x, float y){
       
        state = 1; 
@@ -56,15 +58,10 @@ public class DefaultShip implements Ship, ShipState {
         this.weaponState = 0; //initialze to kinetic weapon
         setShipState(0/*newShipState*/);
         
-        String imagePath = System.getProperty("user.dir");
-        // separator: Windows '\', Linux '/'
-        String separator = System.getProperty("file.separator");
-    
+       
         
         this.eSheet = getImage(imagePath + separator + "images" + 
-            separator +"explosionsheet.png");
-        //----------------------------------------------------------------------------------------------------
-        
+            separator +"explosionsheet.png");       
         this.currentImage = getImage(imagePath + separator + "images" + 
             separator + "raider.png");
         defaultShipMap.put(1, this.currentImage);//Should be use constant NORMAL_STATE=0
