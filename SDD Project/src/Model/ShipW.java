@@ -1,10 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
+import static Model.Ship.STATE_OK;
+import static Model.ShipState.BASE_LEVEL;
+import static Model.ShipState.LEVEL_1;
+import static Model.ShipState.LEVEL_2;
+import static Model.ShipState.LEVEL_3;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Will
  */
-public class DefaultShip implements Ship, ShipState {    
+public class ShipW implements Ship, ShipState {    
    
     
   Image currentImage; 
@@ -37,7 +37,7 @@ public class DefaultShip implements Ship, ShipState {
    private int shipHealth;
    private int shipImageToUse;
   
-   public DefaultShip(float x, float y){
+   public ShipW(float x, float y){
       
        state = 1; 
    
@@ -66,7 +66,7 @@ public class DefaultShip implements Ship, ShipState {
         //----------------------------------------------------------------------------------------------------
         
         this.currentImage = getImage(imagePath + separator + "images" + 
-            separator + "raider.png");
+            separator + "shadow.png");
         defaultShipMap.put(1, this.currentImage);//Should be use constant NORMAL_STATE=0
         this.setShipHitBox();
         
@@ -134,7 +134,7 @@ public class DefaultShip implements Ship, ShipState {
 /*HITBOX METHODS*/
 //-------------------------------------------------------------------------   
     
-     DefaultShip() {
+     ShipW() {
      this.shipHealth = 50;
  }  //Will someone tell me what this is for.  I know what is does, but I don't
     //who or why someone put an additional constructor that does not initalize
@@ -440,26 +440,4 @@ public int getState() {
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-<<<<<<< HEAD
-
-    @Override
-    public void setShipType(int i) {
-        
-    }
-
-    @Override
-    public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
- 
-
-=======
->>>>>>> d5346a101e5cf8ecd43973f315a5ab4ff3dbd4df
 }
