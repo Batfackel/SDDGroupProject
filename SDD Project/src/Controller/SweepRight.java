@@ -7,6 +7,7 @@ package Controller;
 
 import Model.Ship;
 import View.GamePanel;
+import View.MainMenu;
 
 /**
  *
@@ -17,7 +18,6 @@ public class SweepRight implements MovementStrategy{
     @Override
     public void moveShip(Ship ship) {
         ship.moveRight();
-        
     }
     
 }

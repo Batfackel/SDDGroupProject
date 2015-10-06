@@ -5,6 +5,7 @@
  */
 package Model;
 
+import View.MainMenu;
 import java.util.List;
 
 /**
@@ -29,11 +30,11 @@ public class EnemyFactory {
     
     public Ship[] getEnemyShipFormation(String shipSelection, float x, float y) {
         enemyFormation = new Ship[5];
-        enemyFormation[0] = new DefaultEnemyShip(x, y);
-        enemyFormation[1] = new DefaultEnemyShip(x - 190, y);
-        enemyFormation[2] = new DefaultEnemyShip(x + 190, y);
-        enemyFormation[3] = new DefaultEnemyShip(x - 190, y + 250);
-        enemyFormation[4] = new DefaultEnemyShip(x + 190, y + 250);
+        enemyFormation[0] = new DefaultEnemyShip(x, y - 50);
+        enemyFormation[1] = new DefaultEnemyShip(x + 190, y - 50);
+        enemyFormation[2] = new DefaultEnemyShip(x + 380, y - 50);
+        enemyFormation[3] = new DefaultEnemyShip(x + 190, y - 250);
+        enemyFormation[4] = new DefaultEnemyShip(x + 380, y - 250);
         return enemyFormation;
     }
     

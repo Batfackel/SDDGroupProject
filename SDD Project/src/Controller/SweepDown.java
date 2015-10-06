@@ -7,6 +7,7 @@ package Controller;
 
 import Model.Ship;
 import View.GamePanel;
+import View.MainMenu;
 
 /**
  *
@@ -17,6 +18,12 @@ public class SweepDown implements MovementStrategy {
     @Override
     public void moveShip(Ship ship) {
         ship.moveDown();
+        if(ship.getY() >= MainMenu.m.getHeight() + 150) {
+            ship.setState(0);
+        }
+        else {
+            ship.moveDown();
+        }
     }
     
 }

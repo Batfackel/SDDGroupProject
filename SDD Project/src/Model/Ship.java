@@ -64,5 +64,8 @@ public interface Ship {
     public float getYofMissileShoot();
 
     public void setState(int i);
+    
+    public int getX();
+    public int getY();
  
 }
