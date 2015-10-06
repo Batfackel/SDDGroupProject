@@ -69,14 +69,9 @@ public interface Ship {
     // Missile shoot location
     public float getXofMissileShoot();
     public float getYofMissileShoot();
-<<<<<<< HEAD
-
-    public void setState(int i);
     
     public int getX();
     public int getY();
-=======
->>>>>>> d5346a101e5cf8ecd43973f315a5ab4ff3dbd4df
  
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END WEAPON METHODS*/ 

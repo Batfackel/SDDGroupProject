@@ -29,7 +29,7 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     private float x;
     private float y;
     float  dx, dy, shipHeight, shipWidth, rateOfSpeed;
-    int armour, shipState, weaponState, weaponLevel, state;
+    int armour, shipState, weaponState, weaponLevel, state, health;
     int levelState = -1;
     Rectangle[] hitBox = new Rectangle[2];
     private boolean moveRight = true;
@@ -38,8 +38,6 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     public DefaultEnemyShip(float x, float y) {
         this.x = x;
         this.y = y;
-        this.shipHeight = 235;
-        this.shipWidth = 160;
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
         this.rateOfSpeed = 2;
@@ -48,8 +46,55 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
         image = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "defaultEnemyShip.png");
+        this.shipHeight = image.getHeight(null);
+        this.shipWidth = image.getWidth(null);
         this.setShipHitBox();
+    }
+    
+    public DefaultEnemyShip(String shipType, float x, float y) {
+        this.x = x;
+        this.y = y;
+        this.levelState = BASE_LEVEL;
+        this.state = STATE_OK;
+        this.rateOfSpeed = 2;
+        setShipState(0);
+        String imagePath = System.getProperty("user.dir");
+        // separator: Windows '\', Linux '/'
+        String separator = System.getProperty("file.separator");
+        switch(shipType) {
+            case "alien1":
+                image = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "alien1.png");
+                this.shipHeight = image.getHeight(null);
+                this.shipWidth = image.getWidth(null);
+                this.health = 5;
+                break;
+            case "blueFighter":
+                image = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "blueFighter.png");
+                this.shipHeight = image.getHeight(null);
+                this.shipWidth = image.getWidth(null);
+                this.health = 4;
+                break;
+            case "purpleFighter":
+                image = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "purpleFighter.png");
+                this.shipHeight = image.getHeight(null);
+                this.shipWidth = image.getWidth(null);
+                this.health = 3;
+                break;
+            case "redFighter":
+                image = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "redFighter.png");
+                this.shipHeight = image.getHeight(null);
+                this.shipWidth = image.getWidth(null);
+                this.health = 2;
+                break;
+            default:
+                image = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "defaultEnemyShip.png");
+                this.shipHeight = image.getHeight(null);
+                this.shipWidth = image.getWidth(null);
+                this.health = 1;
+                break;
+        }
         
+        this.setShipHitBox();
     }
 
     @Override
@@ -121,15 +166,12 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
 
     @Override
     public void render(Graphics g) {
-//        System.out.println("before switch------------------------");
         switch (getShipState()){
             case 0:
-    //            System.out.println("case 0------------------------");
-                g.setColor(Color.red);
+//                g.setColor(Color.red);
                 g.drawImage(image, (int)getX(), (int)getY(), null);
     //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
-                    //(int) this.shipHeight);
-                g.drawRect((int)this.getX(), (int)this.getY(), (int)this.shipWidth, (int)this.shipHeight);
+//                g.drawRect((int)this.getX(), (int)this.getY(), (int)this.shipWidth, (int)this.shipHeight);
                 break;
         }
         move();
@@ -175,11 +217,6 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     public void moveDown() {
         y = (int) (getY() + this.rateOfSpeed);
         dy = getY();
-    }
-
-    @Override
-    public void setShipType(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
