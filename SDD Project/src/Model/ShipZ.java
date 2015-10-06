@@ -437,7 +437,23 @@ public int getState() {
        }
        return image;
     }
+<<<<<<< HEAD
+
+    @Override
+    public int getX() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getY() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+ 
+=======
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+>>>>>>> d5346a101e5cf8ecd43973f315a5ab4ff3dbd4df
 }

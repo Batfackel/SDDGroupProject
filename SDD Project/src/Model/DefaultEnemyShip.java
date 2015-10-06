@@ -10,6 +10,7 @@ import Controller.SweepDown;
 import Controller.SweepLeft;
 import Controller.SweepRight;
 import View.GamePanel;
+import View.MainMenu;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -31,7 +32,7 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     int armour, shipState, weaponState, weaponLevel, state;
     int levelState = -1;
     Rectangle[] hitBox = new Rectangle[2];
-    boolean moveRight = true;
+    private boolean moveRight = true;
     boolean moveLeft = false;
     
     public DefaultEnemyShip(float x, float y) {
@@ -199,50 +200,51 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     public void move() {
         MovementStrategy movement;
         
-        if(getX() >= 0 && moveRight == true) {
+        if(getX() > 0 && isMoveRight()) {
             movement = new SweepRight();
             movement.moveShip(this);
-            if(getX() + shipWidth >= GamePanel.PWIDTH) {
-                moveRight = false;
-                moveLeft = true;
+            if(getX() + shipWidth >= MainMenu.m.getWidth()) {
+                setMoveRight(false);
             }
         }
-        else if(moveLeft == true) {
+        else if(!isMoveRight()) {
             movement = new SweepLeft();
             movement.moveShip(this);
             if(getX() < 0) {
-                moveRight = true;
-                x = 0;
+                setMoveRight(true);
             }
         }
         
-//        if(y > 3000 ) {
-//            state = STATE_DONE;
-//        }
-//        else {
-            movement = new SweepDown();
-            movement.moveShip(this);
-//        }
-    }
-
-    /**
-     * @return the x
-     */
-    public float getX() {
-        return x;
-    }
-
-    /**
-     * @return the y
-     */
-    public float getY() {
-        return y;
+        movement = new SweepDown();
+        movement.moveShip(this);
     }
 
     @Override
     public void setState(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.state = i;
     }
-    
-    
+
+    @Override
+    public int getX() {
+        return (int)x;
+    }
+
+    @Override
+    public int getY() {
+        return (int)y;
+    }
+
+    /**
+     * @return the moveRight
+     */
+    public boolean isMoveRight() {
+        return moveRight;
+    }
+
+    /**
+     * @param moveRight the moveRight to set
+     */
+    public void setMoveRight(boolean moveRight) {
+        this.moveRight = moveRight;
+    }
 }

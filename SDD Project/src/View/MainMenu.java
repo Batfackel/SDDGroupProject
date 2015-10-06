@@ -18,7 +18,7 @@ import javax.swing.SwingUtilities;
  * @author YuchenFeng
  */
 public class MainMenu extends javax.swing.JPanel {
-
+    public static Main m;
     /**
      * Creates new form MainMenu
      */
@@ -89,7 +89,7 @@ public class MainMenu extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             String value=jComboBox1.getSelectedItem().toString();
-            Main m = new Main();
+            m = new Main();
             String[] size = value.split("\\*");
             
             m.setScreenSize(Integer.parseInt(size[0].trim()), Integer.parseInt(size[1].trim()));

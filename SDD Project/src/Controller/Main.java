@@ -164,4 +164,12 @@ public class Main extends JFrame implements ActionListener {
                 timer.start();
     }
     
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+    
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+    
 }
