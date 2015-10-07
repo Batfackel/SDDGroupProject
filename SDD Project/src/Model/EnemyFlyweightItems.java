@@ -59,6 +59,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                     break;
                 case 0:
                     //ship needs to be removed because it is off screen
+                    image = null;
                     break;
                 case 10:
                     //ship doing a-ok 
@@ -73,7 +74,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                             image = purpleFighterImage;
                             break;
                         case "blueFighter":
-                            image = purpleFighterImage;
+                            image = blueFighterImage;
                             break;
                         case "defaultEnemyShip":
                             image = defaultImage;

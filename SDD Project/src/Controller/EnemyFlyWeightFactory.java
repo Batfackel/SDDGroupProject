@@ -5,10 +5,21 @@
  */
 package Controller;
 
+import Model.EnemyFlyweightItems;
+import Model.Ship;
+import java.awt.Image;
+
 /**
  *
  * @author ryan
  */
 public class EnemyFlyWeightFactory {
+    public EnemyFlyweight flyweight;
+    public EnemyFlyWeightFactory() {
+        flyweight = new EnemyFlyweightItems();
+    }
     
+    public EnemyFlyweight getFlyweight() {
+        return flyweight;
+    }
 }

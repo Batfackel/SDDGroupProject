@@ -5,15 +5,11 @@
  */
 package Model;
 
-import Controller.EnemyExplosion;
-import Controller.ExplosionStrategy;
 import Controller.MovementStrategy;
 import Controller.SweepDown;
 import Controller.SweepLeft;
 import Controller.SweepRight;
-import View.GamePanel;
 import View.MainMenu;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -35,7 +31,6 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     int levelState = -1;
     Rectangle[] hitBox = new Rectangle[2];
     private boolean moveRight = true;
-    private ExplosionStrategy expStrat;
     private String shipType;
     
     public DefaultEnemyShip(float x, float y) {
@@ -56,7 +51,7 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
         this.rateOfSpeed = 2;
         setShipState(10);
         this.shipType = shipType;
-        image = GameData.flyweightFactory.setImage(this);
+        image = GameData.flyweightItems.setImage(this);
         this.shipHeight = image.getHeight(null);
         this.shipWidth = image.getWidth(null);
         Random rand = new Random();
@@ -214,17 +209,18 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     public void move() {
         MovementStrategy movement;
         
-        if(getX() > 0 && isMoveRight()) {
+        if(isMoveRight()) {
             movement = new SweepRight();
             movement.moveShip(this);
             if(getX() + shipWidth >= MainMenu.m.getWidth()) {
                 setMoveRight(false);
             }
         }
-        else if(!isMoveRight()) {
+        else if(isMoveRight() == false) {
             movement = new SweepLeft();
             movement.moveShip(this);
             if(getX() < 0) {
+                x = 0;
                 setMoveRight(true);
             }
         }

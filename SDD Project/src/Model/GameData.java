@@ -42,13 +42,15 @@ public class GameData {
     private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();  
     private Ship incomingShip;
     private int BASE_LEVEL = -1, counter = 0;
-    public static EnemyFlyweight flyweightFactory;
+    private EnemyFlyWeightFactory flyweightFactory;
+    public static EnemyFlyweight flyweightItems;
     public GameData() {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
         items = Collections.synchronizedList(new ArrayList<Item>());
         enemyShips = Collections.synchronizedList(new ArrayList<Ship>());
-        flyweightFactory = new EnemyFlyweightItems();
+        flyweightFactory = new EnemyFlyWeightFactory();
+        flyweightItems = flyweightFactory.getFlyweight();
 
         //create ships for collision test
         //9/10/2015
