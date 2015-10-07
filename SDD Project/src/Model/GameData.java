@@ -1,7 +1,7 @@
 package Model;
 
-import Controller.KeyController;
-import Controller.Main;
+import Controller.EnemyFlyWeightFactory;
+import Controller.EnemyFlyweight;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
@@ -37,16 +37,18 @@ public class GameData {
     public List<GameFigure> figures;
     public List<Item> items;
     public List<Ship> ships, enemyShips; 
-    private ShipFactory shipMaker = new ShipFactory();
+    private final ShipFactory shipMaker = new ShipFactory();
     private EnemyFactory enemyMaker = new EnemyFactory();
     private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();  
     private Ship incomingShip;
-    private int BASE_LEVEL = -1;
+    private int BASE_LEVEL = -1, counter = 0;
+    public static EnemyFlyweight flyweightFactory;
     public GameData() {
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
         items = Collections.synchronizedList(new ArrayList<Item>());
         enemyShips = Collections.synchronizedList(new ArrayList<Ship>());
+        flyweightFactory = new EnemyFlyweightItems();
 
         //create ships for collision test
         //9/10/2015
@@ -183,6 +185,16 @@ public class GameData {
                     } 
                }
             }
+            if(counter == 100) {
+                counter = 0;
+            }
+            else {
+                Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+                for(int i = 0; i < enemyFormation.length; i++) {
+                    figures.add((GameFigure)enemyFormation[i]);
+                }
+            }
+            
               System.out.println("weapon state is " + currentShip.getWeaponState());
             }
          catch (Exception e) {
@@ -264,6 +276,10 @@ public class GameData {
             }
             
         }
+    }
+
+    private EnemyFlyWeightFactory EnemyFlyweightItems() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

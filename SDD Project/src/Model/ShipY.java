@@ -450,4 +450,9 @@ public int getState() {
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+    @Override
+    public String getShipType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
