@@ -44,8 +44,6 @@ public class KeyController implements KeyListener {
             case KeyEvent.VK_DOWN:
                 ship.moveDown(); 
                 break;
-<<<<<<< HEAD
-=======
             case KeyEvent.VK_1:
                 ship.setRateOfSpeed(5);
 //                ship.setShipType(1);
@@ -70,7 +68,6 @@ public class KeyController implements KeyListener {
                 ship.setRateOfSpeed(21);
 //                ship.setShipType(6);
                 break;
->>>>>>> origin/master
             case KeyEvent.VK_S:
                 data.spawnEnemiesForTest();
                 break;
