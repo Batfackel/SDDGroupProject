@@ -125,6 +125,14 @@ public class ShipV implements Ship, ShipState {
    {
        this.armour = this.armour + armourToAdd;
    }
+   public int getY()
+   {
+       return (int) this.y;
+   }
+    public int getX()
+   {
+       return (int) this.x;
+   }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END SHIP METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 

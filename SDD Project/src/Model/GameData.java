@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 public class GameData {
-
-    
+   
+// USE Strategy pattern    
     static final int STATE_EXPLOSIOIN_1 = 1;
     static final int STATE_EXPLOSIOIN_2 = 2;
     static final int STATE_EXPLOSIOIN_3 = 3;

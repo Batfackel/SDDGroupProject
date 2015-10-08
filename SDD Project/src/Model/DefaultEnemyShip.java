@@ -177,11 +177,7 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
         dy = getY();
     }
 
-    @Override
-    public void setShipType(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+   
     @Override
     public float getXofMissileShoot() {
         return getX()+30;

@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Controller.KeyController;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -123,10 +124,51 @@ public ShipSelectMenu(int currentResolution)//Acccepts 1-3 to determine current 
         switch (currentResolution) {
             case RESOLUTION_800X1000: {
                 switch (currentSelection) {
-                    case 1: {
+                    case FIRST_SHIP_SELECTED: {
                         g.setColor(Color.black);
 
                         g.drawRect(TOP_COL_OF_DEFAULT_SHIP_X_VALUE_800X1000, TOP_ROW_OF_SHIPS_Y_VALUE_800X1000,
+                                SELECTION_RECTANGLE_WIDTH_800X1000, SELECTION_RECTANGLE_HEIGHT_800X1000);
+                        //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                        break;
+                    }
+                    
+                    case  SECOND_SHIP_SELECTED: {
+                        g.setColor(Color.black);
+
+                        g.drawRect(TOP_COL_OF_SHIP_V_X_VALUE_800X1000, TOP_ROW_OF_SHIPS_Y_VALUE_800X1000,
+                                SELECTION_RECTANGLE_WIDTH_800X1000, SELECTION_RECTANGLE_HEIGHT_800X1000);
+                        //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                        break;
+                    }
+                    case THIRD_SHIP_SELECTED: {
+                        g.setColor(Color.black);
+
+                        g.drawRect(TOP_COL_OF_SHIP_X_X_VALUE_800X1000, TOP_ROW_OF_SHIPS_Y_VALUE_800X1000,
+                                SELECTION_RECTANGLE_WIDTH_800X1000, SELECTION_RECTANGLE_HEIGHT_800X1000);
+                        //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                        break;
+                    }
+                    case FOURTH_SHIP_SELECTED: {
+                        g.setColor(Color.black);
+
+                        g.drawRect(TOP_COL_OF_SHIP_W_X_VALUE_800X1000, BOTTOM_ROW_OF_SHIPS_Y_VALUE_800X1000,
+                                SELECTION_RECTANGLE_WIDTH_800X1000, SELECTION_RECTANGLE_HEIGHT_800X1000);
+                        //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                        break;
+                    }
+                    case  FIFTH_SHIP_SELECTED: {
+                        g.setColor(Color.black);
+
+                        g.drawRect(TOP_COL_OF_ShipV_X_VALUE_800X1000, BOTTOM_ROW_OF_SHIPS_Y_VALUE_800X1000,
+                                SELECTION_RECTANGLE_WIDTH_800X1000, SELECTION_RECTANGLE_HEIGHT_800X1000);
+                        //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
+                        break;
+                    }
+                    case SIXTH_SHIP_SELECTED: {
+                        g.setColor(Color.black);
+
+                        g.drawRect(TOP_COL_OF_ShipX_X_VALUE_800X1000, BOTTOM_ROW_OF_SHIPS_Y_VALUE_800X1000,
                                 SELECTION_RECTANGLE_WIDTH_800X1000, SELECTION_RECTANGLE_HEIGHT_800X1000);
                         //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
                         break;
