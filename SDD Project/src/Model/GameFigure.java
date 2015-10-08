@@ -4,6 +4,7 @@ package Model;
 import java.awt.Graphics;
 
 public interface GameFigure {
+    //is this level state in the ships or ship state in the ships
     public void render(Graphics g);
     public void update();
     public int getState();

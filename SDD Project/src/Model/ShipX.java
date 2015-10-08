@@ -437,7 +437,10 @@ public int getState() {
        }
        return image;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
     @Override
     public int getX() {
@@ -448,11 +451,21 @@ public int getState() {
     public int getY() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> origin/master
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
+<<<<<<< HEAD
+=======
+    @Override
+    public String getShipType() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+>>>>>>> origin/master
 }

@@ -74,11 +74,19 @@ public interface Ship {
     public float getXofMissileShoot();
 
     public float getYofMissileShoot();
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/master
     public int getX();
 
     public int getY();
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> origin/master
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END WEAPON METHODS*/
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -92,8 +100,18 @@ public interface Ship {
     public int getState();
 
     public void render(Graphics g);
+<<<<<<< HEAD
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }
+=======
+    public String getShipType();
+    
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*END HELPER METHODS*/ 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+    
+}
+>>>>>>> origin/master

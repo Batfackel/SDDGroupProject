@@ -9,13 +9,12 @@ import Controller.MovementStrategy;
 import Controller.SweepDown;
 import Controller.SweepLeft;
 import Controller.SweepRight;
-import View.GamePanel;
 import View.MainMenu;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -24,32 +23,57 @@ import javax.swing.JOptionPane;
  * @author ryan
  */
 public class DefaultEnemyShip implements ShipState, GameFigure{
-    
-    Image image;
+    private Image image;
     private float x;
     private float y;
     float  dx, dy, shipHeight, shipWidth, rateOfSpeed;
-    int armour, shipState, weaponState, weaponLevel, state;
+    int armour, shipState, weaponState, weaponLevel, state, health;
     int levelState = -1;
     Rectangle[] hitBox = new Rectangle[2];
     private boolean moveRight = true;
-    boolean moveLeft = false;
+    private String shipType;
     
     public DefaultEnemyShip(float x, float y) {
         this.x = x;
         this.y = y;
-        this.shipHeight = 235;
-        this.shipWidth = 160;
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
         this.rateOfSpeed = 2;
-        setShipState(0);
-        String imagePath = System.getProperty("user.dir");
-        // separator: Windows '\', Linux '/'
-        String separator = System.getProperty("file.separator");
-        image = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "defaultEnemyShip.png");
+        setShipState(10);
         this.setShipHitBox();
-        
+    }
+    
+    public DefaultEnemyShip(String shipType, float x, float y) {
+        this.x = x;
+        this.y = y;
+        this.levelState = BASE_LEVEL;
+        this.state = STATE_OK;
+        this.rateOfSpeed = 2;
+        setShipState(10);
+        this.shipType = shipType;
+        image = GameData.flyweightItems.setImage(this);
+        this.shipHeight = image.getHeight(null);
+        this.shipWidth = image.getWidth(null);
+        Random rand = new Random();
+        switch(shipType) {
+            case "alien1":
+                this.health = 5;
+                moveRight = rand.nextBoolean();
+                break;
+            case "blueFighter":
+                this.health = 4;
+                break;
+            case "purpleFighter":
+                this.health = 3;
+                break;
+            case "redFighter":
+                this.health = 2;
+                break;
+            default:
+                this.health = 1;
+                break;
+        }
+        this.setShipHitBox();
     }
 
     @Override
@@ -121,17 +145,7 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
 
     @Override
     public void render(Graphics g) {
-//        System.out.println("before switch------------------------");
-        switch (getShipState()){
-            case 0:
-    //            System.out.println("case 0------------------------");
-                g.setColor(Color.red);
-                g.drawImage(image, (int)getX(), (int)getY(), null);
-    //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
-                    //(int) this.shipHeight);
-                g.drawRect((int)this.getX(), (int)this.getY(), (int)this.shipWidth, (int)this.shipHeight);
-                break;
-        }
+        g.drawImage(image, (int)getX(), (int)getY(), null);
         move();
     }
 
@@ -177,7 +191,10 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
         dy = getY();
     }
 
+<<<<<<< HEAD
    
+=======
+>>>>>>> origin/master
     @Override
     public float getXofMissileShoot() {
         return getX()+30;
@@ -196,17 +213,18 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
     public void move() {
         MovementStrategy movement;
         
-        if(getX() > 0 && isMoveRight()) {
+        if(isMoveRight()) {
             movement = new SweepRight();
             movement.moveShip(this);
             if(getX() + shipWidth >= MainMenu.m.getWidth()) {
                 setMoveRight(false);
             }
         }
-        else if(!isMoveRight()) {
+        else if(isMoveRight() == false) {
             movement = new SweepLeft();
             movement.moveShip(this);
             if(getX() < 0) {
+                x = 0;
                 setMoveRight(true);
             }
         }
@@ -242,5 +260,26 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
      */
     public void setMoveRight(boolean moveRight) {
         this.moveRight = moveRight;
+    }
+
+    /**
+     * @return the image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the shipType
+     */
+    public String getShipType() {
+        return shipType;
     }
 }
