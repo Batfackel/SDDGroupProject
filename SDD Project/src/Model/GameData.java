@@ -2,6 +2,7 @@ package Model;
 
 import Controller.EnemyFlyWeightFactory;
 import Controller.EnemyFlyweight;
+import View.GamePanel;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
@@ -173,10 +174,11 @@ public class GameData {
             }
             
             for (int i = 0; i < this.enemyShips.size(); i++) {
-                DefaultEnemyShip eShip = (DefaultEnemyShip) enemyShips.get(i);                                
+                EnemyShip eShip = (EnemyShip) enemyShips.get(i);                                
                 
                 if (currentShip.getShipHitBox().intersects(eShip.getShipHitBox())) {          
-                    synchronized (enemyShips) {                      
+                    synchronized (enemyShips) {
+                        GamePanel.level.save.getloadedScores().lastElement().setScore(GamePanel.level.save.getloadedScores().lastElement().getScore() + eShip.getScore());
                         this.enemyShips.remove(eShip);   
                     }
                 }

@@ -22,18 +22,19 @@ import javax.swing.JOptionPane;
  *
  * @author ryan
  */
-public class DefaultEnemyShip implements ShipState, GameFigure{
+public class EnemyShip implements ShipState, GameFigure{
     private Image image;
     private float x;
     private float y;
     float  dx, dy, shipHeight, shipWidth, rateOfSpeed;
     int armour, shipState, weaponState, weaponLevel, state, health;
+    private int score;
     int levelState = -1;
     Rectangle[] hitBox = new Rectangle[2];
     private boolean moveRight = true;
     private String shipType;
     
-    public DefaultEnemyShip(float x, float y) {
+    public EnemyShip(float x, float y) {
         this.x = x;
         this.y = y;
         this.levelState = BASE_LEVEL;
@@ -43,7 +44,7 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
         this.setShipHitBox();
     }
     
-    public DefaultEnemyShip(String shipType, float x, float y) {
+    public EnemyShip(String shipType, float x, float y) {
         this.x = x;
         this.y = y;
         this.levelState = BASE_LEVEL;
@@ -59,18 +60,23 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
             case "alien1":
                 this.health = 5;
                 moveRight = rand.nextBoolean();
+                score = 5;
                 break;
             case "blueFighter":
                 this.health = 4;
+                score = 4;
                 break;
             case "purpleFighter":
                 this.health = 3;
+                score = 3;
                 break;
             case "redFighter":
                 this.health = 2;
+                score = 2;
                 break;
             default:
                 this.health = 1;
+                score = 1;
                 break;
         }
         this.setShipHitBox();
@@ -276,5 +282,12 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
      */
     public String getShipType() {
         return shipType;
+    }
+
+    /**
+     * @return the score
+     */
+    public int getScore() {
+        return score;
     }
 }

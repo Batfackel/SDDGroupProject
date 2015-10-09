@@ -20,7 +20,7 @@ public class Level {
     private static int height, width, size, x, y;
     private boolean needToDispose;
     private boolean priority = false;
-    private SaveData save;
+    public static SaveData save;
     public Level() {
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'

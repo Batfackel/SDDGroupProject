@@ -26,7 +26,7 @@ public class GamePanel extends JPanel {
     // off screen rendering
     private Graphics graphics;
     private Image dbImage = null;
-    private Level level;
+    public static Level level;
      private HUD hud;
     public ShipFactory shipMaker;
     private Image titleScreen;

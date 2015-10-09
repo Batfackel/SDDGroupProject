@@ -45,11 +45,11 @@ public class SaveData{
     }
     
     public int getnumberOfLoadedScores() {
-        return loadedScores.size();
+        return getLoadedScores().size();
     }
     
     public Vector<Score> getloadedScores() {
-        return loadedScores;
+        return getLoadedScores();
     }
     
     public void readFile() {
@@ -82,7 +82,7 @@ public class SaveData{
                 line = bufferedReader.readLine();
                 score.setHighestLevel(Integer.parseInt(line));
                 //add to the loaded in scores
-                loadedScores.add(score);
+                getLoadedScores().add(score);
             }
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
@@ -99,24 +99,24 @@ public class SaveData{
         try {
             writer = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
-            for(int i = 0; i < loadedScores.size() && !loadedScores.isEmpty(); i++) {
+            for(int i = 0; i < getLoadedScores().size() && !loadedScores.isEmpty(); i++) {
                 //header for marking individuals
                 bufferedWriter.write("***\n");
                 //write the name
-                bufferedWriter.write(loadedScores.elementAt(i).getName() + "\n");
+                bufferedWriter.write(getLoadedScores().elementAt(i).getName() + "\n");
                 //write the score
-                bufferedWriter.write(String.valueOf(loadedScores.elementAt(i).getScore()) + "\n");
+                bufferedWriter.write(String.valueOf(getLoadedScores().elementAt(i).getScore()) + "\n");
                 //get the time and then go and save it
                 Time time = new Time(0, 0, 0);
                 int hours, minutes, seconds;
-                time = loadedScores.elementAt(i).getTimePlayed();
+                time = getLoadedScores().elementAt(i).getTimePlayed();
                 hours = time.getHours();
                 minutes = time.getMinutes();
                 seconds = time.getSeconds();
                 String value = String.valueOf(hours) + "." + String.valueOf(minutes) + "." + String.valueOf(seconds) + "\n";
                 bufferedWriter.write(value);
                 //save the highest level
-                bufferedWriter.write(String.valueOf(loadedScores.elementAt(i).getHighestLevel()));
+                bufferedWriter.write(String.valueOf(getLoadedScores().elementAt(i).getHighestLevel()));
             }
             bufferedWriter.close();
         } catch (IOException ex) {
@@ -136,7 +136,7 @@ public class SaveData{
 //
 //    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Score temp = loadedScores.get(rowIndex);
+        Score temp = getLoadedScores().get(rowIndex);
         switch(columnIndex) {
             case NAME_INDEX:
                 return temp.getName();
@@ -154,4 +154,18 @@ public class SaveData{
 //    public String getColumnName(int column) {
 //        return columnNames[column];
 //    }
+
+    /**
+     * @return the loadedScores
+     */
+    public Vector<Score> getLoadedScores() {
+        return loadedScores;
+    }
+
+    /**
+     * @param loadedScores the loadedScores to set
+     */
+    public void setLoadedScores(Vector<Score> loadedScores) {
+        this.loadedScores = loadedScores;
+    }
 }
