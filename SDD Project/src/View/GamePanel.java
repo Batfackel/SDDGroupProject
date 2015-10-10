@@ -11,10 +11,16 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class GamePanel extends JPanel {
       
@@ -30,6 +36,8 @@ public class GamePanel extends JPanel {
      private HUD hud;
     public ShipFactory shipMaker;
     private Image titleScreen;
+    private Date now; 
+    private Timer timer;
 
     public GamePanel(Animator animator, GameData gameData) {
         this.animator = animator;
@@ -58,12 +66,44 @@ public class GamePanel extends JPanel {
         hud = new HUD();
     }
 
-    public void startGame() {
+    public void startGame(final JLabel lbl) {
        
         Thread t = new Thread(animator);
         t.start();
+        
+        now = new Date();
+        startTimer(lbl);
     }
 
+    public void pauseGame(){
+        animator.setPause(true);
+        if (timer != null) {
+            timer.stop();
+        }
+    }
+    
+    public void resumeGame(){
+        animator.setPause(false);
+        if (timer != null) {
+            timer.start();
+        }
+    }
+    
+        private void startTimer(final JLabel lbl){ 
+		now.setHours(0);
+		now.setMinutes(0);
+		now.setSeconds(0);
+		timer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Date now2 = new Date(now.getTime() + 1000);
+				now = now2;
+				SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+				lbl.setText(formatter.format(now));
+			}
+		});
+                
+                timer.start();
+    }
     
     
     
