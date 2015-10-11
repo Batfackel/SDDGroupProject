@@ -71,14 +71,19 @@ public class Launcher implements Ship, GameFigure, ShipState {
 
     @Override
     public void render(Graphics g) {  
-        g.drawImage(launcherImage, (int)x, (int)y, null);
+        //g.drawImage(launcherImage, (int)x, (int)y, null);
+        int width = launcherImage.getWidth(null);
+        int height = launcherImage.getHeight(null);
+        
+        //g.drawImage(launcherImage, width, 0, width + width / 2, height / 2, 0, 0, width, height, null);
+        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 10, (int)this.y + 10, 0, 0, width, height, null);        
         
         //----------------------------------------------------------------------
         //set up and display hit boxes for the launcher objects
         //used for dubugging 9/10/2015
         //----------------------------------------------------------------------
         g.setColor(Color.yellow);
-        g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
+        g.drawRect((int) this.x, (int) this.y, 10, 10);
         g.setColor(Color.BLUE);
         setLauncherHitBox();        
         g.setColor(Color.BLUE);     
@@ -92,7 +97,7 @@ public class Launcher implements Ship, GameFigure, ShipState {
     //----------------------------------------------------------------------
     // simple hit box for the launcher object
     private void setLauncherHitBox() {
-        this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
+        this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);        
     }
     // get ht box
     public Rectangle getShipHitBox(){
@@ -117,7 +122,8 @@ public class Launcher implements Ship, GameFigure, ShipState {
     @Override
     public void update() 
     {   
-    setLauncherHitBox();        
+        this.y -= 3;
+        setLauncherHitBox();        
     }
     @Override
     public int getState() {
@@ -175,6 +181,10 @@ public class Launcher implements Ship, GameFigure, ShipState {
 
     @Override
     public void moveUp() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void setShipType(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override

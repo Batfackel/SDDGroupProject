@@ -34,7 +34,7 @@ public class GameData {
     static final int STATE_EXPLOSIOIN_16 = 16;
 
     
-    
+    public List<Bullet> bullets; // 10.6.15
     public List<GameFigure> figures;
     public List<Item> items;
     public List<Ship> ships, enemyShips; 
@@ -52,6 +52,7 @@ public class GameData {
         enemyShips = Collections.synchronizedList(new ArrayList<Ship>());
         flyweightFactory = new EnemyFlyWeightFactory();
         flyweightItems = flyweightFactory.getFlyweight();
+        bullets = Collections.synchronizedList(new ArrayList<Bullet>());
 
         //create ships for collision test
         //9/10/2015
@@ -139,7 +140,7 @@ public class GameData {
                        
                        
                       //   Main.controller = new KeyController(currentShip);
-                         System.out.println("Ship state is " + currentShip.getState());
+                         //System.out.println("Ship state is " + currentShip.getState());
                     //asdf.x = 100000;                    
                     //ship.setShipState(STATE_DONE);
                     synchronized (figures) {
@@ -173,6 +174,11 @@ public class GameData {
                 }
             }
             
+            for (int i = 0; i < this.bullets.size(); i++) {
+                KineticBulletBaseLevel bullet = (KineticBulletBaseLevel) bullets.get(i);
+               
+            }
+            
             for (int i = 0; i < this.enemyShips.size(); i++) {
                 EnemyShip eShip = (EnemyShip) enemyShips.get(i);                                
                 
@@ -197,9 +203,9 @@ public class GameData {
                 for(int i = 0; i < enemyFormation.length; i++) {
                     figures.add((GameFigure)enemyFormation[i]);
                 }
-            }
-            
-              System.out.println("weapon state is " + currentShip.getWeaponState());
+            }           
+              //System.out.println("weapon state is " + currentShip.getWeaponState());
+
             }
          catch (Exception e) {
             System.out.println(e.toString());
@@ -252,6 +258,20 @@ public class GameData {
                     removeItems.add(it);
             }
             items.removeAll(removeItems);
+          }
+        
+        List<Bullet> removeBullets = new ArrayList<Bullet>();
+        Bullet bt;  
+        
+        synchronized (bullets) {                                                     
+            
+            for (int i = 0; i < bullets.size(); i++) {               
+                bt = bullets.get(i);
+                bt.update();
+                if (bt.getState() == Item.STATE_DONE)
+                    removeBullets.add(bt);
+            }
+            bullets.removeAll(removeItems);
           }
     }
         

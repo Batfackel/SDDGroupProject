@@ -1,8 +1,10 @@
 package View;
 import Controller.Animator;
+import Model.Bullet;
 import Model.GameData;
 import Model.GameFigure;
 import Model.HUD;
+import Model.KineticBulletBaseLevel;
 import Model.Level;
 import Model.Ship;
 import Model.ShipFactory;
@@ -120,6 +122,13 @@ public class GamePanel extends JPanel {
                 f = (GameFigure) gameData.items.get(i);
                 f.render(graphics);
             }            
+        }
+        synchronized (gameData.bullets) {
+            Bullet f;
+                for (int i = 0; i < gameData.bullets.size(); i++) {
+                    f = (Bullet) gameData.bullets.get(i);
+                    f.render(graphics);
+                }
         }
 //        synchronized (gameData.enemyShips) {
 //            Ship f;
