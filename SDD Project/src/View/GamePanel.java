@@ -101,7 +101,17 @@ public class GamePanel extends JPanel {
         //draw the background image first then draw everything else ontop of it
         level.render(graphics);
         
-
+        synchronized (gameData.enemyShips) {
+            //this part works but the iteration doesn't
+//            gameData.enemyShips.get(0).render(graphics);
+            
+            Ship ship;
+            for(int n = 0; n < gameData.enemyShips.size(); n++) {
+                
+                ship = gameData.enemyShips.get(n);
+                ship.render(graphics);
+            }
+        }
         synchronized (gameData.figures) {
             GameFigure f;
             for (int i = 0; i < gameData.figures.size(); i++) {
@@ -130,13 +140,7 @@ public class GamePanel extends JPanel {
                     f.render(graphics);
                 }
         }
-//        synchronized (gameData.enemyShips) {
-//            Ship f;
-//            for (int i = 0; i < gameData.enemyShips.size(); i++) {
-//                f = (Ship) gameData.enemyShips.get(i);
-//                f.render(graphics);
-//            }
-//        }
+        
          hud.render(graphics);
     }
 

@@ -72,7 +72,6 @@ public class GameData {
         items.add((Item)weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item)weaponMaker.getWeapon("MISSILE", 100, 200));
         
-//         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
 
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
@@ -82,7 +81,7 @@ public class GameData {
         //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
         Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
         for(int i = 0; i < enemyFormation.length; i++) {
-            figures.add((GameFigure)enemyFormation[i]);
+            enemyShips.add((Ship)enemyFormation[i]);
         }
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
@@ -114,16 +113,12 @@ public class GameData {
               
         try {
             for (int i = 0; i < this.figures.size(); i++) {
-
-                //Rectangle[] hit = ship.getHitBox();
-                Rectangle hit = currentShip.getShipHitBox();
-                
                 if (this.figures.get(i) instanceof Ship) {
                     Ship asdf = (Ship) this.figures.get(i);
                 
                 
 
-                  if (hit.intersects(asdf.getShipHitBox())) {
+                  if (currentShip.getShipHitBox().intersects(asdf.getShipHitBox())) {
                     
                     items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
                     items.add((Item)weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
@@ -179,31 +174,36 @@ public class GameData {
                
             }
             
+            //check if a enemy collieded with a player ship or is off the screen
             for (int i = 0; i < this.enemyShips.size(); i++) {
-                EnemyShip eShip = (EnemyShip) enemyShips.get(i);                                
-                
-                if (currentShip.getShipHitBox().intersects(eShip.getShipHitBox())) {          
-                    synchronized (enemyShips) {
-                        GamePanel.level.save.getloadedScores().lastElement().setScore(GamePanel.level.save.getloadedScores().lastElement().getScore() + eShip.getScore());
-                        this.enemyShips.remove(eShip);   
+                if(!enemyShips.isEmpty()) {
+                    EnemyShip eShip = (EnemyShip) enemyShips.get(i); 
+                    System.out.println("Enemy Ship " + eShip.getShipType() + " rectangle corners x:" + eShip.getX() + " y:" + eShip.getY() + " bottom right x:" + eShip.getX() + (int)eShip.shipWidth + " y:" + eShip.getY() + (int)eShip.shipHeight);
+                    System.out.println("Player ship rectangle corners x:" + currentShip.getX() + " y:" + currentShip.getY());
+                    if (eShip.getShipHitBox().intersects(currentShip.getShipHitBox())) {          
+                        synchronized (enemyShips) {
+//                            GamePanel.level.save.getloadedScores().lastElement().setScore(GamePanel.level.save.getloadedScores().lastElement().getScore() + eShip.getScore());
+                            this.enemyShips.remove(eShip);   
+                        }
                     }
+
+                   if(eShip.getShipState() == 0) {
+                      synchronized (enemyShips) {                      
+                            this.enemyShips.remove(eShip);   
+                        } 
+                   }
                 }
-                
-               if(eShip.getShipState() == 0) {
-                  synchronized (enemyShips) {                      
-                        this.enemyShips.remove(eShip);   
-                    } 
-               }
             }
-            if(counter == 100) {
-                counter = 0;
-            }
-            else {
-                Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
-                for(int i = 0; i < enemyFormation.length; i++) {
-                    figures.add((GameFigure)enemyFormation[i]);
-                }
-            }           
+            //used for spawning enemies at set interval
+//            if(counter == 100) {
+//                counter = 0;
+//            }
+//            else {
+//                Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+//                for(int i = 0; i < enemyFormation.length; i++) {
+//                    enemyShips.add(enemyFormation[i]);
+//                }
+//            }           
               //System.out.println("weapon state is " + currentShip.getWeaponState());
 
             }
@@ -280,23 +280,23 @@ public class GameData {
 //Will's Note:  This is probably not needed due to not being able to access Image files from this class.
     //  Is this true anyone?
     //??????????????????????????????????????????????????????????????????????????????????????????????????
-    public Image getImage(String fileName) {
-       Image image = null;
-       try {
-           image = ImageIO.read(new File(fileName));
-       } catch (Exception ioe) {
-           System.out.println("Error: Cannot open image:" + fileName);
-           JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
-       }
-       return image;
-    }
+//    public Image getImage(String fileName) {
+//       Image image = null;
+//       try {
+//           image = ImageIO.read(new File(fileName));
+//       } catch (Exception ioe) {
+//           System.out.println("Error: Cannot open image:" + fileName);
+//           JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
+//       }
+//       return image;
+//    }
     
     public void spawnEnemiesForTest() {
         figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
         Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
         for(int i = 0; i < enemyFormation.length; i++) {
             synchronized(figures) {
-                figures.add((GameFigure)enemyFormation[i]);
+                enemyShips.add(enemyFormation[i]);
             }
             
         }

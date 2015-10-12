@@ -109,12 +109,8 @@ public class EnemyShip implements ShipState, GameFigure{
 
     @Override
     public void setShipHitBox() {
-        switch (getShipState()){
-        case 0: 
-            this.hitBox[0] = new Rectangle((int)this.getX(), (int)this.getY(), (int)this.shipWidth,
-            (int) this.shipHeight); 
-            break;
-        }
+        this.hitBox[0] = new Rectangle(getX(), getY(), (int)this.shipWidth, (int) this.shipHeight); 
+        
     }
 
     @Override
@@ -151,8 +147,8 @@ public class EnemyShip implements ShipState, GameFigure{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(image, (int)getX(), (int)getY(), null);
         move();
+        g.drawImage(image, getX(), getY(), null);
     }
 
     @Override
