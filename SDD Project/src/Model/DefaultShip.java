@@ -440,12 +440,12 @@ public int getState() {
 
     @Override
     public int getX() {
-        return (int)x;
+        return (int)this.x;
     }
 
     @Override
     public int getY() {
-        return (int)y;
+        return (int)this.y;
     }
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
