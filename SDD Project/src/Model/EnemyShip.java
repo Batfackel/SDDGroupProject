@@ -149,6 +149,7 @@ public class EnemyShip implements ShipState, GameFigure{
     public void render(Graphics g) {
         move();
         g.drawImage(image, getX(), getY(), null);
+        g.drawRect(getX(), getY(), (int)this.shipWidth, (int) this.shipHeight);
     }
 
     @Override

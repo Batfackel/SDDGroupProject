@@ -144,8 +144,7 @@ public class DefaultShip implements Ship, ShipState {
 public void setShipHitBox(){
     switch (getState()){
         case 1: {
-            this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth,
-            (int) this.shipHeight); 
+            this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth, (int) this.shipHeight); 
         }
     }
 }

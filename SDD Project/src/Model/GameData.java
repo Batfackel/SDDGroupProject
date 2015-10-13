@@ -79,7 +79,7 @@ public class GameData {
         figures.add(new Launcher(400, 200));
         figures.add(new Launcher(100, 200));  */
         //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
-        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, 250);
         for(int i = 0; i < enemyFormation.length; i++) {
             enemyShips.add((Ship)enemyFormation[i]);
         }
@@ -178,9 +178,12 @@ public class GameData {
             for (int i = 0; i < this.enemyShips.size(); i++) {
                 if(!enemyShips.isEmpty()) {
                     EnemyShip eShip = (EnemyShip) enemyShips.get(i); 
-                    System.out.println("Enemy Ship " + eShip.getShipType() + " rectangle corners x:" + eShip.getX() + " y:" + eShip.getY() + " bottom right x:" + eShip.getX() + (int)eShip.shipWidth + " y:" + eShip.getY() + (int)eShip.shipHeight);
-                    System.out.println("Player ship rectangle corners x:" + currentShip.getX() + " y:" + currentShip.getY());
-                    if (eShip.getShipHitBox().intersects(currentShip.getShipHitBox())) {          
+                    //System.out.println("Enemy Ship " + eShip.getShipType() + " rectangle corners x:" + eShip.getX() + " y:" + eShip.getY() + " bottom right x:" + eShip.getX() + (int)eShip.shipWidth + " y:" + eShip.getY() + (int)eShip.shipHeight);
+                    //System.out.println("Player ship rectangle corners x:" + currentShip.getX() + " y:" + currentShip.getY());
+                    
+                    //if (eShip.getShipHitBox().intersects(currentShip.getShipHitBox())) {          
+                    
+                    if (currentShip.getShipHitBox().intersects(eShip.getShipHitBox())) {
                         synchronized (enemyShips) {
 //                            GamePanel.level.save.getloadedScores().lastElement().setScore(GamePanel.level.save.getloadedScores().lastElement().getScore() + eShip.getScore());
                             this.enemyShips.remove(eShip);   
@@ -272,6 +275,20 @@ public class GameData {
                     removeBullets.add(bt);
             }
             bullets.removeAll(removeItems);
+          }
+        
+        List<Ship> removeEnemies = new ArrayList<Ship>();
+        Ship eShip;
+        
+        synchronized (enemyShips) {                                                     
+            
+            for (int i = 0; i < enemyShips.size(); i++) {               
+                eShip = enemyShips.get(i);
+                eShip.update();  //this update needs to be called in GameData to call class update (I believe)
+                if (eShip.getState() == Item.STATE_DONE)
+                    removeEnemies.add(eShip);
+            }
+            enemyShips.removeAll(removeItems);
           }
     }
         
