@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -19,14 +20,14 @@ import java.util.ArrayList;
  * @author YuchenFeng
  */
 public class Tutorial implements GameFigure, KeyListener, MouseListener {
-    public Tutorial(){
+    public Tutorial() throws IOException{
         items = new ArrayList<>();
         
-        items.add(new KeyboardTutorialItem("Press up arrow button for up!", KeyEvent.VK_UP));
-        items.add(new KeyboardTutorialItem("Press down arrow button for down!", KeyEvent.VK_DOWN));
-        items.add(new KeyboardTutorialItem("Press left arrow button for left!", KeyEvent.VK_LEFT));
-        items.add(new KeyboardTutorialItem("Press right arrow button for right!", KeyEvent.VK_RIGHT));
-        items.add(new MouseTutorialItem("Press mouse for shot!"));
+        items.add(new KeyboardTutorialItem("up.png", KeyEvent.VK_UP));
+        items.add(new KeyboardTutorialItem("down.png", KeyEvent.VK_DOWN));
+        items.add(new KeyboardTutorialItem("left.png", KeyEvent.VK_LEFT));
+        items.add(new KeyboardTutorialItem("right.png", KeyEvent.VK_RIGHT));
+        items.add(new MouseTutorialItem("shot.png"));
     }
 
     @Override

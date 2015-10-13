@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import View.GamePanel;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class Main extends JFrame implements ActionListener {
 
@@ -30,15 +31,16 @@ public class Main extends JFrame implements ActionListener {
     private Animator animator;
     private JButton startButton;
     private JButton quitButton;
+    private JButton pauseButton;
     private Launcher launcher;
     private Launcher launcher2;
     private int screenWidth = 800;
     private int screenHeight = 1000;
     private JLabel lbl;
-    private Date now; 
+
     private JButton leaderBoard;
     private LeaderBoard leaderPanel;
-    private Container c;    
+    private Container c;   
     private ShipFactory shipMaker;
     private Ship ship;
     private Ship mainShip;
@@ -52,7 +54,7 @@ public class Main extends JFrame implements ActionListener {
         return this.ship;
     }
     
-    public Main() {
+    public Main() throws IOException {
         //changed sizing to fit the default image
         setSize(screenWidth, screenHeight);
         setLocation(0, 0);
@@ -60,7 +62,7 @@ public class Main extends JFrame implements ActionListener {
         animator = new Animator();
         gameData = new GameData();
 
-        now = new Date();
+
         //why do something that gamedata does for me already, just give me what
         //is already there
         //shipMaker = new ShipFactory();
@@ -93,12 +95,15 @@ public class Main extends JFrame implements ActionListener {
         southPanel.add(leaderBoard);
         c.add(southPanel, "South");
         
+        pauseButton = new JButton("Pause");
+        southPanel.add(pauseButton);
         
-
+        
         MouseController mouseController = new MouseController(mainShip);
         gamePanel.addMouseListener(mouseController);
         startButton.setFocusable(false); // "Start" button click should not receive keyboard data
         gamePanel.setFocusable(true); // receives keyboard data
+        pauseButton.setFocusable(false); // "Pause" button click should not receive keyboard data
 
       //  gamePanel.addKeyListener(new KeyController());
 
@@ -107,7 +112,8 @@ public class Main extends JFrame implements ActionListener {
         startButton.addActionListener(this);
         quitButton.addActionListener(this);
         leaderBoard.addActionListener(this);
-        
+        pauseButton.addActionListener(this);
+
         //launcher = (Launcher) gameData.figures.get(1); // launcher      
        // ship = (Ship) gameData.ships.get(0);
         pack();
@@ -129,8 +135,8 @@ public class Main extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == startButton) {
-            gamePanel.startGame();
-            startTimer();
+            gamePanel.startGame(lbl);
+            startButton.setEnabled(false);
         } else if (ae.getSource() == quitButton) {
             animator.running = false;
         }
@@ -140,6 +146,18 @@ public class Main extends JFrame implements ActionListener {
             gamePanel.setVisible(false);
             leaderBoard.setVisible(true);
         }
+        else if(ae.getSource() == pauseButton) {
+            if (!animator.isPause()) {
+                gamePanel.pauseGame();
+                
+                pauseButton.setText("Resume");
+            }
+            else{
+                gamePanel.resumeGame();
+                pauseButton.setText("Pause");
+            }
+            
+        }
     }
 
    
@@ -148,21 +166,7 @@ public class Main extends JFrame implements ActionListener {
         this.screenWidth = w;
         setSize(screenWidth, screenHeight);
     }
-    private void startTimer(){ 
-		now.setHours(0);
-		now.setMinutes(0);
-		now.setSeconds(0);
-		final Timer timer = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Date now2 = new Date(now.getTime() + 1000);
-				now = now2;
-				SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-				lbl.setText(formatter.format(now));
-			}
-		});
-                
-                timer.start();
-    }
+
     
     public int getScreenHeight() {
         return screenHeight;
