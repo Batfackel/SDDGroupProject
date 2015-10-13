@@ -9,9 +9,18 @@ public class Animator implements Runnable {
     boolean running;
     GamePanel gamePanel = null;
     GameData gameData = null;
+    boolean pause;
+
+    public boolean isPause() {
+        return pause;
+    }
+
+    public void setPause(boolean pause) {
+        this.pause = pause;
+    }
     
     public Animator() {
-       
+       pause = false;
     }
     
     public void setGamePanel(GamePanel gamePanel) {
@@ -30,17 +39,20 @@ public class Animator implements Runnable {
     public void run() {
         running = true;
         while (running) { 
-             
-            //System.out.println("Before Update");
-            gameData.update();
-            //System.out.println("Before GameRender");
-            gamePanel.gameRender();
-            //System.out.println("Before Game Panel");
-            gamePanel.printScreen();
+            if(!pause){ 
+                //System.out.println("Before Update");
+                gameData.update();
+                //System.out.println("Before GameRender");
+                gamePanel.gameRender();
+                //System.out.println("Before Game Panel");
+                gamePanel.printScreen();
+
+            }
+            
             try {
-                Thread.sleep(40);
+                    Thread.sleep(40);
             } catch (InterruptedException e) {
-                
+
             }
         }
         System.exit(0);
