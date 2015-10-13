@@ -79,11 +79,7 @@ public class ShipZ implements Ship, ShipState {
             separator + "raider_right.png");
         defaultShipMap.put(3, this.currentImage);//Should be use constant NORMAL_STATE=0
         this.setShipHitBox();
-        
-        
-        
-        
-        
+
         //----------------------------------------------------------------------------------------------------
     }
    
@@ -158,10 +154,7 @@ public Rectangle getShipHitBox(){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HITBOX METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-@Override
 public void render(Graphics g){
-    
-   
     //System.out.println("before switch------------------------");
     
     switch (getState()){
@@ -396,8 +389,6 @@ private void updateLocation(){
 private void updateState(){
  //    updateFlightAnimation();
 }
-
-
 @Override
 public void update(){
      updateState();
@@ -436,12 +427,8 @@ public int getState() {
            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
        }
        return image;
-<<<<<<< HEAD
-    }
 
-=======
-   }
->>>>>>> origin/master
+    }
 
     @Override
     public int getX() {
@@ -452,22 +439,13 @@ public int getState() {
     public int getY() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-<<<<<<< HEAD
 
-
- 
-
-=======
->>>>>>> origin/master
- //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-/*END HELPER METHODS*/ 
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-<<<<<<< HEAD
-=======
     @Override
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
->>>>>>> origin/master
-}
+   }
+ //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*END HELPER METHODS*/ 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+

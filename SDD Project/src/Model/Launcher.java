@@ -178,10 +178,6 @@ public class Launcher implements Ship, GameFigure, ShipState {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> origin/master
     @Override
     public void moveDown() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -211,4 +207,5 @@ public class Launcher implements Ship, GameFigure, ShipState {
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

@@ -37,11 +37,9 @@ public class ShipX implements Ship, ShipState {
    private int shipHealth;
    private int shipImageToUse;
   
-   public ShipX(float x, float y){
-      
+   public ShipX(float x, float y){     
        state = 1; 
-   
-       
+
     //Initialize ship here
         this.x = x;
         this.y = y;
@@ -79,12 +77,7 @@ public class ShipX implements Ship, ShipState {
             separator + "raider_right.png");
         defaultShipMap.put(3, this.currentImage);//Should be use constant NORMAL_STATE=0
         this.setShipHitBox();
-        
-        
-        
-        
-        
-        //----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
     }
    
 //-------------------------------------------------------------------------
@@ -129,7 +122,6 @@ public class ShipX implements Ship, ShipState {
 /*END SHIP METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
    
-   
  //-------------------------------------------------------------------------
 /*HITBOX METHODS*/
 //-------------------------------------------------------------------------   
@@ -158,10 +150,7 @@ public Rectangle getShipHitBox(){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HITBOX METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-@Override
 public void render(Graphics g){
-    
-   
     //System.out.println("before switch------------------------");
     
     switch (getState()){
@@ -315,7 +304,6 @@ private boolean isMovingHorizontal() {
             setState(1);
             shipImageToUse = 1;
         }
-
     }
    
 //-------------------------------------------------------------------------
@@ -396,8 +384,6 @@ private void updateLocation(){
 private void updateState(){
  //    updateFlightAnimation();
 }
-
-
 @Override
 public void update(){
      updateState();
@@ -435,37 +421,24 @@ public int getState() {
            System.out.println("Error: Cannot open image:" + fileName);
            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
        }
-       return image;
-    }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
-
-    @Override
-    public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> origin/master
+       return image;   
+   }
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-<<<<<<< HEAD
-=======
+    @Override
+    public int getX() {
+      return (int) this.x;
+    }
+
+    @Override
+    public int getY() {
+         return (int) this.y;
+    }
+
     @Override
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
->>>>>>> origin/master
 }

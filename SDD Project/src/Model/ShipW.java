@@ -37,11 +37,8 @@ public class ShipW implements Ship, ShipState {
    private int shipHealth;
    private int shipImageToUse;
   
-   public ShipW(float x, float y){
-      
-       state = 1; 
-   
-       
+   public ShipW(float x, float y){      
+       state = 1;  
     //Initialize ship here
         this.x = x;
         this.y = y;
@@ -78,15 +75,9 @@ public class ShipW implements Ship, ShipState {
         this.currentImage = getImage(imagePath + separator + "images" + 
             separator + "raider_right.png");
         defaultShipMap.put(3, this.currentImage);//Should be use constant NORMAL_STATE=0
-        this.setShipHitBox();
-        
-        
-        
-        
-        
+        this.setShipHitBox();    
         //----------------------------------------------------------------------------------------------------
-    }
-   
+    } 
 //-------------------------------------------------------------------------
 /*SHIP METHODS*/
 //-------------------------------------------------------------------------   
@@ -166,12 +157,8 @@ public Rectangle getShipHitBox(){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HITBOX METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-@Override
 public void render(Graphics g){
-    
-   
     //System.out.println("before switch------------------------");
-    
     switch (getState()){
         case 1:{  //flying normally
            //System.out.println("case 0------------------------");
@@ -450,17 +437,8 @@ public int getState() {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
     @Override
-    public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

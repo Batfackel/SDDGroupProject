@@ -166,7 +166,6 @@ public Rectangle getShipHitBox(){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HITBOX METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-@Override
 public void render(Graphics g){
     
    
@@ -450,17 +449,8 @@ public int getState() {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
     @Override
-    public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

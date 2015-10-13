@@ -1,5 +1,6 @@
 package View;
 import Controller.Animator;
+import Model.Background;
 import Model.GameData;
 import Model.GameFigure;
 import Model.HUD;
@@ -46,7 +47,7 @@ public class GamePanel extends JPanel {
         //launcherImage = getImage(imagePath + separator + "images" + separator
      
         titleScreen = getImage(imagePath + separator + "images" + separator
-                + "Inazuma no sentōki2000x1500.png");
+                + "Inazuma no sentōki800x1000.png");
 
 
         
@@ -121,6 +122,14 @@ public class GamePanel extends JPanel {
                 f.render(graphics);
             }            
         }
+//        synchronized (gameData.menu)
+//        {
+//            Background f;
+//            for (int i = 0; i < gameData.menu.size(); i++) {
+//                f = (Background) gameData.menu.get(i);
+//                f.render(graphics);
+//            }            
+//        }
 //        synchronized (gameData.enemyShips) {
 //            Ship f;
 //            for (int i = 0; i < gameData.enemyShips.size(); i++) {
@@ -144,7 +153,13 @@ public class GamePanel extends JPanel {
             System.out.println("Graphics error: " + e);
         }
     }
-    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(titleScreen, 0, 0, null); // see javadoc for more info on the parameters      
+        //g.drawImage(playerSpriteSheet, (int) this.x, (int) this.y, (int) x + 25, (int) y + 40, 144, 16, 169, 52, null, null);
+    }
+
     public static Image getImage(String fileName) {
         Image image = null;
         try {
@@ -160,4 +175,7 @@ public class GamePanel extends JPanel {
         //called and sets the size of the game so the panel knows which image to go and use
         
     }
+    
+   
+    
 }

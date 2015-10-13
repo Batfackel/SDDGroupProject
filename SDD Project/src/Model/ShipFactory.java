@@ -36,6 +36,14 @@ public class ShipFactory {
             shipType = new ShipZ(x,y);
             return shipType;
         }
+         else if (shipSelection.equalsIgnoreCase("shipw")){
+            shipType = new ShipW(x,y);
+            return shipType;
+        }
+          else if (shipSelection.equalsIgnoreCase("shipv")){
+            shipType = new ShipV(x,y);
+            return shipType;
+        }
         else{
             throw new IllegalArgumentException("NO SUCH SHIP TYPE");
         }

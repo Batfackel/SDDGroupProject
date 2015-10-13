@@ -19,8 +19,6 @@ import javax.swing.JOptionPane;
  * @author Will
  */
 public class DefaultShip implements Ship, ShipState {    
-   
-    
    private Image currentImage; 
    private float x, y , dx, dy;
    private float shipHeight, shipWidth;
@@ -39,11 +37,8 @@ public class DefaultShip implements Ship, ShipState {
    private final String imagePath = System.getProperty("user.dir");  // separator: Windows '\', Linux '/'  
    private final String separator = System.getProperty("file.separator");
     
-   public DefaultShip(float x, float y){
-      
-       state = 1; 
-   
-       
+   public DefaultShip(float x, float y){     
+       state = 1;    
     //Initialize ship here
         this.x = x;
         this.y = y;
@@ -57,9 +52,6 @@ public class DefaultShip implements Ship, ShipState {
         this.rateOfSpeed = 10;
         this.weaponState = 0; //initialze to kinetic weapon
         setShipState(0/*newShipState*/);
-        
-       
-        
         this.eSheet = getImage(imagePath + separator + "images" + 
             separator +"explosionsheet.png");       
         this.currentImage = getImage(imagePath + separator + "images" + 
@@ -76,14 +68,8 @@ public class DefaultShip implements Ship, ShipState {
             separator + "raider_right.png");
         defaultShipMap.put(3, this.currentImage);//Should be use constant NORMAL_STATE=0
         this.setShipHitBox();
-        
-        
-        
-        
-        
         //----------------------------------------------------------------------------------------------------
-    }
-   
+    } 
 //-------------------------------------------------------------------------
 /*SHIP METHODS*/
 //-------------------------------------------------------------------------   
@@ -155,10 +141,7 @@ public Rectangle getShipHitBox(){
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HITBOX METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-@Override
 public void render(Graphics g){
-    
-   
     //System.out.println("before switch------------------------");
     
     switch (getState()){
@@ -437,29 +420,18 @@ public int getState() {
  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HELPER METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 
     @Override
     public int getX() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public int getY() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-<<<<<<< HEAD
-
- 
-
-=======
     @Override
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
->>>>>>> origin/master
 }

@@ -31,12 +31,14 @@ public class GameData {
     static final int STATE_EXPLOSIOIN_14 = 14;
     static final int STATE_EXPLOSIOIN_15 = 15;
     static final int STATE_EXPLOSIOIN_16 = 16;
-
+    private final String[] shipTypes = {"defaultship","shipx","shipy","shipz","shipv","shipw"};
+    private final static int RESOLUTION_800X1000 = 1;
     
-    
+   
     public List<GameFigure> figures;
     public List<Item> items;
     public List<Ship> ships, enemyShips; 
+    public List<Background> menu;
     private final ShipFactory shipMaker = new ShipFactory();
     private EnemyFactory enemyMaker = new EnemyFactory();
     private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();  
@@ -44,7 +46,10 @@ public class GameData {
     private int BASE_LEVEL = -1, counter = 0;
     private EnemyFlyWeightFactory flyweightFactory;
     public static EnemyFlyweight flyweightItems;
+    private ShipSelectMenu shipSelectionMenu;
     public GameData() {
+        
+        menu = Collections.synchronizedList(new ArrayList<Background>());
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
         items = Collections.synchronizedList(new ArrayList<Item>());
@@ -58,7 +63,10 @@ public class GameData {
         
         //incomingShip = shipMaker.getShip("defaultShip",300,350);
         // ships.add(incomingShip);      
-        ships.add((Ship)shipMaker.getShip("defaultShip",450,450));
+        menu.add((Background) new ShipSelectMenu(0));
+        
+        String shipT = shipTypes[((int)randomize((float)0,5))];        
+        ships.add((Ship)shipMaker.getShip(shipT,450,450));
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
         // testing items and new item mechanics
@@ -84,9 +92,9 @@ public class GameData {
         }
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
-         
+        
       //System.out.println("@@GAME DATA CONSTRUCTO@@");
-
+      
     }
 
     private float randomize(float in, int offset) {
@@ -98,7 +106,71 @@ public class GameData {
     }
     
     public void update() {
-//-----------------------------------------------------------------------------
+
+        mainGame();
+    }
+        
+       
+
+//Will's Note:  This is probably not needed due to not being able to access Image files from this class.
+    //  Is this true anyone?
+    //??????????????????????????????????????????????????????????????????????????????????????????????????
+    public Image getImage(String fileName) {
+       Image image = null;
+       try {
+           image = ImageIO.read(new File(fileName));
+       } catch (Exception ioe) {
+           System.out.println("Error: Cannot open image:" + fileName);
+           JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
+       }
+       return image;
+    }
+    
+    public void spawnEnemiesForTest() {
+        figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
+        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+        for(int i = 0; i < enemyFormation.length; i++) {
+            synchronized(figures) {
+                figures.add((GameFigure)enemyFormation[i]);
+            }
+            
+        }
+    }
+
+    private EnemyFlyWeightFactory EnemyFlyweightItems() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+   void selectShip()
+   {
+//        shipSelectionMenu = (ShipSelectMenu) this.menu.get(0);
+//       
+//       while (shipSelectionMenu.hasPlayerSelectedAShip() == false)
+//       {
+//        
+//       }
+//       
+//       
+//       
+//       List<Background> removeBackground = new ArrayList<Background>();
+//        Background back;        
+//       
+//        synchronized (menu) {                                                     
+//            
+//            for (int i = 0; i < menu.size(); i++) {               
+//                back = menu.get(i);
+//                back.update();
+//                if (back.getState() == Item.STATE_DONE)
+//                    removeBackground.add(back);
+//            }
+//            menu.removeAll(removeBackground);
+//          }
+//         menu.add((Background) shipSelectionMenu);
+   }
+   
+   void mainGame()
+   {
+       //-----------------------------------------------------------------------------
 // a little collision test for the playable ship and another instance of the ship
 // when the ship collides the weapon level state will increment
 // the player ship's weapon level state 9/15/2015
@@ -176,6 +248,7 @@ public class GameData {
                 DefaultEnemyShip eShip = (DefaultEnemyShip) enemyShips.get(i);                                
                 
                 if (currentShip.getShipHitBox().intersects(eShip.getShipHitBox())) {          
+                     
                     synchronized (enemyShips) {                      
                         this.enemyShips.remove(eShip);   
                     }
@@ -251,38 +324,11 @@ public class GameData {
             }
             items.removeAll(removeItems);
           }
-    }
+   
+    
+     
         
-       
-
-//Will's Note:  This is probably not needed due to not being able to access Image files from this class.
-    //  Is this true anyone?
-    //??????????????????????????????????????????????????????????????????????????????????????????????????
-    public Image getImage(String fileName) {
-       Image image = null;
-       try {
-           image = ImageIO.read(new File(fileName));
-       } catch (Exception ioe) {
-           System.out.println("Error: Cannot open image:" + fileName);
-           JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
-       }
-       return image;
-    }
+   
     
-    public void spawnEnemiesForTest() {
-        figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
-        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
-        for(int i = 0; i < enemyFormation.length; i++) {
-            synchronized(figures) {
-                figures.add((GameFigure)enemyFormation[i]);
-            }
-            
-        }
-    }
-
-    private EnemyFlyWeightFactory EnemyFlyweightItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+   }
 }

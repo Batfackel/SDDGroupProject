@@ -190,11 +190,6 @@ public class DefaultEnemyShip implements ShipState, GameFigure{
         y = (int) (getY() + this.rateOfSpeed);
         dy = getY();
     }
-
-<<<<<<< HEAD
-   
-=======
->>>>>>> origin/master
     @Override
     public float getXofMissileShoot() {
         return getX()+30;
