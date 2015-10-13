@@ -1,9 +1,14 @@
 package View;
 import Controller.Animator;
+<<<<<<< HEAD
+import Model.Bullet;
+=======
 import Model.Background;
+>>>>>>> Changed ships around added title screen.
 import Model.GameData;
 import Model.GameFigure;
 import Model.HUD;
+import Model.KineticBulletBaseLevel;
 import Model.Level;
 import Model.Ship;
 import Model.ShipFactory;
@@ -27,7 +32,7 @@ public class GamePanel extends JPanel {
     // off screen rendering
     private Graphics graphics;
     private Image dbImage = null;
-    private Level level;
+    public static Level level;
      private HUD hud;
     public ShipFactory shipMaker;
     private Image titleScreen;
@@ -100,7 +105,17 @@ public class GamePanel extends JPanel {
         //draw the background image first then draw everything else ontop of it
         level.render(graphics);
         
-
+        synchronized (gameData.enemyShips) {
+            //this part works but the iteration doesn't
+//            gameData.enemyShips.get(0).render(graphics);
+            
+            Ship ship;
+            for(int n = 0; n < gameData.enemyShips.size(); n++) {
+                
+                ship = gameData.enemyShips.get(n);
+                ship.render(graphics);
+            }
+        }
         synchronized (gameData.figures) {
             GameFigure f;
             for (int i = 0; i < gameData.figures.size(); i++) {
@@ -122,6 +137,16 @@ public class GamePanel extends JPanel {
                 f.render(graphics);
             }            
         }
+<<<<<<< HEAD
+        synchronized (gameData.bullets) {
+            Bullet f;
+                for (int i = 0; i < gameData.bullets.size(); i++) {
+                    f = (Bullet) gameData.bullets.get(i);
+                    f.render(graphics);
+                }
+        }
+        
+=======
 //        synchronized (gameData.menu)
 //        {
 //            Background f;
@@ -137,6 +162,7 @@ public class GamePanel extends JPanel {
 //                f.render(graphics);
 //            }
 //        }
+>>>>>>> Changed ships around added title screen.
          hud.render(graphics);
     }
 
