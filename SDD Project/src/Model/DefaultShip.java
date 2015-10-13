@@ -130,8 +130,7 @@ public class DefaultShip implements Ship, ShipState {
 public void setShipHitBox(){
     switch (getState()){
         case 1: {
-            this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth,
-            (int) this.shipHeight); 
+            this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth, (int) this.shipHeight); 
         }
     }
 }
@@ -152,7 +151,7 @@ public void render(Graphics g){
 //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
                 //(int) this.shipHeight);
           //  g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
-             System.out.println("Normal State="+this.state+" and explosionState = " + this.explosionState);
+//             System.out.println("Normal State="+this.state+" and explosionState = " + this.explosionState);
             break;
         }
         case 2:{
@@ -161,7 +160,7 @@ public void render(Graphics g){
 //            g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth,            
                 //(int) this.shipHeight);
            // g.drawRect((int)this.x, (int)this.y, (int)this.shipWidth, (int)this.shipHeight);
-             System.out.println("Normal State="+this.state+" and explosionState = " + this.explosionState);
+//             System.out.println("Normal State="+this.state+" and explosionState = " + this.explosionState);
             break;
         }
          case 3:{
@@ -423,15 +422,18 @@ public int getState() {
 
     @Override
     public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int)this.x;
     }
     @Override
     public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int)this.y;
     }
+
 
     @Override
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 }

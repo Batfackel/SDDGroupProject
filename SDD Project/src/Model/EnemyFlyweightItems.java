@@ -37,7 +37,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
     @Override
     public Image setImage(Ship ship) {
         //get images from the flyweight so we don't have to create a ton of images in memory
-        if(ship instanceof DefaultEnemyShip) {
+        if(ship instanceof EnemyShip) {
             switch(ship.getShipState()) {
                 case 1:
                     break;
