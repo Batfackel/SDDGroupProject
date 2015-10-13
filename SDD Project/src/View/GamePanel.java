@@ -174,14 +174,16 @@ public class GamePanel extends JPanel {
                 f.render(graphics);
             }            
         }
-//        synchronized (gameData.bullets) {
-//            Bullet f;
-//                for (int i = 0; i < gameData.bullets.size(); i++) {
-//                    f = (Bullet) gameData.bullets.get(i);
-//                    f.render(graphics);
-//                }
-//        }
+
+        synchronized (gameData.bullets) {
+            Bullet f;
+                for (int i = 0; i < gameData.bullets.size(); i++) {
+                    f = (Bullet) gameData.bullets.get(i);
+                    f.render(graphics);
+                }
+        }
         
+
 //        synchronized (gameData.menu)
 //        {
 //            Background f;
@@ -197,6 +199,7 @@ public class GamePanel extends JPanel {
 //                f.render(graphics);
 //            }
 //        }
+
          hud.render(graphics);
     }
 
