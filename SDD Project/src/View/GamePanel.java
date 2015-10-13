@@ -1,10 +1,7 @@
 package View;
 import Controller.Animator;
-<<<<<<< HEAD
 import Model.Bullet;
-=======
 import Model.Background;
->>>>>>> Changed ships around added title screen.
 import Model.GameData;
 import Model.GameFigure;
 import Model.HUD;
@@ -177,16 +174,14 @@ public class GamePanel extends JPanel {
                 f.render(graphics);
             }            
         }
-<<<<<<< HEAD
-        synchronized (gameData.bullets) {
-            Bullet f;
-                for (int i = 0; i < gameData.bullets.size(); i++) {
-                    f = (Bullet) gameData.bullets.get(i);
-                    f.render(graphics);
-                }
-        }
+//        synchronized (gameData.bullets) {
+//            Bullet f;
+//                for (int i = 0; i < gameData.bullets.size(); i++) {
+//                    f = (Bullet) gameData.bullets.get(i);
+//                    f.render(graphics);
+//                }
+//        }
         
-=======
 //        synchronized (gameData.menu)
 //        {
 //            Background f;
@@ -202,7 +197,6 @@ public class GamePanel extends JPanel {
 //                f.render(graphics);
 //            }
 //        }
->>>>>>> Changed ships around added title screen.
          hud.render(graphics);
     }
 

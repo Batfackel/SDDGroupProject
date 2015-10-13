@@ -244,14 +244,12 @@ public class GameData {
                 }
             }
             
+            //collision for enemies
             for (int i = 0; i < this.enemyShips.size(); i++) {
-                DefaultEnemyShip eShip = (DefaultEnemyShip) enemyShips.get(i);                                
+                EnemyShip eShip = (EnemyShip) enemyShips.get(i);                                
                 
                 if (currentShip.getShipHitBox().intersects(eShip.getShipHitBox())) {          
-                     
-                    synchronized (enemyShips) {                      
-                        this.enemyShips.remove(eShip);   
-                    }
+                    eShip.getHit();
                 }
                 
                if(eShip.getShipState() == 0) {
@@ -260,15 +258,15 @@ public class GameData {
                     } 
                }
             }
-            if(counter == 100) {
-                counter = 0;
-            }
-            else {
-                Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
-                for(int i = 0; i < enemyFormation.length; i++) {
-                    figures.add((GameFigure)enemyFormation[i]);
-                }
-            }
+//            if(counter == 100) {
+//                counter = 0;
+//            }
+//            else {
+//                Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+//                for(int i = 0; i < enemyFormation.length; i++) {
+//                    figures.add((GameFigure)enemyFormation[i]);
+//                }
+//            }
             
               System.out.println("weapon state is " + currentShip.getWeaponState());
             }

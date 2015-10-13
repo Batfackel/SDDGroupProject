@@ -148,8 +148,9 @@ public class EnemyShip implements ShipState, GameFigure{
     @Override
     public void render(Graphics g) {
         move();
+        setShipHitBox();
         g.drawImage(image, getX(), getY(), null);
-        g.drawRect(getX(), getY(), (int)this.shipWidth, (int) this.shipHeight);
+//        g.drawRect(getX(), getY(), (int)this.shipWidth, (int) this.shipHeight);
     }
 
     @Override
@@ -286,5 +287,13 @@ public class EnemyShip implements ShipState, GameFigure{
      */
     public int getScore() {
         return score;
+    }
+    
+    public void getHit() {
+        //can have the type of bullet change how much damage is done
+        health--;
+        if(health == 0) {
+            shipState = 0;
+        }
     }
 }
