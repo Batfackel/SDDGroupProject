@@ -68,8 +68,8 @@ public class GameData {
         // ships.add(incomingShip);      
         menu.add((Background) new ShipSelectMenu(0));
         
-        String shipT = shipTypes[((int)randomize((float)0,5))];        
-        ships.add((Ship)shipMaker.getShip(shipT,450,450));
+             
+        ships.add((Ship)shipMaker.getShip("defaultship",450,450));
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
         // testing items and new item mechanics
