@@ -14,7 +14,11 @@ public class MouseController implements MouseListener{
         this.mainShip = (Ship) ship;
        // this.ship =  ship;
     }
-    
+     public void setShip(Ship ship){
+        
+        this.mainShip = ship;
+        
+    }
      @Override
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
