@@ -14,11 +14,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyController implements KeyListener {
-    //stuff for state design patters
-    private Context bullet;
-    private KineticState kinetic;
-    private LaserState laser;
-    private MissileState missile;   
+    private Context bullet;         //stuff for state design pattern
+    private KineticState kinetic;   //stuff for state design pattern
+    private LaserState laser;       //stuff for state design pattern
+    private MissileState missile;   //stuff for state design pattern
     private Ship mainShip;
     private GameData data;
     private Main main;
@@ -28,21 +27,21 @@ public class KeyController implements KeyListener {
     //there are two constructors here
     public KeyController(Ship ship, GameData gameData) {
         this.mainShip = (Ship)ship;
-        this.data = gameData;
-        this.bullet = new Context();
-        this.kinetic = new KineticState();
-        this.laser = new LaserState();
-        this.missile = new MissileState(); 
+        this.data = gameData;                   //need to create objects of the different bullet states
+        this.bullet = new Context();        //object of context. Context creates bullet types
+        this.kinetic = new KineticState();  //object of KineticState
+        this.laser = new LaserState();      //object of LaserState
+        this.missile = new MissileState();  //object of MissileState
     }
     
     
     public KeyController(Ship ship, Main main) {
         this.mainShip = (Ship) ship;
-        this.main = (Main) main;
-        this.bullet = new Context();
-        this.kinetic = new KineticState();
-        this.laser = new LaserState();
-        this.missile = new MissileState(); 
+        this.main = (Main) main;                //need to create objects of the different bullet states
+        this.bullet = new Context();        //object of context. Context creates bullet types
+        this.kinetic = new KineticState();  //object of KineticState
+        this.laser = new LaserState();      //object of LaserState
+        this.missile = new MissileState();  //object of MissileState
     }
     
     public void setGameData(GameData gameData) {
@@ -161,41 +160,83 @@ public class KeyController implements KeyListener {
             case KeyEvent.VK_S:
                 data.spawnEnemiesForTest();
                 break;     
+                /*
+                On space bar click a bullet object will be spawned at a designated position.
+                To acomplish this goal a State desgin pattern is used to determine what type of 
+                bullet to spawn in based up what the ships weapon type is. The current gun type 
+                is being stored in the ship objects themselves. More notes will be supplied below. 
+                */
             case KeyEvent.VK_SPACE:
+                /*
+                This stuff is from the old missile that was being used as a placeholder
+                The logic may still be valuable at some point so I just commented it out.
+                */
                 //KineticBulletBaseItem f = new KineticBulletBaseItem(ship.getXofMissileShoot(), ship.getYofMissileShoot(), color);
                 //f.setTarget(x, y);
                 //int size = (int) (Math.random() * 100) + 5; // min = 5 max = 105
                 //f.setExplosionMaxSize(size);
                 
+                // used for debugging
                 System.out.println("current level of the weapon: " + mainShip.getLevelState());
-        switch(mainShip.getWeaponState()) {
-            case 0: 
-                this.bullet.setState(kinetic, mainShip.getLevelState());
-                System.out.println(this.bullet.getState().toString());
-                this.bullet.fire(mainShip.getX(), mainShip.getY());
-                break;
-            case 1:
-                this.bullet.setState(laser, mainShip.getLevelState());
-                System.out.println(this.bullet.getState().toString());
-                this.bullet.fire(mainShip.getX(), mainShip.getY());
-                break;
-            case 2:
-                this.bullet.setState(missile, mainShip.getLevelState());
-                System.out.println(this.bullet.getState().toString());
-                this.bullet.fire(mainShip.getX(), mainShip.getY());
-                break;
-            default:System.out.println("error in weapon architecture");
-        }    
                 
-                /*synchronized (Main.gameData.figures) {
-                    //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
-                    Main.gameData.figures.add(new Launcher( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY() - 10));
+                /*
+                Upon space bar click the weapon type that is stored in the ship object is returned. 
+                That value declared in the interface and is being stored as an integer.
+                The integer is used to select the case. More can be added as needed.
+                Note: I'm only commenting one case, the others work exactly the same.
+                */
+                switch (mainShip.getWeaponState()) {
+                    case 0: //kinetic
+                        /*
+                        In order for the State design pattern to spawn the right object it spawns in
+                        a "bullet" which is a object of Context. Context holds the information about
+                        what kind of bullet to generate. By calling setState the type of bullet
+                        is being declared so,
+                        
+                        setState("bulletType", "shipWeaponLevel") --> setState(kinetic, mainShip.getLevelState())
+                        
+                        Above the state of context is changed to Kinetic and with the ships current weapon level.                        
+                        */
+                        this.bullet.setState(kinetic, mainShip.getLevelState());                        
+                        System.out.println(this.bullet.getState().toString());  //used for debugging
+                        /*
+                        Once the bullet state is set using Context methods this command is executed to
+                        actually spawn in a bullet. fire(x, y) is a method stored in context. The method in
+                        context calls another method to generate the correct type of bullet. 
+                        
+                        fire("shipX", "shipY") --> fire(mainShip.getX(), mainShip.getY())
+                        
+                        This above code generates a bullet object at the ships x and y location.
+                        */
+                        this.bullet.fire(mainShip.getX(), mainShip.getY());
+                        break;
+                    case 1: //laser
+                        this.bullet.setState(laser, mainShip.getLevelState());
+                        System.out.println(this.bullet.getState().toString());
+                        this.bullet.fire(mainShip.getX(), mainShip.getY());
+                        break;
+                    case 2: //missile
+                        this.bullet.setState(missile, mainShip.getLevelState());
+                        System.out.println(this.bullet.getState().toString());
+                        this.bullet.fire(mainShip.getX(), mainShip.getY());
+                        break;
+                    default: //error
+                        System.out.println("error in weapon architecture");
+                }
+             
+            /*
+            These were adaptations of the launcher to simulate how a bullet might spawn and work. They were used 
+            for testing and are not needed. I commented them out in case I wanted to reference it later.
+            */
+             /*synchronized (Main.gameData.figures) {
+             //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
+             Main.gameData.figures.add(new Launcher( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY() - 10));
                                     
-                /*synchronized (Main.gameData.figures) {
-                    //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
-                    Main.gameData.figures.add(new Launcher( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY() - 10));
+             /*synchronized (Main.gameData.figures) {
+             //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
+             Main.gameData.figures.add(new Launcher( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY() - 10));
                     
-                }*/
+             }*/
         }
     }
 
