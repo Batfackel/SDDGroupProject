@@ -49,7 +49,7 @@ public class Main extends JFrame implements ActionListener {
 
 
     private KeyController controller;
-    
+    public MouseController mouseController;
     public Ship Ship(){
         return this.ship;
     }
@@ -67,12 +67,11 @@ public class Main extends JFrame implements ActionListener {
         //is already there
         //shipMaker = new ShipFactory();
         //ship = shipMaker.getShip("defaultShip", 350, 350);
-        ship = (Ship) gameData.ships.get(0);//will checking som
-        controller = new KeyController(ship);
+       
 
        // ship = shipMaker.getShip("defaultShip", 350, 350);
         mainShip = (Ship) gameData.ships.get(0);//will checking som
-        controller = new KeyController(mainShip);
+        controller = new KeyController(mainShip, this);
         controller.setGameData(gameData);
 
         gamePanel = new GamePanel(animator, gameData);
@@ -99,7 +98,7 @@ public class Main extends JFrame implements ActionListener {
         southPanel.add(pauseButton);
         
         
-        MouseController mouseController = new MouseController(mainShip);
+        mouseController = new MouseController(mainShip);
         gamePanel.addMouseListener(mouseController);
         startButton.setFocusable(false); // "Start" button click should not receive keyboard data
         gamePanel.setFocusable(true); // receives keyboard data
@@ -131,7 +130,7 @@ public class Main extends JFrame implements ActionListener {
 //        ship = (Ship) gameData.ships.get(0);
 
     }
-       
+     
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == startButton) {
