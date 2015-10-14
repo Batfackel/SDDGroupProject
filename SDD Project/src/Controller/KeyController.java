@@ -1,5 +1,6 @@
 package Controller;
 
+import static Controller.Main.gameData;
 import Model.Context;
 import Model.GameData;
 import Model.KineticBulletBaseLevel;
@@ -8,6 +9,7 @@ import Model.LaserState;
 import Model.Launcher;
 import Model.MissileState;
 import Model.Ship;
+import Model.ShipFactory;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,6 +21,9 @@ public class KeyController implements KeyListener {
     private MissileState missile;   
     private Ship mainShip;
     private GameData data;
+    private Main main;
+    private ShipFactory shipMaker = new ShipFactory(); 
+    private Ship newShip;
     //KeyController(){this.ship = null;}//Will Added constructor 9/16/2015
     //there are two constructors here
     public KeyController(Ship ship, GameData gameData) {
@@ -31,8 +36,9 @@ public class KeyController implements KeyListener {
     }
     
     
-    public KeyController(Ship ship) {
+    public KeyController(Ship ship, Main main) {
         this.mainShip = (Ship) ship;
+        this.main = (Main) main;
         this.bullet = new Context();
         this.kinetic = new KineticState();
         this.laser = new LaserState();
@@ -51,6 +57,48 @@ public class KeyController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
+            case KeyEvent.VK_D:
+                newShip = shipMaker.getShip("defaultship",mainShip.getX(),mainShip.getY());
+                gameData.ships.remove(0);
+                gameData.ships.add(0,newShip);
+                this.setShip(newShip);
+                main.mouseController.setShip(newShip);
+                break;            
+            case KeyEvent.VK_V:
+                newShip = shipMaker.getShip("shipv",mainShip.getX(),mainShip.getY());
+                gameData.ships.remove(0);
+                gameData.ships.add(0,newShip);
+                this.setShip(newShip);
+                main.mouseController.setShip(newShip);
+                break;
+              case KeyEvent.VK_W:
+                newShip = shipMaker.getShip("shipw",mainShip.getX(),mainShip.getY());
+                gameData.ships.remove(0);
+                gameData.ships.add(0,newShip);
+                this.setShip(newShip);
+                main.mouseController.setShip(newShip);
+                break;              
+            case KeyEvent.VK_X:
+                newShip = shipMaker.getShip("shipx",mainShip.getX(),mainShip.getY());
+                gameData.ships.remove(0);
+                gameData.ships.add(0,newShip);
+                this.setShip(newShip);
+                main.mouseController.setShip(newShip);
+                break;
+            case KeyEvent.VK_Y:
+                newShip = shipMaker.getShip("shipy",mainShip.getX(),mainShip.getY());
+                gameData.ships.remove(0);
+                gameData.ships.add(0,newShip);
+                this.setShip(newShip);
+                main.mouseController.setShip(newShip);
+                break;   
+            case KeyEvent.VK_Z:
+                newShip = shipMaker.getShip("shipz",mainShip.getX(),mainShip.getY());
+                gameData.ships.remove(0);
+                gameData.ships.add(0,newShip);
+                this.setShip(newShip);
+                main.mouseController.setShip(newShip);
+                break;                
             case KeyEvent.VK_LEFT:
                 mainShip.moveLeft();
                 break;
