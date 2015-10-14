@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
 public class EnemyFlyweightItems implements EnemyFlyweight {
     Image defaultImage, redFighterImage, alienImage, blueFighterImage, purpleFighterImage,
             explosionImage1, explosionImage2, explosionImage3, explosionImage4, explosionImage5, 
-            explosionImage6, explosionImage7, explosionImage8, explosionImage9, image;
+            explosionImage6, explosionImage7, explosionImage8, explosionImage9, explosionImage10,
+            explosionImage11, explosionImage12, image;
     String shipType;
     
     
@@ -31,7 +32,18 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
         alienImage = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "alien1.png");
         blueFighterImage = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "blueFighter.png");
         purpleFighterImage = getImage(imagePath + separator + "images" + separator + "Enemies" + separator + "purpleFighter.png");
-        
+        explosionImage1 = getImage(imagePath + separator + "images" + separator + "explosion1.png");
+        explosionImage2 = getImage(imagePath + separator + "images" + separator + "explosion2.png");
+        explosionImage3 = getImage(imagePath + separator + "images" + separator + "explosion3.png");
+        explosionImage4 = getImage(imagePath + separator + "images" + separator + "explosion4.png");
+        explosionImage5 = getImage(imagePath + separator + "images" + separator + "explosion5.png");
+        explosionImage6 = getImage(imagePath + separator + "images" + separator + "explosion6.png");
+        explosionImage7 = getImage(imagePath + separator + "images" + separator + "explosion7.png");
+        explosionImage8 = getImage(imagePath + separator + "images" + separator + "explosion8.png");
+        explosionImage9 = getImage(imagePath + separator + "images" + separator + "explosion9.png");
+        explosionImage10 = getImage(imagePath + separator + "images" + separator + "explosion10.png");
+        explosionImage11 = getImage(imagePath + separator + "images" + separator + "explosion11.png");
+        explosionImage12 = getImage(imagePath + separator + "images" + separator + "explosion12.png");
     }
     
     @Override
@@ -40,28 +52,46 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
         if(ship instanceof EnemyShip) {
             switch(ship.getShipState()) {
                 case 1:
+                    image = explosionImage1;
                     break;
                 case 2:
+                    image = explosionImage2;
                     break;
                 case 3:
+                    image = explosionImage3;
                     break;
                 case 4:
+                    image = explosionImage4;
                     break;
                 case 5:
+                    image = explosionImage5;
                     break;
                 case 6:
+                    image = explosionImage6;
                     break;
                 case 7:
+                    image = explosionImage7;
                     break;
                 case 8:
+                    image = explosionImage8;
                     break;
                 case 9:
+                    image = explosionImage9;
                     break;
                 case 0:
                     //ship needs to be removed because it is off screen
                     image = null;
                     break;
                 case 10:
+                    image = explosionImage10;
+                    break;
+                case 11:
+                    image = explosionImage11;
+                    break;
+                case 12:
+                    image = explosionImage12;
+                    break;
+                case 13:
                     //ship doing a-ok 
                     switch(ship.getShipType()) {
                         case "alien1":

@@ -91,7 +91,7 @@ public class GameData {
         //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
         Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
         for(int i = 0; i < enemyFormation.length; i++) {
-            figures.add((GameFigure)enemyFormation[i]);
+            enemyShips.add(enemyFormation[i]);
         }
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------

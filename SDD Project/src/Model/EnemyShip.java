@@ -40,7 +40,7 @@ public class EnemyShip implements ShipState, GameFigure{
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
         this.rateOfSpeed = 2;
-        setShipState(10);
+        setShipState(13);
         this.setShipHitBox();
     }
     
@@ -50,7 +50,7 @@ public class EnemyShip implements ShipState, GameFigure{
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
         this.rateOfSpeed = 2;
-        setShipState(10);
+        setShipState(13);
         this.shipType = shipType;
         image = GameData.flyweightItems.setImage(this);
         this.shipHeight = image.getHeight(null);
@@ -149,7 +149,20 @@ public class EnemyShip implements ShipState, GameFigure{
     public void render(Graphics g) {
         move();
         setShipHitBox();
-        g.drawImage(image, getX(), getY(), null);
+        if(getShipState() == 13) {
+            g.drawImage(image, getX(), getY(), null);
+        }
+        else {
+            g.drawImage(GameData.flyweightItems.setImage(this), getX(), getY(), null);
+            if(shipState != 12) {
+                shipState++;
+            }
+            else {
+                shipState = 0;
+            }
+            
+        }
+        
 //        g.drawRect(getX(), getY(), (int)this.shipWidth, (int) this.shipHeight);
     }
 
@@ -293,7 +306,7 @@ public class EnemyShip implements ShipState, GameFigure{
         //can have the type of bullet change how much damage is done
         health--;
         if(health == 0) {
-            shipState = 0;
+            shipState = 1;
         }
     }
 }
