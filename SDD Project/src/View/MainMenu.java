@@ -22,6 +22,17 @@ import javax.swing.SwingUtilities;
  */
 public class MainMenu extends javax.swing.JPanel {
     public static Main m;
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JLabel jLabel1;
+
+    private javax.swing.JLabel jLabel2;
+    // End of variables declaration                   
+
+
+    // End of variables declaration 
     /**
      * Creates new form MainMenu
      */
@@ -105,7 +116,6 @@ public class MainMenu extends javax.swing.JPanel {
         // TO add your handling code here:
     }                                          
 
-<<<<<<< HEAD
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             
@@ -114,41 +124,24 @@ public class MainMenu extends javax.swing.JPanel {
             String value=jComboBox1.getSelectedItem().toString();
             m = new Main(ship);
             
-           
-=======
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-            String value=jComboBox1.getSelectedItem().toString();
-        try {
-            m = new Main();
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
->>>>>>> origin/master
-            String[] size = value.split("\\*");
-            
-            m.setScreenSize(Integer.parseInt(size[0].trim()), Integer.parseInt(size[1].trim()));
-            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            frame.dispose();
-<<<<<<< HEAD
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+    
+//    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+//            String value=jComboBox1.getSelectedItem().toString();
+//        try {
+//            m = new Main();
+//        } catch (Exception ex) {
+//            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//            String[] size = value.split("\\*");
+//            
+//            m.setScreenSize(Integer.parseInt(size[0].trim()), Integer.parseInt(size[1].trim()));
+//            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+//            frame.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-=======
-    }                                        
->>>>>>> origin/master
 
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jLabel1;
-<<<<<<< HEAD
-    private javax.swing.JLabel jLabel2;
-    // End of variables declaration//GEN-END:variables
-}
-=======
-    // End of variables declaration                   
-}
->>>>>>> origin/master

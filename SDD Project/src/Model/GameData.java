@@ -36,13 +36,9 @@ public class GameData {
     static final int STATE_EXPLOSIOIN_16 = 16;
     private final String[] shipTypes = {"defaultship", "shipx", "shipy", "shipz", "shipv", "shipw"};
     private final static int RESOLUTION_800X1000 = 1;
-<<<<<<< HEAD
     public String shipName = "error";
     
-   
-=======
 
->>>>>>> origin/master
     public List<GameFigure> figures;
     public List<Item> items;
     public List<Ship> ships, enemyShips;
@@ -56,18 +52,14 @@ public class GameData {
     private EnemyFlyWeightFactory flyweightFactory;
     public static EnemyFlyweight flyweightItems;
     private ShipSelectMenu shipSelectionMenu;
-<<<<<<< HEAD
+
    
     
     public GameData(String sName) {
         
         this.shipName = sName;
-=======
-
-    public GameData() {
-
         menu = Collections.synchronizedList(new ArrayList<Background>());
->>>>>>> origin/master
+
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
         items = Collections.synchronizedList(new ArrayList<Item>());
@@ -81,17 +73,74 @@ public class GameData {
 //-----------------------------------------------------------------------------        
         //incomingShip = shipMaker.getShip("defaultShip",300,350);
         // ships.add(incomingShip);      
-<<<<<<< HEAD
+
         //menu.add((Background) new ShipSelectMenu(0));
         
         //String shipT = shipTypes[((int)randomize((float)0,5))];  
         
         ships.add((Ship)shipMaker.getShip(shipName,450,450));//-----------------------------
-=======
+
         menu.add((Background) new ShipSelectMenu(0));
 
         ships.add((Ship) shipMaker.getShip("defaultship", 450, 450));
->>>>>>> origin/master
+
+        //represent weapon power-up items
+        //figures.add(new Launcher(100, 200));    
+        // testing items and new item mechanics
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 200));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 180));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 1600));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 220));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 240));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("MISSILE", 100, 200));
+
+//         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
+        //represent weapon power-up items
+        //figures.add(new Launcher(100, 200));    
+        /*figures.add(new Launcher(250, 200));
+         figures.add(new Launcher(400, 200));
+         figures.add(new Launcher(100, 200));  */
+        //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
+        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+        for (int i = 0; i < enemyFormation.length; i++) {
+            enemyShips.add(enemyFormation[i]);
+        }
+//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------
+
+      //System.out.println("@@GAME DATA CONSTRUCTO@@");
+    }
+
+
+    public GameData() {
+
+        menu = Collections.synchronizedList(new ArrayList<Background>());
+
+        figures = Collections.synchronizedList(new ArrayList<GameFigure>());
+        ships = Collections.synchronizedList(new ArrayList<Ship>());
+        items = Collections.synchronizedList(new ArrayList<Item>());
+        enemyShips = Collections.synchronizedList(new ArrayList<Ship>());
+        flyweightFactory = new EnemyFlyWeightFactory();
+        flyweightItems = flyweightFactory.getFlyweight();
+        bullets = Collections.synchronizedList(new ArrayList<Bullet>());
+
+        //create ships for collision test
+        //9/10/2015
+//-----------------------------------------------------------------------------        
+        //incomingShip = shipMaker.getShip("defaultShip",300,350);
+        // ships.add(incomingShip);      
+
+        //menu.add((Background) new ShipSelectMenu(0));
+        
+        //String shipT = shipTypes[((int)randomize((float)0,5))];  
+        
+        ships.add((Ship)shipMaker.getShip(shipName,450,450));//-----------------------------
+
+        menu.add((Background) new ShipSelectMenu(0));
+
+        ships.add((Ship) shipMaker.getShip("defaultship", 450, 450));
+
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
         // testing items and new item mechanics
