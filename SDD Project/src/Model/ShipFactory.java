@@ -45,7 +45,9 @@ public class ShipFactory {
             return shipType;
         }
         else{
-            throw new IllegalArgumentException("NO SUCH SHIP TYPE");
+              shipType = new DefaultShip(x,y);
+            return shipType;
+            //throw new IllegalArgumentException("NO SUCH SHIP TYPE");
         }
     }    
 }

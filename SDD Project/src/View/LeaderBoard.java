@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JButton;
+
 
 /**
  *
@@ -33,7 +35,7 @@ public class LeaderBoard extends JPanel{
     private JPanel[][] panelHolder;
     private JTable table;
     private JScrollPane scrollPane;
-            
+        
     public LeaderBoard() {
         //read the data file to get what scores are in there
         data = new SaveData(true);

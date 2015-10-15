@@ -1,7 +1,8 @@
 package Model;
-
+import Controller.Main;
 import Controller.EnemyFlyWeightFactory;
 import Controller.EnemyFlyweight;
+import View.MainMenu;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
@@ -9,8 +10,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import javafx.scene.control.MenuItem;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+
 
 public class GameData {
    
@@ -33,6 +36,7 @@ public class GameData {
     static final int STATE_EXPLOSIOIN_16 = 16;
     private final String[] shipTypes = {"defaultship","shipx","shipy","shipz","shipv","shipw"};
     private final static int RESOLUTION_800X1000 = 1;
+    public String shipName = "error";
     
    
     public List<GameFigure> figures;
@@ -48,10 +52,11 @@ public class GameData {
     private EnemyFlyWeightFactory flyweightFactory;
     public static EnemyFlyweight flyweightItems;
     private ShipSelectMenu shipSelectionMenu;
+   
     
-    public GameData() {
+    public GameData(String sName) {
         
-        menu = Collections.synchronizedList(new ArrayList<Background>());
+        this.shipName = sName;
         figures = Collections.synchronizedList(new ArrayList<GameFigure>());
         ships = Collections.synchronizedList(new ArrayList<Ship>());
         items = Collections.synchronizedList(new ArrayList<Item>());
@@ -66,10 +71,11 @@ public class GameData {
         
         //incomingShip = shipMaker.getShip("defaultShip",300,350);
         // ships.add(incomingShip);      
-        menu.add((Background) new ShipSelectMenu(0));
+        //menu.add((Background) new ShipSelectMenu(0));
         
-        String shipT = shipTypes[((int)randomize((float)0,5))];        
-        ships.add((Ship)shipMaker.getShip(shipT,450,450));
+        //String shipT = shipTypes[((int)randomize((float)0,5))];  
+        
+        ships.add((Ship)shipMaker.getShip(shipName,450,450));//-----------------------------
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
         // testing items and new item mechanics
