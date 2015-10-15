@@ -24,7 +24,6 @@ import View.GamePanel;
 import View.ShipSelect;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import static java.time.Clock.system;
 
 public class Main extends JFrame implements ActionListener {
 
