@@ -6,23 +6,16 @@
 package Model;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  *
  * @author atm15_000
  */
-public class Bullet {
-
-    void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    int getState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void render(Graphics graphics) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+public abstract class Bullet implements GameFigure{
+    abstract float getX();
+    abstract float getY();
+    abstract void setState();
+    abstract public void render(Graphics graphics);  
+    abstract public Rectangle getShipHitBox();     
 }

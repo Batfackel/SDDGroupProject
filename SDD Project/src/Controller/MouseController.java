@@ -27,7 +27,11 @@ public class MouseController implements MouseListener{
         this.laser = new LaserState();
         this.missile = new MissileState();        
     }
-    
+     public void setShip(Ship ship){
+        
+        this.mainShip = ship;
+        
+    }
      @Override
     public void mousePressed(MouseEvent e) {
         int x = e.getX();

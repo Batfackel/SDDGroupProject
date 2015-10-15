@@ -1,10 +1,7 @@
 package View;
 import Controller.Animator;
-
 import Model.Bullet;
-
 import Model.Background;
-
 import Model.GameData;
 import Model.GameFigure;
 import Model.HUD;
