@@ -144,6 +144,7 @@ public class Main extends JFrame implements ActionListener {
             c.add(leaderPanel, "Center");
             gamePanel.setVisible(false);
             leaderBoard.setVisible(true);
+            //use pause to show leaderboard better
         }
         else if(ae.getSource() == pauseButton) {
             if (!animator.isPause()) {
