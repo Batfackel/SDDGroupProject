@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author atm15_000
  */
-public class KineticBulletBaseLevel extends Bullet implements GameFigure{
+public class KineticBulletBaseLevel extends Bullet{
   
     Rectangle r1, r2;
     Image launcherImage;
@@ -88,12 +88,31 @@ public class KineticBulletBaseLevel extends Bullet implements GameFigure{
     public void update() {
         setLauncherHitBox();        
         this.y -= 4;
+        //if (this.x < 1){
+        //    System.out.println("bullet = " + this.x);
+        //    this.state = STATE_DONE;
+        //}
     }
 
     @Override
     public int getState() {
         return state;
         
+    }
+
+    @Override
+    void setState() {
+        state = STATE_DONE;
+    }
+
+    @Override
+    float getX() {
+        return this.x;
+    }
+    
+    @Override
+    float getY() {
+        return this.y;
     }
     
 }

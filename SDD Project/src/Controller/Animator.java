@@ -3,6 +3,7 @@ package Controller;
 
 import View.GamePanel;
 import Model.GameData;
+import java.awt.Color;
 
 
 public class Animator implements Runnable {
@@ -47,6 +48,9 @@ public class Animator implements Runnable {
                 //System.out.println("Before Game Panel");
                 gamePanel.printScreen();
 
+            }
+            else{
+                gamePanel.setBackground(Color.red);
             }
             
             try {

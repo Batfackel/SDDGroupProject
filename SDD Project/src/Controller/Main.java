@@ -21,22 +21,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import View.GamePanel;
+import View.ShipSelect;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import static java.time.Clock.system;
 
 public class Main extends JFrame implements ActionListener {
 
-    private GamePanel gamePanel;
+    public GamePanel gamePanel;
     public static  GameData gameData;
+   //public static GameData gameData2;
     private Animator animator;
-    private JButton startButton;
+    //private Animator animator2;
+    public JButton startButton;
     private JButton quitButton;
     private JButton pauseButton;
+    private JButton selectShipButton;
     private Launcher launcher;
     private Launcher launcher2;
     private int screenWidth = 800;
     private int screenHeight = 1000;
-    private JLabel lbl;
+    public JLabel lbl;
 
     private JButton leaderBoard;
     private LeaderBoard leaderPanel;
@@ -45,8 +50,9 @@ public class Main extends JFrame implements ActionListener {
     private Ship ship;
     private Ship mainShip;
     private Tutorial tutorial;
-    
+    private ShipSelect shipSelector = new ShipSelect();
 
+    private String shipName = null;
 
     private KeyController controller;
     public MouseController mouseController;
@@ -54,15 +60,17 @@ public class Main extends JFrame implements ActionListener {
         return this.ship;
     }
     
-    public Main() throws IOException {
+    public Main(String shipN) throws IOException {
         //changed sizing to fit the default image
+        this.shipName = shipN;
         setSize(screenWidth, screenHeight);
         setLocation(0, 0);
         c = getContentPane();
         animator = new Animator();
-        gameData = new GameData();
+        gameData = new GameData(this.shipName);
 
-
+//        animator2 = new Animator();
+//        gameData2 = new GameData();
         //why do something that gamedata does for me already, just give me what
         //is already there
         //shipMaker = new ShipFactory();
@@ -73,7 +81,7 @@ public class Main extends JFrame implements ActionListener {
         mainShip = (Ship) gameData.ships.get(0);//will checking som
         controller = new KeyController(mainShip, this);
         controller.setGameData(gameData);
-
+//Add before here
         gamePanel = new GamePanel(animator, gameData);
         animator.setGamePanel(gamePanel);
         animator.setGameData(gameData);
@@ -86,6 +94,9 @@ public class Main extends JFrame implements ActionListener {
         
         startButton = new JButton("Start");
         southPanel.add(startButton);
+        
+        selectShipButton = new JButton("Select Ship");
+        southPanel.add(selectShipButton);
         
         quitButton = new JButton("Quit");
         southPanel.add(quitButton);
@@ -109,6 +120,7 @@ public class Main extends JFrame implements ActionListener {
         gamePanel.addKeyListener(controller);
 
         startButton.addActionListener(this);
+        selectShipButton.addActionListener(this);
         quitButton.addActionListener(this);
         leaderBoard.addActionListener(this);
         pauseButton.addActionListener(this);
@@ -134,9 +146,17 @@ public class Main extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == startButton) {
-            gamePanel.startGame(lbl);
-            startButton.setEnabled(false);
-        } else if (ae.getSource() == quitButton) {
+          gamePanel.startGame(lbl);
+          startButton.setEnabled(false);            
+        }
+//        else if (ae.getSource() == selectShipButton) {
+//            gamePanel.pauseGame();
+//            c.add(shipSelector, "Center");
+//            gamePanel.setVisible(false);
+//            shipSelector.setVisible(true);
+//            selectShipButton.setEnabled(false);
+//        } 
+        else if (ae.getSource() == quitButton) {
             animator.running = false;
         }
         else if(ae.getSource() == leaderBoard) {
@@ -144,7 +164,7 @@ public class Main extends JFrame implements ActionListener {
             c.add(leaderPanel, "Center");
             gamePanel.setVisible(false);
             leaderBoard.setVisible(true);
-            //use pause to show leaderboard better
+           ;
         }
         else if(ae.getSource() == pauseButton) {
             if (!animator.isPause()) {
@@ -167,13 +187,19 @@ public class Main extends JFrame implements ActionListener {
         setSize(screenWidth, screenHeight);
     }
 
-    
+    public void setShipName(String ship) {
+        this.shipName = ship;
+    }
+
     public int getScreenHeight() {
         return screenHeight;
     }
-    
+
     public int getScreenWidth() {
         return screenWidth;
     }
-    
+
+    public String getShipName() {
+        return shipName;
+    }
 }

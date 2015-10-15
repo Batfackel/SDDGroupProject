@@ -1,18 +1,31 @@
 
 package Controller;
-
+import Model.Context;
+import Model.KineticState;
+import Model.LaserState;
 import Model.Missile;
+import Model.MissileState;
 import Model.Ship;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MouseController implements MouseListener{
+    //stuff for state design patters
+    private Context bullet;
+    private KineticState kinetic;
+    private LaserState laser;
+    private MissileState missile;    
+    
       private Ship mainShip;
     //KeyController(){this.ship = null;}//Will Added constructor 9/16/2015
     public MouseController(Ship ship) {
         this.mainShip = (Ship) ship;
        // this.ship =  ship;
+        this.bullet = new Context();
+        this.kinetic = new KineticState();
+        this.laser = new LaserState();
+        this.missile = new MissileState();        
     }
      public void setShip(Ship ship){
         
@@ -40,8 +53,10 @@ public class MouseController implements MouseListener{
         } else {
             color = Color.green;
         }
-        */       
-        System.out.println("this is the state -------- " + mainShip.getLevelState());
+        */
+        /*                      10.6.15
+        
+        System.out.println("current level of the weapon: " + mainShip.getLevelState());
         //switch(launcher.getLevelState()){            
         switch(mainShip.getLevelState()) {
             case 0: color = Color.gray;
@@ -54,10 +69,13 @@ public class MouseController implements MouseListener{
                 break;
             default: color = Color.yellow;
         }
+        */
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
         
-        //Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);
+        /*                              10.6.16
+        
+        //Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);               
         Missile f = new Missile(mainShip.getXofMissileShoot(), mainShip.getYofMissileShoot(), color);
         f.setTarget(x, y);
         int size = (int) (Math.random() * 100) + 5; // min = 5 max = 105
@@ -65,6 +83,35 @@ public class MouseController implements MouseListener{
          synchronized (Main.gameData.figures) {
             Main.gameData.figures.add(f);
         }
+        */
+        
+        //----------------------------------------------------------------------
+         //new weapons
+         //any new weapon types added to the game will have to be registered here 
+         //so that the weaponState of the ship can determine what kind of bullet to shoot
+         //This is the "main" for the state design pattern. 10.6.15
+        //----------------------------------------------------------------------
+        System.out.println("current level of the weapon: " + mainShip.getLevelState());
+        switch(mainShip.getWeaponState()) {
+            case 0: 
+                this.bullet.setState(kinetic, mainShip.getLevelState());
+                System.out.println(this.bullet.getState().toString());
+                this.bullet.fire(mainShip.getX(), mainShip.getY());
+                break;
+            case 1:
+                this.bullet.setState(laser, mainShip.getLevelState());
+                System.out.println(this.bullet.getState().toString());
+                this.bullet.fire(mainShip.getX(), mainShip.getY());
+                break;
+            case 2:
+                this.bullet.setState(missile, mainShip.getLevelState());
+                System.out.println(this.bullet.getState().toString());
+                this.bullet.fire(mainShip.getX(), mainShip.getY());
+                break;
+            default:System.out.println("error in weapon architecture");
+        }                     
+        //---------------------------------------------------------------------- 
+        
     }
       @Override
     public void mouseClicked(MouseEvent me) {
@@ -82,15 +129,6 @@ public class MouseController implements MouseListener{
     public void mouseExited(MouseEvent me) {
     }
     //move into controller that handles player input
-    
-    //initial main not needed
-    /*
-    public static void main(String[] args) {
-        JFrame game = new Main();
-        //game.setTitle("Beggar's Canyon");
-        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        game.setVisible(true);
-    }
-    */
+   
 }
 

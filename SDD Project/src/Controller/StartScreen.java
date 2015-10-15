@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
  */
 public class StartScreen extends JFrame {
     public StartScreen(){
-        setSize(600,400);
+        setSize(500,500);
         setLocation(0, 0);
         Container c = getContentPane();
         c.add(new MainMenu(), "Center");
