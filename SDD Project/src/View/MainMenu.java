@@ -124,6 +124,12 @@ public class MainMenu extends javax.swing.JPanel {
             String value=jComboBox1.getSelectedItem().toString();
             m = new Main(ship);
             
+            String[] size = value.split("\\*");
+            
+            m.setScreenSize(Integer.parseInt(size[0].trim()), Integer.parseInt(size[1].trim()));
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+            
         }
         catch (Exception e) {
             e.printStackTrace();
