@@ -52,14 +52,14 @@ public class EnemyShip implements ShipState, GameFigure{
         this.rateOfSpeed = 2;
         setShipState(13);
         this.shipType = shipType;
-        image = GameData.flyweightItems.setImage(this);
+        image = GameData.flyweightItems.setShipImage(this);
         this.shipHeight = image.getHeight(null);
         this.shipWidth = image.getWidth(null);
         Random rand = new Random();
+        moveRight = rand.nextBoolean();
         switch(shipType) {
             case "alien1":
                 this.health = 5;
-                moveRight = rand.nextBoolean();
                 score = 5;
                 break;
             case "blueFighter":
@@ -153,7 +153,7 @@ public class EnemyShip implements ShipState, GameFigure{
             g.drawImage(image, getX(), getY(), null);
         }
         else {
-            g.drawImage(GameData.flyweightItems.setImage(this), getX(), getY(), null);
+            g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
             if(shipState != 12) {
                 shipState++;
             }

@@ -14,6 +14,7 @@ import java.awt.Image;
  */
 public interface EnemyFlyweight {
     
-    public Image setImage(Ship ship);
+    public Image setShipImage(Ship ship);
+    public Image setBulletImage();
     
 }

@@ -47,12 +47,11 @@ public class GameData {
     private EnemyFactory enemyMaker = new EnemyFactory();
     private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();
     private Ship incomingShip;
-    private int BASE_LEVEL = -1, counter = 0;
+    private int BASE_LEVEL = -1, counter = 0, spawnTicker;
     private EnemyFlyWeightFactory flyweightFactory;
     public static EnemyFlyweight flyweightItems;
-    private ShipSelectMenu shipSelectionMenu;
-
-   
+    private ShipSelectMenu shipSelectionMenu;  
+    private Random rand;
     
     public GameData(String sName) {
         
@@ -105,6 +104,8 @@ public class GameData {
         for (int i = 0; i < enemyFormation.length; i++) {
             enemyShips.add(enemyFormation[i]);
         }
+        rand = new Random();
+        spawnTicker = rand.nextInt(100);
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
 
@@ -196,20 +197,16 @@ public class GameData {
     }
 
     public void spawnEnemiesForTest() {
-        figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
+        enemyShips.add(enemyMaker.getEnemyShip("defaultship", 20, 20));
         Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
         for (int i = 0; i < enemyFormation.length; i++) {
-            synchronized (figures) {
-                figures.add((GameFigure) enemyFormation[i]);
+            synchronized (enemyShips) {
+                enemyShips.add(enemyFormation[i]);
             }
 
         }
     }
-
-    private EnemyFlyWeightFactory EnemyFlyweightItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     void selectShip() {
 //        shipSelectionMenu = (ShipSelectMenu) this.menu.get(0);
 //       
@@ -335,23 +332,7 @@ public class GameData {
                     }
                 }
             }
-//-----------------------------------------------------------------------------                                                   
-//            if(counter == 100) {
-//                counter = 0;
-//            }
-//            else {
-//                Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
-//                for(int i = 0; i < enemyFormation.length; i++) {
-//                    figures.add((GameFigure)enemyFormation[i]);
-//                }
-//            }
-
-            //debugging
-            //System.out.println("weapon state is " + currentShip.getWeaponState());
-        //} catch (Exception e) {
-        //    System.out.println(e.toString());
-        //}
-//-----------------------------------------------------------------------------
+            
         List<GameFigure> removeGameFigures = new ArrayList<GameFigure>();
         GameFigure f;
 
@@ -413,6 +394,14 @@ public class GameData {
                 }
             }
             bullets.removeAll(removeBullets);
+        }
+        if(counter != spawnTicker) {
+            counter++;
+        }
+        else {
+            counter = 0;
+            spawnTicker = rand.nextInt(100);
+            spawnEnemiesForTest();
         }
     }
 }
