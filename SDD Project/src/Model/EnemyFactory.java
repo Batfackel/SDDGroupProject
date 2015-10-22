@@ -33,11 +33,11 @@ public class EnemyFactory {
     public Ship[] getEnemyShipFormation(String shipSelection, float x, float y) {
         enemyFormation = new Ship[5];
         rand = new Random();
-        enemyFormation[0] = new EnemyShip("alien1", x, y - rand.nextInt(MainMenu.m.getHeight()));
-        enemyFormation[1] = new EnemyShip("blueFighter", x + rand.nextInt(MainMenu.m.getWidth()), y - rand.nextInt(MainMenu.m.getHeight()));
-        enemyFormation[2] = new EnemyShip("purpleFighter", x + rand.nextInt(MainMenu.m.getWidth()), y - rand.nextInt(MainMenu.m.getHeight()));
-        enemyFormation[3] = new EnemyShip("redFighter", x + rand.nextInt(MainMenu.m.getWidth()), y - rand.nextInt(MainMenu.m.getHeight()));
-        enemyFormation[4] = new EnemyShip("defaultEnemyShip", x + rand.nextInt(MainMenu.m.getWidth()), y - rand.nextInt(MainMenu.m.getHeight()));
+        enemyFormation[0] = new EnemyShip("alien1", x, y - rand.nextInt(1000));
+        enemyFormation[1] = new EnemyShip("blueFighter", x + rand.nextInt(800), y - rand.nextInt(1000));
+        enemyFormation[2] = new EnemyShip("purpleFighter", x + rand.nextInt(800), y - rand.nextInt(1000));
+        enemyFormation[3] = new EnemyShip("redFighter", x + rand.nextInt(800), y - rand.nextInt(1000));
+        enemyFormation[4] = new EnemyShip("defaultEnemyShip", x + rand.nextInt(800), y - rand.nextInt(1000));
         return enemyFormation;
     }
     

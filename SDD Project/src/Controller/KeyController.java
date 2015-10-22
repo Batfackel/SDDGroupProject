@@ -14,8 +14,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyController implements KeyListener {
-    private Context bullet;         //stuff for state design pattern
-    private KineticState kinetic;   //stuff for state design pattern
+    public static Context bullet;         //stuff for state design pattern
+    public static KineticState kinetic;   //stuff for state design pattern
     private LaserState laser;       //stuff for state design pattern
     private MissileState missile;   //stuff for state design pattern
     private Ship mainShip;

@@ -186,7 +186,7 @@ public class Main extends JFrame implements ActionListener {
     public void setScreenSize(int w, int h){
         this.screenHeight = h;
         this.screenWidth = w;
-        setSize(screenWidth, screenHeight);
+        setSize(getScreenWidth(), getScreenHeight());
     }
 
     public void setShipName(String ship) {

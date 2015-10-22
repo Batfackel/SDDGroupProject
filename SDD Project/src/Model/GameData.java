@@ -400,7 +400,7 @@ public class GameData {
         }
         else {
             counter = 0;
-            spawnTicker = rand.nextInt(100);
+            spawnTicker = rand.nextInt(500);
             spawnEnemiesForTest();
         }
     }

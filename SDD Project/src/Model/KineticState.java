@@ -37,6 +37,13 @@ public class KineticState implements State{
             case 3:
                 System.out.println("kinetic max level");
                 break;
+            case 10:
+                synchronized (Main.gameData.bullets) {
+                    //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
+                    Main.gameData.bullets.add((Bullet)new KineticBulletBaseLevel(x + 20, y + 51));
+                    //Main.gameData.figures.add(new Launcher( x + 20, y - 51));
+                    break;
+                }
             default:
                 System.out.println("kinetic error");
         }

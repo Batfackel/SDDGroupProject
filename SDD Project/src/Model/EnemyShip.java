@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Controller.KeyController;
 import Controller.MovementStrategy;
 import Controller.SweepDown;
 import Controller.SweepLeft;
@@ -33,6 +34,8 @@ public class EnemyShip implements ShipState, GameFigure{
     Rectangle[] hitBox = new Rectangle[2];
     private boolean moveRight = true;
     private String shipType;
+    private int shootTicker, shootTimer;
+    private Random rand;
     
     public EnemyShip(float x, float y) {
         this.x = x;
@@ -55,8 +58,10 @@ public class EnemyShip implements ShipState, GameFigure{
         image = GameData.flyweightItems.setShipImage(this);
         this.shipHeight = image.getHeight(null);
         this.shipWidth = image.getWidth(null);
-        Random rand = new Random();
+        rand = new Random();
         moveRight = rand.nextBoolean();
+        shootTicker = rand.nextInt(200);
+        weaponState = 0;
         switch(shipType) {
             case "alien1":
                 this.health = 5;
@@ -243,6 +248,17 @@ public class EnemyShip implements ShipState, GameFigure{
         
         movement = new SweepDown();
         movement.moveShip(this);
+        
+        if(shootTimer != shootTicker) {
+            shootTimer++;
+            shootTicker = rand.nextInt(200);
+        }
+        else {
+            //spawn a shot and make it go down to attack the player
+            //should ignore the other enemyships
+            KeyController.bullet.setState(KeyController.kinetic, 10);
+            KeyController.bullet.fire(this.getX(), this.getY());
+        }
     }
 
     @Override
