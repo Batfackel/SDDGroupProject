@@ -24,6 +24,7 @@ import View.GamePanel;
 import View.ShipSelect;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import Model.Sounds;
 
 public class Main extends JFrame implements ActionListener {
 
@@ -146,7 +147,8 @@ public class Main extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == startButton) {
           gamePanel.startGame(lbl);
-          startButton.setEnabled(false);            
+          startButton.setEnabled(false);    
+          Sounds.sound1.loop();
         }
 //        else if (ae.getSource() == selectShipButton) {
 //            gamePanel.pauseGame();
@@ -168,12 +170,13 @@ public class Main extends JFrame implements ActionListener {
         else if(ae.getSource() == pauseButton) {
             if (!animator.isPause()) {
                 gamePanel.pauseGame();
-                
+                Sounds.sound1.stop();
                 pauseButton.setText("Resume");
             }
             else{
                 gamePanel.resumeGame();
                 pauseButton.setText("Pause");
+                Sounds.sound1.loop();
             }
             
         }

@@ -6,6 +6,7 @@ import Model.LaserState;
 import Model.Missile;
 import Model.MissileState;
 import Model.Ship;
+import Model.Sounds;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -42,6 +43,7 @@ public class MouseController implements MouseListener{
         //the ship weapon state changes - 9/10/2015
         //----------------------------------------------------------------------
         Color color;
+        Sounds.sound2.play();
         /*
         double r = Math.random();
         if (r < 0.25) {
