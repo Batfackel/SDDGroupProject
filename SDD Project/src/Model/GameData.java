@@ -47,7 +47,7 @@ public class GameData {
     private EnemyFactory enemyMaker = new EnemyFactory();
     private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();
     private Ship incomingShip;
-    private int BASE_LEVEL = -1, counter = 0, spawnTicker;
+    private int BASE_LEVEL = -1, counter = 0, spawnTicker, difficulty = 500;
     private EnemyFlyWeightFactory flyweightFactory;
     public static EnemyFlyweight flyweightItems;
     private ShipSelectMenu shipSelectionMenu;  
@@ -400,7 +400,7 @@ public class GameData {
         }
         else {
             counter = 0;
-            spawnTicker = rand.nextInt(500);
+            spawnTicker = rand.nextInt(difficulty);
             spawnEnemiesForTest();
         }
     }
