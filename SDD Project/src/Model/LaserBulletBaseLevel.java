@@ -114,4 +114,14 @@ public class LaserBulletBaseLevel extends Bullet{
     float getY() {
         return this.y;
     }
+
+    @Override
+    public Rectangle getRectangle() {
+        return this.getShipHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For LaserBulletBaseLevel", (int)getX(), (int)getY());
+    }
 }

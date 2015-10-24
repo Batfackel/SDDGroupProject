@@ -7,6 +7,7 @@
 package Model;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -98,4 +99,13 @@ public class Tutorial implements GameFigure, KeyListener, MouseListener {
     }
     
     ArrayList<ITutorialItem> items;
+
+    @Override
+    public Rectangle getRectangle() {
+        return null;
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+    }
 }

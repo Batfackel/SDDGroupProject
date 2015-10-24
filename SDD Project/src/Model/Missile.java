@@ -5,6 +5,7 @@ import static Model.Item.getImage;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import javax.vecmath.Vector2f;
@@ -97,6 +98,16 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
 
     public int getState() {
         return state;
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return this.getRectangle();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For Missile", (int)getX(), (int)getY());
     }
 
 }

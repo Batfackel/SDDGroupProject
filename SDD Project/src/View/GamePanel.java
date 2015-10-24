@@ -7,15 +7,19 @@ import Model.GameFigure;
 import Model.HUD;
 import Model.KineticBulletBaseLevel;
 import Model.Level;
+import Model.ProxyGameFigure;
 import Model.Ship;
 import Model.ShipFactory;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,7 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements MouseMotionListener {
       
     public static final int PWIDTH = 800; // size of the game panel
     public static final int PHEIGHT = 800;
@@ -41,6 +45,8 @@ public class GamePanel extends JPanel {
     private Image titleScreen;
     private Date now; 
     private Timer timer;
+    
+    private Point mousePos;
 
     public GamePanel(Animator animator, GameData gameData) {
         this.animator = animator;
@@ -59,7 +65,7 @@ public class GamePanel extends JPanel {
         titleScreen = getImage(imagePath + separator + "images" + separator
                 + "Inazuma no sentōki800x1000.png");
 
-
+        this.addMouseMotionListener(this);
         
         level = new Level(); 
         setBackground(Color.blue);
@@ -150,28 +156,29 @@ public class GamePanel extends JPanel {
             for(int n = 0; n < gameData.enemyShips.size(); n++) {
                 
                 ship = gameData.enemyShips.get(n);
-                ship.render(graphics);
+                
+                figureRendering((GameFigure)ship);
             }
         }
         synchronized (gameData.figures) {
             GameFigure f;
             for (int i = 0; i < gameData.figures.size(); i++) {
                 f = (GameFigure) gameData.figures.get(i);
-                f.render(graphics);
+                figureRendering(f);
             }
         }
         synchronized (gameData.ships) {
             Ship f;
             for (int i = 0; i < gameData.ships.size(); i++) {
                 f = (Ship) gameData.ships.get(i);
-                f.render(graphics);
+                figureRendering((GameFigure)f);
             }
         }        
         synchronized (gameData.items) {
             GameFigure f;
             for (int i = 0; i < gameData.items.size(); i++) {
                 f = (GameFigure) gameData.items.get(i);
-                f.render(graphics);
+                figureRendering(f);
             }            
         }
 
@@ -179,7 +186,7 @@ public class GamePanel extends JPanel {
             Bullet f;
                 for (int i = 0; i < gameData.bullets.size(); i++) {
                     f = (Bullet) gameData.bullets.get(i);
-                    f.render(graphics);
+                    figureRendering(f);
                 }
         }
         
@@ -239,6 +246,19 @@ public class GamePanel extends JPanel {
         
     }
     
-   
+    private void figureRendering(GameFigure f){
+        ProxyGameFigure proxy = new ProxyGameFigure(f);
+        
+        proxy.onRendering(graphics, mousePos);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        mousePos = e.getPoint();
+    }
     
 }
