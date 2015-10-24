@@ -117,4 +117,14 @@ class KineticBulletLeftShot extends Bullet{
     float getY() {
         return this.y;
     }
+
+    @Override
+    public Rectangle getRectangle() {
+        return this.getShipHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For KineticBulletLeftShot", (int)getX(), (int)getY());
+    }
 }

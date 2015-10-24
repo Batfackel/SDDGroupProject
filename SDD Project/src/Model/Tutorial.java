@@ -28,7 +28,8 @@ public class Tutorial implements GameFigure, KeyListener, MouseListener {
         items.add(new KeyboardTutorialItem("down.png", KeyEvent.VK_DOWN));
         items.add(new KeyboardTutorialItem("left.png", KeyEvent.VK_LEFT));
         items.add(new KeyboardTutorialItem("right.png", KeyEvent.VK_RIGHT));
-        items.add(new MouseTutorialItem("shot.png"));
+        items.add(new KeyboardTutorialItem("shots.png", KeyEvent.VK_SPACE));
+        //items.add(new MouseTutorialItem("shot.png"));
     }
 
     @Override
