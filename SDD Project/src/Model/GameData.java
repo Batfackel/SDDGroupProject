@@ -5,11 +5,13 @@ import Controller.EnemyFlyweight;
 import View.MainMenu;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -53,6 +55,8 @@ public class GameData {
     private ShipSelectMenu shipSelectionMenu;  
     private Random rand;
     
+    public boolean shockOn;
+    
     public GameData(String sName) {
         
         this.shipName = sName;
@@ -91,6 +95,11 @@ public class GameData {
         items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 220));
         items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 240));
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item) weaponMaker.getWeapon("MISSILE", 100, 200));
 
 //         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
@@ -106,69 +115,9 @@ public class GameData {
         }
         rand = new Random();
         spawnTicker = rand.nextInt(100);
-//-----------------------------------------------------------------------------
-//----------------------------------------------------------------------
-
-      //System.out.println("@@GAME DATA CONSTRUCTO@@");
+        this.shockOn = false;
     }
-
-
-    public GameData() {
-
-        menu = Collections.synchronizedList(new ArrayList<Background>());
-
-        figures = Collections.synchronizedList(new ArrayList<GameFigure>());
-        ships = Collections.synchronizedList(new ArrayList<Ship>());
-        items = Collections.synchronizedList(new ArrayList<Item>());
-        enemyShips = Collections.synchronizedList(new ArrayList<Ship>());
-        flyweightFactory = new EnemyFlyWeightFactory();
-        flyweightItems = flyweightFactory.getFlyweight();
-        bullets = Collections.synchronizedList(new ArrayList<Bullet>());
-
-        //create ships for collision test
-        //9/10/2015
-//-----------------------------------------------------------------------------        
-        //incomingShip = shipMaker.getShip("defaultShip",300,350);
-        // ships.add(incomingShip);      
-
-        //menu.add((Background) new ShipSelectMenu(0));
-        
-        //String shipT = shipTypes[((int)randomize((float)0,5))];  
-        
-        ships.add((Ship)shipMaker.getShip(shipName,450,450));//-----------------------------
-
-        menu.add((Background) new ShipSelectMenu(0));
-
-        ships.add((Ship) shipMaker.getShip("defaultship", 450, 450));
-
-        //represent weapon power-up items
-        //figures.add(new Launcher(100, 200));    
-        // testing items and new item mechanics
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 200));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 180));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 1600));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 220));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 240));
-        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("MISSILE", 100, 200));
-
-//         enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));
-        //represent weapon power-up items
-        //figures.add(new Launcher(100, 200));    
-        /*figures.add(new Launcher(250, 200));
-         figures.add(new Launcher(400, 200));
-         figures.add(new Launcher(100, 200));  */
-        //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
-        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
-        for (int i = 0; i < enemyFormation.length; i++) {
-            enemyShips.add(enemyFormation[i]);
-        }
-//-----------------------------------------------------------------------------
-//----------------------------------------------------------------------
-
-      //System.out.println("@@GAME DATA CONSTRUCTO@@");
-    }
-
+    
     private float randomize(float in, int offset) {
         float min = in, max = in + offset;
         Random rand = new Random();
@@ -180,20 +129,6 @@ public class GameData {
     public void update() {
 
         mainGame();
-    }
-
-//Will's Note:  This is probably not needed due to not being able to access Image files from this class.
-    //  Is this true anyone?
-    //??????????????????????????????????????????????????????????????????????????????????????????????????
-    public Image getImage(String fileName) {
-        Image image = null;
-        try {
-            image = ImageIO.read(new File(fileName));
-        } catch (Exception ioe) {
-            System.out.println("Error: Cannot open image:" + fileName);
-            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
-        }
-        return image;
     }
 
     public void spawnEnemiesForTest() {
@@ -244,10 +179,16 @@ public class GameData {
 //                              10/14/15
 //-----------------------------------------------------------------------------                           
         Ship currentShip = (Ship) this.ships.get(0);
+        if (currentShip.getWeaponState() == 1 && currentShip.getLevelState() > 1 && this.shockOn == false) {
+            this.shockOn = true;
+            Main.gameData.bullets.add(new LightningShot(currentShip.getX() - 60, currentShip.getY() - 60));
+        }
+        
+            
         //set to 4 for the time being, make a new arraylist for the enemies               
         //try {
             for (int i = 0; i < this.figures.size(); i++) {                
-                Rectangle hit = currentShip.getShipHitBox();
+                Rectangle hit = currentShip.getShipHitBox();                
                 if (this.figures.get(i) instanceof Ship) {
                     Ship asdf = (Ship) this.figures.get(i);
                     if (hit.intersects(asdf.getShipHitBox())) {
@@ -275,48 +216,70 @@ public class GameData {
             }
 //-----------------------------------------------------------------------------                           
             // checks for collision between items and the ship. If collision is 
-            // detected then it either changes the ships weapon in increments the 
-            // weapon level 9/23/15
-            for (int i = 0; i < this.items.size(); i++) {
-                //Rectangle[] hit = currentShip.getShipHitBox();
-                Rectangle hit = currentShip.getShipHitBox();
-                //System.out.println(this.items.size());
-                Item item = (Item) this.items.get(i);
+        // detected then it either changes the ships weapon in increments the 
+        // weapon level 9/23/15
+        for (int i = 0; i < this.items.size(); i++) {
+            //Rectangle[] hit = currentShip.getShipHitBox();
+            Rectangle hit = currentShip.getShipHitBox();
+            //System.out.println(this.items.size());
+            Item item = (Item) this.items.get(i);
 
-                if (hit.intersects(item.getRectangle1())) {
-                    int itemReference = item.getItemType();
-                    int shipWeaponReference = currentShip.getWeaponState();
-                    if (itemReference == shipWeaponReference) {
-                        currentShip.setLevelState(currentShip.getLevelState());
-                    } else if (itemReference >= 0 && itemReference <= 2) {
-                        currentShip.setWeaponState(itemReference);
-                        currentShip.setLevelState(BASE_LEVEL);
-                    } synchronized (items){
-                        this.items.remove(item);
-                    }
+            if (hit.intersects(item.getRectangle1())) {
+                int itemReference = item.getItemType();
+                int shipWeaponReference = currentShip.getWeaponState();
+                if (itemReference == shipWeaponReference) {
+                    currentShip.setLevelState(currentShip.getLevelState());
+                } else if (itemReference >= 0 && itemReference <= 2) {
+                    currentShip.setWeaponState(itemReference);
+                    currentShip.setLevelState(BASE_LEVEL);
+                }
+                synchronized (items) {
+                    this.items.remove(item);
                 }
             }
+        }
+//-----------------------------------------------------------------------------  
+        
 //-----------------------------------------------------------------------------                           
-            // player ship bullets to enemy ship collision 10/14/15
+        // player ship bullets to enemy ship collision 10/14/15
+        try {
             for (int i = 0; i < this.bullets.size(); i++) {
                 Bullet shot = (Bullet) bullets.get(i);
                 for (int j = 0; j < this.enemyShips.size(); j++) {
                     EnemyShip eShip = (EnemyShip) enemyShips.get(j);
-
-                    if (shot.getShipHitBox().intersects(eShip.getShipHitBox())) {                        
-                        eShip.getHit();        
+                    if (shot.name != "Lightning Shot") {                        
+                        if (shot.getHitBox().intersects(eShip.getShipHitBox())) {
+                            eShip.getHit();
+                            synchronized (bullets) {
+                                this.bullets.remove(shot);
+                            }
+                            break;
+                        }
+                        if (shot.getY() < -15) {
+                        System.out.println("bullet = " + shot.getY());
                         synchronized (bullets) {
                             this.bullets.remove(shot);
                         }
+                        break;
+                    } 
                     }
+                    else if (shot.name == "Lightning Shot") {
+                        if (shot.getHitCircle().intersects(eShip.getShipHitBox())) {
+                            this.shockOn = false;
+                            Rectangle we = eShip.getShipHitBox();
+                            Ellipse2D qw = shot.getHitCircle();
+                            eShip.getHit();                               
+                            synchronized (bullets) {
+                                this.bullets.remove(shot);
+                            }
+                            break;
+                        }                        
+                    }                     
                 }
-                if (shot.getY() < -15){
-            System.out.println("bullet = " + shot.getY());
-            synchronized (bullets) {
-                this.bullets.remove(shot);
             }
+        } catch (Exception e) {
+            System.out.println("Gamedata");
         }
-            }
 //-----------------------------------------------------------------------------                           
             //collision for enemies
             for (int i = 0; i < this.enemyShips.size(); i++) {

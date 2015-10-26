@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ class KineticBulletLeftShot extends Bullet{
     public KineticBulletLeftShot(float x, float y) {
         this.x = x;
         this.y = y;
+        this.name = "Kinetic Left Shot";
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
@@ -61,11 +63,7 @@ class KineticBulletLeftShot extends Bullet{
     private void setLauncherHitBox() {
         //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
         this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
-    }
-    
-    public Rectangle getShipHitBox(){
-        return this.r1;
-    }
+    }   
     
     @Override
     public void render(Graphics g) {
@@ -119,8 +117,22 @@ class KineticBulletLeftShot extends Bullet{
     }
 
     @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public Rectangle getHitBox() {
+        return this.r1;
+    }
+
+    @Override
+    public Ellipse2D getHitCircle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     public Rectangle getRectangle() {
-        return this.getShipHitBox();
+        return this.getHitBox();
     }
 
     @Override
