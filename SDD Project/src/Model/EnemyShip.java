@@ -325,4 +325,14 @@ public class EnemyShip implements ShipState, GameFigure{
             shipState = 1;
         }
     }
+
+    @Override
+    public Rectangle getRectangle() {
+        return this.getShipHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For EnemyShip", (int)getX(), (int)getY());
+    }
 }

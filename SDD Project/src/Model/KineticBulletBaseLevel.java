@@ -128,4 +128,13 @@ public class KineticBulletBaseLevel extends Bullet{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public Rectangle getRectangle() {
+        return this.getHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For KineticBulletBaseLevel", (int)getX(), (int)getY());
+    }
+    
 }

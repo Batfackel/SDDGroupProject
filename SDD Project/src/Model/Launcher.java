@@ -208,4 +208,14 @@ public class Launcher implements Ship, GameFigure, ShipState {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Rectangle getRectangle() {
+        return this.getShipHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For Launcher", (int)getX(), (int)getY());
+    }
+
 }

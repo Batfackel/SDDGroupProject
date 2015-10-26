@@ -7,6 +7,7 @@
 package Model;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -27,7 +28,8 @@ public class Tutorial implements GameFigure, KeyListener, MouseListener {
         items.add(new KeyboardTutorialItem("down.png", KeyEvent.VK_DOWN));
         items.add(new KeyboardTutorialItem("left.png", KeyEvent.VK_LEFT));
         items.add(new KeyboardTutorialItem("right.png", KeyEvent.VK_RIGHT));
-        items.add(new MouseTutorialItem("shot.png"));
+        items.add(new KeyboardTutorialItem("shots.png", KeyEvent.VK_SPACE));
+        //items.add(new MouseTutorialItem("shot.png"));
     }
 
     @Override
@@ -98,4 +100,13 @@ public class Tutorial implements GameFigure, KeyListener, MouseListener {
     }
     
     ArrayList<ITutorialItem> items;
+
+    @Override
+    public Rectangle getRectangle() {
+        return null;
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+    }
 }

@@ -154,4 +154,14 @@ public class LightningShot extends Bullet{
     public Ellipse2D getHitCircle() {
         return this.e1;
     }
+
+    @Override
+    public Rectangle getRectangle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -126,4 +126,14 @@ public class MissileBulletBaseLevel extends Bullet{
     public String getName() {
         return this.name;
     }
+
+    public Rectangle getRectangle() {
+        return this.getHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For MissileBulletBaseLevel", (int)getX(), (int)getY());
+
+    }
 }

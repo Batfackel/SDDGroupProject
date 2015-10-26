@@ -130,6 +130,7 @@ public class KineticState implements State{
                 t10.schedule(new SpawnShot(1, x + xRightOffset, y - yOffset), timeElapsed);
                 break;
             case 10:
+                //used by enemies to go and shoot at the player
                 synchronized (Main.gameData.bullets) {
                     //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
                     Main.gameData.bullets.add((Bullet)new KineticBulletBaseLevel(x + 20, y + 51));

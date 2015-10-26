@@ -130,4 +130,13 @@ class KineticBulletLeftShot extends Bullet{
     public Ellipse2D getHitCircle() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public Rectangle getRectangle() {
+        return this.getHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For KineticBulletLeftShot", (int)getX(), (int)getY());
+    }
 }
