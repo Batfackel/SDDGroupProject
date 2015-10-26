@@ -256,8 +256,7 @@ public class EnemyShip implements ShipState, GameFigure{
         else {
             //spawn a shot and make it go down to attack the player
             //should ignore the other enemyships
-            KeyController.bullet.setState(KeyController.kinetic, 10);
-            KeyController.bullet.fire(this.getX(), this.getY());
+            
         }
     }
 
