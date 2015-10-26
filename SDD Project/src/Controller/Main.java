@@ -4,7 +4,7 @@ import Model.Launcher;
 import Model.GameData;
 import Model.Missile;
 import Model.Ship;
-import Model.ShipFactory;
+//import Model.ShipFactory;
 import Model.Tutorial;
 import View.LeaderBoard;
 import java.awt.Color;
@@ -45,7 +45,7 @@ public class Main extends JFrame implements ActionListener {
     private JButton leaderBoard;
     private LeaderBoard leaderPanel;
     private Container c;   
-    private ShipFactory shipMaker;
+    //private ShipFactory shipMaker;
     private Ship ship;
     private Ship mainShip;
     private Tutorial tutorial;

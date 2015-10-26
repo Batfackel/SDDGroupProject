@@ -309,4 +309,9 @@ public class EnemyShip implements ShipState, GameFigure{
             shipState = 1;
         }
     }
+
+    @Override
+    public void onShipDamage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

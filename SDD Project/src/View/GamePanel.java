@@ -8,7 +8,7 @@ import Model.HUD;
 import Model.KineticBulletBaseLevel;
 import Model.Level;
 import Model.Ship;
-import Model.ShipFactory;
+//import Model.ShipFactory;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -37,7 +37,7 @@ public class GamePanel extends JPanel {
     private Image dbImage = null;
     public static Level level;
      private HUD hud;
-    public ShipFactory shipMaker;
+    //public ShipFactory shipMaker;
     private Image titleScreen;
     private Date now; 
     private Timer timer;

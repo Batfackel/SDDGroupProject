@@ -13,8 +13,12 @@ public interface Ship {
     static final int STATE_TURNING_LEFT = 2;
     static final int STATE_TURNING_RIGHT = 3;
     static final int STATE_EXPLODING = 4;
+    static final int STATE_DAMAGED = 5;
     static final int STATE_FINISHED = 0;
     
+    
+    
+    public void onShipDamage();
     public int getShipState();
   //getShipState()method I am unsure of if some one is using it please tell me,
     //if not I am going to delete it.

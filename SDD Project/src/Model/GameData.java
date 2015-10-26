@@ -81,7 +81,7 @@ public class GameData {
 
         menu.add((Background) new ShipSelectMenu(0));
 
-        ships.add((Ship) shipMaker.getShip("defaultship", 450, 450));
+        //ships.add((Ship) shipMaker.getShip("defaultship", 450, 450));
 
         //represent weapon power-up items
         //figures.add(new Launcher(100, 200));    
@@ -111,7 +111,7 @@ public class GameData {
       //System.out.println("@@GAME DATA CONSTRUCTO@@");
     }
 
-
+/*
     public GameData() {
 
         menu = Collections.synchronizedList(new ArrayList<Background>());
@@ -156,7 +156,7 @@ public class GameData {
         //figures.add(new Launcher(100, 200));    
         /*figures.add(new Launcher(250, 200));
          figures.add(new Launcher(400, 200));
-         figures.add(new Launcher(100, 200));  */
+         figures.add(new Launcher(100, 200));  
         //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
         Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
         for (int i = 0; i < enemyFormation.length; i++) {
@@ -166,7 +166,7 @@ public class GameData {
 //----------------------------------------------------------------------
 
       //System.out.println("@@GAME DATA CONSTRUCTO@@");
-    }
+    }*/
 
     private float randomize(float in, int offset) {
         float min = in, max = in + offset;
