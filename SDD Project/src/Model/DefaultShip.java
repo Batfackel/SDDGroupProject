@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Will
  */
-public class DefaultShip implements Ship, ShipState {    
+public class DefaultShip implements ShipState, GameFigure {    
    private Image currentImage; 
    private float x, y , dx, dy;
    private float shipHeight, shipWidth;
@@ -127,20 +127,23 @@ public class DefaultShip implements Ship, ShipState {
      return this.shipHealth;
  }
 
-public void setShipHitBox(){
+   @Override
+   public void setShipHitBox(){
     switch (getState()){
         case 1: {
             this.hitBox[0] = new Rectangle((int)this.x, (int)this.y, (int)this.shipWidth, (int) this.shipHeight); 
         }
     }
 }
-public Rectangle getShipHitBox(){
+   @Override
+   public Rectangle getShipHitBox(){
     return this.hitBox[0];
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*END HITBOX METHODS*/ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-public void render(Graphics g){
+   @Override
+   public void render(Graphics g){
     //System.out.println("before switch------------------------");
     
     switch (getState()){
@@ -432,7 +435,17 @@ public int getState() {
 
     @Override
     public String getShipType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "DefaultShip";
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return this.getShipHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For DefaultShip", (int)getX(), (int)getY());
     }
 
     @Override

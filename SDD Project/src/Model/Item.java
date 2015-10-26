@@ -133,5 +133,15 @@ class Item implements GameFigure, AbstractItem{
     public void timeout() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Rectangle getRectangle() {
+        return this.getRectangle1();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For Item", (int)x, (int)y);
+    }
     
 }

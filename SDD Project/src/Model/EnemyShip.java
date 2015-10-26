@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Controller.KeyController;
 import Controller.MovementStrategy;
 import Controller.SweepDown;
 import Controller.SweepLeft;
@@ -33,6 +34,8 @@ public class EnemyShip implements ShipState, GameFigure{
     Rectangle[] hitBox = new Rectangle[2];
     private boolean moveRight = true;
     private String shipType;
+    private int shootTicker, shootTimer;
+    private Random rand;
     
     public EnemyShip(float x, float y) {
         this.x = x;
@@ -52,14 +55,16 @@ public class EnemyShip implements ShipState, GameFigure{
         this.rateOfSpeed = 2;
         setShipState(13);
         this.shipType = shipType;
-        image = GameData.flyweightItems.setImage(this);
+        image = GameData.flyweightItems.setShipImage(this);
         this.shipHeight = image.getHeight(null);
         this.shipWidth = image.getWidth(null);
-        Random rand = new Random();
+        rand = new Random();
+        moveRight = rand.nextBoolean();
+        shootTicker = rand.nextInt(200);
+        weaponState = 0;
         switch(shipType) {
             case "alien1":
                 this.health = 5;
-                moveRight = rand.nextBoolean();
                 score = 5;
                 break;
             case "blueFighter":
@@ -153,7 +158,7 @@ public class EnemyShip implements ShipState, GameFigure{
             g.drawImage(image, getX(), getY(), null);
         }
         else {
-            g.drawImage(GameData.flyweightItems.setImage(this), getX(), getY(), null);
+            g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
             if(shipState != 12) {
                 shipState++;
             }
@@ -243,6 +248,17 @@ public class EnemyShip implements ShipState, GameFigure{
         
         movement = new SweepDown();
         movement.moveShip(this);
+        
+        if(shootTimer != shootTicker) {
+            shootTimer++;
+            shootTicker = rand.nextInt(200);
+        }
+        else {
+            //spawn a shot and make it go down to attack the player
+            //should ignore the other enemyships
+       //     KeyController.bullet.setState(KeyController.kinetic, 10);
+       //     KeyController.bullet.fire(this.getX(), this.getY());
+        }
     }
 
     @Override
@@ -311,7 +327,17 @@ public class EnemyShip implements ShipState, GameFigure{
     }
 
     @Override
+<<<<<<< HEAD
     public void onShipDamage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+=======
+    public Rectangle getRectangle() {
+        return this.getShipHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For EnemyShip", (int)getX(), (int)getY());
+>>>>>>> origin/master
     }
 }

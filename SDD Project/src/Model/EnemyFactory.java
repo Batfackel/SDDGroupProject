@@ -7,6 +7,7 @@ package Model;
 
 import View.MainMenu;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -16,6 +17,7 @@ public class EnemyFactory {
     
     private Ship enemyShip;
     private Ship[] enemyFormation;
+    private Random rand;
     
     public Ship getEnemyShip(String shipSelection, float x, float y){
         
@@ -30,11 +32,12 @@ public class EnemyFactory {
     
     public Ship[] getEnemyShipFormation(String shipSelection, float x, float y) {
         enemyFormation = new Ship[5];
-        enemyFormation[0] = new EnemyShip("alien1", x, y - 50);
-        enemyFormation[1] = new EnemyShip("blueFighter", x + 190, y - 50);
-        enemyFormation[2] = new EnemyShip("purpleFighter", x + 380, y - 50);
-        enemyFormation[3] = new EnemyShip("redFighter", x + 190, y - 250);
-        enemyFormation[4] = new EnemyShip("defaultEnemyShip", x + 380, y - 250);
+        rand = new Random();
+        enemyFormation[0] = new EnemyShip("alien1", x, y - rand.nextInt(1000));
+        enemyFormation[1] = new EnemyShip("blueFighter", x + rand.nextInt(800), y - rand.nextInt(1000));
+        enemyFormation[2] = new EnemyShip("purpleFighter", x + rand.nextInt(800), y - rand.nextInt(1000));
+        enemyFormation[3] = new EnemyShip("redFighter", x + rand.nextInt(800), y - rand.nextInt(1000));
+        enemyFormation[4] = new EnemyShip("defaultEnemyShip", x + rand.nextInt(800), y - rand.nextInt(1000));
         return enemyFormation;
     }
     

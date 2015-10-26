@@ -19,6 +19,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
       Image defaultImage, redFighterImage, alienImage, blueFighterImage, purpleFighterImage,
             explosionImage1, explosionImage2, explosionImage3, explosionImage4, explosionImage5,
             explosionImage6, explosionImage7, explosionImage8, explosionImage9, explosionImage10,
+<<<<<<< HEAD
             explosionImage11, explosionImage12, balancedShipImage,balancedShipImageRight,balancedShipImageLeft, 
             speederShipImage, speederShipImageRight,speederShipImageLeft,
             heavyShipImage, heavyShipImageRight, heavyShipImageLeft,
@@ -28,6 +29,11 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
             image;
     String shipType;
 
+=======
+            explosionImage11, explosionImage12, image;
+    
+    
+>>>>>>> origin/master
     public EnemyFlyweightItems() {
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -76,6 +82,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
     }
 
     @Override
+<<<<<<< HEAD
     public Image setImage(Ship ship) {
         try {
             //get images from the flyweight so we don't have to create a ton of images in memory
@@ -83,6 +90,13 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                 switch (ship.getShipState()) {
                     case 1:
                         image = explosionImage1;
+=======
+    public Image setShipImage(Ship ship) {
+        //get images from the flyweight so we don't have to create a ton of images in memory
+            switch(ship.getShipState()) {
+                case 1:
+                    image = explosionImage1;
+>>>>>>> origin/master
                     break;
                 case 2:
                     image = explosionImage2;
@@ -145,6 +159,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                     }
                     break;
             }
+<<<<<<< HEAD
                 }   
        if (ship instanceof NewShip)
        {
@@ -346,6 +361,13 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
         return image;
     }
 
+=======
+        return image;
+    }
+    
+    
+    
+>>>>>>> origin/master
     public Image getImage(String fileName) {
         Image image = null;
         try {
@@ -355,5 +377,10 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
             JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
         }
         return image;
+    }
+
+    @Override
+    public Image setBulletImage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

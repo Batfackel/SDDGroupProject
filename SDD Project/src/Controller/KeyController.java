@@ -14,8 +14,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyController implements KeyListener {
-    private Context bullet;         //stuff for state design pattern
-    private KineticState kinetic;   //stuff for state design pattern
+    public static Context bullet;         //stuff for state design pattern
+    public static KineticState kinetic;   //stuff for state design pattern
     private LaserState laser;       //stuff for state design pattern
     private MissileState missile;   //stuff for state design pattern
     private Ship mainShip;
@@ -198,7 +198,7 @@ public class KeyController implements KeyListener {
                         Above the state of context is changed to Kinetic and with the ships current weapon level.                        
                         */
                         this.bullet.setState(kinetic, mainShip.getLevelState());                        
-                        System.out.println(this.bullet.getState().toString());  //used for debugging
+                        //System.out.println(this.bullet.getState().toString());  //used for debugging
                         /*
                         Once the bullet state is set using Context methods this command is executed to
                         actually spawn in a bullet. fire(x, y) is a method stored in context. The method in
@@ -212,12 +212,12 @@ public class KeyController implements KeyListener {
                         break;
                     case 1: //laser
                         this.bullet.setState(laser, mainShip.getLevelState());
-                        System.out.println(this.bullet.getState().toString());
+                        //System.out.println(this.bullet.getState().toString());
                         this.bullet.fire(mainShip.getX(), mainShip.getY());
                         break;
                     case 2: //missile
                         this.bullet.setState(missile, mainShip.getLevelState());
-                        System.out.println(this.bullet.getState().toString());
+                        //System.out.println(this.bullet.getState().toString());
                         this.bullet.fire(mainShip.getX(), mainShip.getY());
                         break;
                     default: //error
