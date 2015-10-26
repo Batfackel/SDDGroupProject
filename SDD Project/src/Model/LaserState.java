@@ -18,7 +18,7 @@ public class LaserState implements State{
     public void fire(Context bullet, int wls, int x, int y) {
         System.out.println("player is in Laser state");
         bullet.setState(this, 1);    
-      
+      try {
         switch(wls) {
             case 0:
                 synchronized (Main.gameData.bullets) {
@@ -28,10 +28,13 @@ public class LaserState implements State{
                     break;
                 }
             case 1:
-                System.out.println("Laser level 2");
+                Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 30, y - 51));
+                Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 10, y - 51));
                 break;
             case 2:
-                System.out.println("Laser level 3");
+                Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 30, y - 51));
+                Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 10, y - 51));
+//                Main.gameData.bullets.add(new LightningShot(x + 25, y + 25));
                 break;
             case 3:
                 System.out.println("Laser max level");
@@ -39,7 +42,11 @@ public class LaserState implements State{
             default:
                 System.out.println("Laser error");
         }
+      }catch(Exception e) {
+          System.out.println("error in LaserState");
+      }
     }
+    
     
     public String toString() {
         return "Laser State";

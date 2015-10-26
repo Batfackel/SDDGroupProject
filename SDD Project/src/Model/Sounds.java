@@ -24,7 +24,7 @@ public class Sounds {
     public Sounds (String fileName) {
 
         try {
-            clip = Applet.newAudioClip(Sounds.class.getResource(fileName));
+//            clip = Applet.newAudioClip(Sounds.class.getResource(fileName));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class Sounds {
     }
     
     public void loop() {
-        clip.loop();
+//        clip.loop();
     }
 
     

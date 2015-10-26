@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class MissileBulletBaseLevel extends Bullet{
     public MissileBulletBaseLevel(float x, float y) {
         this.x = x;
         this.y = y;
+        this.name = "Missile Base Level";
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
@@ -61,8 +63,13 @@ public class MissileBulletBaseLevel extends Bullet{
         this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
     }
     
-    public Rectangle getShipHitBox(){
+    public Rectangle getHitBox(){
         return this.r1;
+    }
+    
+    @Override
+    public Ellipse2D getHitCircle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
@@ -113,5 +120,10 @@ public class MissileBulletBaseLevel extends Bullet{
     @Override
     float getY() {
         return this.y;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

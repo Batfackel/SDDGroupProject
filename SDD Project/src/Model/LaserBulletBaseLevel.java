@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class LaserBulletBaseLevel extends Bullet{
     public LaserBulletBaseLevel(float x, float y) {
         this.x = x;
         this.y = y;
+        this.name = "Laser Base Shot";
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
@@ -37,7 +39,7 @@ public class LaserBulletBaseLevel extends Bullet{
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
         launcherImage = getImage(imagePath + separator + "images" + separator
-                + "BulletTest.png");
+                + "laserShot.png");
         
 
         //setRectangle(); // initialize the hit box when object is created for testing   
@@ -59,18 +61,14 @@ public class LaserBulletBaseLevel extends Bullet{
     private void setLauncherHitBox() {
         //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
         this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
-    }
-    
-    public Rectangle getShipHitBox(){
-        return this.r1;
-    }
+    }   
     
     @Override
     public void render(Graphics g) {
         int width = launcherImage.getWidth(null);
         int height = launcherImage.getHeight(null);
         //g.drawImage(launcherImage, (int)x, (int)y, null);
-        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 2, 54, 9, 65, null);        
+        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 35, 5, 5, 18, 40, null);        
         //----------------------------------------------------------------------
         //set up and display hit boxes for the launcher objects
         //used for dubugging 9/10/2015
@@ -87,7 +85,7 @@ public class LaserBulletBaseLevel extends Bullet{
     @Override
     public void update() {
         setLauncherHitBox();        
-        this.y -= 4;
+        this.y -= 15;
         //if (this.x < 1){
         //    System.out.println("bullet = " + this.x);
         //    this.state = STATE_DONE;
@@ -113,5 +111,20 @@ public class LaserBulletBaseLevel extends Bullet{
     @Override
     float getY() {
         return this.y;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public Rectangle getHitBox() {
+        return this.r1;
+    }
+
+    @Override
+    public Ellipse2D getHitCircle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -150,21 +150,5 @@ public class KineticState implements State{
     public String toString() {
         return "Kinetic State";
     }    
-
-    class RemindTask extends TimerTask {
-        int x, y, count;
-        public RemindTask(int i, int x, int y) {
-            this.count = i;
-            this.x = x;
-            this.y = y;
-        }
-        public void run() {
-            //System.out.println("Time's up!");
-            Main.gameData.bullets.add((Bullet)new KineticBulletBaseLevel(this.x + 20, this.y - 51));               
-            timers[this.count].cancel();
-            //timer.cancel(); //Terminate the timer thread            
-        }
-    }
-
-    
+ 
 }
