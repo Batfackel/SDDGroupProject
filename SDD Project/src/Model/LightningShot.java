@@ -157,7 +157,7 @@ public class LightningShot extends Bullet{
 
     @Override
     public Rectangle getRectangle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return new Rectangle((int)this.x, (int)this.y, 30, 30);
     }
 
     @Override
