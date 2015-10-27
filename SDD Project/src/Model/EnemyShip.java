@@ -161,27 +161,19 @@ public class EnemyShip implements ShipState, GameFigure{
             g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
             if(shipState != 12) {
                 shipState++;
+                hitBox[0] = new Rectangle(-100, -100, 0, 0);
             }
             else {
                 shipState = 0;
+                hitBox[0] = new Rectangle(-100, -100, 0, 0);
             }
             
         }
-        
-//        g.drawRect(getX(), getY(), (int)this.shipWidth, (int) this.shipHeight);
     }
 
     @Override
     public void setLevelState(int i) {
-        switch(i) {
-            case -1: this.levelState = BASE_LEVEL;
-                break;
-            case 0: this.levelState = LEVEL_1;
-                break;
-            case 1: this.levelState = LEVEL_2;
-                break;
-            case 2: this.levelState = LEVEL_3;
-        }
+        levelState = i;
     }
 
     @Override
@@ -324,6 +316,10 @@ public class EnemyShip implements ShipState, GameFigure{
             shipState = 1;
         }
     }
+    
+    public void getHit(Bullet bullet) {
+        //do stuff depending on what type of bullet it is
+    }
 
     @Override
     public Rectangle getRectangle() {
@@ -332,6 +328,17 @@ public class EnemyShip implements ShipState, GameFigure{
 
     @Override
     public void renderToolTips(Graphics g) {
+        //string is modified based on the enemy type that is being hovered over
         g.drawString("Tool Tips For EnemyShip", (int)getX(), (int)getY());
+    }
+    
+    public int fireLocationX() {
+        //half the width of the ship
+        return (int) x + ((int) shipWidth / 2);
+    }
+    
+    public int fileLocationY() {
+        //at the bottom of the picture
+        return (int) y + (int)shipHeight;
     }
 }

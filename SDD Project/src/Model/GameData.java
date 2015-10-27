@@ -44,7 +44,7 @@ public class GameData {
     public List<Item> items;
     public List<Ship> ships, enemyShips;
     public List<Background> menu;
-    public List<Bullet> bullets;
+    public List<Bullet> bullets, enemyBullets;
     private final ShipFactory shipMaker = new ShipFactory();
     private EnemyFactory enemyMaker = new EnemyFactory();
     private WeaponPowerFactory weaponMaker = new WeaponPowerFactory();
@@ -69,6 +69,7 @@ public class GameData {
         flyweightFactory = new EnemyFlyWeightFactory();
         flyweightItems = flyweightFactory.getFlyweight();
         bullets = Collections.synchronizedList(new ArrayList<Bullet>());
+        enemyBullets = Collections.synchronizedList(new ArrayList<Bullet>());
 
         //create ships for collision test
         //9/10/2015
