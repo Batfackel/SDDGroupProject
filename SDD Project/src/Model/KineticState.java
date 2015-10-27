@@ -131,9 +131,9 @@ public class KineticState implements State{
                 break;
             case 10:
                 //used by enemies to go and shoot at the player
-                synchronized (Main.gameData.bullets) {
+               synchronized (Main.gameData.friendlyBullets) {
                     //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
-                    Main.gameData.bullets.add((Bullet)new KineticBulletBaseLevel(x + 20, y + 51));
+                    Main.gameData.friendlyBullets.add((Bullet)new KineticBulletBaseLevel(x + 20, y + 51));
                     //Main.gameData.figures.add(new Launcher( x + 20, y - 51));
                     break;
                 }

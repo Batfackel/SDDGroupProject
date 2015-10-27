@@ -30,13 +30,13 @@ class SpawnShot extends TimerTask {
         public void run() {
             //this.x = ship.getX();
             //System.out.println("Time's up!");
-            synchronized (Main.gameData.bullets) {
+            synchronized (Main.gameData.friendlyBullets) {
                 if (this.shotType == 0)
-                    Main.gameData.bullets.add((Bullet)new KineticBulletBaseLevel(this.x, this.y));               
+                    Main.gameData.friendlyBullets.add((Bullet)new KineticBulletBaseLevel(this.x, this.y));               
                 else if (this.shotType == 1)
-                    Main.gameData.bullets.add((Bullet)new KineticBulletRightShot(this.x, this.y));               
+                    Main.gameData.friendlyBullets.add((Bullet)new KineticBulletRightShot(this.x, this.y));               
                 else if (this.shotType == 2)
-                    Main.gameData.bullets.add((Bullet)new KineticBulletLeftShot(this.x, this.y));               
+                    Main.gameData.friendlyBullets.add((Bullet)new KineticBulletLeftShot(this.x, this.y));               
             }
             try {
             //timers[this.count].cancel();            
