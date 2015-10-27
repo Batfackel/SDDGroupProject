@@ -269,19 +269,17 @@ public int getState() {
     }
 
     @Override
-<<<<<<< HEAD
-    public void onShipDamage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
     public Rectangle getRectangle() {
         return this.getShipHitBox();
     }
 
     @Override
     public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For TempShip", (int)getX(), (int)getY());
->>>>>>> origin/master
+        g.drawString("Tool Tips For TempShip", (int) getX(), (int) getY());
     }
-}    
 
-
+    @Override
+    public int getDamagedCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}

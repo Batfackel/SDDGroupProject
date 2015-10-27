@@ -207,12 +207,8 @@ public class Launcher implements Ship, GameFigure, ShipState {
     public String getShipType() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-<<<<<<< HEAD
-    public void onShipDamage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
+    
+     @Override
     public Rectangle getRectangle() {
         return this.getShipHitBox();
     }
@@ -220,7 +216,12 @@ public class Launcher implements Ship, GameFigure, ShipState {
     @Override
     public void renderToolTips(Graphics g) {
         g.drawString("Tool Tips For Launcher", (int)getX(), (int)getY());
->>>>>>> origin/master
+
+    }
+
+    @Override
+    public int getDamagedCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

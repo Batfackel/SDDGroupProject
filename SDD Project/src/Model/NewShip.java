@@ -16,17 +16,21 @@ import javax.swing.JOptionPane;
  *
  * @author Will
  */
-public class NewShip implements Ship, ShipState {
+public class NewShip implements GameFigure, ShipState {
 
     private float x, y, dx, dy, shipHeight, shipWidth;
     private int state, levelState, rateOfSpeed, armour, shipState, weaponState, weaponLevel, health;
     private String shipType;
     private Image shipImage;
+    
+    private int damagedCounter;
+    
     Rectangle[] hitBox = new Rectangle[2];
 
     NewShip(float x, float y) {
         this.x = x;
         this.y = y;
+        damagedCounter=0;
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
         this.rateOfSpeed = 2;
@@ -37,12 +41,14 @@ public class NewShip implements Ship, ShipState {
     NewShip(String shipType, float x, float y) {
         this.x = x;
         this.y = y;
+        damagedCounter = 0;
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
         //this.rateOfSpeed = 2;
         setShipState(13);
         this.shipType = shipType;
-        shipImage = GameData.flyweightItems.setImage(this);
+        Ship xx = (Ship) this;
+        shipImage = GameData.flyweightItems.setShipImage(xx);
         this.shipHeight = shipImage.getHeight(null);
         this.shipWidth = shipImage.getWidth(null);
         //this.shipHeight = 64;
@@ -166,6 +172,10 @@ public class NewShip implements Ship, ShipState {
         }
     }
 
+    public int getDamagedCounter() {
+        return damagedCounter;
+    }
+
     @Override
     public int getLevelState() {
         return this.levelState;
@@ -209,26 +219,55 @@ public class NewShip implements Ship, ShipState {
     @Override
     public void update() {
         setShipHitBox();
+        isShipDamaged();
         isTurning();
-        shipImage = GameData.flyweightItems.setImage(this);
+
+        shipImage = GameData.flyweightItems.setShipImage(this);
     }
-    private void isTurning()
-    {
-        if (dx>0)
-        {
-            this.state = STATE_TURNING_RIGHT;
-             dx=0;
+
+    void isShipDamaged() {
+        if (this.state == STATE_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ) {
+            if (damagedCounter < 50) {
+                damagedCounter++;
+            } else {
+                this.state = STATE_OK;
+                damagedCounter = 0;
+            }
         }
-        else if (dx<0)
-        {
-           this.state = STATE_TURNING_LEFT;
-           dx=0;
-        }
-        else { 
-              this.state = STATE_OK;
-        }
-            
+
     }
+
+    private void isTurning() {
+        if (dx > 0) {
+            if (this.state != STATE_DAMAGED) {
+                this.state = STATE_TURNING_RIGHT;
+            }
+            else {
+                this.state = STATE_TURNING_RIGHT_DAMAGED;
+            }
+            dx = 0;
+        } else if (dx < 0) {
+            if (this.state != STATE_DAMAGED) {
+                this.state = STATE_TURNING_LEFT;
+            }
+            else {
+                this.state = STATE_TURNING_LEFT_DAMAGED;
+            }
+
+            dx = 0;
+        } else {
+            if (this.state != STATE_DAMAGED) {
+                 this.state = STATE_OK;
+            }
+             else {
+                this.state = STATE_DAMAGED;
+            }
+
+           
+        }
+
+    }
+
     @Override
     public int getState() {
         return this.state;
@@ -239,8 +278,10 @@ public class NewShip implements Ship, ShipState {
         update();
         if (getShipState() == 13) {
             g.drawImage(shipImage, getX(), getY(), null);
-        } else {
-            g.drawImage(GameData.flyweightItems.setImage(this), getX(), getY(), null);
+        }
+        
+        else {
+            g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
             if (shipState != 12) {
                 shipState++;
             } else {
@@ -278,8 +319,14 @@ public class NewShip implements Ship, ShipState {
         throw new UnsupportedOperationException("Not using anymore."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     @Override
-    public void onShipDamage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Rectangle getRectangle() {
+        return this.getShipHitBox();
+    }
+
+    @Override
+    public void renderToolTips(Graphics g) {
+        g.drawString("Tool Tips For DefaultShip", (int)getX(), (int)getY());
     }
 }

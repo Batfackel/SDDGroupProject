@@ -449,9 +449,8 @@ public int getState() {
     }
 
     @Override
-    public void onShipDamage() {
+    public int getDamagedCounter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
 }

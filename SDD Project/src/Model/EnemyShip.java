@@ -326,11 +326,8 @@ public class EnemyShip implements ShipState, GameFigure{
         }
     }
 
+    
     @Override
-<<<<<<< HEAD
-    public void onShipDamage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
     public Rectangle getRectangle() {
         return this.getShipHitBox();
     }
@@ -338,6 +335,11 @@ public class EnemyShip implements ShipState, GameFigure{
     @Override
     public void renderToolTips(Graphics g) {
         g.drawString("Tool Tips For EnemyShip", (int)getX(), (int)getY());
->>>>>>> origin/master
+
+    }
+
+    @Override
+    public int getDamagedCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
