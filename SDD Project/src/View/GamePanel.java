@@ -182,10 +182,10 @@ public class GamePanel extends JPanel implements MouseMotionListener {
             }            
         }
 
-        synchronized (gameData.bullets) {
+        synchronized (gameData.friendlyBullets) {
             Bullet f;
-                for (int i = 0; i < gameData.bullets.size(); i++) {
-                    f = (Bullet) gameData.bullets.get(i);
+                for (int i = 0; i < gameData.friendlyBullets.size(); i++) {
+                    f = (Bullet) gameData.friendlyBullets.get(i);
                     figureRendering(f);
                 }
         }

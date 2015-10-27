@@ -21,19 +21,19 @@ public class LaserState implements State{
       try {
         switch(wls) {
             case 0:
-                synchronized (Main.gameData.bullets) {
+                synchronized (Main.gameData.friendlyBullets) {
                     //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
-                    Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 20, y - 51));
+                    Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 20, y - 51));
                     //Main.gameData.figures.add(new Launcher( x + 20, y - 51));
                     break;
                 }
             case 1:
-                Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 30, y - 51));
-                Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 10, y - 51));
+                Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 30, y - 51));
+                Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 10, y - 51));
                 break;
             case 2:
-                Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 30, y - 51));
-                Main.gameData.bullets.add(new LaserBulletBaseLevel(x + 10, y - 51));
+                Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 30, y - 51));
+                Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 10, y - 51));
 //                Main.gameData.bullets.add(new LightningShot(x + 25, y + 25));
                 break;
             case 3:
