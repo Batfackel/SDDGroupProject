@@ -65,15 +65,8 @@ public class GameData {
         enemyBullets = Collections.synchronizedList(new ArrayList<Bullet>());
                      
         menu.add((Background) new ShipSelectMenu(0));        
-        ships.add((Ship)shipMaker.getShip(shipName,450,450));
-        ships.add((Ship)shipMaker.getShip(shipName,450,450));
-        menu.add((Background) new ShipSelectMenu(0));
-
-        //ships.add((Ship) shipMaker.getShip("defaultship", 450, 450));
-
-        //represent weapon power-up items
-        //figures.add(new Launcher(100, 200));    
-
+        ships.add((Ship)shipMaker.getShip(shipName,450,450));        
+        
         //represent weapon power-up items        
         // testing items and new item mechanics
         items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 200));
@@ -82,7 +75,11 @@ public class GameData {
         items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 220));
         items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 240));
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
-
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item) weaponMaker.getWeapon("MISSILE", 100, 200));
 
         //enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));        
@@ -148,10 +145,6 @@ public class GameData {
                         items.add((Item) weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
                         items.add((Item) weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
                         items.add((Item) weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));
-                        /*START EXPLOSION TEST*/
-                       // currentShip.setState(4);
-                        //Damaged Test               
-//=======================/*END EXPLOSION TEST*/                        
                         items.add((Item) weaponMaker.getWeapon("KINETIC", randomize(asdf.getXofMissileShoot(), 100), randomize(asdf.getYofMissileShoot(), 100)));                        
                         currentShip.setState(4);
                         //   Main.controller = new KeyController(currentShip);
