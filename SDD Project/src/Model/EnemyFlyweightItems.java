@@ -20,14 +20,19 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
     Image defaultImage, redFighterImage, alienImage, blueFighterImage, purpleFighterImage,
             explosionImage1, explosionImage2, explosionImage3, explosionImage4, explosionImage5,
             explosionImage6, explosionImage7, explosionImage8, explosionImage9, explosionImage10,
-            explosionImage11, explosionImage12, 
-            balancedShipImage,balancedShipImageDamaged, balancedShipImageRight,
-            balancedShipImageRightDamaged, balancedShipImageLeft,balancedShipImageLeftDamaged,
+            explosionImage11, explosionImage12,
+            balancedShipImage, balancedShipImageDamaged, balancedShipImageRight,
+            balancedShipImageRightDamaged, balancedShipImageLeft, balancedShipImageLeftDamaged,
             speederShipImage, speederShipImageRight, speederShipImageLeft,
+            speederShipImageDamaged, speederShipImageRightDamaged, speederShipImageLeftDamaged,
             heavyShipImage, heavyShipImageRight, heavyShipImageLeft,
+            heavyShipImageDamaged, heavyShipImageRightDamaged, heavyShipImageLeftDamaged,
             sniperShipImage, sniperShipImageRight, sniperShipImageLeft,
+            sniperShipImageDamaged, sniperShipImageRightDamaged, sniperShipImageLeftDamaged,
             battleShipImage, battleShipImageRight, battleShipImageLeft,
+            battleShipImageDamaged, battleShipImageRightDamaged, battleShipImageLeftDamaged,
             fighterShipImage, fighterShipImageRight, fighterShipImageLeft,
+            fighterShipImageDamaged, fighterShipImageRightDamaged, fighterShipImageLeftDamaged,
             image;
     String shipType;
 
@@ -58,30 +63,44 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
         balancedShipImageDamaged = getImage(imagePath + separator + "images" + separator + "raiderDamaged.png");
         balancedShipImageLeftDamaged = getImage(imagePath + separator + "images" + separator + "raider_leftDamaged.png");
         balancedShipImageRightDamaged = getImage(imagePath + separator + "images" + separator + "raider_rightDamaged.png");
-        
+
         speederShipImage = getImage(imagePath + separator + "images" + separator + "violet.png");
         speederShipImageLeft = getImage(imagePath + separator + "images" + separator + "violet_left.png");
         speederShipImageRight = getImage(imagePath + separator + "images" + separator + "violet_right.png");
-        
+        speederShipImageDamaged = getImage(imagePath + separator + "images" + separator + "violetDamaged.png");
+        speederShipImageLeftDamaged = getImage(imagePath + separator + "images" + separator + "violet_leftDamaged.png");
+        speederShipImageRightDamaged = getImage(imagePath + separator + "images" + separator + "violet_rightDamaged.png");
+
         heavyShipImage = getImage(imagePath + separator + "images" + separator + "death.png");
         heavyShipImageLeft = getImage(imagePath + separator + "images" + separator + "death_left.png");
         heavyShipImageRight = getImage(imagePath + separator + "images" + separator + "death_right.png");
+        heavyShipImageDamaged = getImage(imagePath + separator + "images" + separator + "deathDamaged.png");
+        heavyShipImageLeftDamaged = getImage(imagePath + separator + "images" + separator + "death_leftDamaged.png");
+        heavyShipImageRight = getImage(imagePath + separator + "images" + separator + "death_rightDamaged.png");
 
         sniperShipImage = getImage(imagePath + separator + "images" + separator + "shadow.png");
         sniperShipImageLeft = getImage(imagePath + separator + "images" + separator + "shadow_left.png");
         sniperShipImageRight = getImage(imagePath + separator + "images" + separator + "shadow_right.png");
+        sniperShipImageDamaged = getImage(imagePath + separator + "images" + separator + "shadowDamaged.png");
+        sniperShipImageLeftDamaged = getImage(imagePath + separator + "images" + separator + "shadow_leftDamaged.png");
+        sniperShipImageRightDamaged = getImage(imagePath + separator + "images" + separator + "shadow_rightDamaged.png");
 
         battleShipImage = getImage(imagePath + separator + "images" + separator + "sun.png");
         battleShipImageLeft = getImage(imagePath + separator + "images" + separator + "sun_left.png");
         battleShipImageRight = getImage(imagePath + separator + "images" + separator + "sun_right.png");
+        battleShipImageDamaged = getImage(imagePath + separator + "images" + separator + "sunDamaged.png");
+        battleShipImageLeftDamaged = getImage(imagePath + separator + "images" + separator + "sun_leftDamaged.png");
+        battleShipImageRightDamaged = getImage(imagePath + separator + "images" + separator + "sun_rightDamaged.png");
 
         fighterShipImage = getImage(imagePath + separator + "images" + separator + "pine.png");
         fighterShipImageLeft = getImage(imagePath + separator + "images" + separator + "pine_left.png");
         fighterShipImageRight = getImage(imagePath + separator + "images" + separator + "pine_right.png");
-
+        fighterShipImageDamaged = getImage(imagePath + separator + "images" + separator + "pineDamaged.png");
+        fighterShipImageLeftDamaged = getImage(imagePath + separator + "images" + separator + "pine_leftDamaged.png");
+        fighterShipImageRightDamaged = getImage(imagePath + separator + "images" + separator + "pine_rightDamaged.png");
     }
 
-   
+
     public Image setShipImage(Ship ship) {
         try {
             //get images from the flyweight so we don't have to create a ton of images in memory
@@ -219,25 +238,43 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                                         break;
                                     }
                                      case Ship.STATE_DAMAGED: {
-                                       image = balancedShipImageDamaged;
-                                       
+                                     
+                                         if ((ship.getDamagedCounter()% 3)==0)
+                                         {
+                                         image = balancedShipImageDamaged;
+                                         }
+                                         else
+                                         {
+                                             image = balancedShipImage;
+                                         }
                                         break;
                                     }
                                     case Ship.STATE_TURNING_LEFT_DAMAGED: {
                                         
-                                        image = balancedShipImageLeftDamaged;
+                                         if ((ship.getDamagedCounter()% 3)==0)
+                                         {
+                                         image = balancedShipImageLeftDamaged;
+                                         }
+                                         else
+                                         {
+                                             image = balancedShipImageLeft;
+                                         }
                                         break;
                                     }
                                     case Ship.STATE_TURNING_RIGHT_DAMAGED: {
-                                       
-                                        image = balancedShipImageRightDamaged;
+
+                                        if ((ship.getDamagedCounter() % 3) == 0) {
+                                            image = balancedShipImageRightDamaged;
+                                        } else {
+                                           image = balancedShipImageRight;
+                                        }
                                         break;
                                     }
-                                    
-                                     default:{
+
+                                    default: {
                                         image = balancedShipImage;
                                         break;
-                                     }
+                                    }
                                 }
 
                                 break;

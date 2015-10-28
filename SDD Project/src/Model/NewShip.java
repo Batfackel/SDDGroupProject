@@ -227,7 +227,7 @@ public class NewShip implements GameFigure, ShipState {
 
     void isShipDamaged() {
         if (this.state == STATE_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ) {
-            if (damagedCounter < 10) {
+            if (damagedCounter < 25) {
                 damagedCounter++;
             } else {
                 this.state = STATE_OK;
