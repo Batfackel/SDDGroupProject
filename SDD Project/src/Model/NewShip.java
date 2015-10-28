@@ -17,11 +17,13 @@ import javax.swing.JOptionPane;
  * @author Will
  */
 public class NewShip implements GameFigure, ShipState {
-
+ 
+    private final int DAMAGE_WAIT_TIME=50;
     private float x, y, dx, dy, shipHeight, shipWidth;
     private int state, levelState, rateOfSpeed, armour, shipState, weaponState, weaponLevel, health;
     private String shipType;
     private Image shipImage;
+    private boolean isShipBeingDamaged;
     
     private int damagedCounter;
     
@@ -30,6 +32,7 @@ public class NewShip implements GameFigure, ShipState {
     NewShip(float x, float y) {
         this.x = x;
         this.y = y;
+        isShipBeingDamaged = false;
         damagedCounter=0;
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
@@ -41,6 +44,7 @@ public class NewShip implements GameFigure, ShipState {
     NewShip(String shipType, float x, float y) {
         this.x = x;
         this.y = y;
+        isShipBeingDamaged = false;
         damagedCounter = 0;
         this.levelState = BASE_LEVEL;
         this.state = STATE_OK;
@@ -173,7 +177,7 @@ public class NewShip implements GameFigure, ShipState {
     }
 
     public int getDamagedCounter() {
-        return damagedCounter;
+        return this.damagedCounter;
     }
 
     @Override
@@ -216,22 +220,28 @@ public class NewShip implements GameFigure, ShipState {
         return shipType;
     }
 
+    public boolean getIsShipBeingDamaged()
+    {
+        return this.isShipBeingDamaged;
+    }
+    
     @Override
     public void update() {
         setShipHitBox();
         isShipDamaged();
         isTurning();
-
         shipImage = GameData.flyweightItems.setShipImage(this);
     }
 
     void isShipDamaged() {
         if (this.state == STATE_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ) {
-            if (damagedCounter < 25) {
-                damagedCounter++;
+            isShipBeingDamaged = true;
+            if (this.damagedCounter < DAMAGE_WAIT_TIME) {
+                this.damagedCounter++;
             } else {
+                isShipBeingDamaged = false;
                 this.state = STATE_OK;
-                damagedCounter = 0;
+                this.damagedCounter = 0;
             }
         }
 
@@ -239,33 +249,25 @@ public class NewShip implements GameFigure, ShipState {
 
     private void isTurning() {
         if (dx > 0) {
-            if (this.state != STATE_DAMAGED) {
-                this.state = STATE_TURNING_RIGHT;
-            }
-            else {
-                this.state = STATE_TURNING_RIGHT_DAMAGED;
-            }
-            dx = 0;
-        } else if (dx < 0) {
-            if (this.state != STATE_DAMAGED) {
-                this.state = STATE_TURNING_LEFT;
-            }
-            else {
-                this.state = STATE_TURNING_LEFT_DAMAGED;
-            }
-
-            dx = 0;
-        } else {
-            if (this.state != STATE_DAMAGED) {
-                 this.state = STATE_OK;
-            }
-             else {
-                this.state = STATE_DAMAGED;
-            }
-
-           
+            if (this.state == STATE_DAMAGED || this.state == STATE_TURNING_RIGHT_DAMAGED || this.state == STATE_TURNING_LEFT_DAMAGED) 
+            {this.state = STATE_TURNING_RIGHT_DAMAGED;}
+             else {this.state = STATE_TURNING_RIGHT;}
         }
+        
+         if (dx < 0) {
+            if (this.state == STATE_DAMAGED || this.state == STATE_TURNING_RIGHT_DAMAGED || this.state == STATE_TURNING_LEFT_DAMAGED) 
+             {this.state = STATE_TURNING_LEFT_DAMAGED;}
+             else {this.state = STATE_TURNING_LEFT;}
 
+            }
+
+        if (dx == 0 ) {
+            if (this.state == STATE_DAMAGED|| this.state == STATE_TURNING_RIGHT_DAMAGED || this.state == STATE_TURNING_LEFT_DAMAGED) 
+            {this.state = STATE_DAMAGED;}
+            else {this.state = STATE_OK;}
+
+        }
+        dx = 0;
     }
 
     @Override

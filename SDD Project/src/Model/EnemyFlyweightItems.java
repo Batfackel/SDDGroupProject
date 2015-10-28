@@ -239,7 +239,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                                     }
                                      case Ship.STATE_DAMAGED: {
                                      
-                                         if ((ship.getDamagedCounter()% 3)==0)
+                                         if ((ship.getDamagedCounter()% 5)==0)
                                          {
                                          image = balancedShipImageDamaged;
                                          }
@@ -251,7 +251,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                                     }
                                     case Ship.STATE_TURNING_LEFT_DAMAGED: {
                                         
-                                         if ((ship.getDamagedCounter()% 3)==0)
+                                         if ((ship.getDamagedCounter()% 5)==0)
                                          {
                                          image = balancedShipImageLeftDamaged;
                                          }
@@ -263,7 +263,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                                     }
                                     case Ship.STATE_TURNING_RIGHT_DAMAGED: {
 
-                                        if ((ship.getDamagedCounter() % 3) == 0) {
+                                        if ((ship.getDamagedCounter() % 5) == 0) {
                                             image = balancedShipImageRightDamaged;
                                         } else {
                                            image = balancedShipImageRight;
@@ -280,123 +280,348 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                                 break;
                             }
                             case "shipw": {
+
                                 switch (ship.getState()) {
                                     case Ship.STATE_OK: {
                                         image = speederShipImage;
+
                                         break;
                                     }
                                     case Ship.STATE_TURNING_LEFT: {
+
                                         image = speederShipImageLeft;
                                         break;
                                     }
                                     case Ship.STATE_TURNING_RIGHT: {
+
                                         image = speederShipImageRight;
                                         break;
                                     }
-                                    default:
-                                        image = balancedShipImage;
+                                    case Ship.STATE_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                            image = speederShipImageDamaged;
+                                        } else {
+                                            image = speederShipImage;
+                                        }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_LEFT_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                            image = speederShipImageLeftDamaged;
+                                        } else {
+                                            image = speederShipImageLeft;
+                                        }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_RIGHT_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                            image = speederShipImageRightDamaged;
+                                        } else {
+                                            image = speederShipImageRight;
+                                        }
+                                        break;
+                                    }
+
+                                    default: {
+                                        image = speederShipImage;
+                                        break;
+                                    }
                                 }
                                 break;
                             }
                             case "shipv": {
                                 switch (ship.getState()) {
                                     case Ship.STATE_OK: {
-                                        image = sniperShipImage;
+                                       image = heavyShipImage;
+                                       
                                         break;
                                     }
                                     case Ship.STATE_TURNING_LEFT: {
-                                        image = sniperShipImageLeft;
-                                        break;
-                                    }
-                                    case Ship.STATE_TURNING_RIGHT: {
-                                        image = sniperShipImageRight;
-                                        break;
-                                    }
-                                    default:
-                                        image = balancedShipImage;
-                                }
-
-                                break;
-                            }
-                            case "shipx": {
-                                switch (ship.getState()) {
-                                    case Ship.STATE_OK: {
-                                        image = heavyShipImage;
-                                        break;
-                                    }
-                                    case Ship.STATE_TURNING_LEFT: {
+                                        
                                         image = heavyShipImageLeft;
                                         break;
                                     }
                                     case Ship.STATE_TURNING_RIGHT: {
-                                        
+                                       
                                         image = heavyShipImageRight;
                                         break;
                                     }
-                                    
-                                    default:
-                                        image = balancedShipImage;
+                                     case Ship.STATE_DAMAGED: {
+                                     
+                                         if ((ship.getDamagedCounter()% 2)==0)
+                                         {
+                                         image = heavyShipImageDamaged;
+                                         }
+                                         else
+                                         {
+                                             image = heavyShipImage;
+                                         }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_LEFT_DAMAGED: {
+                                        
+                                         if ((ship.getDamagedCounter()% 2)==0)
+                                         {
+                                         image = heavyShipImageLeftDamaged;
+                                         }
+                                         else
+                                         {
+                                             image = heavyShipImageLeft;
+                                         }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_RIGHT_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                            image = heavyShipImageRightDamaged;
+                                        } else {
+                                           image = heavyShipImageRight;
+                                        }
+                                        break;
+                                    }
+
+                                    default: {
+                                        image = heavyShipImage;
+                                        break;
+                                    }
                                 }
+
+
+                                break;
+                            }
+                            case "shipx": {
+                                
+                                switch (ship.getState()) {
+                                    case Ship.STATE_OK: {
+                                        image = sniperShipImage;
+                                       
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_LEFT: {
+                                        
+                                         image = sniperShipImageLeft;
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_RIGHT: {
+                                       
+                                         image = sniperShipImageRight;
+                                        break;
+                                    }
+                                     case Ship.STATE_DAMAGED: {
+                                     
+                                         if ((ship.getDamagedCounter()% 2)==0)
+                                         {
+                                          image = sniperShipImageDamaged;
+                                         }
+                                         else
+                                         {
+                                              image = sniperShipImage;
+                                         }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_LEFT_DAMAGED: {
+                                        
+                                         if ((ship.getDamagedCounter()% 2)==0)
+                                         {
+                                          image = sniperShipImageLeftDamaged;
+                                         }
+                                         else
+                                         {
+                                              image = sniperShipImageLeft;
+                                         }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_RIGHT_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                             image = sniperShipImageRightDamaged;
+                                        } else {
+                                            image = sniperShipImageRight;
+                                        }
+                                        break;
+                                    }
+
+                                    default: {
+                                        image = sniperShipImage;
+                                        break;
+                                    }
+                                }
+
 
                                 break;
                             }
                             case "shipy": {
+                               
                                 switch (ship.getState()) {
                                     case Ship.STATE_OK: {
-                                        image = battleShipImage;
+                                       image =  battleShipImage;
+                                       
                                         break;
                                     }
                                     case Ship.STATE_TURNING_LEFT: {
-                                        image = battleShipImageLeft;
+                                        
+                                        image =  battleShipImageLeft;
                                         break;
                                     }
                                     case Ship.STATE_TURNING_RIGHT: {
-                                        image = battleShipImageRight;
+                                       
+                                       image =  battleShipImageRight;
                                         break;
                                     }
-                                    default:
-                                        image = balancedShipImage;
+                                     case Ship.STATE_DAMAGED: {
+                                     
+                                         if ((ship.getDamagedCounter()% 2)==0)
+                                         {
+                                         image =  battleShipImageDamaged;
+                                         }
+                                         else
+                                         {
+                                             image =  battleShipImage;
+                                         }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_LEFT_DAMAGED: {
+                                        
+                                         if ((ship.getDamagedCounter()% 2)==0)
+                                         {
+                                         image =  battleShipImageLeftDamaged;
+                                         }
+                                         else
+                                         {
+                                            image =  battleShipImageLeft;
+                                         }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_RIGHT_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                            image =  battleShipImageRightDamaged;
+                                        } else {
+                                          image =  battleShipImageRight;
+                                        }
+                                        break;
+                                    }
+
+                                    default: {
+                                        image =  battleShipImage;
+                                        break;
+                                    }
                                 }
+
 
                                 break;
                             }
                             case "shipz": {
+                              
                                 switch (ship.getState()) {
                                     case Ship.STATE_OK: {
-
-                                        image = fighterShipImage;
+                                       image = fighterShipImage;
+                                       
                                         break;
                                     }
                                     case Ship.STATE_TURNING_LEFT: {
+                                        
                                         image = fighterShipImageLeft;
                                         break;
                                     }
                                     case Ship.STATE_TURNING_RIGHT: {
+                                       
                                         image = fighterShipImageRight;
                                         break;
                                     }
-                                    default:
-                                        image = balancedShipImage;
-                                }
+                                     case Ship.STATE_DAMAGED: {
+                                     
+                                         if ((ship.getDamagedCounter()% 2)==0)
+                                         {
+                                         image = fighterShipImageDamaged;
+                                         }
+                                         else
+                                         {
+                                             image = fighterShipImage;
+                                         }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_LEFT_DAMAGED: {
+                                        
+                                         if ((ship.getDamagedCounter()% 2)==0)
+                                         {
+                                         image = fighterShipImageLeftDamaged;
+                                         }
+                                         else
+                                         {
+                                            image = fighterShipImageLeft;
+                                         }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_RIGHT_DAMAGED: {
 
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                          image = fighterShipImageRightDamaged;
+                                        } else {
+                                           image = fighterShipImageRight;
+                                        }
+                                        break;
+                                    }
+
+                                    default: {
+                                        image = fighterShipImage;
+                                        break;
+                                    }
+                                }
                                 break;
                             }
                             default: {
                                 switch (ship.getState()) {
                                     case Ship.STATE_OK: {
                                         image = balancedShipImage;
+
                                         break;
                                     }
                                     case Ship.STATE_TURNING_LEFT: {
+
                                         image = balancedShipImageLeft;
                                         break;
                                     }
                                     case Ship.STATE_TURNING_RIGHT: {
+
                                         image = balancedShipImageRight;
                                         break;
                                     }
-                                    default:
+                                    case Ship.STATE_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                            image = balancedShipImageDamaged;
+                                        } else {
+                                            image = balancedShipImage;
+                                        }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_LEFT_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                            image = balancedShipImageLeftDamaged;
+                                        } else {
+                                            image = balancedShipImageLeft;
+                                        }
+                                        break;
+                                    }
+                                    case Ship.STATE_TURNING_RIGHT_DAMAGED: {
+
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
+                                            image = balancedShipImageRightDamaged;
+                                        } else {
+                                            image = balancedShipImageRight;
+                                        }
+                                        break;
+                                    }
+
+                                    default: {
                                         image = balancedShipImage;
+                                        break;
+                                    }
                                 }
 
                                 break;
@@ -405,19 +630,16 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                         }
                         break;
                 }
-            //}
+                //}
             }
-            
+
         } catch (Exception ieo) {
             System.out.println("no image");
         }
         return image;
     }
 
-    
-
-
-public Image getImage(String fileName) {
+    public Image getImage(String fileName) {
         Image image = null;
         try {
             image = ImageIO.read(new File(fileName));
@@ -429,9 +651,8 @@ public Image getImage(String fileName) {
     }
 
     @Override
-        public Image setBulletImage() {
+    public Image setBulletImage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-}    
+}
