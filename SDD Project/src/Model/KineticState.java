@@ -126,7 +126,7 @@ public class KineticState implements State {
                     break;
                 case 10:
                     //used by enemies to go and shoot at the player
-                    synchronized (Main.gameData.friendlyBullets) {
+                    synchronized (Main.gameData.enemyBullets) {
                         //----------------
                         //test stuff
                         //spawn the enemy shots, 10 - from up to down, 11 & 12 shoot sidways
@@ -137,9 +137,9 @@ public class KineticState implements State {
                         t1 = new Timer();
                         t2 = new Timer();
                         t3 = new Timer();
-                        t1.schedule(new SpawnShot(10, x - xLeftOffset, y + yOffset), timeElapsed);
-                        t2.schedule(new SpawnShot(11, x - xLeftOffset, y + yOffset), timeElapsed);
-                        t3.schedule(new SpawnShot(12, x - xLeftOffset, y + yOffset), timeElapsed);
+                        t1.schedule(new SpawnShot(10, x, y - yOffset), timeElapsed);
+                        t2.schedule(new SpawnShot(11, x, y - yOffset), timeElapsed);
+                        t3.schedule(new SpawnShot(12, x, y - yOffset), timeElapsed);
                         //----------------
                         //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
                         //Main.gameData.friendlyBullets.add((Bullet) new KineticBulletBaseLevel(x + 20, y + 51));
