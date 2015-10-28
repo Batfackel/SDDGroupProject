@@ -23,11 +23,12 @@ public class LaserBulletBaseLevel extends Bullet{
         Rectangle r1, r2;
     Image launcherImage;
     float x, y, width1 = 110, height1 = 125;
-    int state = STATE_TRAVELING;
+    private boolean isEnemy;
     
-    public LaserBulletBaseLevel(float x, float y) {
+    public LaserBulletBaseLevel(float x, float y, boolean enemy) {
         this.x = x;
         this.y = y;
+        this.isEnemy = enemy;
         this.name = "Laser Base Shot";
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -61,7 +62,7 @@ public class LaserBulletBaseLevel extends Bullet{
     private void setLauncherHitBox() {
         //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
         this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
-    }   
+    }           
     
     @Override
     public void render(Graphics g) {
@@ -84,8 +85,13 @@ public class LaserBulletBaseLevel extends Bullet{
 
     @Override
     public void update() {
-        setLauncherHitBox();        
-        this.y -= 15;
+        setLauncherHitBox();   
+        //friendly shot movement
+        if (isEnemy == false)
+            this.y -= 15;
+        //enemy shot movement
+        else
+            this.y += 15;
         //if (this.x < 1){
         //    System.out.println("bullet = " + this.x);
         //    this.state = STATE_DONE;

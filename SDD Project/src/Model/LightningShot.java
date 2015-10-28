@@ -35,10 +35,12 @@ public class LightningShot extends Bullet{
     float x, y, width1 = 110, height1 = 125;
     int state = STATE_TRAVELING;
     int drawX, drawY;
+    private boolean isEnemy;
     
-    public LightningShot(float x, float y) {
+    public LightningShot(float x, float y, boolean enemy) {
         this.x = x;
         this.y = y;
+        this.isEnemy = enemy;
         this.name = "Lightning Shot";
         this.e1 = new Ellipse2D.Float();        
         this.drawX = 300;

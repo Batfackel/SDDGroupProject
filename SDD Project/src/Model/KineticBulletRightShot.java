@@ -26,10 +26,12 @@ class KineticBulletRightShot extends Bullet{
     Image launcherImage;
     float x, y, width1 = 110, height1 = 125;
     int state = STATE_TRAVELING;
+    private boolean isEnemy;
     
-    public KineticBulletRightShot(float x, float y) {
+    public KineticBulletRightShot(float x, float y, boolean enemy) {
         this.x = x;
         this.y = y;
+        this.isEnemy = enemy;
         this.name = "Kinetic Right Shot";
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -87,8 +89,16 @@ class KineticBulletRightShot extends Bullet{
     @Override
     public void update() {
         setLauncherHitBox();        
-        this.y -= 5;
-        this.x += 2;
+        //friendly shot movement
+        if (isEnemy == false) {
+            this.y -= 7;
+            this.x += 3;
+        }
+        //enemy shot movement
+        else {
+            this.y += 7;
+            this.x += 3;
+        }
         //if (this.x < 1){
         //    System.out.println("bullet = " + this.x);
         //    this.state = STATE_DONE;

@@ -15,6 +15,7 @@ import java.awt.geom.Ellipse2D;
  */
 public abstract class Bullet implements GameFigure{
     String name;
+    int state = STATE_TRAVELING;
     abstract float getX();
     abstract float getY();
     abstract void setState();
@@ -22,4 +23,9 @@ public abstract class Bullet implements GameFigure{
     abstract public Rectangle getHitBox();     
     abstract public String getName();
     abstract public Ellipse2D getHitCircle(); 
+    
+    // sets the shot to enemy
+    public void setIsEnemy() {
+        state = 10;
+    }
 }

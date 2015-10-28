@@ -24,10 +24,12 @@ public class MissileBulletBaseLevel extends Bullet{
     Image launcherImage;
     float x, y, width1 = 110, height1 = 125;
     int state = STATE_TRAVELING;
+    private boolean isEnemy;
     
-    public MissileBulletBaseLevel(float x, float y) {
+    public MissileBulletBaseLevel(float x, float y, boolean enemy) {
         this.x = x;
         this.y = y;
+        this.isEnemy = enemy;
         this.name = "Missile Base Level";
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -94,7 +96,12 @@ public class MissileBulletBaseLevel extends Bullet{
     @Override
     public void update() {
         setLauncherHitBox();        
-        this.y -= 4;
+        //friendly shot movement
+        if (isEnemy == false)
+            this.y -= 4;
+        //enemy shot movement
+        else            
+            this.y += 4;
         //if (this.x < 1){
         //    System.out.println("bullet = " + this.x);
         //    this.state = STATE_DONE;

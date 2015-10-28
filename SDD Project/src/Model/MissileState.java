@@ -23,7 +23,7 @@ public class MissileState implements State{
             case 0:
                 synchronized (Main.gameData.friendlyBullets) {
                     //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
-                    Main.gameData.friendlyBullets.add((Bullet)new MissileBulletBaseLevel(x + 20, y - 51));
+                    Main.gameData.friendlyBullets.add((Bullet)new MissileBulletBaseLevel(x + 20, y - 51, false));
                     //Main.gameData.figures.add(new Launcher( x + 20, y - 51));
                     break;
                 }
