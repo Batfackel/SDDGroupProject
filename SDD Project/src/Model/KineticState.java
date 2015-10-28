@@ -137,9 +137,9 @@ public class KineticState implements State {
                         t1 = new Timer();
                         t2 = new Timer();
                         t3 = new Timer();
-                        t1.schedule(new SpawnShot(10, x - xLeftOffset, y - yOffset), timeElapsed);
-                        t2.schedule(new SpawnShot(11, x - xLeftOffset, y - yOffset), timeElapsed);
-                        t3.schedule(new SpawnShot(12, x - xLeftOffset, y - yOffset), timeElapsed);
+                        t1.schedule(new SpawnShot(10, x - xLeftOffset, y + yOffset), timeElapsed);
+                        t2.schedule(new SpawnShot(11, x - xLeftOffset, y + yOffset), timeElapsed);
+                        t3.schedule(new SpawnShot(12, x - xLeftOffset, y + yOffset), timeElapsed);
                         //----------------
                         //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
                         //Main.gameData.friendlyBullets.add((Bullet) new KineticBulletBaseLevel(x + 20, y + 51));

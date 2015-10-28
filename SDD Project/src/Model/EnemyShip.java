@@ -10,6 +10,7 @@ import Controller.MovementStrategy;
 import Controller.SweepDown;
 import Controller.SweepLeft;
 import Controller.SweepRight;
+import static Model.GameData.enemyBulletsContext;
 import View.MainMenu;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -60,8 +61,9 @@ public class EnemyShip implements ShipState, GameFigure{
         this.shipWidth = image.getWidth(null);
         rand = new Random();
         moveRight = rand.nextBoolean();
-        shootTicker = rand.nextInt(200);
-        weaponState = 0;
+        shootTicker = 100;
+        shootTimer = 0;
+        weaponState = 10;
         switch(shipType) {
             case "alien1":
                 this.health = 5;
@@ -241,15 +243,18 @@ public class EnemyShip implements ShipState, GameFigure{
         movement = new SweepDown();
         movement.moveShip(this);
         
-        if(shootTimer != shootTicker) {
-            shootTimer++;
-            shootTicker = rand.nextInt(200);
-        }
-        else {
+        if(shootTimer == shootTicker) {
+            shootTicker = 50; 
+            shootTimer = 0;
             //spawn a shot and make it go down to attack the player
             //should ignore the other enemyships
-            
+            GameData.enemyBulletsContext.setState(GameData.kinetic, this.weaponState);
+            GameData.enemyBulletsContext.fire(fireLocationX(), fireLocationY());
         }
+        else {
+            shootTimer++;
+        }
+        
     }
 
     @Override
@@ -344,7 +349,7 @@ public class EnemyShip implements ShipState, GameFigure{
         return (int) x + ((int) shipWidth / 2);
     }
     
-    public int fileLocationY() {
+    public int fireLocationY() {
         //at the bottom of the picture
         return (int) y + (int)shipHeight;
     }

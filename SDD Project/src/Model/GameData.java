@@ -49,6 +49,8 @@ public class GameData {
     private ShipSelectMenu shipSelectionMenu;  
     private Random rand;  
     public boolean shockOn;
+    public static Context enemyBulletsContext;
+    public static KineticState kinetic;
     
     public GameData(String sName) {
         
@@ -88,6 +90,8 @@ public class GameData {
         for (int i = 0; i < enemyFormation.length; i++) {
             enemyShips.add(enemyFormation[i]);
         }
+        enemyBulletsContext = new Context();
+        kinetic = new KineticState();
 //-----------------------------------------------------------------------------
 //----------------------------------------------------------------------
     
