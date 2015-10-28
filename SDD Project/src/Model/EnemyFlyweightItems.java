@@ -239,7 +239,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                                     }
                                      case Ship.STATE_DAMAGED: {
                                      
-                                         if ((ship.getDamagedCounter()% 5)==0)
+                                         if ((ship.getDamagedCounter()% 2)==0)
                                          {
                                          image = balancedShipImageDamaged;
                                          }
@@ -251,7 +251,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                                     }
                                     case Ship.STATE_TURNING_LEFT_DAMAGED: {
                                         
-                                         if ((ship.getDamagedCounter()% 5)==0)
+                                         if ((ship.getDamagedCounter()% 2)==0)
                                          {
                                          image = balancedShipImageLeftDamaged;
                                          }
@@ -263,7 +263,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                                     }
                                     case Ship.STATE_TURNING_RIGHT_DAMAGED: {
 
-                                        if ((ship.getDamagedCounter() % 5) == 0) {
+                                        if ((ship.getDamagedCounter() % 2) == 0) {
                                             image = balancedShipImageRightDamaged;
                                         } else {
                                            image = balancedShipImageRight;
