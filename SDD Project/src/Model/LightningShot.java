@@ -98,7 +98,8 @@ public class LightningShot extends Bullet{
         //int width = shockImage.getWidth(null);
         //int height = shockImage.getHeight(null);
         //g.drawImage(launcherImage, (int)x, (int)y, null);
-//        g.drawImage(shockImage, (int)this.x, (int)this.y, (int)this.x + 40, (int)this.y + 100, 0, 0, 40, 100, null);                
+        g2d.draw(e1);
+        g.drawImage(shockImage, (int)this.x, (int)this.y, (int)this.x + 40, (int)this.y + 100, 0, 0, 40, 100, null);                
         //g2d.drawImage(op.filter((BufferedImage)shockImage, null), 200, 200, null);
         //g.drawImage(op.filter((BufferedImage)shockImage, null), 200, 200, null);
         //----------------------------------------------------------------------
