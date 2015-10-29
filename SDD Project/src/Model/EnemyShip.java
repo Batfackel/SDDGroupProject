@@ -155,9 +155,9 @@ public class EnemyShip implements ShipState, GameFigure{
     @Override
     public void render(Graphics g) {
         move();
-        setShipHitBox();
         if(getShipState() == 13) {
-            g.drawImage(image, getX(), getY(), null);
+            g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
+            setShipHitBox();
         }
         else {
             g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
@@ -244,7 +244,7 @@ public class EnemyShip implements ShipState, GameFigure{
         movement.moveShip(this);
         
         if(shootTimer == shootTicker) {
-            shootTicker = 50; 
+            shootTicker = 100; 
             shootTimer = 0;
             //spawn a shot and make it go down to attack the player
             //should ignore the other enemyships

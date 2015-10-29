@@ -2,6 +2,7 @@ package Model;
 import Controller.Main;
 import Controller.EnemyFlyWeightFactory;
 import Controller.EnemyFlyweight;
+import View.MainMenu;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
@@ -86,7 +87,7 @@ public class GameData {
 
         //enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));        
         //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
-        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 100, -300);
         for (int i = 0; i < enemyFormation.length; i++) {
             enemyShips.add(enemyFormation[i]);
         }
@@ -112,8 +113,7 @@ public class GameData {
     }
 
     public void spawnEnemiesForTest() {
-        enemyShips.add(enemyMaker.getEnemyShip("defaultship", 20, 20));
-        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 200, -250);
+        Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 100, -300);
         for (int i = 0; i < enemyFormation.length; i++) {
             synchronized (enemyShips) {
                 enemyShips.add(enemyFormation[i]);
@@ -237,7 +237,26 @@ public class GameData {
                 }
             }
             //----collision: enemies vs friendly ship-----
-            } catch (Exception e) {
+            
+            //----collision: player vs enemy bullets-----        
+            for (int i = 0; i < this.enemyBullets.size(); i++) {
+                Bullet shot = (Bullet) enemyBullets.get(i);
+                for (int j = 0; j < this.enemyBullets.size(); j++) {                  
+                  if(shot.getY() >= MainMenu.m.getScreenHeight()) {
+                      synchronized (enemyBullets) {
+                        this.enemyBullets.remove(shot);
+                    }
+                  }
+                  if(currentShip.getShipHitBox().intersects(shot.getHitBox())) {
+                      synchronized (enemyBullets) {
+                        this.enemyBullets.remove(shot);
+                        currentShip.setState(Ship.STATE_DAMAGED);
+                      }
+                  }
+                }                       
+            }
+            
+        } catch (Exception e) {
             System.out.println("Error in collision == Gamedata");
         }
 //-----------------------------------------------------------------------------                           
