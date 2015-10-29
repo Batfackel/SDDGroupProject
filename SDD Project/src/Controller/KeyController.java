@@ -10,6 +10,7 @@ import Model.Launcher;
 import Model.MissileState;
 import Model.Ship;
 import Model.ShipFactory;
+import Model.Sound;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -167,6 +168,7 @@ public class KeyController implements KeyListener {
                 is being stored in the ship objects themselves. More notes will be supplied below. 
                 */
             case KeyEvent.VK_SPACE:
+                //Sound.shot.play();
                 /*
                 This stuff is from the old missile that was being used as a placeholder
                 The logic may still be valuable at some point so I just commented it out.
@@ -209,16 +211,19 @@ public class KeyController implements KeyListener {
                         This above code generates a bullet object at the ships x and y location.
                         */
                         this.bullet.fire(mainShip.getX(), mainShip.getY());
+                        Sound.shot.play();
                         break;
                     case 1: //laser
                         this.bullet.setState(laser, mainShip.getLevelState());
                         //System.out.println(this.bullet.getState().toString());
                         this.bullet.fire(mainShip.getX(), mainShip.getY());
+                        Sound.shot3.play();
                         break;
                     case 2: //missile
                         this.bullet.setState(missile, mainShip.getLevelState());
                         //System.out.println(this.bullet.getState().toString());
                         this.bullet.fire(mainShip.getX(), mainShip.getY());
+                        Sound.shot2.play();
                         break;
                     default: //error
                         System.out.println("error in weapon architecture");
