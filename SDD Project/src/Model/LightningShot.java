@@ -18,6 +18,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
@@ -28,14 +29,13 @@ import javax.swing.JOptionPane;
  * @author atm15_000
  */
 public class LightningShot extends Bullet{
-        //Rectangle r1, r2;
-        Ellipse2D e1, e2;
-        AffineTransformOp op;
+    //Rectangle r1, r2;
+    Ellipse2D e1, e2;    
     Image shockImage;
     float x, y, width1 = 110, height1 = 125;
     int state = STATE_TRAVELING;
     int drawX, drawY;
-    private boolean isEnemy;
+    private boolean isEnemy;    
     
     public LightningShot(float x, float y, boolean enemy) {
         this.x = x;
@@ -45,8 +45,7 @@ public class LightningShot extends Bullet{
         this.e1 = new Ellipse2D.Float();        
         this.drawX = 300;
         this.drawY = 300;
-                                 
-        double rotationRequired = Math.toRadians(45);    
+                                         
         
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -58,14 +57,9 @@ public class LightningShot extends Bullet{
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
         shockImage = getImage(imagePath + separator + "images" + separator+ "shocking.png");
-        
-        double locationX = shockImage.getWidth(null) / 2;
-        double locationY = shockImage.getHeight(null) / 2;
-        AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX);
-        this.op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                
         //setRectangle(); // initialize the hit box when object is created for testing   
-
-       setLauncherHitBox();
+       setLauncherHitBox();         
     }
     
     public Image getImage(String fileName) {
@@ -90,13 +84,22 @@ public class LightningShot extends Bullet{
     
     @Override
     public void render(Graphics g) {
+        double rotationRequired = Math.toRadians(45);
+        double locationX = 100;
+        double locationY = 100;
+        AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        Graphics2D g2d = (Graphics2D) g;
+        //g2d.drawImage(op.filter((BufferedImage)shockImage, null), locationX, locationY, null);
+        
+        
+        
+        
         //int width = shockImage.getWidth(null);
         //int height = shockImage.getHeight(null);
         //g.drawImage(launcherImage, (int)x, (int)y, null);
-        g.drawImage(shockImage, (int)this.x, (int)this.y, (int)this.x + 40, (int)this.y + 100, 0, 0, 40, 100, null);        
-        Graphics2D g2 = (Graphics2D) g;
-        g2.draw(e1);
-        g2.drawImage(op.filter((BufferedImage)shockImage, null), 200, 200, null);
+//        g.drawImage(shockImage, (int)this.x, (int)this.y, (int)this.x + 40, (int)this.y + 100, 0, 0, 40, 100, null);                
+        //g2d.drawImage(op.filter((BufferedImage)shockImage, null), 200, 200, null);
         //g.drawImage(op.filter((BufferedImage)shockImage, null), 200, 200, null);
         //----------------------------------------------------------------------
         //set up and display hit boxes for the launcher objects
@@ -106,7 +109,7 @@ public class LightningShot extends Bullet{
         //g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
         //g.drawRect((int) this.x, (int) this.y, 10, 10);
         //g.setColor(Color.BLUE);
-        setLauncherHitBox();        
+        //setLauncherHitBox();        
         //g.setColor(Color.BLUE);     
         //----------------------------------------------------------------------
     }
@@ -166,4 +169,5 @@ public class LightningShot extends Bullet{
     public void renderToolTips(Graphics g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
