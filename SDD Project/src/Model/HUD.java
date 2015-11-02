@@ -11,7 +11,6 @@ import static View.GamePanel.PWIDTH;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import javax.swing.JPanel;
 
 
 /**
@@ -47,9 +46,9 @@ public void render(Graphics g) {
     
     //public void render(Graphics g){
 
-    g.setColor(Color.BLACK);
-    g.fillRect(750,0,50, 1200);
-    g.fillRect(0, 0, 50, 1200);
+    //g.setColor(Color.BLACK);
+   // g.fillRect(750,0,50, 1200);
+    //g.fillRect(0, 0, 50, 1200);
    // g.setColor(Color.WHITE);
     
    
@@ -66,7 +65,7 @@ public void render(Graphics g) {
         
         g.setColor(Color.GREEN);
         g.fillRect(5,5,10,300);
-        g.setColor(Color.BLACK);
+       // g.setColor(Color.BLACK);
         ///////Terrible way to get verticle letters- will change later///////
         g.drawString("L",5,240);
         g.drawString("I",5,260);
