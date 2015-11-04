@@ -1,9 +1,11 @@
 package Model;
 
+import Controller.Main;
 import Controller.SaveData;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -15,12 +17,13 @@ import javax.swing.JOptionPane;
 public class Level {
 
     
-    private Image backgroundImage, clouds, clouds2;
+    private Image backgroundImage, clouds, clouds2, transitionImage, level2Image;
     private BufferedImage background;
     private static int height, width, size, x, y;
     private boolean needToDispose;
-    private boolean priority = false;
-    public static SaveData save;
+    private boolean levelComplete = false;
+    public static SaveData saveData;
+    public static Score currentSave;
     public Level() {
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -31,7 +34,10 @@ public class Level {
                 + "tile sets" + separator + "test tile set.png");
                 clouds = importImage(imagePath + separator + "images" + separator + "tile sets" + separator + "cloudsmerged.png");
                 clouds2 = importImage(imagePath + separator + "images" + separator + "tile sets" + separator + "cloudsmerged2.png");
-                
+                transitionImage = importImage(imagePath + separator + "images" + separator + "tile sets" + separator + "transition.png");
+                level2Image = importImage(imagePath + separator + "images" + separator + "tile sets" + separator + "level 2.png");
+                backgroundImage = clouds2;
+                currentSave = new Score();
                 x = 0;
                 y = -2840;
                 height = 800;
@@ -64,15 +70,32 @@ public class Level {
     }
     
     public void render(Graphics g) {
-        //System.out.print("y = " + y);
-        g.drawImage(clouds2, x, y, null);
-        if(this.y >= 10) {
-            g.drawImage(clouds2, x, y-3840, null);
-            if(y == 3840) {
-                y = -2840;
-            }
+        if(currentSave.getScore() >= 100) {
+           Main.gamePanel.pauseGame();
+           levelComplete = true;
+           //clear all of the figures on the panel currently
+           Main.gameData.clearData();
+           //display the image for the transition
+           backgroundImage = transitionImage;
+           g.drawImage(backgroundImage, 0, 0, null);
         }
-        scrollLevel();       
+        
+        if(levelComplete) {
+            //change the background image for the level and use that instead
+            levelComplete = false;
+            currentSave.setScore(0);
+            backgroundImage = level2Image;
+        }
+        else {
+            g.drawImage(backgroundImage, x, y, null);
+            if(this.y >= 10) {
+                g.drawImage(backgroundImage, x, y-3840, null);
+                if(y == 3840) {
+                    y = -2840;
+                }
+            }
+            scrollLevel();     
+        }
     }
     
     public Image getImage() {
