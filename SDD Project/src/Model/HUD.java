@@ -22,12 +22,12 @@ public class HUD {
 public static float Health = 100;
 
 private float greenValue = 255;
-public int score = 0;
+public static int score = 0;
 
 
 public void update() {
     HealthBound();
-    score ++;
+    //score 
     greenValue = Health*3;
     
     if (greenValue > 255) {
@@ -36,21 +36,7 @@ public void update() {
 }
 public void render(Graphics g) {
     
-        /*g.setColor(Color.DARK_GRAY);
-        g.fillRect(2, 5, (int) (100 * 3.5), 15);
-        g.setColor(new Color(150, (int)greenValue, 0));
-        g.fillRect(2, 5, (int) (Health * 3.5), 15);
-        g.setColor(Color.white);
-        g.drawRect(2, 5, (int) (100 * 3.5), 15);*/
-        
-    
-    //public void render(Graphics g){
 
-    //g.setColor(Color.BLACK);
-   // g.fillRect(750,0,50, 1200);
-    //g.fillRect(0, 0, 50, 1200);
-   // g.setColor(Color.WHITE);
-    
    
 
         /////////////////////health bar/////////////////////////////

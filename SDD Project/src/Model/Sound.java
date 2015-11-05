@@ -33,7 +33,7 @@ public class Sound {
         }
     }
     
-    public void play() {
+    public  void play() {
         try {
             new Thread() {
                 public void run() {
@@ -56,5 +56,11 @@ public class Sound {
             e.printStackTrace();
         }
     }
+ 
+     public void mute() {
+                    
+    }
+    
+    
 }
 

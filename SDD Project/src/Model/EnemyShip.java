@@ -319,6 +319,7 @@ public class EnemyShip implements ShipState, GameFigure{
         health--;
         if(health == 0) {
             shipState = 1;
+        HUD.score += 100;
         }
     }
     
