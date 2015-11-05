@@ -346,4 +346,12 @@ public class GameData {
             spawnEnemiesForTest();
         }
     }
+    
+    public void clearData() {
+        enemyBullets.clear();
+        friendlyBullets.clear();
+        items.clear();
+        figures.clear();
+        enemyShips.clear();
+    }
 }

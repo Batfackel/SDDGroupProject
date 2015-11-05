@@ -235,6 +235,9 @@ public class KeyController implements KeyListener {
                     default: //error
                         System.out.println("error in weapon architecture");
                 }
+            break;
+            case KeyEvent.VK_J:
+                Main.gamePanel.level.currentSave.setScore(150);
              
             /*
             These were adaptations of the launcher to simulate how a bullet might spawn and work. They were used 
