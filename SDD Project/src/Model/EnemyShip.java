@@ -145,6 +145,9 @@ public class EnemyShip implements ShipState, GameFigure{
     @Override
     public void update() {
         setShipHitBox();
+        if (this.x > 850 || this.y > 1050){            
+            this.state = STATE_DONE;
+        }
     }
 
     @Override
@@ -335,8 +338,9 @@ public class EnemyShip implements ShipState, GameFigure{
 
     @Override
     public void renderToolTips(Graphics g) {
-        //string is modified based on the enemy type that is being hovered over
-        g.drawString("Tool Tips For EnemyShip", (int)getX(), (int)getY());
+        //string is modified based on the enemy type that is being hovered over        
+        g.drawString("****ENEMY SHIP****", (int)getX() + 25, (int)getY());
+        g.drawString("FIRE WHEN READY!!", (int)getX() + 25, (int)getY() + 15);
 
     }
 

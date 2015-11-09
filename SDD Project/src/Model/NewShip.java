@@ -328,7 +328,8 @@ public class NewShip implements GameFigure, ShipState {
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For DefaultShip", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("New Ship", (int)getX() + 25, (int)getY());
+        g.drawString("New ships are too expensive for service", (int)getX() + 25, (int)getY() + 15);
     }
 }

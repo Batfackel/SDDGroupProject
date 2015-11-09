@@ -141,7 +141,13 @@ class Item implements GameFigure, AbstractItem{
 
     @Override
     public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For Item", (int)x, (int)y);
+        g.drawString(getText(), (int)x, (int)y);
     }
+
+    protected String getText() {
+        throw new UnsupportedOperationException("Items"); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     
 }

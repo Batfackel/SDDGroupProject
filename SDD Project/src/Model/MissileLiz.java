@@ -6,6 +6,7 @@
 package Model;
 
 import Controller.Main;
+import static Model.GameFigure.STATE_DONE;
 import static Model.GameFigure.STATE_TRAVELING;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
  *
  * @author atm15_000
  */
-public class MissileBulletBaseLevel extends Bullet{
+public class MissileLiz extends Bullet{
     Rectangle r1, r2;
     Image launcherImage;
     float x, y, width1 = 110, height1 = 125, pos, dist, targetx, targety, speed, sep;
@@ -35,9 +36,9 @@ public class MissileBulletBaseLevel extends Bullet{
     private float offset;
     
     
-    public MissileBulletBaseLevel(float x, float y, boolean enemy, int num) {
-        this.pos = this.x = x;
-        this.y = y;
+    public MissileLiz(float x, float y, boolean enemy) {
+        this.x = x;
+        this.pos = this.y = y;
         this.isEnemy = enemy;
         this.name = "Missile Base Level";        
         this.dist = 2;        
@@ -45,10 +46,7 @@ public class MissileBulletBaseLevel extends Bullet{
         this.turn = 6;
         this.offset = this.x;
                 
-       if (num == 1)
-        state = STATE_INIT_LEFT;
-       else
-        state = STATE_INIT_RIGHT;   
+      
        
        double target = 9999;
        //pick target
@@ -93,9 +91,17 @@ public class MissileBulletBaseLevel extends Bullet{
         return image;
     }
     
+    private int randomize(int min, int max) {
+        Random rand = new Random();
+        int number = 0;        
+        number = rand.nextInt(max - min) + min;
+
+        return number;
+    }
+    
     private void setLauncherHitBox() {
         //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
-        this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
+        this.r1 = new Rectangle((int) this.x, (int) this.y, 40, 40);  
     }
     
     public Rectangle getHitBox(){
@@ -113,14 +119,14 @@ public class MissileBulletBaseLevel extends Bullet{
         int height = launcherImage.getHeight(null);
         //g.drawImage(launcherImage, (int)x, (int)y, null);
         //g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 2, 18, 9, 29, null);        
-        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 21, 5, 38, 22, null);
+        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 40, (int)this.y + 40, 21, 5, 38, 22, null);
         //----------------------------------------------------------------------
         //set up and display hit boxes for the launcher objects
         //used for dubugging 9/10/2015
         //----------------------------------------------------------------------
         g.setColor(Color.yellow);
         //g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
-        g.drawRect((int) this.x, (int) this.y, 10, 10);
+        g.drawRect((int) this.x, (int) this.y, 40, 40);
         g.setColor(Color.BLUE);
         setLauncherHitBox();        
         g.setColor(Color.BLUE);     
@@ -133,20 +139,21 @@ public class MissileBulletBaseLevel extends Bullet{
         //friendly shot movement
         if (isEnemy == false) {            
             
-            if (state == STATE_INIT_LEFT) {
-                this.x-=3;
-                if (this.x < offset - 30)
-                    state = STATE_TRAVELING;
-            } else if (state == STATE_INIT_RIGHT) {
-                this.x += 3;
-                if (this.x > offset + 30) {
-                    state = STATE_TRAVELING;
-                }
-            } else if (state == STATE_TRAVELING) {
                 this.y -= dist;
-                if (dist < 25)
-                dist += 7;
-            }
+                if (dist < 10)
+                dist += .5;
+            
+                if (this.y < pos - 350) {
+                    Main.gameData.friendlyBullets.add((Bullet)new MissilePatty(x, y, randomize((int)x + 20, (int)x + 100), randomize((int)y + 20, (int)y + 100), false));
+                    Main.gameData.friendlyBullets.add((Bullet)new MissilePatty(x, y, randomize((int)x + 20, (int)x + 100), randomize((int)y + 20, (int)y + 100), false));
+                    Main.gameData.friendlyBullets.add((Bullet)new MissilePatty(x, y, randomize((int)x - 100, (int)x - 20), randomize((int)y + 20, (int)y + 100), false));
+                    Main.gameData.friendlyBullets.add((Bullet)new MissilePatty(x, y, randomize((int)x - 100, (int)x - 20), randomize((int)y + 20, (int)y + 100), false));
+                    Main.gameData.friendlyBullets.add((Bullet)new MissilePatty(x, y, randomize((int)x - 100, (int)x - 20), randomize((int)y - 100, (int)y - 20), false));    
+                    Main.gameData.friendlyBullets.add((Bullet)new MissilePatty(x, y, randomize((int)x - 100, (int)x - 20), randomize((int)y - 100, (int)y - 20), false));    
+                    Main.gameData.friendlyBullets.add((Bullet)new MissilePatty(x, y, randomize((int)x + 20, (int)x + 100), randomize((int)y - 100, (int)y - 20), false));    
+                    Main.gameData.friendlyBullets.add((Bullet)new MissilePatty(x, y, randomize((int)x + 20, (int)x + 100), randomize((int)y - 100, (int)y - 20), false));    
+                    state = STATE_DONE;                                          
+                }
                 /*float dx = targetx - this.x;
                 float dy = targety - this.y;
 
@@ -213,9 +220,10 @@ public class MissileBulletBaseLevel extends Bullet{
     }
 
     @Override
-    public void renderToolTips(Graphics g) {        
-        g.drawString("These missiles are common among military craft.", (int)getX() + 25, (int)getY());
-        g.drawString("They have minor tracking abilities.", (int)getX() + 25, (int)getY() + 15);
+    public void renderToolTips(Graphics g) {
+        g.drawString("LIZ", (int)getX() + 25, (int)getY());
+        g.drawString("carries a deadly payload", (int)getX() + 25, (int)getY() + 15);
 
     }
 }
+

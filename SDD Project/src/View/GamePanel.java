@@ -178,13 +178,13 @@ public class GamePanel extends JPanel implements MouseMotionListener {
                 figureRendering(f);
             }
         }
-        synchronized (gameData.ships) {
+/*        synchronized (gameData.ships) {
             Ship f;
             for (int i = 0; i < gameData.ships.size(); i++) {
                 f = (Ship) gameData.ships.get(i);
                 figureRendering((GameFigure)f);
             }
-        }        
+        }        */
         synchronized (gameData.items) {
             GameFigure f;
             for (int i = 0; i < gameData.items.size(); i++) {
@@ -225,6 +225,13 @@ public class GamePanel extends JPanel implements MouseMotionListener {
 //                f.render(graphics);
 //            }
 //        }
+        synchronized (gameData.ships) {
+            Ship f;
+            for (int i = 0; i < gameData.ships.size(); i++) {
+                f = (Ship) gameData.ships.get(i);
+                figureRendering((GameFigure)f);
+            }
+        }    
 
          hud.render(graphics);
     }

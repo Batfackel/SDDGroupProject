@@ -53,6 +53,7 @@ public class GameData {
     public static Context enemyBulletsContext;
     public static KineticState kinetic;
     
+    
     public GameData(String sName) {
         
         this.shipName = sName;
@@ -72,11 +73,11 @@ public class GameData {
         
         //represent weapon power-up items        
         // testing items and new item mechanics
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 200));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 180));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 1600));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 220));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 240));
+//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 200));
+//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 180));
+//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 1600));
+//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 220));
+//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 240));
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
@@ -84,6 +85,11 @@ public class GameData {
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item) weaponMaker.getWeapon("MISSILE", 100, 200));
+        items.add((Item) weaponMaker.getWeapon("MISSILE", 200, 200));
+        items.add((Item) weaponMaker.getWeapon("MISSILE", 300, 200));
+        items.add((Item) weaponMaker.getWeapon("MISSILE", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("MISSILE", 500, 200));
+        items.add((Item) weaponMaker.getWeapon("MISSILE", 500, 200));
 
         //enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));        
         //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
@@ -204,12 +210,16 @@ public class GameData {
                     }
                     else if (shot.name == "Lightning Shot") {
                         if (shot.getHitCircle().intersects(eShip.getShipHitBox())) {
-                            this.shockOn = false;
-                            Rectangle we = eShip.getShipHitBox();
-                            Ellipse2D qw = shot.getHitCircle();
+                            this.shockOn = false;                            
+                            shot.setTurn(currentShip.getX(), currentShip.getY(), eShip.fireLocationX(), eShip.fireLocationY());
+                            shot.setHit();
+//                            shot.render(null);
+            //                Main.gameData.friendlyBullets.add(new LightningShot(currentShip.getX() - 60, currentShip.getY() - 60, false));
+                            
                             eShip.getHit();                               
                             synchronized (friendlyBullets) {
-                            //    this.bullets.remove(shot);
+  //                              this.friendlyBullets.remove(shot);
+                                
                             }
                             break;
                         }                        

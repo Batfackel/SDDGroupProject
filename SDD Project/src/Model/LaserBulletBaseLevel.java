@@ -139,7 +139,8 @@ public class LaserBulletBaseLevel extends Bullet{
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For LaserBulletBaseLevel", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("Laser weapons are a new addition to the military's arsenal", (int)getX() + 25, (int)getY());
+        g.drawString("They shoot in a continuous beam.", (int)getX() + 25, (int)getY() + 15);
     }
 }

@@ -106,8 +106,9 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For Missile", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("Missiles", (int)getX() + 25, (int)getY());
+        g.drawString("Missiles are were too expensive and replaced", (int)getX() + 25, (int)getY() + 15);
     }
 
 }
