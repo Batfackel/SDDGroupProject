@@ -20,7 +20,7 @@ public class NewShip implements GameFigure, ShipState {
  
     private final int DAMAGE_WAIT_TIME=50;
     private float x, y, dx, dy, shipHeight, shipWidth;
-    private int state, levelState, rateOfSpeed, armour, shipState, weaponState, weaponLevel, health;
+    private int state, levelState, rateOfSpeed, armour, shipState, weaponState, weaponLevel, health, lives;
     private String shipType;
     private Image shipImage;
     private boolean isShipBeingDamaged;
@@ -29,9 +29,38 @@ public class NewShip implements GameFigure, ShipState {
     
     Rectangle[] hitBox = new Rectangle[2];
 
+    private static volatile NewShip instance;
+    private NewShip() { }
+
+    public static NewShip newInstance(float x, float y) {
+        instance = new NewShip(x, y);
+
+        return instance;
+    }
+    
+    public static NewShip newInstance(String shipType, float x, float y) {
+        instance = new NewShip(shipType, x, y);
+
+        return instance;
+    }
+    
+    public static NewShip getInstance() {
+        if (instance == null ) {
+            synchronized (NewShip.class) {
+                if (instance == null) {
+                    instance = new NewShip();
+                }
+            }
+        }
+
+        return instance;
+    }
+    
     NewShip(float x, float y) {
         this.x = x;
         this.y = y;
+        this.health = 100;
+        this.lives = 3;
         isShipBeingDamaged = false;
         damagedCounter=0;
         this.levelState = BASE_LEVEL;
@@ -44,6 +73,8 @@ public class NewShip implements GameFigure, ShipState {
     NewShip(String shipType, float x, float y) {
         this.x = x;
         this.y = y;
+        this.health = 100;
+        this.lives = 3;
         isShipBeingDamaged = false;
         damagedCounter = 0;
         this.levelState = BASE_LEVEL;
@@ -59,35 +90,50 @@ public class NewShip implements GameFigure, ShipState {
         //this.shipWidth = 64;
         switch (shipType) {
             case "defaultship":
-                this.health = 4;
+                //this.health = 4;
                 this.rateOfSpeed = 10;
                 break;
             case "shipv":
-                this.health = 2;
+                //this.health = 2;
                 this.rateOfSpeed = 30;
                 break;
             case "shipw":
-                this.health = 10;
+                //this.health = 10;
                 this.rateOfSpeed = 5;
                 break;
             case "shipx":
-                this.health = 3;
+                //this.health = 3;
                 this.rateOfSpeed = 10;
                 break;
             case "shipy":
-                this.health = 8;
+                //this.health = 8;
                 this.rateOfSpeed = 8;
                 break;
             case "shipz":
-                this.health = 3;
+                //this.health = 3;
                 this.rateOfSpeed = 20;
                 break;
             default:
-                this.health = 5;
+                //this.health = 5;
                 this.rateOfSpeed = 10;
                 break;
         }
         this.setShipHitBox();
+    }
+    
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     @Override
@@ -225,12 +271,21 @@ public class NewShip implements GameFigure, ShipState {
         return this.isShipBeingDamaged;
     }
     
+    public void getHit(){
+        this.health--;
+    }
+    
     @Override
     public void update() {
         setShipHitBox();
         isShipDamaged();
         isTurning();
         shipImage = GameData.flyweightItems.setShipImage(this);
+        
+        if (this.health <= 0 && this.lives > 0) {
+            this.health = 100;
+            this.lives--;
+        }
     }
 
     void isShipDamaged() {

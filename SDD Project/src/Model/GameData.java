@@ -227,7 +227,7 @@ public class GameData {
                     currentShip.setState(Ship.STATE_DAMAGED);
 
                     eShip.getHit();                    
-
+                    NewShip.getInstance().getHit();
                 }
 
                 if (eShip.getShipState() == 0) {
@@ -251,6 +251,7 @@ public class GameData {
                       synchronized (enemyBullets) {
                         this.enemyBullets.remove(shot);
                         currentShip.setState(Ship.STATE_DAMAGED);
+                        NewShip.getInstance().getHit();
                       }
                   }
                 }                       

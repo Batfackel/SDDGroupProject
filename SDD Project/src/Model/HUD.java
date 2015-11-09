@@ -20,20 +20,16 @@ import javax.swing.JPanel;
  */
 public class HUD {
 
-public static float Health = 100;
 
-private float greenValue = 255;
 public int score = 0;
 
 
 public void update() {
-    HealthBound();
-    score ++;
-    greenValue = Health*3;
-    
-    if (greenValue > 255) {
-        greenValue = 255;
+    //Health
+    if (gameOver()) {
+        // do game over here
     }
+    score ++;
 }
 public void render(Graphics g) {
     
@@ -59,13 +55,13 @@ public void render(Graphics g) {
         g.drawRect(5,5,10,300);
         
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(5,5,10,300);
+        renderHealth(g, 1);
         
         g.setColor(Color.RED);
-        g.fillRect(5,5,10,300);
+        renderHealth(g, 2);
         
         g.setColor(Color.GREEN);
-        g.fillRect(5,5,10,300);
+        renderHealth(g, 3);
         g.setColor(Color.BLACK);
         ///////Terrible way to get verticle letters- will change later///////
         g.drawString("L",5,240);
@@ -102,11 +98,25 @@ public void render(Graphics g) {
 
 }
 
-
-private void HealthBound() {
-    if(Health <= 0) {
-        Health = 0;
+private void renderHealth(Graphics g, int lifeNumber){
+    float percentage = 0;
+    
+    if (lifeNumber < NewShip.getInstance().getLives()) {
+        percentage = 1;
     }
+    else if(lifeNumber == NewShip.getInstance().getLives()){
+        percentage = NewShip.getInstance().getHealth() / 100f;
+    }
+    else{
+        percentage = 0;
+    }
+    System.out.println(percentage);
+    g.fillRect(5,305 - (int)(300 * percentage),10,(int)(300 * percentage));
+}
+
+private boolean gameOver() {
+    return NewShip.getInstance().getLives() <= 0 &&
+            NewShip.getInstance().getHealth() <= 0;
 }
 
   
