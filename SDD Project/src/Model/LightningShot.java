@@ -20,7 +20,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
-import javafx.scene.shape.Circle;
+//import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
