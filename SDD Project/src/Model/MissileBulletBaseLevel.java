@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Controller.Main;
 import static Model.GameFigure.STATE_TRAVELING;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,6 +13,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.io.File;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -22,15 +24,46 @@ import javax.swing.JOptionPane;
 public class MissileBulletBaseLevel extends Bullet{
     Rectangle r1, r2;
     Image launcherImage;
-    float x, y, width1 = 110, height1 = 125;
+    float x, y, width1 = 110, height1 = 125, pos, dist, targetx, targety, speed, sep;
     int state = STATE_TRAVELING;
-    private boolean isEnemy;
+    private boolean isEnemy;    
+    double angleToTarget;
     
-    public MissileBulletBaseLevel(float x, float y, boolean enemy) {
-        this.x = x;
+    private int speeed, turn;
+    private double vx = 0, vy = 0;
+    private double vel;
+    private float offset;
+    
+    
+    public MissileBulletBaseLevel(float x, float y, boolean enemy, int num) {
+        this.pos = this.x = x;
         this.y = y;
         this.isEnemy = enemy;
-        this.name = "Missile Base Level";
+        this.name = "Missile Base Level";        
+        this.dist = 2;        
+        this.speeed = 20;
+        this.turn = 6;
+        this.offset = this.x;
+                
+       if (num == 1)
+        state = STATE_INIT_LEFT;
+       else
+        state = STATE_INIT_RIGHT;   
+       
+       double target = 9999;
+       //pick target
+       for (int i = 0; i < Main.gameData.enemyShips.size(); i++) {
+           Ship eShip = Main.gameData.enemyShips.get(i);
+           if (eShip.getX() > 0 && eShip.getY() > 0) {
+           double temp = Math.sqrt(Math.pow((eShip.getX() - this.x), 2) + Math.pow((eShip.getY() - this.y), 2));
+           if (temp < target) {
+               this.targetx = eShip.getX();
+               this.targety = eShip.getY();
+               target = temp;
+           }
+           }
+       }
+        
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
@@ -41,12 +74,12 @@ public class MissileBulletBaseLevel extends Bullet{
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
         launcherImage = getImage(imagePath + separator + "images" + separator
-                + "BulletTest.png");
+                + "redMissile.png");
         
 
         //setRectangle(); // initialize the hit box when object is created for testing   
 
-       setLauncherHitBox();
+       setLauncherHitBox();       
     }
     
     public Image getImage(String fileName) {
@@ -79,7 +112,8 @@ public class MissileBulletBaseLevel extends Bullet{
         int width = launcherImage.getWidth(null);
         int height = launcherImage.getHeight(null);
         //g.drawImage(launcherImage, (int)x, (int)y, null);
-        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 2, 18, 9, 29, null);        
+        //g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 2, 18, 9, 29, null);        
+        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 21, 5, 38, 22, null);
         //----------------------------------------------------------------------
         //set up and display hit boxes for the launcher objects
         //used for dubugging 9/10/2015
@@ -95,10 +129,50 @@ public class MissileBulletBaseLevel extends Bullet{
 
     @Override
     public void update() {
-        setLauncherHitBox();        
+        setLauncherHitBox();           
         //friendly shot movement
-        if (isEnemy == false)
-            this.y -= 4;
+        if (isEnemy == false) {            
+            
+            if (state == STATE_INIT_LEFT) {
+                this.x-=3;
+                if (this.x < offset - 30)
+                    state = STATE_TRAVELING;
+            } else if (state == STATE_INIT_RIGHT) {
+                this.x += 3;
+                if (this.x > offset + 30) {
+                    state = STATE_TRAVELING;
+                }
+            } else if (state == STATE_TRAVELING) {
+                this.y -= dist;
+                if (dist < 25)
+                dist += 7;
+            }
+                /*float dx = targetx - this.x;
+                float dy = targety - this.y;
+
+                double dist = Math.sqrt((dx * dx) + (dy * dy));
+
+                dx /= dist;
+                dy /= dist;
+
+                vx += dx * turn;
+                vy += dy * turn;
+
+                vel = Math.sqrt((vx * vx) + (vy * vy));
+
+                if (vel > speeed) {
+                    vx = (vx * speeed) / vel;
+                    vy = (vy * speeed) / vel;
+                }
+
+                this.x += vx;
+                this.y += vy;
+
+            }
+            
+            if (targetx - this.x < 2 && targety - this.y < 2)
+                state = STATE_DONE;*/            
+        }                    
         //enemy shot movement
         else            
             this.y += 4;
@@ -139,8 +213,9 @@ public class MissileBulletBaseLevel extends Bullet{
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For MissileBulletBaseLevel", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("These missiles are common among military craft.", (int)getX() + 25, (int)getY());
+        g.drawString("They have minor tracking abilities.", (int)getX() + 25, (int)getY() + 15);
 
     }
 }

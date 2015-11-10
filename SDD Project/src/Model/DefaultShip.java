@@ -444,8 +444,9 @@ public int getState() {
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For DefaultShip", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("Standard ships in the military", (int)getX() + 25, (int)getY());
+        g.drawString("default ships are very reliable", (int)getX() + 25, (int)getY() + 15);
     }
 
     @Override

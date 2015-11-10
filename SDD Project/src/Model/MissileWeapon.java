@@ -4,6 +4,7 @@
  */
 package Model;
 
+import java.awt.Graphics;
 import java.util.Random;
 
 /**
@@ -32,5 +33,10 @@ public class MissileWeapon extends Item{
     @Override
     public int getItemType() {
         return this.weaponType;
+    }
+    
+    @Override
+    protected String getText() {
+        return "Missile Weapon -Item Pickup.";
     }
 }

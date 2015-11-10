@@ -11,6 +11,7 @@ import Model.MissileState;
 import Model.Ship;
 import Model.ShipFactory;
 import Model.Sound;
+import static Model.Sound.shot;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -24,6 +25,7 @@ public class KeyController implements KeyListener {
     private Main main;
     private ShipFactory shipMaker = new ShipFactory(); 
     private Ship newShip;
+    private Sound mute;
     //KeyController(){this.ship = null;}//Will Added constructor 9/16/2015
     //there are two constructors here
     public KeyController(Ship ship, GameData gameData) {
@@ -111,6 +113,11 @@ public class KeyController implements KeyListener {
             case KeyEvent.VK_DOWN:
                 mainShip.moveDown(); 
                 break;
+          case KeyEvent.VK_M: {
+          
+        }
+               
+                
 
 
 //            case KeyEvent.VK_1:
@@ -228,6 +235,9 @@ public class KeyController implements KeyListener {
                     default: //error
                         System.out.println("error in weapon architecture");
                 }
+            break;
+            case KeyEvent.VK_J:
+                Main.gamePanel.level.currentSave.setScore(150);
              
             /*
             These were adaptations of the launcher to simulate how a bullet might spawn and work. They were used 
@@ -247,10 +257,12 @@ public class KeyController implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        
     }
 
 }

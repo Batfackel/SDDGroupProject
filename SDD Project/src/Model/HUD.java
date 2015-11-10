@@ -11,7 +11,6 @@ import static View.GamePanel.PWIDTH;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import javax.swing.JPanel;
 
 
 /**
@@ -21,33 +20,29 @@ import javax.swing.JPanel;
 public class HUD {
 
 
-public int score = 0;
+public static int score = 0;
 
 
 public void update() {
     //Health
     if (gameOver()) {
         // do game over here
+
+//private float greenValue = 255;
+//public static int score = 0;
+
+//    HealthBound();
+    //score 
+//    greenValue = Health*3;
+    
+//    if (greenValue > 255) {
+//        greenValue = 255;
     }
     score ++;
 }
 public void render(Graphics g) {
     
-        /*g.setColor(Color.DARK_GRAY);
-        g.fillRect(2, 5, (int) (100 * 3.5), 15);
-        g.setColor(new Color(150, (int)greenValue, 0));
-        g.fillRect(2, 5, (int) (Health * 3.5), 15);
-        g.setColor(Color.white);
-        g.drawRect(2, 5, (int) (100 * 3.5), 15);*/
-        
-    
-    //public void render(Graphics g){
 
-    g.setColor(Color.BLACK);
-    g.fillRect(750,0,50, 1200);
-    g.fillRect(0, 0, 50, 1200);
-   // g.setColor(Color.WHITE);
-    
    
 
         /////////////////////health bar/////////////////////////////
@@ -63,6 +58,10 @@ public void render(Graphics g) {
         g.setColor(Color.GREEN);
         renderHealth(g, 3);
         g.setColor(Color.BLACK);
+
+//        g.fillRect(5,5,10,300);
+       // g.setColor(Color.BLACK);
+
         ///////Terrible way to get verticle letters- will change later///////
         g.drawString("L",5,240);
         g.drawString("I",5,260);

@@ -28,14 +28,14 @@ import Model.Sound;
 
 public class Main extends JFrame implements ActionListener {
 
-    public GamePanel gamePanel;
+    public static GamePanel gamePanel;
     public static  GameData gameData;
    //public static GameData gameData2;
     private Animator animator;
     //private Animator animator2;
     public JButton startButton;
     private JButton quitButton;
-    private JButton pauseButton;
+    public static JButton pauseButton;
     private JButton selectShipButton;
     private Launcher launcher;
     private Launcher launcher2;

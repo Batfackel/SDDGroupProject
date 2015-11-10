@@ -50,7 +50,7 @@ public class Animator implements Runnable {
 
             }
             else{
-                gamePanel.setBackground(Color.red);
+                //gamePanel.setBackground(Color.red);
             }
             
             try {

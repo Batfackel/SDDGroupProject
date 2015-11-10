@@ -1,5 +1,7 @@
 package View;
 import Controller.Animator;
+import Controller.Main;
+import static Controller.Main.pauseButton;
 import Model.Bullet;
 import Model.Background;
 import Model.GameData;
@@ -9,6 +11,7 @@ import Model.KineticBulletBaseLevel;
 import Model.Level;
 import Model.ProxyGameFigure;
 import Model.Ship;
+import Model.Sound;
 //import Model.ShipFactory;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,6 +46,7 @@ public class GamePanel extends JPanel implements MouseMotionListener {
      private HUD hud;
     //public ShipFactory shipMaker;
     private Image titleScreen;
+    private boolean running = false;
     private Date now; 
     private Timer timer;
     
@@ -82,10 +86,13 @@ public class GamePanel extends JPanel implements MouseMotionListener {
         
         now = new Date();
         startTimer(lbl);
+        running = true;
     }
 
     public void pauseGame(){
         animator.setPause(true);
+        Sound.sound1.stop();
+        Main.pauseButton.setText("Resume");
         if (timer != null) {
             timer.stop();
         }
@@ -93,9 +100,12 @@ public class GamePanel extends JPanel implements MouseMotionListener {
     
     public void resumeGame(){
         animator.setPause(false);
+        Main.pauseButton.setText("Pause");
+        Sound.sound1.play();
         if (timer != null) {
             timer.start();
         }
+        level.currentSave.setScore(0);
     }
     
         private void startTimer(final JLabel lbl){ 
@@ -143,7 +153,8 @@ public class GamePanel extends JPanel implements MouseMotionListener {
                 graphics = dbImage.getGraphics();
             }
         }
-            
+        
+        
         graphics.clearRect(0, 0, Level.returnWidth(), Level.returnHeight());
         //draw the background image first then draw everything else ontop of it
         level.render(graphics);
@@ -167,13 +178,13 @@ public class GamePanel extends JPanel implements MouseMotionListener {
                 figureRendering(f);
             }
         }
-        synchronized (gameData.ships) {
+/*        synchronized (gameData.ships) {
             Ship f;
             for (int i = 0; i < gameData.ships.size(); i++) {
                 f = (Ship) gameData.ships.get(i);
                 figureRendering((GameFigure)f);
             }
-        }        
+        }        */
         synchronized (gameData.items) {
             GameFigure f;
             for (int i = 0; i < gameData.items.size(); i++) {
@@ -214,6 +225,13 @@ public class GamePanel extends JPanel implements MouseMotionListener {
 //                f.render(graphics);
 //            }
 //        }
+        synchronized (gameData.ships) {
+            Ship f;
+            for (int i = 0; i < gameData.ships.size(); i++) {
+                f = (Ship) gameData.ships.get(i);
+                figureRendering((GameFigure)f);
+            }
+        }    
 
          hud.render(graphics);
     }
@@ -234,7 +252,10 @@ public class GamePanel extends JPanel implements MouseMotionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(titleScreen, 0, 0, null); // see javadoc for more info on the parameters      
+        if(running = true) {
+            g.drawImage(titleScreen, 0, 0, null); // see javadoc for more info on the parameters    
+        }
+          
         //g.drawImage(playerSpriteSheet, (int) this.x, (int) this.y, (int) x + 25, (int) y + 40, 144, 16, 169, 52, null, null);
     }
 
