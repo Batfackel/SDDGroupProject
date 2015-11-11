@@ -214,13 +214,29 @@ public class Launcher implements Ship, GameFigure, ShipState {
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For Launcher", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("This is the legenday launcher.", (int)getX() + 25, (int)getY());
+        g.drawString("Some say that all things were created through these.", (int)getX() + 25, (int)getY() + 15);
 
     }
 
     @Override
     public int getDamagedCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipSpeed() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxHealth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxShield() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

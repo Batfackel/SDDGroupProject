@@ -147,6 +147,8 @@ class KineticBulletLeftShot extends Bullet{
 
     @Override
     public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For KineticBulletLeftShot", (int)getX(), (int)getY());
+        g.drawString("Kinetic based projectile bullet", (int)getX() + 25, (int)getY());
+        g.drawString("Shot from the left of the vehicle", (int)getX() + 25, (int)getY() + 15);
     }
+
 }

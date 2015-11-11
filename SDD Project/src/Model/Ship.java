@@ -48,6 +48,9 @@ public interface Ship {
 //--------------------------------------------------------------------------
     public void setLevelState(int i);
     public int getLevelState();
+    public int getShipSpeed();
+    public int getShipMaxHealth();
+    public int getShipMaxShield();
     public void setWeaponState(int newWeaponState);
     public int getWeaponState();
     public void addWeaponLevel(int weaponPower);

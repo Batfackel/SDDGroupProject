@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements MouseMotionListener {
      private HUD hud;
     //public ShipFactory shipMaker;
     private Image titleScreen;
+    private Image test;
     private boolean running = false;
     private Date now; 
     private Timer timer;
@@ -68,7 +69,9 @@ public class GamePanel extends JPanel implements MouseMotionListener {
      
         titleScreen = getImage(imagePath + separator + "images" + separator
                 + "Inazuma no sentōki800x1000.png");
-
+         test = getImage(imagePath + separator + "images" + separator
+                + "speed.png");
+        
         this.addMouseMotionListener(this);
         
         level = new Level(); 
@@ -92,6 +95,7 @@ public class GamePanel extends JPanel implements MouseMotionListener {
     public void pauseGame(){
         animator.setPause(true);
         Sound.sound1.stop();
+        
         Main.pauseButton.setText("Resume");
         if (timer != null) {
             timer.stop();
@@ -178,13 +182,13 @@ public class GamePanel extends JPanel implements MouseMotionListener {
                 figureRendering(f);
             }
         }
-        synchronized (gameData.ships) {
+/*        synchronized (gameData.ships) {
             Ship f;
             for (int i = 0; i < gameData.ships.size(); i++) {
                 f = (Ship) gameData.ships.get(i);
                 figureRendering((GameFigure)f);
             }
-        }        
+        }        */
         synchronized (gameData.items) {
             GameFigure f;
             for (int i = 0; i < gameData.items.size(); i++) {
@@ -225,6 +229,13 @@ public class GamePanel extends JPanel implements MouseMotionListener {
 //                f.render(graphics);
 //            }
 //        }
+        synchronized (gameData.ships) {
+            Ship f;
+            for (int i = 0; i < gameData.ships.size(); i++) {
+                f = (Ship) gameData.ships.get(i);
+                figureRendering((GameFigure)f);
+            }
+        }    
 
          hud.render(graphics);
     }
@@ -248,7 +259,7 @@ public class GamePanel extends JPanel implements MouseMotionListener {
         if(running = true) {
             g.drawImage(titleScreen, 0, 0, null); // see javadoc for more info on the parameters    
         }
-          
+       
         //g.drawImage(playerSpriteSheet, (int) this.x, (int) this.y, (int) x + 25, (int) y + 40, 144, 16, 169, 52, null, null);
     }
 

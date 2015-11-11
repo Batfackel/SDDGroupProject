@@ -140,8 +140,9 @@ public class KineticBulletBaseLevel extends Bullet{
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For KineticBulletBaseLevel", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("Kinetic based projectile bullet", (int)getX() + 25, (int)getY());
+        g.drawString("Shot from the front of the vehicle", (int)getX() + 25, (int)getY() + 15);
     }
     
 }

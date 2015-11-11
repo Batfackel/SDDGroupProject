@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -145,6 +146,9 @@ public class EnemyShip implements ShipState, GameFigure{
     @Override
     public void update() {
         setShipHitBox();
+        if (this.x > 850 || this.y > 1050){            
+            this.state = STATE_DONE;
+        }
     }
 
     @Override
@@ -319,6 +323,7 @@ public class EnemyShip implements ShipState, GameFigure{
         health--;
         if(health == 0) {
             shipState = 1;
+        HUD.score += 100;
         }
     }
     
@@ -334,8 +339,9 @@ public class EnemyShip implements ShipState, GameFigure{
 
     @Override
     public void renderToolTips(Graphics g) {
-        //string is modified based on the enemy type that is being hovered over
-        g.drawString("Tool Tips For EnemyShip", (int)getX(), (int)getY());
+        //string is modified based on the enemy type that is being hovered over        
+        g.drawString("****ENEMY SHIP****", (int)getX() + 25, (int)getY());
+        g.drawString("FIRE WHEN READY!!", (int)getX() + 25, (int)getY() + 15);
 
     }
 
@@ -352,5 +358,20 @@ public class EnemyShip implements ShipState, GameFigure{
     public int fireLocationY() {
         //at the bottom of the picture
         return (int) y + (int)shipHeight;
+    }
+
+    @Override
+    public int getShipSpeed() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxHealth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxShield() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

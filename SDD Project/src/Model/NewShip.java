@@ -19,8 +19,10 @@ import javax.swing.JOptionPane;
 public class NewShip implements GameFigure, ShipState {
  
     private final int DAMAGE_WAIT_TIME=50;
+    private int maxHealth;
+    private int maxShield;
     private float x, y, dx, dy, shipHeight, shipWidth;
-    private int state, levelState, rateOfSpeed, armour, shipState, weaponState, weaponLevel, health;
+    private int state, levelState, rateOfSpeed, armour, shipState, weaponState, weaponLevel, health, lives;
     private String shipType;
     private Image shipImage;
     private boolean isShipBeingDamaged;
@@ -29,9 +31,38 @@ public class NewShip implements GameFigure, ShipState {
     
     Rectangle[] hitBox = new Rectangle[2];
 
+    private static volatile NewShip instance;
+    private NewShip() { }
+
+    public static NewShip newInstance(float x, float y) {
+        instance = new NewShip(x, y);
+
+        return instance;
+    }
+    
+    public static NewShip newInstance(String shipType, float x, float y) {
+        instance = new NewShip(shipType, x, y);
+
+        return instance;
+    }
+    
+    public static NewShip getInstance() {
+        if (instance == null ) {
+            synchronized (NewShip.class) {
+                if (instance == null) {
+                    instance = new NewShip();
+                }
+            }
+        }
+
+        return instance;
+    }
+    
     NewShip(float x, float y) {
         this.x = x;
         this.y = y;
+        this.health = 100;
+        this.lives = 3;
         isShipBeingDamaged = false;
         damagedCounter=0;
         this.levelState = BASE_LEVEL;
@@ -44,6 +75,8 @@ public class NewShip implements GameFigure, ShipState {
     NewShip(String shipType, float x, float y) {
         this.x = x;
         this.y = y;
+        this.health = 100;
+        this.lives = 3;
         isShipBeingDamaged = false;
         damagedCounter = 0;
         this.levelState = BASE_LEVEL;
@@ -60,36 +93,75 @@ public class NewShip implements GameFigure, ShipState {
         switch (shipType) {
             case "defaultship":
                 this.health = 4;
+                this.maxHealth = 4;
+                this.armour = 4;
+                this.maxShield = 4;
                 this.rateOfSpeed = 10;
                 break;
             case "shipv":
                 this.health = 2;
+                this.maxHealth = 2;
+                this.armour = 2;
+                this.maxShield = 2;
                 this.rateOfSpeed = 30;
                 break;
             case "shipw":
                 this.health = 10;
+                this.maxHealth = 10;
+                this.armour = 10;
+                this.maxShield = 10;
                 this.rateOfSpeed = 5;
                 break;
             case "shipx":
                 this.health = 3;
+                this.maxHealth = 3;
                 this.rateOfSpeed = 10;
                 break;
             case "shipy":
                 this.health = 8;
+                this.maxHealth = 8;
+                this.armour = 8;
+                this.maxShield = 8;
                 this.rateOfSpeed = 8;
                 break;
             case "shipz":
                 this.health = 3;
+                this.maxHealth = 3;
                 this.rateOfSpeed = 20;
                 break;
             default:
                 this.health = 5;
+                this.maxHealth = 5;
+                this.armour = 5;
+                this.maxShield = 5;
+                //this.health = 4;
                 this.rateOfSpeed = 10;
                 break;
         }
         this.setShipHitBox();
     }
+    
+    public int getLives() {
+        return lives;
+    }
 
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getShipSpeed()
+    {
+            return this.rateOfSpeed;
+        
+    }
+    
     @Override
     public int getShipState() {
         return this.shipState;
@@ -225,12 +297,21 @@ public class NewShip implements GameFigure, ShipState {
         return this.isShipBeingDamaged;
     }
     
+    public void getHit(){
+        this.health--;
+    }
+    
     @Override
     public void update() {
         setShipHitBox();
         isShipDamaged();
         isTurning();
         shipImage = GameData.flyweightItems.setShipImage(this);
+        
+        if (this.health <= 0 && this.lives > 0) {
+            this.health = 100;
+            this.lives--;
+        }
     }
 
     void isShipDamaged() {
@@ -328,7 +409,18 @@ public class NewShip implements GameFigure, ShipState {
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For DefaultShip", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("New Ship", (int)getX() + 25, (int)getY());
+        g.drawString("New ships are too expensive for service", (int)getX() + 25, (int)getY() + 15);
+    }
+
+    @Override
+    public int getShipMaxHealth() {
+        return this.maxHealth; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxShield() {
+        return this.maxShield;
     }
 }

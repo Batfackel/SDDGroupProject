@@ -69,7 +69,7 @@ public class ProxyGameFigure implements GameFigure {
             showToolTips = false;
         }
         if(p!=null)
-        System.out.println("Mouse.X: " + p.x + " Mouse.Y: " + p.y + " showToolTip: " + showToolTips);
+        //System.out.println("Mouse.X: " + p.x + " Mouse.Y: " + p.y + " showToolTip: " + showToolTips);
         this.render(g);
     }
 

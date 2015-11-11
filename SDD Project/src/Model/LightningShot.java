@@ -20,7 +20,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
-import javafx.scene.shape.Circle;
+//import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -34,17 +34,17 @@ public class LightningShot extends Bullet{
     Image shockImage;
     float x, y, width1 = 110, height1 = 125;
     int state = STATE_TRAVELING;
-    int drawX, drawY;
-    private boolean isEnemy;    
+    double radians;
+    private boolean isEnemy, hit;    
+    BufferedImage bufferedShockImage;
     
     public LightningShot(float x, float y, boolean enemy) {
         this.x = x;
         this.y = y;
         this.isEnemy = enemy;
         this.name = "Lightning Shot";
-        this.e1 = new Ellipse2D.Float();        
-        this.drawX = 300;
-        this.drawY = 300;
+        this.e1 = new Ellipse2D.Float();                
+        this.hit = false;
                                          
         
         String imagePath = System.getProperty("user.dir");
@@ -56,11 +56,25 @@ public class LightningShot extends Bullet{
         // the project folder name, and create a folder named "image"
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
-        shockImage = getImage(imagePath + separator + "images" + separator+ "shocking.png");
-                
+        shockImage = getImage(imagePath + separator + "images" + separator+ "ElectricTest.png");
+        bufferedShockImage = (BufferedImage) shockImage;
+        //bufferedShockImage = bufferedShockImage.getSubimage(0, 0, 40, 100);        
+        this.radians = 45;
+
         //setRectangle(); // initialize the hit box when object is created for testing   
        setLauncherHitBox();         
     }
+    
+    @Override
+    public void setTurn(int x1, int y1, int x2, int y2) {
+        double temp1 = (double)y2 - (double)y1;
+        double temp2 = (double)x2 - (double)x1;        
+        double in = temp1 / temp2;
+        //double degrees = Math.toDegrees(Math.atan2(temp1, temp2));        
+        double degrees = Math.toDegrees(Math.atan(in));
+                //double degrees = Math.toDegrees(Math.atan((x2 - x1) / (y2 - y1)));
+        this.radians = Math.toRadians(degrees - 90);        
+    }       
     
     public Image getImage(String fileName) {
         Image image = null;
@@ -73,48 +87,42 @@ public class LightningShot extends Bullet{
         return image;
     }
     
+    @Override
+    void setHit() {
+        this.hit = true;
+    }
+    
     private void setLauncherHitBox() {
         //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
         //this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
-        e1.setFrame(this.x, this.y, this.width1, this.height1);              
-        e1.setFrame(this.x, this.y, 200, 200);  
+//        e1.setFrame(this.x, this.y, this.width1, this.height1);              
+//        e1.setFrame(this.x, this.y, 100, 100);  
         Ship ship = Main.gameData.ships.get(0);
-        e1.setFrame(ship.getX() - 80, ship.getY() - 80, 200, 200);
+        e1.setFrame(ship.getX() - 25, ship.getY() - 25, 100, 100);
     }
     
     @Override
     public void render(Graphics g) {
-        double rotationRequired = Math.toRadians(45);
-        double locationX = 100;
-        double locationY = 100;
-        AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
-        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-        Graphics2D g2d = (Graphics2D) g;
-        //g2d.drawImage(op.filter((BufferedImage)shockImage, null), locationX, locationY, null);
-        
-        
-        
-        
-        //int width = shockImage.getWidth(null);
-        //int height = shockImage.getHeight(null);
-        //g.drawImage(launcherImage, (int)x, (int)y, null);
+        Graphics2D g2d = (Graphics2D) g;     
+        Ship ship = Main.gameData.ships.get(0);
+        if (this.hit == true) {
+        //Graphics2D g2d = (Graphics2D) g;             
+        double locationX = 50;
+        double locationY = 50;
+        //AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+        AffineTransform tx = AffineTransform.getRotateInstance(this.radians, locationX, locationY);                
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);                
+        //Graphics2D g2d = (Graphics2D) g;
+        //g2d.drawImage(op.filter((BufferedImage)shockImage, null), (int)locationX, (int)locationY, (int)this.x + 40, (int)this.y + 100, 0, 0, 40, 100, null);                
+//        g2d.drawImage(op.filter(ass, null), (int)this.x + 40, (int)this.y + 20, null);        
+        g2d.drawImage(op.filter(bufferedShockImage, null), (int)ship.getX() - 35, (int)ship.getY() - 35, null);        
+        this.state = STATE_DONE;
+           }
         g2d.draw(e1);
-        g.drawImage(shockImage, (int)this.x, (int)this.y, (int)this.x + 40, (int)this.y + 100, 0, 0, 40, 100, null);                
-        //g2d.drawImage(op.filter((BufferedImage)shockImage, null), 200, 200, null);
-        //g.drawImage(op.filter((BufferedImage)shockImage, null), 200, 200, null);
-        //----------------------------------------------------------------------
-        //set up and display hit boxes for the launcher objects
-        //used for dubugging 9/10/2015
-        //----------------------------------------------------------------------
-        //g.setColor(Color.yellow);
-        //g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
-        //g.drawRect((int) this.x, (int) this.y, 10, 10);
-        //g.setColor(Color.BLUE);
-        //setLauncherHitBox();        
-        //g.setColor(Color.BLUE);     
-        //----------------------------------------------------------------------
-    }
-
+        //this.state = STATE_DONE;
+    //}
+    }   
+    
     @Override
     public void update() {
         setLauncherHitBox();        
@@ -167,8 +175,9 @@ public class LightningShot extends Bullet{
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void renderToolTips(Graphics g) {        
+        g.drawString("Tesla Coil", (int)getX() + 25, (int)getY());
+        g.drawString("This is extrememly experimental and isn't realible", (int)getX() + 25, (int)getY() + 15);
     }
 
 }

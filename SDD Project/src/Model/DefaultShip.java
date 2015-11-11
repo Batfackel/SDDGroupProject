@@ -123,7 +123,7 @@ public class DefaultShip implements ShipState, GameFigure {
     //who or why someone put an additional constructor that does not initalize
     //anything but the health of the ship.
     
- public int getShipHealth() {
+ public int getShipMaxHealth() {
      return this.shipHealth;
  }
 
@@ -444,12 +444,23 @@ public int getState() {
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For DefaultShip", (int)getX(), (int)getY());
+    public void renderToolTips(Graphics g) {        
+        g.drawString("Standard ships in the military", (int)getX() + 25, (int)getY());
+        g.drawString("default ships are very reliable", (int)getX() + 25, (int)getY() + 15);
     }
 
     @Override
     public int getDamagedCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipSpeed() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxShield() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -22,37 +22,37 @@ public class ShipFactory {
         
         if (shipSelection.equalsIgnoreCase("defaultship")){
             //shipType = new DefaultShip(x,y);
-            shipType = new NewShip("defaultShip",x,y);
+            shipType = NewShip.newInstance("defaultShip",x,y);
             return shipType;
         }
         else if (shipSelection.equalsIgnoreCase("shipx")){
             //shipType = new ShipX(x,y);
-            shipType = new NewShip("shipx",x,y);
+            shipType = NewShip.newInstance("shipx",x,y);
             return shipType;
         }
         else if (shipSelection.equalsIgnoreCase("shipy")){
             //shipType = new ShipY(x,y);
-            shipType = new NewShip("shipy",x,y);
+            shipType = NewShip.newInstance("shipy",x,y);
             return shipType;
         }
         else if (shipSelection.equalsIgnoreCase("shipz")){
             //shipType = new ShipZ(x,y);
-           shipType = new NewShip("shipz",x,y);
+           shipType = NewShip.newInstance("shipz",x,y);
             return shipType;
         }
          else if (shipSelection.equalsIgnoreCase("shipw")){
             //shipType = new ShipW(x,y);
-            shipType = new NewShip("shipw",x,y);
+            shipType = NewShip.newInstance("shipw",x,y);
             return shipType;
         }
           else if (shipSelection.equalsIgnoreCase("shipv")){
             //shipType = new ShipV(x,y);
-            shipType = new NewShip("shipv",x,y);
+            shipType = NewShip.newInstance("shipv",x,y);
             return shipType;
         }
         else{
             //shipType = new DefaultShip(x,y);
-            shipType = new NewShip("defaultShip",x,y);
+            shipType = NewShip.newInstance("defaultShip",x,y);
             return shipType;
             //throw new IllegalArgumentException("NO SUCH SHIP TYPE");
         }

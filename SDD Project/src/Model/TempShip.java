@@ -275,11 +275,27 @@ public int getState() {
 
     @Override
     public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For TempShip", (int) getX(), (int) getY());
+        g.drawString("Rental Ship", (int)getX() + 25, (int)getY());
+        g.drawString("Just pass'n through", (int)getX() + 25, (int)getY() + 15);
     }
 
     @Override
     public int getDamagedCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipSpeed() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxHealth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxShield() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

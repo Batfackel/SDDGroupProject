@@ -167,7 +167,6 @@ public class Main extends JFrame implements ActionListener {
             c.add(leaderPanel, "Center");
             gamePanel.setVisible(false);
             leaderBoard.setVisible(true);
-           ;
         }
         else if(ae.getSource() == pauseButton) {
             if (!animator.isPause()) {
