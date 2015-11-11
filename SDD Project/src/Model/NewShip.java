@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 public class NewShip implements GameFigure, ShipState {
  
     private final int DAMAGE_WAIT_TIME=50;
+    private int maxHealth;
+    private int maxShield;
     private float x, y, dx, dy, shipHeight, shipWidth;
     private int state, levelState, rateOfSpeed, armour, shipState, weaponState, weaponLevel, health;
     private String shipType;
@@ -60,36 +62,59 @@ public class NewShip implements GameFigure, ShipState {
         switch (shipType) {
             case "defaultship":
                 this.health = 4;
+                this.maxHealth = 4;
+                this.armour = 4;
+                this.maxShield = 4;
                 this.rateOfSpeed = 10;
                 break;
             case "shipv":
                 this.health = 2;
+                this.maxHealth = 2;
+                this.armour = 2;
+                this.maxShield = 2;
                 this.rateOfSpeed = 30;
                 break;
             case "shipw":
                 this.health = 10;
+                this.maxHealth = 10;
+                this.armour = 10;
+                this.maxShield = 10;
                 this.rateOfSpeed = 5;
                 break;
             case "shipx":
                 this.health = 3;
+                this.maxHealth = 3;
                 this.rateOfSpeed = 10;
                 break;
             case "shipy":
                 this.health = 8;
+                this.maxHealth = 8;
+                this.armour = 8;
+                this.maxShield = 8;
                 this.rateOfSpeed = 8;
                 break;
             case "shipz":
                 this.health = 3;
+                this.maxHealth = 3;
                 this.rateOfSpeed = 20;
                 break;
             default:
                 this.health = 5;
+                this.maxHealth = 5;
+                this.armour = 5;
+                this.maxShield = 5;
                 this.rateOfSpeed = 10;
                 break;
         }
         this.setShipHitBox();
     }
 
+    public int getShipSpeed()
+    {
+            return this.rateOfSpeed;
+        
+    }
+    
     @Override
     public int getShipState() {
         return this.shipState;
@@ -330,5 +355,15 @@ public class NewShip implements GameFigure, ShipState {
     @Override
     public void renderToolTips(Graphics g) {
         g.drawString("Tool Tips For DefaultShip", (int)getX(), (int)getY());
+    }
+
+    @Override
+    public int getShipMaxHealth() {
+        return this.maxHealth; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxShield() {
+        return this.maxShield;
     }
 }

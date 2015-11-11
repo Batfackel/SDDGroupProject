@@ -353,4 +353,19 @@ public class EnemyShip implements ShipState, GameFigure{
         //at the bottom of the picture
         return (int) y + (int)shipHeight;
     }
+
+    @Override
+    public int getShipSpeed() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxHealth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxShield() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

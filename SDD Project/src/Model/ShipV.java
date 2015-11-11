@@ -148,7 +148,7 @@ public class ShipV implements Ship, ShipState {
     //who or why someone put an additional constructor that does not initalize
     //anything but the health of the ship.
     
- public int getShipHealth() {
+ public int getShipMaxHealth() {
      return this.shipHealth;
  }
 
@@ -455,6 +455,16 @@ public int getState() {
 
     @Override
     public int getDamagedCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipSpeed() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getShipMaxShield() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

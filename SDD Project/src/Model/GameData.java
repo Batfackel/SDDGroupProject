@@ -33,6 +33,8 @@ public class GameData {
     private final static int RESOLUTION_800X1000 = 1;
     public String shipName = "error";
     
+    //Will added to test hud
+    public Ship currentShip;
     public List<GameFigure> figures;
     public List<Item> items;
     public List<Ship> ships, enemyShips;
@@ -122,7 +124,8 @@ public class GameData {
     }    
 
     void mainGame() {        
-        Ship currentShip = (Ship) this.ships.get(0);
+       // Ship currentShip = (Ship) this.ships.get(0);
+        currentShip = (Ship) this.ships.get(0);
         //starts the lightning attack automatically
         if (currentShip.getWeaponState() == 1 && currentShip.getLevelState() > 1 && this.shockOn == false) {
             this.shockOn = true;
