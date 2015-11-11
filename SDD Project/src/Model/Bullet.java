@@ -28,4 +28,12 @@ public abstract class Bullet implements GameFigure{
     public void setIsEnemy() {
         state = 10;
     }
+
+    void setTurn(int x1, int y1, int x2, int y2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setHit() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

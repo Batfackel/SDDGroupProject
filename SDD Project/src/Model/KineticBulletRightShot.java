@@ -138,7 +138,7 @@ class KineticBulletRightShot extends Bullet{
 
     @Override
     public Ellipse2D getHitCircle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("A kinetic based projectile bullet.\nThe shot will shoot at a diagnol."); //To change body of generated methods, choose Tools | Templates.
     }
         
     public Rectangle getRectangle() {
@@ -147,6 +147,7 @@ class KineticBulletRightShot extends Bullet{
 
     @Override
     public void renderToolTips(Graphics g) {
-        g.drawString("Tool Tips For KineticBulletRightShot", (int)getX(), (int)getY());
+        g.drawString("Kinetic based projectile bullet", (int)getX() + 25, (int)getY());
+        g.drawString("Shot from the right of the vehicle", (int)getX() + 25, (int)getY() + 15);
     }
 }

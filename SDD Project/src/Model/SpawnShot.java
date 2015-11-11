@@ -39,6 +39,8 @@ class SpawnShot extends TimerTask {
                     Main.gameData.friendlyBullets.add((Bullet)new KineticBulletRightShot(this.x, this.y, false));               
                 else if (this.shotType == 2)
                     Main.gameData.friendlyBullets.add((Bullet)new KineticBulletLeftShot(this.x, this.y, false));  
+                else if (this.shotType == 5)
+                    Main.gameData.friendlyBullets.add((Bullet)new MissileSparkleDust(this.x, this.y, false));
                 else if (this.shotType == 10)
                     Main.gameData.enemyBullets.add((Bullet)new KineticBulletBaseLevel(this.x, this.y, true));
                 else if (this.shotType == 11)
