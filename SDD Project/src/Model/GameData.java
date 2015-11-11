@@ -188,6 +188,7 @@ public class GameData {
                     EnemyShip eShip = (EnemyShip) enemyShips.get(j);
                     if (shot.name != "Lightning Shot") {                        
                         if (shot.getHitBox().intersects(eShip.getShipHitBox())) {
+                            Level.currentSave.setScore(Level.currentSave.getScore() + eShip.getScore());
                             eShip.getHit();
                             synchronized (friendlyBullets) {
                                 this.friendlyBullets.remove(shot);
@@ -207,6 +208,7 @@ public class GameData {
                             this.shockOn = false;
                             Rectangle we = eShip.getShipHitBox();
                             Ellipse2D qw = shot.getHitCircle();
+                            Level.currentSave.setScore(Level.currentSave.getScore() + eShip.getScore());
                             eShip.getHit();                               
                             synchronized (friendlyBullets) {
                             //    this.bullets.remove(shot);
@@ -222,7 +224,7 @@ public class GameData {
                 EnemyShip eShip = (EnemyShip) enemyShips.get(i);
                                
                 if (currentShip.getShipHitBox().intersects(eShip.getShipHitBox())) {
-
+                    Level.currentSave.setScore(Level.currentSave.getScore() + eShip.getScore());
                     eShip.getHit();
                     currentShip.setState(Ship.STATE_DAMAGED);
 
