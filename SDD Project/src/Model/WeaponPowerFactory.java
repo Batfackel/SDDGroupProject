@@ -29,6 +29,10 @@ public class WeaponPowerFactory {
             leItem = new MissileWeapon(x, y, 2);
             return leItem;
         }
+        if(weaponSelection.equalsIgnoreCase("HEALTH")) {
+            leItem = new HealthItem(x, y, 0);
+            return leItem;
+        }
         else {
             throw new IllegalArgumentException("NO SUCH WEAPON");
         }

@@ -92,7 +92,11 @@ public class GameData {
         items.add((Item) weaponMaker.getWeapon("MISSILE", 400, 200));
         items.add((Item) weaponMaker.getWeapon("MISSILE", 500, 200));
         items.add((Item) weaponMaker.getWeapon("MISSILE", 500, 200));
-
+        items.add((Item) weaponMaker.getWeapon("HEALTH", 200, 200));
+        items.add((Item) weaponMaker.getWeapon("HEALTH", 300, 200));
+        items.add((Item) weaponMaker.getWeapon("HEALTH", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("HEALTH", 500, 200));
+        items.add((Item) weaponMaker.getWeapon("HEALTH", 500, 200));
         //enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));        
         //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
         Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 100, -300);
