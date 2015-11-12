@@ -20,7 +20,7 @@ public class Level {
     private Image backgroundImage, clouds, clouds2, transitionImage, level2Image;
     private BufferedImage background;
     private static int height, width, size, x, y;
-    private boolean needToDispose;
+    public static boolean doNotTransition = true;
     private boolean levelComplete = false;
     public static SaveData saveData;
     public static Score currentSave;
@@ -70,7 +70,7 @@ public class Level {
     }
     
     public void render(Graphics g) {
-        if(currentSave.getScore() >= 100) {
+        if(currentSave.getScore() >= 100  && doNotTransition) {
            Main.gamePanel.pauseGame();
            levelComplete = true;
            //clear all of the figures on the panel currently

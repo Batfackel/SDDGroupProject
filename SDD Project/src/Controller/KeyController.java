@@ -7,6 +7,7 @@ import Model.KineticBulletBaseLevel;
 import Model.KineticState;
 import Model.LaserState;
 import Model.Launcher;
+import Model.Level;
 import Model.MissileState;
 import Model.Ship;
 import Model.ShipFactory;
@@ -113,11 +114,14 @@ public class KeyController implements KeyListener {
             case KeyEvent.VK_DOWN:
                 mainShip.moveDown(); 
                 break;
-          case KeyEvent.VK_M: {
-          
-        }
-               
-                
+          case KeyEvent.VK_M: 
+              boolean temp = Level.doNotTransition;
+                if(temp) {
+                    Level.doNotTransition = false;
+                }
+                else {
+                    Level.doNotTransition = true;
+                }
 
 
 //            case KeyEvent.VK_1:
