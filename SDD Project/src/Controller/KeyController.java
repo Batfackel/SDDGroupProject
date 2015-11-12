@@ -124,11 +124,7 @@ public class KeyController implements KeyListener {
                 }
           case KeyEvent.VK_P:
               Sound.sound1.mute();
-             // Sound.shot.mute();
-              //Sound.shot2.mute();
-             // Sound.shot3.mute();
-
-
+           
 //            case KeyEvent.VK_1:
 //                ship.setRateOfSpeed(5);
 //                break;

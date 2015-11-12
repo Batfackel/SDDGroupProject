@@ -56,7 +56,6 @@ public class Sound {
             e.printStackTrace();
         }
     }
- 
      public void mute() {
         try {
             new Thread() {
