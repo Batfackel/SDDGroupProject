@@ -38,6 +38,10 @@ public class LaserState implements State{
                 break;
             case 3:
                 System.out.println("Laser max level");
+                Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 25, y - 51, false));
+                Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 5, y - 51, false));
+                Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 45, y - 51, false));
+                Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x - 15, y - 51, false));
                 break;
             default:
                 System.out.println("Laser error");
