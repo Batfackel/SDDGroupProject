@@ -58,7 +58,15 @@ public class Sound {
     }
  
      public void mute() {
-                    
+        try {
+            new Thread() {
+                public void run() {
+                    clip.stop();
+                }
+            }.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }    
     }
     
     

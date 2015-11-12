@@ -122,6 +122,11 @@ public class KeyController implements KeyListener {
                 else {
                     Level.doNotTransition = true;
                 }
+          case KeyEvent.VK_P:
+              Sound.sound1.mute();
+             // Sound.shot.mute();
+              //Sound.shot2.mute();
+             // Sound.shot3.mute();
 
 
 //            case KeyEvent.VK_1:
