@@ -96,26 +96,26 @@ public void render(Graphics g) {
         
 
         /////////////////Score placeholder//////////
-        g.setColor(Color.WHITE);
+        g.setColor(Color.BLACK);
         g.drawString("SCORE", PWIDTH/2,PHEIGHT+75);
         g.drawString(String.valueOf(score),PWIDTH/2,PHEIGHT+100);
  
  /*Will*/
         g.drawImage(weaponPowerIcon,-5, 300, null);
         
-        g.drawString((Integer.toString(gameData.currentShip.getLevelState())),25,350);
+        g.drawString((Integer.toString(gameData.currentShip.getLevelState())),30,350);
         
         g.drawImage(speedIcon,-237, 115, null);
         
-        g.drawString((Integer.toString(gameData.currentShip.getShipSpeed())),25,400);
+        g.drawString((Integer.toString(gameData.currentShip.getShipSpeed())),30,400);
         
         g.drawImage(heartIcon,-90, 320, null);
         
-        g.drawString((Integer.toString(gameData.currentShip.getShipMaxHealth())),26,450);
+        g.drawString((Integer.toString(gameData.currentShip.getShipMaxHealth())),30,455);
        
         g.drawImage(shieldIcon,-90, 380, null);
         
-        g.drawString((Integer.toString(gameData.currentShip.getShipMaxShield())),30,520);
+        g.drawString((Integer.toString(gameData.currentShip.getShipMaxShield())),30,525);
  /*Will++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
         
         
