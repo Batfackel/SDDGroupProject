@@ -1,13 +1,9 @@
 package Model;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.File;
 import java.util.Random;
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 /**
  * This is a general purpose item class. Feel free to build use this with child
@@ -15,16 +11,16 @@ import javax.swing.JOptionPane;
  *
  * @author Michael McGregor
  */
-class Item implements GameFigure, AbstractItem{
+class Item implements GameFigure, AbstractItem {
 
     private float x, y;
     private final float movementX, movementY;
     protected int itemType;
-    Image itemImage1, itemImage2;
-    Rectangle r1;
+    private final Image itemImage1, itemImage2;
+    private Rectangle r1;
     private int state = STATE_TRAVELING, timer;
-    private final int picX1, picX2, picY1, picY2;               
-    
+    private final int picX1, picX2, picY1, picY2;
+
     public Item(float x, float y, int ref, int startX, int endX, int startY, int endY) {
         this.x = x;
         this.y = y;
@@ -35,76 +31,62 @@ class Item implements GameFigure, AbstractItem{
         this.movementX = randomizeX();
         this.movementY = randomizeY();
         this.timer = 1;
-        
-        
+
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
         String separator = System.getProperty("file.separator");
-    
+
         // put images in 'images' folder, which is on the top level of
         // the NetBeans project folder.
         // Using "Files" tab of the NetBeans explorer window, right click on
         // the project folder name, and create a folder named "image"
-        // You cannot see "images" folder in 'Project' tab, though
-        //launcherImage = getImage(imagePath + separator + "images" + separator
-        //itemImage = getImage(imagePath + separator + "images" + separator
-        //        + "itemSample.png");
-        itemImage1 = GameData.flyweightItems.setItemImage(this, "full");                
-        itemImage2 = GameData.flyweightItems.setItemImage(this, "trans");                
+        // You cannot see "images" folder in 'Project' tab, though       
+        itemImage1 = GameData.flyweightItems.setItemImage(this, "full");
+        itemImage2 = GameData.flyweightItems.setItemImage(this, "trans");
         setRectangle(); // initialize the hit box when object is created for testing
     }
 
-    public static Image getImage(String fileName) {
-        Image image = null;
-        try {
-            image = ImageIO.read(new File(fileName));
-        } catch (Exception ioe) {
-            System.out.println("Error: Cannot open image:" + fileName);
-            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
-        }
-        return image;
-    }
-    
     @Override
     public void render(Graphics g) {
-        if (timer < 3 || timer > 5)       
-            g.drawImage(itemImage1, (int)x, (int)y, (int)x + 40, (int)y + 40, this.picX1, this.picX2, this.picY1, this.picY2, null, null);        
-        else
-            g.drawImage(itemImage2, (int)x, (int)y, (int)x + 40, (int)y + 40, this.picX1, this.picX2, this.picY1, this.picY2, null, null);        
-        g.setColor(Color.red);
-        g.drawRect((int) this.x + 5, (int) this.y + 5, 28, 28);        
+        if (timer < 3 || timer > 5) {
+            g.drawImage(itemImage1, (int) x, (int) y, (int) x + 40, (int) y + 40, this.picX1, this.picX2, this.picY1, this.picY2, null, null);
+        } else {
+            g.drawImage(itemImage2, (int) x, (int) y, (int) x + 40, (int) y + 40, this.picX1, this.picX2, this.picY1, this.picY2, null, null);
+        }
+        //g.setColor(Color.red);
+        //g.drawRect((int) this.x + 10, (int) this.y + 10, 15, 15);
     }
 
     private float randomizeX() {
         Random rand = new Random();
         return rand.nextFloat() * (3 - (-3)) + (-3);
     }
-    
+
     private float randomizeY() {
         Random rand = new Random();
         return rand.nextFloat() * 3;
     }
-    
+
     private void setRectangle() {
-        this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, 28, 28);        
+        this.r1 = new Rectangle((int) this.x + 10, (int) this.y + 10, 15, 15);
     }
-    
+
     public Rectangle getRectangle1() {
         return this.r1;
-    }   
-    
+    }
+
+    @Override
     public int getItemType() {
         return this.itemType;
     }
-    
+
     @Override
     public void update() {
-        setRectangle();       
+        setRectangle();
         timeout();
         this.x += this.movementX;
         this.y += this.movementY;
-        if (this.x > 850 || this.y > 1050){
-            System.out.println(this.x);
+        if (this.x > 850 || this.y > 1050) {
             this.state = STATE_DONE;
         }
     }
@@ -115,11 +97,6 @@ class Item implements GameFigure, AbstractItem{
     }
 
     @Override
-    public int getItem() {
-        return this.itemType;
-    }
-
-    @Override
     public void setItem(int item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -127,24 +104,22 @@ class Item implements GameFigure, AbstractItem{
     @Override
     public void timeout() {
         timer++;
-        if (timer == 10)
+        if (timer == 10) {
             timer = 1;
+        }
     }
-    
+
     @Override
     public Rectangle getRectangle() {
         return this.getRectangle1();
     }
 
     @Override
-    public void renderToolTips(Graphics g) {        
-        g.drawString(getText(), (int)x, (int)y);
+    public void renderToolTips(Graphics g) {
+        g.drawString(getText(), (int) x, (int) y);
     }
 
     protected String getText() {
         throw new UnsupportedOperationException("Items"); //To change body of generated methods, choose Tools | Templates.
-    }   
-
-    
-    
+    }
 }
