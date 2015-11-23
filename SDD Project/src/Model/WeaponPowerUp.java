@@ -1,28 +1,18 @@
 package Model;
 
-
-import Model.Item;
-import static java.lang.Math.random;
 import java.util.Random;
 
-/*
- * This class inherits from item and represents an actual weapon power up item.
- */
-
-
-//import Model.AbstractItem;
-
 /**
- *
+ * This class inherits from item and represents an actual weapon power up item.
+ * 
  * @author Michael McGregor
  */
 public class WeaponPowerUp extends Item{
 
-   private int weaponType, adsaf = 0;
+   private int weaponType;
    private float x, y;
-   Random rand;
+   private final Random rand;
    
-
     public WeaponPowerUp(float x, float y, int ref) {
         super(x, y, ref, 0, 0, 32, 32);
         rand = new Random();
@@ -33,6 +23,10 @@ public class WeaponPowerUp extends Item{
   @Override
     public void setItem(int item) {
         this.itemType = item;
+    }           
+    
+    @Override
+    public int getItem() {
+        return this.itemType;
     }
-            
 }

@@ -655,4 +655,16 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Image setItemImage(AbstractItem item) {
+        if (item instanceof HealthItem) {
+                switch (item.getItem()) {
+                    case 1:
+                        image = explosionImage1;
+                        break;
+                }
+        }
+        return image;
+    }
+
 }

@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Ship;
+import Model.AbstractItem;
 import java.awt.Image;
 
 /**
@@ -15,6 +16,7 @@ import java.awt.Image;
 public interface EnemyFlyweight {
     
     public Image setShipImage(Ship ship);
+    public Image setItemImage(AbstractItem item);
     public Image setBulletImage();
     
 }
