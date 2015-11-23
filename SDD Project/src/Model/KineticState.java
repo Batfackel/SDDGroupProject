@@ -1,36 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Controller.Main;
 import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * used with the state design pattern
+ * used with the state design pattern. This sets the bullet to the correct
+ * missile shot level relative to the ship firing it. This class is a little
+ * different than the other two state classes because this utilizes timers to
+ * shoot multiple shots in a burst mode.
  *
- * @author atm15_000
+ * The timers use the SpawnShot class.
+ *
+ * @author Michael McGregor
  */
 public class KineticState implements State {
 
-    private Ship ship;
     Timer timer, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16;
     Timer[] timers = new Timer[64];
     int timeElapsed;
 
     @Override
     public void fire(Context bullet, int wls, int x, int y) {
-        System.out.println("player is in kinetic state");
+        //System.out.println("player is in kinetic state");
         bullet.setState(this, 0);
+        
         try {
             switch (wls) {
-                case 0:                
+                case 0:
                     timeElapsed = 0;
                     t1 = new Timer();
                     t2 = new Timer();
@@ -42,7 +40,7 @@ public class KineticState implements State {
                     t3.schedule(new SpawnShot(0, x + xCenter, y - yOffset), timeElapsed);
                     break;
                 case 1:
-                //System.out.println("kinetic level 2");                    
+                    //System.out.println("kinetic level 2");                    
                     timeElapsed = 0;
                     t1 = new Timer();
                     t2 = new Timer();
@@ -60,7 +58,7 @@ public class KineticState implements State {
                     t6.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
                     break;
                 case 2:
-                //System.out.println("kinetic level 3");                    
+                    //System.out.println("kinetic level 3");                    
                     timeElapsed = 0;
                     t1 = new Timer();
                     t2 = new Timer();
@@ -86,7 +84,7 @@ public class KineticState implements State {
                     t10.schedule(new SpawnShot(2, x - xLeftOffset, y - yOffset), timeElapsed);
                     break;
                 case 3:
-                //System.out.println("kinetic max level");                    
+                    //System.out.println("kinetic max level");                    
                     timeElapsed = 0;
                     t1 = new Timer();
                     t2 = new Timer();
@@ -104,6 +102,7 @@ public class KineticState implements State {
                     t14 = new Timer();
                     t15 = new Timer();
                     t16 = new Timer();
+
                     t1.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
                     t2.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
                     timeElapsed += 175;
@@ -141,21 +140,18 @@ public class KineticState implements State {
                         t2.schedule(new SpawnShot(11, x, y), timeElapsed);
                         t3.schedule(new SpawnShot(12, x, y), timeElapsed);
                         //----------------
-                        //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
-                        //Main.gameData.friendlyBullets.add((Bullet) new KineticBulletBaseLevel(x + 20, y + 51));
-                        //Main.gameData.figures.add(new Launcher( x + 20, y - 51));
                         break;
                     }
                 default:
                     System.out.println("kinetic error");
             }
-
         } catch (Exception ex) {
             Logger.getLogger(KineticState.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
+    @Override
     public String toString() {
         return "Kinetic State";
     }

@@ -1,37 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 /**
- *used with the state design pattern
+ * used with the state design pattern. This is used to change the state of the
+ * bullet that is to be shot. It operates almost as an independent system of the
+ * ships. Values stored in the ships are passed to the bullet through this
+ * context.
  *
- * @author atm15_000
+ * @author Michael McGregor
  */
 public class Context {
+
     private State bullet;
     private int weaponLevelState;
-    
-    public Context(){
+
+    public Context() {
         bullet = null;
         weaponLevelState = -1;
     }
-    
-    public void setState(State bullet, int wls){
+
+    public void setState(State bullet, int wls) {
         this.weaponLevelState = wls;
-        this.bullet = bullet;        
+        this.bullet = bullet;
     }
-    
+
     public State getState() {
         return bullet;
     }
-    
+
     public int getWeaponLevel() {
         return weaponLevelState;
     }
-    
+
     public void fire(int x, int y) {
         this.bullet.fire(this, weaponLevelState, x, y);
     }
