@@ -33,7 +33,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
             battleShipImageDamaged, battleShipImageRightDamaged, battleShipImageLeftDamaged,
             fighterShipImage, fighterShipImageRight, fighterShipImageLeft,
             fighterShipImageDamaged, fighterShipImageRightDamaged, fighterShipImageLeftDamaged,
-            image;
+            image, itemSheet, itemSheetDark;
     String shipType;
 
     public EnemyFlyweightItems() {
@@ -98,6 +98,9 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
         fighterShipImageDamaged = getImage(imagePath + separator + "images" + separator + "pineDamaged.png");
         fighterShipImageLeftDamaged = getImage(imagePath + separator + "images" + separator + "pine_leftDamaged.png");
         fighterShipImageRightDamaged = getImage(imagePath + separator + "images" + separator + "pine_rightDamaged.png");
+        
+        itemSheet = getImage(imagePath + separator + "images" + separator + "itemSample.png");
+        itemSheetDark = getImage(imagePath + separator + "images" + separator + "itemSampleDark.png");
     }
 
 
@@ -656,13 +659,12 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
     }
 
     @Override
-    public Image setItemImage(AbstractItem item) {
-        if (item instanceof HealthItem) {
-                switch (item.getItem()) {
-                    case 1:
-                        image = explosionImage1;
-                        break;
-                }
+    public Image setItemImage(AbstractItem item, String desc) {                
+        if (item instanceof Item) {            
+            if (desc == "full")
+                image = itemSheet;
+            else if (desc == "trans")
+                image = itemSheetDark;
         }
         return image;
     }

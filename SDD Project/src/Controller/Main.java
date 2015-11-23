@@ -1,28 +1,19 @@
 package Controller;
 
-import Model.Launcher;
 import Model.GameData;
-import Model.Missile;
 import Model.Ship;
 //import Model.ShipFactory;
 import Model.Tutorial;
 import View.LeaderBoard;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 import View.GamePanel;
 import View.ShipSelect;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import Model.Sound;
 
@@ -36,9 +27,7 @@ public class Main extends JFrame implements ActionListener {
     public JButton startButton;
     private JButton quitButton;
     public static JButton pauseButton;
-    private JButton selectShipButton;
-    private Launcher launcher;
-    private Launcher launcher2;
+    private JButton selectShipButton;    
     private int screenWidth = 800;
     private int screenHeight = 1000;
     public JLabel lbl;
@@ -124,8 +113,7 @@ public class Main extends JFrame implements ActionListener {
         quitButton.addActionListener(this);
         leaderBoard.addActionListener(this);
         pauseButton.addActionListener(this);
-
-        //launcher = (Launcher) gameData.figures.get(1); // launcher      
+        
        // ship = (Ship) gameData.ships.get(0);
         pack();
         setVisible(true);

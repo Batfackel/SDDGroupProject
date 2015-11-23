@@ -20,9 +20,9 @@ class Item implements GameFigure, AbstractItem{
     private float x, y;
     private final float movementX, movementY;
     protected int itemType;
-    Image itemImage;
+    Image itemImage1, itemImage2;
     Rectangle r1;
-    private int state = STATE_TRAVELING;
+    private int state = STATE_TRAVELING, timer;
     private final int picX1, picX2, picY1, picY2;               
     
     public Item(float x, float y, int ref, int startX, int endX, int startY, int endY) {
@@ -34,6 +34,8 @@ class Item implements GameFigure, AbstractItem{
         this.picY2 = endY;
         this.movementX = randomizeX();
         this.movementY = randomizeY();
+        this.timer = 1;
+        
         
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -45,10 +47,10 @@ class Item implements GameFigure, AbstractItem{
         // the project folder name, and create a folder named "image"
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
-        itemImage = getImage(imagePath + separator + "images" + separator
-                + "itemSample.png");
-        //itemImage = GameData.flyweightItems.setItemImage(this);
-        
+        //itemImage = getImage(imagePath + separator + "images" + separator
+        //        + "itemSample.png");
+        itemImage1 = GameData.flyweightItems.setItemImage(this, "full");                
+        itemImage2 = GameData.flyweightItems.setItemImage(this, "trans");                
         setRectangle(); // initialize the hit box when object is created for testing
     }
 
@@ -65,7 +67,10 @@ class Item implements GameFigure, AbstractItem{
     
     @Override
     public void render(Graphics g) {
-        g.drawImage(itemImage, (int)x, (int)y, (int)x + 40, (int)y + 40, this.picX1, this.picX2, this.picY1, this.picY2, null, null);        
+        if (timer < 3 || timer > 5)       
+            g.drawImage(itemImage1, (int)x, (int)y, (int)x + 40, (int)y + 40, this.picX1, this.picX2, this.picY1, this.picY2, null, null);        
+        else
+            g.drawImage(itemImage2, (int)x, (int)y, (int)x + 40, (int)y + 40, this.picX1, this.picX2, this.picY1, this.picY2, null, null);        
         g.setColor(Color.red);
         g.drawRect((int) this.x + 5, (int) this.y + 5, 28, 28);        
     }
@@ -95,6 +100,7 @@ class Item implements GameFigure, AbstractItem{
     @Override
     public void update() {
         setRectangle();       
+        timeout();
         this.x += this.movementX;
         this.y += this.movementY;
         if (this.x > 850 || this.y > 1050){
@@ -120,22 +126,24 @@ class Item implements GameFigure, AbstractItem{
 
     @Override
     public void timeout() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        timer++;
+        if (timer == 10)
+            timer = 1;
     }
-
+    
     @Override
     public Rectangle getRectangle() {
         return this.getRectangle1();
     }
 
     @Override
-    public void renderToolTips(Graphics g) {
+    public void renderToolTips(Graphics g) {        
         g.drawString(getText(), (int)x, (int)y);
     }
 
     protected String getText() {
         throw new UnsupportedOperationException("Items"); //To change body of generated methods, choose Tools | Templates.
-    }
+    }   
 
     
     

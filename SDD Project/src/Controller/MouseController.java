@@ -3,7 +3,6 @@ package Controller;
 import Model.Context;
 import Model.KineticState;
 import Model.LaserState;
-import Model.Missile;
 import Model.MissileState;
 import Model.Ship;
 import Model.Sound;
@@ -73,19 +72,7 @@ public class MouseController implements MouseListener{
         }
         */
         //----------------------------------------------------------------------
-        //----------------------------------------------------------------------
         
-        /*                              10.6.16
-        
-        //Missile f = new Missile(launcher.getXofMissileShoot(), launcher.getYofMissileShoot(), color);               
-        Missile f = new Missile(mainShip.getXofMissileShoot(), mainShip.getYofMissileShoot(), color);
-        f.setTarget(x, y);
-        int size = (int) (Math.random() * 100) + 5; // min = 5 max = 105
-        f.setExplosionMaxSize(size);
-         synchronized (Main.gameData.figures) {
-            Main.gameData.figures.add(f);
-        }
-        */
         
         //----------------------------------------------------------------------
          //new weapons

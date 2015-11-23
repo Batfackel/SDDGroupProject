@@ -6,7 +6,6 @@ import Model.GameData;
 import Model.KineticBulletBaseLevel;
 import Model.KineticState;
 import Model.LaserState;
-import Model.Launcher;
 import Model.Level;
 import Model.MissileState;
 import Model.Ship;
@@ -243,20 +242,6 @@ public class KeyController implements KeyListener {
             break;
             case KeyEvent.VK_J:
                 Main.gamePanel.level.currentSave.setScore(150);
-             
-            /*
-            These were adaptations of the launcher to simulate how a bullet might spawn and work. They were used 
-            for testing and are not needed. I commented them out in case I wanted to reference it later.
-            */
-             /*synchronized (Main.gameData.figures) {
-             //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
-             Main.gameData.figures.add(new Launcher( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY() - 10));
-                                    
-             /*synchronized (Main.gameData.figures) {
-             //Main.gameData.figures.add(new KineticBulletBaseLevel( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY()));
-             Main.gameData.figures.add(new Launcher( (float)(ship.getX() + (ship.getShipHitBox().width/2)), (float)ship.getY() - 10));
-                    
-             }*/
         }
     }
 
