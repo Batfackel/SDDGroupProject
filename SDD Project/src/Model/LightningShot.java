@@ -1,38 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Controller.Main;
 import static Model.GameFigure.STATE_DONE;
 import static Model.GameFigure.STATE_TRAVELING;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.io.File;
-//import javafx.scene.shape.Circle;
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author atm15_000
+ * @author Michael McGregor
  */
-public class LightningShot extends Bullet{
-    //Rectangle r1, r2;
-    Ellipse2D e1, e2;    
+public class LightningShot extends Bullet{    
+    Ellipse2D e1;    
     Image shockImage;
-    float x, y, width1 = 110, height1 = 125;
+    float x, y;
     int state = STATE_TRAVELING;
     double radians;
     private boolean isEnemy, hit;    
@@ -44,8 +31,7 @@ public class LightningShot extends Bullet{
         this.isEnemy = enemy;
         this.name = "Lightning Shot";
         this.e1 = new Ellipse2D.Float();                
-        this.hit = false;
-                                         
+        this.hit = false;                                         
         
         String imagePath = System.getProperty("user.dir");
         // separator: Windows '\', Linux '/'
@@ -56,12 +42,11 @@ public class LightningShot extends Bullet{
         // the project folder name, and create a folder named "image"
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
-        shockImage = getImage(imagePath + separator + "images" + separator+ "ElectricTest.png");
+        shockImage = GameData.flyweightItems.setShotImage(this);
         bufferedShockImage = (BufferedImage) shockImage;
         //bufferedShockImage = bufferedShockImage.getSubimage(0, 0, 40, 100);        
         this.radians = 45;
 
-        //setRectangle(); // initialize the hit box when object is created for testing   
        setLauncherHitBox();         
     }
     
@@ -76,27 +61,12 @@ public class LightningShot extends Bullet{
         this.radians = Math.toRadians(degrees - 90);        
     }       
     
-    public Image getImage(String fileName) {
-        Image image = null;
-        try {
-            image = ImageIO.read(new File(fileName));
-        } catch (Exception ioe) {
-            System.out.println("Error: Cannot open image:" + fileName);
-            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
-        }
-        return image;
-    }
-    
     @Override
     void setHit() {
         this.hit = true;
     }
     
     private void setLauncherHitBox() {
-        //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
-        //this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
-//        e1.setFrame(this.x, this.y, this.width1, this.height1);              
-//        e1.setFrame(this.x, this.y, 100, 100);  
         Ship ship = Main.gameData.ships.get(0);
         e1.setFrame(ship.getX() - 25, ship.getY() - 25, 100, 100);
     }
@@ -106,37 +76,24 @@ public class LightningShot extends Bullet{
         Graphics2D g2d = (Graphics2D) g;     
         Ship ship = Main.gameData.ships.get(0);
         if (this.hit == true) {
-        //Graphics2D g2d = (Graphics2D) g;             
         double locationX = 50;
         double locationY = 50;
-        //AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
         AffineTransform tx = AffineTransform.getRotateInstance(this.radians, locationX, locationY);                
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);                
-        //Graphics2D g2d = (Graphics2D) g;
-        //g2d.drawImage(op.filter((BufferedImage)shockImage, null), (int)locationX, (int)locationY, (int)this.x + 40, (int)this.y + 100, 0, 0, 40, 100, null);                
-//        g2d.drawImage(op.filter(ass, null), (int)this.x + 40, (int)this.y + 20, null);        
         g2d.drawImage(op.filter(bufferedShockImage, null), (int)ship.getX() - 35, (int)ship.getY() - 35, null);        
         this.state = STATE_DONE;
            }
         g2d.draw(e1);
-        //this.state = STATE_DONE;
-    //}
     }   
     
     @Override
     public void update() {
         setLauncherHitBox();        
-        //this.y -= 5;
-        //if (this.x < 1){
-        //    System.out.println("bullet = " + this.x);
-        //    this.state = STATE_DONE;
-        //}
     }
 
     @Override
     public int getState() {
-        return state;
-        
+        return state;        
     }
 
     @Override

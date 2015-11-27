@@ -33,7 +33,7 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
             battleShipImageDamaged, battleShipImageRightDamaged, battleShipImageLeftDamaged,
             fighterShipImage, fighterShipImageRight, fighterShipImageLeft,
             fighterShipImageDamaged, fighterShipImageRightDamaged, fighterShipImageLeftDamaged,
-            image, itemSheet, itemSheetDark;
+            image, itemSheet, itemSheetDark, kineticShot, laserShot, lightningShot, baseMissile;
     String shipType;
 
     public EnemyFlyweightItems() {
@@ -101,6 +101,11 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
         
         itemSheet = getImage(imagePath + separator + "images" + separator + "itemSample.png");
         itemSheetDark = getImage(imagePath + separator + "images" + separator + "itemSampleDark.png");
+        
+        kineticShot = getImage(imagePath + separator + "images" + separator + "BulletTest.png");
+        laserShot = getImage(imagePath + separator + "images" + separator + "laserShot.png");
+        lightningShot = getImage(imagePath + separator + "images" + separator + "ElectricTest.png");
+        baseMissile = getImage(imagePath + separator + "images" + separator + "redMissile.png");
     }
 
 
@@ -669,4 +674,22 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
         return image;
     }
 
+    @Override
+    public Image setShotImage(Bullet bullet) {
+        if (bullet instanceof KineticBulletBaseLevel || bullet instanceof KineticBulletLeftShot || bullet instanceof KineticBulletRightShot) {
+            image = kineticShot;
+        }
+        else if (bullet instanceof LaserBulletBaseLevel) {
+            image = laserShot;
+        }
+        else if (bullet instanceof LightningShot) {
+            image = lightningShot;
+        }
+        else if (bullet instanceof MissileBulletBaseLevel) {
+            image = baseMissile;
+        }
+        return image;
+    }
+ 
+    
 }

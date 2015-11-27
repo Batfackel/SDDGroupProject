@@ -19,28 +19,28 @@ public class LaserState implements State {
             switch (wls) {
                 case 0:
                     synchronized (Main.gameData.friendlyBullets) {
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 20, y - 51, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 20, y - 40, false));
                         break;
                     }
                 case 1:
                     synchronized (Main.gameData.friendlyBullets) {
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 30, y - 51, false));
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 10, y - 51, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 30, y - 35, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 10, y - 35, false));
                         break;
                     }
                 case 2:
                     synchronized (Main.gameData.friendlyBullets) {
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 30, y - 51, false));
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 10, y - 51, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 30, y - 35, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 10, y - 35, false));
                         break;
                     }
                 case 3:
                     synchronized (Main.gameData.friendlyBullets) {
                         System.out.println("Laser max level");
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 25, y - 51, false));
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 5, y - 51, false));
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 45, y - 51, false));
-                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x - 15, y - 51, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 25, y - 35, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 5, y - 35, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x + 45, y - 20, false));
+                        Main.gameData.friendlyBullets.add(new LaserBulletBaseLevel(x - 15, y - 20, false));
                         break;
                     }
                 default:

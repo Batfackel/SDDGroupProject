@@ -33,11 +33,11 @@ public class KineticState implements State {
                     t1 = new Timer();
                     t2 = new Timer();
                     t3 = new Timer();
-                    t1.schedule(new SpawnShot(0, x + xCenter, y - yOffset), timeElapsed);
+                    t1.schedule(new SpawnShot(0, x + xCenter, y), timeElapsed);
                     timeElapsed += 175;
-                    t2.schedule(new SpawnShot(0, x + xCenter, y - yOffset), timeElapsed);
+                    t2.schedule(new SpawnShot(0, x + xCenter, y), timeElapsed);
                     timeElapsed += 175;
-                    t3.schedule(new SpawnShot(0, x + xCenter, y - yOffset), timeElapsed);
+                    t3.schedule(new SpawnShot(0, x + xCenter, y), timeElapsed);
                     break;
                 case 1:
                     //System.out.println("kinetic level 2");                    
@@ -48,14 +48,14 @@ public class KineticState implements State {
                     t4 = new Timer();
                     t5 = new Timer();
                     t6 = new Timer();
-                    t1.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t4.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
+                    t1.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t4.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
                     timeElapsed += 175;
-                    t2.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t5.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
+                    t2.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t5.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
                     timeElapsed += 175;
-                    t3.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t6.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
+                    t3.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t6.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
                     break;
                 case 2:
                     //System.out.println("kinetic level 3");                    
@@ -70,18 +70,18 @@ public class KineticState implements State {
                     t8 = new Timer();
                     t9 = new Timer();
                     t10 = new Timer();
-                    t1.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t4.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
+                    t1.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t4.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
                     timeElapsed += 175;
-                    t2.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t5.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
-                    t7.schedule(new SpawnShot(1, x + xRightOffset, y - yOffset), timeElapsed);
-                    t8.schedule(new SpawnShot(2, x - xLeftOffset, y - yOffset), timeElapsed);
+                    t2.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t5.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
+                    t7.schedule(new SpawnShot(1, x + xRightOffset, y), timeElapsed);
+                    t8.schedule(new SpawnShot(2, x - xLeftOffset, y), timeElapsed);
                     timeElapsed += 175;
-                    t3.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t6.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
-                    t9.schedule(new SpawnShot(1, x + xRightOffset, y - yOffset), timeElapsed);
-                    t10.schedule(new SpawnShot(2, x - xLeftOffset, y - yOffset), timeElapsed);
+                    t3.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t6.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
+                    t9.schedule(new SpawnShot(1, x + xRightOffset, y), timeElapsed);
+                    t10.schedule(new SpawnShot(2, x - xLeftOffset, y), timeElapsed);
                     break;
                 case 3:
                     //System.out.println("kinetic max level");                    
@@ -103,25 +103,25 @@ public class KineticState implements State {
                     t15 = new Timer();
                     t16 = new Timer();
 
-                    t1.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t2.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
+                    t1.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t2.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
                     timeElapsed += 175;
-                    t3.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t4.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
-                    t5.schedule(new SpawnShot(1, x + xRightOffset, y - yOffset), timeElapsed);
-                    t6.schedule(new SpawnShot(1, x + xRightOffset + 20, y - yOffset + 25), timeElapsed);
-                    t8.schedule(new SpawnShot(2, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t9.schedule(new SpawnShot(2, x - xLeftOffset - 20, y - yOffset + 25), timeElapsed);
+                    t3.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t4.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
+                    t5.schedule(new SpawnShot(1, x + xRightOffset, y), timeElapsed);
+                    t6.schedule(new SpawnShot(1, x + xRightOffset + 15, y + 25), timeElapsed);
+                    t8.schedule(new SpawnShot(2, x - xLeftOffset, y), timeElapsed);
+                    t9.schedule(new SpawnShot(2, x - xLeftOffset - 15, y + 25), timeElapsed);
                     timeElapsed += 175;
-                    t11.schedule(new SpawnShot(0, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t12.schedule(new SpawnShot(0, x + xRightOffset, y - yOffset), timeElapsed);
-                    t13.schedule(new SpawnShot(1, x + xRightOffset, y - yOffset), timeElapsed);
-                    t14.schedule(new SpawnShot(1, x + xRightOffset + 20, y - yOffset + 25), timeElapsed);
-                    t15.schedule(new SpawnShot(2, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t16.schedule(new SpawnShot(2, x - xLeftOffset - 20, y - yOffset + 25), timeElapsed);
+                    t11.schedule(new SpawnShot(0, x - xLeftOffset, y), timeElapsed);
+                    t12.schedule(new SpawnShot(0, x + xRightOffset, y), timeElapsed);
+                    t13.schedule(new SpawnShot(1, x + xRightOffset, y), timeElapsed);
+                    t14.schedule(new SpawnShot(1, x + xRightOffset + 15, y + 25), timeElapsed);
+                    t15.schedule(new SpawnShot(2, x - xLeftOffset, y), timeElapsed);
+                    t16.schedule(new SpawnShot(2, x - xLeftOffset - 15, y + 25), timeElapsed);
                     timeElapsed += 175;
-                    t7.schedule(new SpawnShot(2, x - xLeftOffset, y - yOffset), timeElapsed);
-                    t10.schedule(new SpawnShot(1, x + xRightOffset, y - yOffset), timeElapsed);
+                    t7.schedule(new SpawnShot(2, x - xLeftOffset, y), timeElapsed);
+                    t10.schedule(new SpawnShot(1, x + xRightOffset, y), timeElapsed);
                     break;
                 case 10:
                     //used by enemies to go and shoot at the player
