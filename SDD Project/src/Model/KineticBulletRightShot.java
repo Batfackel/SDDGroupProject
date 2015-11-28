@@ -7,26 +7,22 @@ package Model;
 
 import static Model.GameFigure.STATE_DONE;
 import static Model.GameFigure.STATE_TRAVELING;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
-import java.io.File;
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author atm15_000
+ * @author Michael McGregor
  */
 class KineticBulletRightShot extends Bullet{
 
     Rectangle r1, r2;
-    Image launcherImage;
+    Image itemImage1;
     float x, y, width1 = 110, height1 = 125;
     int state = STATE_TRAVELING;
-    private boolean isEnemy;
+    private final boolean isEnemy;
     
     public KineticBulletRightShot(float x, float y, boolean enemy) {
         this.x = x;
@@ -42,48 +38,21 @@ class KineticBulletRightShot extends Bullet{
         // the project folder name, and create a folder named "image"
         // You cannot see "images" folder in 'Project' tab, though
         //launcherImage = getImage(imagePath + separator + "images" + separator
-        launcherImage = getImage(imagePath + separator + "images" + separator
-                + "BulletTest.png");
-        
-
-        //setRectangle(); // initialize the hit box when object is created for testing   
+        itemImage1 = GameData.flyweightItems.setShotImage(this);               
 
        setLauncherHitBox();
-    }
-    
-    public Image getImage(String fileName) {
-        Image image = null;
-        try {
-            image = ImageIO.read(new File(fileName));
-        } catch (Exception ioe) {
-            System.out.println("Error: Cannot open image:" + fileName);
-            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
-        }
-        return image;
-    }
+    }    
     
     private void setLauncherHitBox() {
-        //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
-        this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
+        this.r1 = new Rectangle((int) this.x, (int) this.y, 15, 15);  
     }
         
     @Override
     public void render(Graphics g) {
-        int width = launcherImage.getWidth(null);
-        int height = launcherImage.getHeight(null);
-        //g.drawImage(launcherImage, (int)x, (int)y, null);
-        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 2, 0, 9, 11, null);        
-        //----------------------------------------------------------------------
-        //set up and display hit boxes for the launcher objects
-        //used for dubugging 9/10/2015
-        //----------------------------------------------------------------------
-        g.setColor(Color.yellow);
-        //g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
-        g.drawRect((int) this.x, (int) this.y, 10, 10);
-        g.setColor(Color.BLUE);
+        int width = itemImage1.getWidth(null);
+        int height = itemImage1.getHeight(null);
+        g.drawImage(itemImage1, (int)this.x, (int)this.y, (int)this.x + 15, (int)this.y + 15, 2, 0, 9, 11, null);        
         setLauncherHitBox();        
-        g.setColor(Color.BLUE);     
-        //----------------------------------------------------------------------
     }
 
     @Override
@@ -99,16 +68,11 @@ class KineticBulletRightShot extends Bullet{
             this.y += 7;
             this.x += 3;
         }
-        //if (this.x < 1){
-        //    System.out.println("bullet = " + this.x);
-        //    this.state = STATE_DONE;
-        //}
     }
 
     @Override
     public int getState() {
-        return state;
-        
+        return state;        
     }
 
     @Override
@@ -141,6 +105,7 @@ class KineticBulletRightShot extends Bullet{
         throw new UnsupportedOperationException("A kinetic based projectile bullet.\nThe shot will shoot at a diagnol."); //To change body of generated methods, choose Tools | Templates.
     }
         
+    @Override
     public Rectangle getRectangle() {
         return this.getHitBox();
     }

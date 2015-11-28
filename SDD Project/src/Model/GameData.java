@@ -86,6 +86,11 @@ public class GameData {
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
         items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
+        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
         items.add((Item) weaponMaker.getWeapon("MISSILE", 100, 200));
         items.add((Item) weaponMaker.getWeapon("MISSILE", 200, 200));
         items.add((Item) weaponMaker.getWeapon("MISSILE", 300, 200));

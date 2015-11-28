@@ -1,40 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Controller.Main;
 import static Model.GameFigure.STATE_DONE;
-import static Model.GameFigure.STATE_INIT_LEFT;
-import static Model.GameFigure.STATE_INIT_RIGHT;
 import static Model.GameFigure.STATE_TRAVELING;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
-import java.io.File;
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author atm15_000
+ * @author Michael McGregor
  */
 public class MissileSwarmer extends Bullet{
-    Rectangle r1, r2;
-    Image launcherImage;
-    float x, y, width1 = 110, height1 = 125, pos, dist, targetx, targety, speed, sep;
+    Rectangle r1;
+    Image itemImage1;
+    float x, y, pos, dist, targetx, targety, speed, sep;
     int state = STATE_TRAVELING;
-    private boolean isEnemy;    
+    private final boolean isEnemy;    
     double angleToTarget;
     
-    private int speeed, turn;
+    private final int speeed, turn;
     private double vx = 0, vy = 0;
     private double vel;
-    private float offset;
+    private final float offset;
     int count;
     
     
@@ -63,40 +52,16 @@ public class MissileSwarmer extends Bullet{
            }
        }
         
-        String imagePath = System.getProperty("user.dir");
-        // separator: Windows '\', Linux '/'
-        String separator = System.getProperty("file.separator");
-        // put images in 'images' folder, which is on the top level of
-        // the NetBeans project folder.
-        // Using "Files" tab of the NetBeans explorer window, right click on
-        // the project folder name, and create a folder named "image"
-        // You cannot see "images" folder in 'Project' tab, though
-        //launcherImage = getImage(imagePath + separator + "images" + separator
-        launcherImage = getImage(imagePath + separator + "images" + separator
-                + "redMissile.png");
-        
-
-        //setRectangle(); // initialize the hit box when object is created for testing   
+        itemImage1 = GameData.flyweightItems.setShotImage(this);
 
        setLauncherHitBox();       
     }
     
-    public Image getImage(String fileName) {
-        Image image = null;
-        try {
-            image = ImageIO.read(new File(fileName));
-        } catch (Exception ioe) {
-            System.out.println("Error: Cannot open image:" + fileName);
-            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
-        }
-        return image;
-    }
-    
     private void setLauncherHitBox() {
-        //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
         this.r1 = new Rectangle((int) this.x, (int) this.y, 10, 10);  
     }
     
+    @Override
     public Rectangle getHitBox(){
         return this.r1;
     }
@@ -108,22 +73,8 @@ public class MissileSwarmer extends Bullet{
     
     @Override
     public void render(Graphics g) {
-        int width = launcherImage.getWidth(null);
-        int height = launcherImage.getHeight(null);
-        //g.drawImage(launcherImage, (int)x, (int)y, null);
-        //g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 2, 18, 9, 29, null);        
-        g.drawImage(launcherImage, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 21, 5, 38, 22, null);
-        //----------------------------------------------------------------------
-        //set up and display hit boxes for the launcher objects
-        //used for dubugging 9/10/2015
-        //----------------------------------------------------------------------
-        g.setColor(Color.yellow);
-        //g.drawRect((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);
-        g.drawRect((int) this.x, (int) this.y, 10, 10);
-        g.setColor(Color.BLUE);
+        g.drawImage(itemImage1, (int)this.x, (int)this.y, (int)this.x + 20, (int)this.y + 20, 21, 5, 38, 22, null);
         setLauncherHitBox();        
-        g.setColor(Color.BLUE);     
-        //----------------------------------------------------------------------
     }
 
     @Override
@@ -134,10 +85,6 @@ public class MissileSwarmer extends Bullet{
             
             state = STATE_TRAVELING;
             if (state == STATE_TRAVELING) {
-                //this.y -= dist;
-                //if (dist < 25)
-                //dist += 7;
-            //}
                 float dx = targetx - this.x;
                 float dy = targety - this.y;
 
@@ -164,16 +111,10 @@ public class MissileSwarmer extends Bullet{
             if (count > 50)
                 state = STATE_DONE;
             else count++;
-            //if (targetx - this.x < 2 && targety - this.y < 2)
-            //    state = STATE_DONE;
         }                    
         //enemy shot movement
         else            
             this.y += 4;
-        //if (this.x < 1){
-        //    System.out.println("bullet = " + this.x);
-        //    this.state = STATE_DONE;
-        //}
     }
 
     @Override
@@ -202,6 +143,7 @@ public class MissileSwarmer extends Bullet{
         return this.name;
     }
 
+    @Override
     public Rectangle getRectangle() {
         return this.getHitBox();
     }
@@ -210,7 +152,6 @@ public class MissileSwarmer extends Bullet{
     public void renderToolTips(Graphics g) {
         g.drawString("Swarmers", (int)getX() + 25, (int)getY());
         g.drawString("Tracking missiles that stick around", (int)getX() + 25, (int)getY() + 15);
-
     }
 }
 

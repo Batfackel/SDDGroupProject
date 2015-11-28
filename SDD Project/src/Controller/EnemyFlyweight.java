@@ -7,6 +7,8 @@ package Controller;
 
 import Model.Ship;
 import Model.AbstractItem;
+import Model.Bullet;
+import Model.KineticBulletBaseLevel;
 import java.awt.Image;
 
 /**
@@ -18,5 +20,6 @@ public interface EnemyFlyweight {
     public Image setShipImage(Ship ship);
     public Image setItemImage(AbstractItem item, String desc);
     public Image setBulletImage();
+    public Image setShotImage(Bullet bullet);
     
 }

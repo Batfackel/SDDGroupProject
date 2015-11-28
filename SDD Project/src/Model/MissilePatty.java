@@ -1,36 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import static Model.GameFigure.STATE_DONE;
 import static Model.GameFigure.STATE_TRAVELING;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
-import java.io.File;
 import java.util.Random;
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author atm15_000
+ * @author Michael McGregor
  */
 public class MissilePatty extends Bullet{
-    Rectangle r1, r2;
-    Image launcherImage;
-    float viX, viY, dX, dY, width1 = 110, height1 = 125, dist, targetx, targety, speed, sep;
+    Rectangle r1;
+    Image itemImage1;
+    float viX, viY, dX, dY, dist, targetx, targety, speed, sep;
     int state = STATE_TRAVELING, pos, count;
-    private boolean isEnemy;    
+    private final boolean isEnemy;    
     double angleToTarget;    
-    
-    
-    
     
     public MissilePatty(float viX, float viY, float dX, float dY, boolean enemy) {
         this.viX = viX;
@@ -44,20 +32,7 @@ public class MissilePatty extends Bullet{
                   
         this.pos = this.randomize();
         
-        String imagePath = System.getProperty("user.dir");
-        // separator: Windows '\', Linux '/'
-        String separator = System.getProperty("file.separator");
-        // put images in 'images' folder, which is on the top level of
-        // the NetBeans project folder.
-        // Using "Files" tab of the NetBeans explorer window, right click on
-        // the project folder name, and create a folder named "image"
-        // You cannot see "images" folder in 'Project' tab, though
-        //launcherImage = getImage(imagePath + separator + "images" + separator
-        launcherImage = getImage(imagePath + separator + "images" + separator
-                + "mines.png");
-        
-
-        //setRectangle(); // initialize the hit box when object is created for testing   
+        itemImage1 = GameData.flyweightItems.setShotImage(this);
 
        setLauncherHitBox();       
     }
@@ -71,22 +46,11 @@ public class MissilePatty extends Bullet{
         return number;
     }
     
-    public Image getImage(String fileName) {
-        Image image = null;
-        try {
-            image = ImageIO.read(new File(fileName));
-        } catch (Exception ioe) {
-            System.out.println("Error: Cannot open image:" + fileName);
-            JOptionPane.showMessageDialog(null, "Error: Cannot open image:" + fileName);
-        }
-        return image;
-    }
-    
     private void setLauncherHitBox() {
-        //this.r1 = new Rectangle((int) this.x + 5, (int) this.y + 10, (int) this.width1, (int) this.height1);        
         this.r1 = new Rectangle((int) this.viX, (int) this.viY, 20, 20);  
     }
     
+    @Override
     public Rectangle getHitBox(){
         return this.r1;
     }
@@ -98,15 +62,8 @@ public class MissilePatty extends Bullet{
     
     @Override
     public void render(Graphics g) {          
-        g.drawImage(launcherImage, (int)this.viX, (int)this.viY, (int)this.viX + 25, (int)this.viY + 25, 0, 0, 20, 20, null);
-        //----------------------------------------------------------------------
-        //set up and display hit boxes for the launcher objects
-        //used for dubugging 9/10/2015
-        //----------------------------------------------------------------------
-        g.setColor(Color.yellow);        
-        g.drawRect((int) this.viX, (int) this.viY, 20, 20);        
+        g.drawImage(itemImage1, (int)this.viX, (int)this.viY, (int)this.viX + 25, (int)this.viY + 25, 0, 0, 20, 20, null);
         setLauncherHitBox();        
-        //----------------------------------------------------------------------
     }
 
     @Override
@@ -120,17 +77,10 @@ public class MissilePatty extends Bullet{
                 if (count > 100)
                     state = STATE_DONE;
                 else count++;
-                //if (dist > 15)
-                //dist -= 5;
-                //this.viX += pos;
         }                    
         //enemy shot movement
         else            
             this.viY += 4;
-        //if (this.x < 1){
-        //    System.out.println("bullet = " + this.x);
-        //    this.state = STATE_DONE;
-        //}
     }
 
     @Override
@@ -159,6 +109,7 @@ public class MissilePatty extends Bullet{
         return this.name;
     }
 
+    @Override
     public Rectangle getRectangle() {
         return this.getHitBox();
     }
