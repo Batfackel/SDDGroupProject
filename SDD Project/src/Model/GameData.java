@@ -142,6 +142,11 @@ public class GameData {
        // Ship currentShip = (Ship) this.ships.get(0);
         currentShip = (Ship) this.ships.get(0);
         //starts the lightning attack automatically
+     
+        
+        if (currentShip.getHealth() <= 0 && currentShip.isDead()){
+            currentShip.playerDied();
+        }
         if (currentShip.getWeaponState() == 1 && currentShip.getLevelState() > 1 && this.shockOn == false) {
             this.shockOn = true;
             Main.gameData.friendlyBullets.add(new LightningShot(currentShip.getX() - 60, currentShip.getY() - 60, false));

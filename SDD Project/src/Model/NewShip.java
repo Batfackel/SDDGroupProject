@@ -26,6 +26,7 @@ public class NewShip implements GameFigure, ShipState {
     private String shipType;
     private Image shipImage;
     private boolean isShipBeingDamaged;
+    private boolean isDead;
     
     private int damagedCounter;
     
@@ -70,6 +71,7 @@ public class NewShip implements GameFigure, ShipState {
         this.rateOfSpeed = 2;
         setShipState(13);
         this.setShipHitBox();
+        this.isDead = false;
     }
 
     NewShip(String shipType, float x, float y) {
@@ -432,5 +434,23 @@ public class NewShip implements GameFigure, ShipState {
     @Override
     public int getShipMaxShield() {
         return this.maxShield;
+    }
+
+    @Override
+    public void playerDied() {
+        this.shipState=1;
+        this.isDead = true;
+    }
+    @Override
+      public boolean isDead()
+    {
+        if (isDead==true)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

@@ -76,4 +76,9 @@ public interface Ship {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
 
     public void addHealth(int i);
-}
+
+    public int getHealth();
+    public void playerDied();
+    
+    public boolean isDead();
+  }
