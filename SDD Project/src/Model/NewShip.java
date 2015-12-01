@@ -155,6 +155,16 @@ public class NewShip implements GameFigure, ShipState {
     public void setHealth(int health) {
         this.health = health;
     }
+    
+    public void addHealth(int healthIn)    {
+        
+        if (this.health + healthIn > this.maxHealth){
+            this.health = this.maxHealth;
+        }
+        else {
+            this.health = this.health + healthIn;
+        }
+    }
 
     public int getShipSpeed()
     {

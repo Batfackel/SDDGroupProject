@@ -193,10 +193,14 @@ public class GameData {
                         currentShip.setWeaponState(item.getItemType());
                         currentShip.setLevelState(BASE_LEVEL);
                     }
+                    else{
+                        currentShip.addHealth(10);
+                    }
                     synchronized (items) {
                         this.items.remove(item);
                     }
                 }
+               
             }
             //----collision: items vs friendly ships-----        
             //----collision: enemies vs friendly bullets-----        
