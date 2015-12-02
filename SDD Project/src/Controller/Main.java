@@ -57,6 +57,7 @@ public class Main extends JFrame implements ActionListener {
         c = getContentPane();
         animator = new Animator();
         gameData = new GameData(this.shipName);
+        leaderBoard = null;
 
 //        animator2 = new Animator();
 //        gameData2 = new GameData();
@@ -155,6 +156,7 @@ public class Main extends JFrame implements ActionListener {
             c.add(leaderPanel, "Center");
             gamePanel.setVisible(false);
             leaderBoard.setVisible(true);
+            gamePanel.pauseGame();
         }
         else if(ae.getSource() == pauseButton) {
             if (!animator.isPause()) {
@@ -163,6 +165,9 @@ public class Main extends JFrame implements ActionListener {
                 pauseButton.setText("Resume");
             }
             else{
+                if(leaderBoard != null) {
+                    leaderBoard = null;
+                }
                 gamePanel.resumeGame();
                 pauseButton.setText("Pause");
                 Sound.sound1.play();

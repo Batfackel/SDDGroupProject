@@ -72,38 +72,7 @@ public class GameData {
                      
         menu.add((Background) new ShipSelectMenu(0));        
         ships.add((Ship)shipMaker.getShip(shipName,450,450));        
-        
-        //represent weapon power-up items        
-        // testing items and new item mechanics
-//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 200));
-//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 180));
-//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 1600));
-//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 220));
-//        items.add((Item) weaponMaker.getWeapon("KINETIC", 250, 240));
-        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("LASER", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("KINETIC", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("MISSILE", 100, 200));
-        items.add((Item) weaponMaker.getWeapon("MISSILE", 200, 200));
-        items.add((Item) weaponMaker.getWeapon("MISSILE", 300, 200));
-        items.add((Item) weaponMaker.getWeapon("MISSILE", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("MISSILE", 500, 200));
-        items.add((Item) weaponMaker.getWeapon("MISSILE", 500, 200));
-        items.add((Item) weaponMaker.getWeapon("HEALTH", 200, 200));
-        items.add((Item) weaponMaker.getWeapon("HEALTH", 300, 200));
-        items.add((Item) weaponMaker.getWeapon("HEALTH", 400, 200));
-        items.add((Item) weaponMaker.getWeapon("HEALTH", 500, 200));
-        items.add((Item) weaponMaker.getWeapon("HEALTH", 500, 200));
-        //enemyShips.add((Ship)enemyMaker.getEnemyShip("defaultship", 200, 200));        
-        //figures.add((GameFigure) enemyMaker.getEnemyShip("defaultship", 20, 20));
+                           
         Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 100, -300);
         for (int i = 0; i < enemyFormation.length; i++) {
             enemyShips.add(enemyFormation[i]);
@@ -206,24 +175,24 @@ public class GameData {
             //----collision: enemies vs friendly bullets-----        
             for (int i = 0; i < this.friendlyBullets.size(); i++) {
                 Bullet shot = (Bullet) friendlyBullets.get(i);
-                for (int j = 0; j < this.enemyShips.size(); j++) {
-                    EnemyShip eShip = (EnemyShip) enemyShips.get(j);
+                for (Ship enemyShip : this.enemyShips) {
+                    EnemyShip eShip = (EnemyShip) enemyShip;
                     if (shot.name != "Lightning Shot") {                        
                         if (shot.getHitBox().intersects(eShip.getShipHitBox())) {
                             Level.currentSave.setScore(Level.currentSave.getScore() + eShip.getScore());
-                            eShip.getHit();
+                            eShip.getHit();                                               
                             synchronized (friendlyBullets) {
                                 this.friendlyBullets.remove(shot);
                             }
                             break;
                         }
                         if (shot.getY() < -15) {
-                        System.out.println("bullet = " + shot.getY());
-                        synchronized (friendlyBullets) {
-                            this.friendlyBullets.remove(shot);
+                            System.out.println("bullet = " + shot.getY());
+                            synchronized (friendlyBullets) {
+                                this.friendlyBullets.remove(shot);
+                            }
+                            break;
                         }
-                        break;
-                    } 
                     }
                     else if (shot.name == "Lightning Shot") {
                         if (shot.getHitCircle().intersects(eShip.getShipHitBox())) {
@@ -231,15 +200,15 @@ public class GameData {
                             shot.setTurn(currentShip.getX(), currentShip.getY(), eShip.fireLocationX(), eShip.fireLocationY());
                             shot.setHit();
 //                            shot.render(null);
-            //                Main.gameData.friendlyBullets.add(new LightningShot(currentShip.getX() - 60, currentShip.getY() - 60, false));
+                            //                Main.gameData.friendlyBullets.add(new LightningShot(currentShip.getX() - 60, currentShip.getY() - 60, false));
                             Level.currentSave.setScore(Level.currentSave.getScore() + eShip.getScore());
                             eShip.getHit();                               
                             synchronized (friendlyBullets) {
-  //                              this.friendlyBullets.remove(shot);
+                                //                              this.friendlyBullets.remove(shot);
                                 
                             }
                             break;
-                        }                        
+                        }
                     }                     
                 }
             }               
@@ -259,7 +228,21 @@ public class GameData {
 
                 if (eShip.getShipState() == 0) {
                     synchronized (enemyShips) {
-                        this.enemyShips.remove(eShip);
+                        this.enemyShips.remove(eShip);                        
+                    }
+                    synchronized (items) {
+                        Random type = new Random();                       
+                        switch(type.nextInt(3)) {
+                            case 0:
+                                items.add((Item) weaponMaker.getWeapon("KINETIC", randomize(100, 600), randomize(100, 600)));                            
+                                break;
+                            case 1:
+                                items.add((Item) weaponMaker.getWeapon("LASER", randomize(100, 600), randomize(100, 600)));                            
+                                break;
+                            case 2:
+                                items.add((Item) weaponMaker.getWeapon("MISSILE", randomize(100, 600), randomize(100, 600)));                            
+                                break;
+                        }                        
                     }
                 }
             }
@@ -317,7 +300,7 @@ public class GameData {
 //                    removeShips.add(s);
 //                }
             }
-            ships.removeAll(removeShips);
+            ships.removeAll(removeShips);            
         }
         //-------------ships---------------
         //-------------items---------------

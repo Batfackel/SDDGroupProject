@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author Michael McGregor
  */
-class Item implements GameFigure, AbstractItem {
+public class Item implements GameFigure, AbstractItem {
 
     private float x, y;
     private final float movementX, movementY;
