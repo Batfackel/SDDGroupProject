@@ -80,21 +80,21 @@ public class MouseController implements MouseListener{
          //so that the weaponState of the ship can determine what kind of bullet to shoot
          //This is the "main" for the state design pattern. 10.6.15
         //----------------------------------------------------------------------
-        System.out.println("current level of the weapon: " + mainShip.getLevelState());
+       // System.out.println("current level of the weapon: " + mainShip.getLevelState());
         switch(mainShip.getWeaponState()) {
             case 0: 
                 this.bullet.setState(kinetic, mainShip.getLevelState());
-                System.out.println(this.bullet.getState().toString());
+               // System.out.println(this.bullet.getState().toString());
                 this.bullet.fire(mainShip.getX(), mainShip.getY());
                 break;
             case 1:
                 this.bullet.setState(laser, mainShip.getLevelState());
-                System.out.println(this.bullet.getState().toString());
+               // System.out.println(this.bullet.getState().toString());
                 this.bullet.fire(mainShip.getX(), mainShip.getY());
                 break;
             case 2:
                 this.bullet.setState(missile, mainShip.getLevelState());
-                System.out.println(this.bullet.getState().toString());
+                //System.out.println(this.bullet.getState().toString());
                 this.bullet.fire(mainShip.getX(), mainShip.getY());
                 break;
             default:System.out.println("error in weapon architecture");

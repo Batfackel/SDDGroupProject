@@ -49,15 +49,18 @@ public class GameData {
     private int BASE_LEVEL = -1, counter = 0, spawnTicker, difficulty = 500;
     private EnemyFlyWeightFactory flyweightFactory;
     public static EnemyFlyweight flyweightItems;
-    private ShipSelectMenu shipSelectionMenu;  
+   
     private Random rand;  
     public boolean shockOn;
     public static Context enemyBulletsContext;
     public static KineticState kinetic;
+    boolean gameOver;
     
-    
-    public GameData(String sName) {
-        
+    //--------------------------------------------------------------------------------------------
+    //   public GameData(String sName)  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //--------------------------------------------------------------------------------------------
+    public GameData(String sName) {  
+        this.gameOver = false;
         this.shipName = sName;
         this.shockOn = false;
         menu = Collections.synchronizedList(new ArrayList<Background>());
@@ -69,8 +72,7 @@ public class GameData {
         flyweightItems = flyweightFactory.getFlyweight();
         friendlyBullets = Collections.synchronizedList(new ArrayList<Bullet>());
         enemyBullets = Collections.synchronizedList(new ArrayList<Bullet>());
-                     
-        menu.add((Background) new ShipSelectMenu(0));        
+     
         ships.add((Ship)shipMaker.getShip(shipName,450,450));        
         
         //represent weapon power-up items        
@@ -109,26 +111,27 @@ public class GameData {
             enemyShips.add(enemyFormation[i]);
         }
         enemyBulletsContext = new Context();
-        kinetic = new KineticState();
-//-----------------------------------------------------------------------------
-//----------------------------------------------------------------------
-    
+        kinetic = new KineticState();  
         rand = new Random();
         spawnTicker = rand.nextInt(100);        
     }
-    
-
-    private float randomize(float in, int offset) {
-        float min = in, max = in + offset;        
-        float number = rand.nextFloat() * (max - min) + min;
-
-        return number;
-    }
-
+/*=============================================================================================
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+  =============================================================================================*/   
+ 
+//--------------------------------------------------------------------------------------------
+//    public void update()   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//--------------------------------------------------------------------------------------------
     public void update() {
         mainGame();
     }
-
+/*=============================================================================================
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+  =============================================================================================*/   
+ 
+//--------------------------------------------------------------------------------------------
+//  public void spawnEnemiesForTest()  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//--------------------------------------------------------------------------------------------
     public void spawnEnemiesForTest() {
         Ship[] enemyFormation = enemyMaker.getEnemyShipFormation("defaultship", 100, -300);
         for (int i = 0; i < enemyFormation.length; i++) {
@@ -137,24 +140,36 @@ public class GameData {
             }
         }
     }    
-
+/*=============================================================================================
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+  =============================================================================================*/   
+ 
+//--------------------------------------------------------------------------------------------
+//      void mainGame() ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//--------------------------------------------------------------------------------------------
     void mainGame() {        
        // Ship currentShip = (Ship) this.ships.get(0);
         currentShip = (Ship) this.ships.get(0);
         //starts the lightning attack automatically
-     
-        
-        if (currentShip.getHealth() <= 0 && currentShip.isDead()){
-            currentShip.playerDied();
+       if (this.currentShip.getLives() == 0)
+        {
+            this.gameOver = true;
+            
         }
         if (currentShip.getWeaponState() == 1 && currentShip.getLevelState() > 1 && this.shockOn == false) {
             this.shockOn = true;
             Main.gameData.friendlyBullets.add(new LightningShot(currentShip.getX() - 60, currentShip.getY() - 60, false));
-        }
-                  
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-// collisions for stuff in the game        
+        }        
+        checkCollisions();
+        removeObjects();      
+        System.out.println("Lives = "+this.currentShip.getLives());
+    } 
+//--------------------------------------------------------------------------------------------
+//  public void checkCollisions()  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//--------------------------------------------------------------------------------------------
+    public void checkCollisions()
+    {
+       // collisions for stuff in the game        
         try {
             //----collision: objectes in figures and player ship-----
             //---------------probably not currently used-----------
@@ -223,7 +238,7 @@ public class GameData {
                             break;
                         }
                         if (shot.getY() < -15) {
-                        System.out.println("bullet = " + shot.getY());
+                        //System.out.println("bullet = " + shot.getY());
                         synchronized (friendlyBullets) {
                             this.friendlyBullets.remove(shot);
                         }
@@ -269,7 +284,6 @@ public class GameData {
                 }
             }
             //----collision: enemies vs friendly ship-----
-            
             //----collision: player vs enemy bullets-----        
             for (int i = 0; i < this.enemyBullets.size(); i++) {
                 Bullet shot = (Bullet) enemyBullets.get(i);
@@ -283,17 +297,27 @@ public class GameData {
                       synchronized (enemyBullets) {
                         this.enemyBullets.remove(shot);
                         currentShip.setState(Ship.STATE_DAMAGED);
-                        NewShip.getInstance().getHit();
+                        NewShip.getInstance().getHit(10);
+                        
                       }
                   }
                 }                       
             }
+          
             
         } catch (Exception e) {
             System.out.println("Error in collision == Gamedata");
         }
-//-----------------------------------------------------------------------------                           
-//-----------------------------------------------------------------------------                                       
+         
+    }
+/*=============================================================================================
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+  =============================================================================================*/   
+//--------------------------------------------------------------------------------------------
+//   public void removeObjects()++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//--------------------------------------------------------------------------------------------
+    public void removeObjects()
+    {
         //remove objects as follows
         //-------------figures---------------
         List<GameFigure> removeGameFigures = new ArrayList<GameFigure>();
@@ -377,14 +401,31 @@ public class GameData {
             counter = 0;
             spawnTicker = rand.nextInt(difficulty);
             spawnEnemiesForTest();
-        }
+        }  
     }
-    
+/*=============================================================================================
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+  =============================================================================================*/   
+//--------------------------------------------------------------------------------------------
+//  public void clearData()  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//--------------------------------------------------------------------------------------------
     public void clearData() {
         enemyBullets.clear();
         friendlyBullets.clear();
         items.clear();
         figures.clear();
         enemyShips.clear();
+    }  
+ /*=============================================================================================
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+  =============================================================================================*/     
+//--------------------------------------------------------------------------------------------
+// private float randomize(float in, int offset)++++++++++++++++++++++++++++++++++++++++++++++
+//--------------------------------------------------------------------------------------------
+    private float randomize(float in, int offset) {
+        float min = in, max = in + offset;        
+        float number = rand.nextFloat() * (max - min) + min;
+
+        return number;
     }
 }

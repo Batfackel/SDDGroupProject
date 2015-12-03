@@ -225,6 +225,8 @@ public class EnemyFlyweightItems implements EnemyFlyweight {
                         break;
                     case 12:
                         image = explosionImage12;
+                        ship.setState(Ship.STATE_OK);
+                        ship.setShipState(13);
                         break;
                     case 13:
                         //ship doing a-ok 

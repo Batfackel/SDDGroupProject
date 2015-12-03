@@ -22,7 +22,8 @@ public class NewShip implements GameFigure, ShipState {
     private int maxHealth;
     private int maxShield;
     private float x, y, dx, dy, shipHeight, shipWidth;
-    private int state, levelState, rateOfSpeed, armour, shipState, weaponState, weaponLevel, health, lives;
+    private int state, levelState, rateOfSpeed, armour, shipState,
+            weaponState, weaponLevel, health, lives;
     private String shipType;
     private Image shipImage;
     private boolean isShipBeingDamaged;
@@ -143,6 +144,11 @@ public class NewShip implements GameFigure, ShipState {
         this.setShipHitBox();
     }
     
+    
+    public void getHit(int damage){
+        
+        this.health = this.health - damage;
+    }
     public int getLives() {
         return lives;
     }
@@ -310,7 +316,13 @@ public class NewShip implements GameFigure, ShipState {
     }
     
     public void getHit(){
-        this.health--;
+       this.health--;
+       if (this.getHealth()<=0 )
+       {
+           this.setShipState(1);
+           this.lives--;
+           
+       }
     }
     
     @Override
@@ -318,16 +330,16 @@ public class NewShip implements GameFigure, ShipState {
         setShipHitBox();
         isShipDamaged();
         isTurning();
-        shipImage = GameData.flyweightItems.setShipImage(this);
+        //shipImage = GameData.flyweightItems.setShipImage(this);
         
-        if (this.health <= 0 && this.lives > 0) {
+        /*if (this.health <= 0 && this.lives > 0) {
             this.health = 100;
             this.lives--;
-        }
+        }*/
     }
 
     void isShipDamaged() {
-        if (this.state == STATE_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ) {
+        if (this.state == STATE_DAMAGED ||this.state == STATE_TURNING_RIGHT_DAMAGED ||this.state == STATE_TURNING_LEFT_DAMAGED ) {
             isShipBeingDamaged = true;
             if (this.damagedCounter < DAMAGE_WAIT_TIME) {
                 this.damagedCounter++;
@@ -372,17 +384,26 @@ public class NewShip implements GameFigure, ShipState {
     public void render(Graphics g) {
         update();
         if (getShipState() == 13) {
-            g.drawImage(shipImage, getX(), getY(), null);
+            g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
         }
         
         else {
             g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
-            if (shipState != 12) {
+            if(shipState <= 12) {
                 shipState++;
-            } else {
-                shipState = 0;
+                hitBox[0] = new Rectangle(-100, -100, 0, 0);
             }
-
+            else {
+                if(this.lives>=0){
+                     //state = Ship.STATE_OK;
+                     shipState = 13;
+                     hitBox[0] = new Rectangle(-100, -100, 0, 0);
+                }
+                else{
+                    shipState = 0;
+                }
+            }
+       
         }
 
         g.drawRect(getX(), getY(), (int)this.shipWidth, (int) this.shipHeight);
@@ -436,10 +457,16 @@ public class NewShip implements GameFigure, ShipState {
         return this.maxShield;
     }
 
+    public void reInitialize(){
+//        this.shipState = 13;
+//        this.isDead = false;
+//        //addHealth(this.maxHealth);
+//     addHealth(5);
+    }
     @Override
     public void playerDied() {
-        this.shipState=1;
-        this.isDead = true;
+//        this.shipState=1;
+//        this.isDead = true;
     }
     @Override
       public boolean isDead()

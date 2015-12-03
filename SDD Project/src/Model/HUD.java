@@ -135,7 +135,7 @@ private void renderHealth(Graphics g, int lifeNumber){
     else{
         percentage = 0;
     }
-    System.out.println(percentage);
+   // System.out.println(percentage);
     g.fillRect(5,305 - (int)(300 * percentage),10,(int)(300 * percentage));
 }
 

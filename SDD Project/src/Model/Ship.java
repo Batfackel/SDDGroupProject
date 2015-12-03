@@ -17,6 +17,7 @@ public interface Ship {
     static final int STATE_TURNING_LEFT_DAMAGED = 12;
     static final int STATE_TURNING_RIGHT_DAMAGED = 13;
     static final int STATE_EXPLODING = 14;
+    static final int STATE_GAME_OVER = -99;
   
   
     
@@ -75,10 +76,15 @@ public interface Ship {
 /*END HELPER METHODS*/
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
 
+    public void reInitialize();
     public void addHealth(int i);
 
     public int getHealth();
     public void playerDied();
     
     public boolean isDead();
+
+    public int getLives();
+
+    public void setLives(int i);
   }
