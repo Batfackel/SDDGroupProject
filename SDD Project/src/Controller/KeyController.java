@@ -3,6 +3,7 @@ package Controller;
 import static Controller.Main.gameData;
 import Model.Context;
 import Model.GameData;
+import Model.Item;
 import Model.KineticState;
 import Model.LaserState;
 import Model.Level;
@@ -10,8 +11,10 @@ import Model.MissileState;
 import Model.Ship;
 import Model.ShipFactory;
 import Model.Sound;
+import Model.WeaponPowerFactory;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 public class KeyController implements KeyListener {
 
@@ -23,13 +26,16 @@ public class KeyController implements KeyListener {
     private GameData data;
     private Main main;
     private final ShipFactory shipMaker = new ShipFactory();
+    private final WeaponPowerFactory weaponMaker = new WeaponPowerFactory();
     private Ship newShip;
     private Sound mute;
+    private Random rand;
 
     //KeyController(){this.ship = null;}//Will Added constructor 9/16/2015
     //there are two constructors here
 
     public KeyController(Ship ship, GameData gameData) {
+        this.rand = new Random();
         this.mainShip = (Ship) ship;
         this.data = gameData;               //need to create objects of the different bullet states
         this.bullet = new Context();        //object of context. Context creates bullet types
@@ -39,6 +45,7 @@ public class KeyController implements KeyListener {
     }
 
     public KeyController(Ship ship, Main main) {
+        this.rand = new Random();
         this.mainShip = (Ship) ship;
         this.main = (Main) main;            //need to create objects of the different bullet states
         this.bullet = new Context();        //object of context. Context creates bullet types
@@ -51,6 +58,13 @@ public class KeyController implements KeyListener {
         this.data = gameData;
     }
 
+    private float randomize(float in, int offset) {
+        float min = in, max = in + offset;        
+        float number = rand.nextFloat() * (max - min) + min;
+
+        return number;
+    }
+    
     public void setShip(Ship ship) {
 
         this.mainShip = ship;
@@ -59,7 +73,16 @@ public class KeyController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
+        switch (e.getKeyCode()) {       
+            case KeyEvent.VK_0:                
+                gameData.items.add((Item) weaponMaker.getWeapon("Kinetic", randomize(100, 600), randomize(100, 600)));
+                break;
+            case KeyEvent.VK_9:
+                gameData.items.add((Item) weaponMaker.getWeapon("Laser", randomize(100, 600), randomize(100, 600)));
+                break;
+            case KeyEvent.VK_8:
+                gameData.items.add((Item) weaponMaker.getWeapon("Missile", randomize(100, 600), randomize(100, 600)));
+                break;    
             case KeyEvent.VK_D:
                 newShip = shipMaker.getShip("defaultship", mainShip.getX(), mainShip.getY());
                 gameData.ships.remove(0);

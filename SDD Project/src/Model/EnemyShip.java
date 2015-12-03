@@ -12,6 +12,7 @@ import Controller.SweepDown;
 import Controller.SweepLeft;
 import Controller.SweepRight;
 import static Model.GameData.enemyBulletsContext;
+import static Model.Sound.dead;
 import View.MainMenu;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -171,6 +172,7 @@ public class EnemyShip implements ShipState, GameFigure{
             }
             else {
                 shipState = 0;
+                dead.play();
                 hitBox[0] = new Rectangle(-100, -100, 0, 0);
             }
             
