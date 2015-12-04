@@ -68,7 +68,7 @@ public class GamePanel extends JPanel implements MouseMotionListener {
         //launcherImage = getImage(imagePath + separator + "images" + separator
      
         titleScreen = getImage(imagePath + separator + "images" + separator
-                + "Inazuma no sentōki800x1000.png");
+                + "Inazuma800x1000.png");
          test = getImage(imagePath + separator + "images" + separator
                 + "speed.png");
         
