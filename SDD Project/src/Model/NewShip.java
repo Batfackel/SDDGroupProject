@@ -385,28 +385,22 @@ public class NewShip implements GameFigure, ShipState {
         update();
         if (getShipState() == 13) {
             g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
-        }
-        
-        else {
+        } else {
             g.drawImage(GameData.flyweightItems.setShipImage(this), getX(), getY(), null);
-            if(shipState <= 12) {
+            if (shipState <= 12) {
                 shipState++;
                 hitBox[0] = new Rectangle(-100, -100, 0, 0);
-            }
-            else {
-                if(this.lives>=0){
-                     //state = Ship.STATE_OK;
-                     shipState = 13;
-                     hitBox[0] = new Rectangle(-100, -100, 0, 0);
-                }
-                else{
+            } else {
+                if (this.lives >= 0) {
+                    //state = Ship.STATE_OK;
+                    shipState = 13;
+                    hitBox[0] = new Rectangle(-100, -100, 0, 0);
+                } else {
                     shipState = 0;
                 }
             }
-       
         }
-
-        g.drawRect(getX(), getY(), (int)this.shipWidth, (int) this.shipHeight);
+        g.drawRect(getX(), getY(), (int) this.shipWidth, (int) this.shipHeight);
     }
 
     public void setImage(Image image) {
